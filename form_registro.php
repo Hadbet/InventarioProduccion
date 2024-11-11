@@ -187,7 +187,7 @@
                             </div>
                             <div class="card-footer">
                                 <button type="submit"
-                                        class="btn mb-2 btn-success float-right text-white">Finalizar Captura<span
+                                        class="btn mb-2 btn-success float-right text-white" onclick="enviarDatos()">Finalizar Captura<span
                                             class="fe fe-chevron-right fe-16 ml-2"></span></button>
                             </div>
                     </div> <!-- / .card -->
@@ -504,7 +504,7 @@
 
         var storageUnits = Object.keys(addedStorageUnits);
 
-        fetch('https://grammermx.com/Logistica/Inventario/dao/guardarDatos.php', { // Cambia esto por la URL de tu script PHP
+        fetch('https://grammermx.com/Logistica/Inventario/dao/guardarMarbete.php', { // Cambia esto por la URL de tu script PHP
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

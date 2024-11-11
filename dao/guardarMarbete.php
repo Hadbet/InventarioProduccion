@@ -14,7 +14,7 @@ $Object = new DateTime();
 $Object->setTimezone(new DateTimeZone('America/Denver'));
 $DateAndTime = $Object->format("Y/m/d h:i:s");
 
-$stmt = $conex->prepare("INSERT INTO `Bitacora_Inventario`(`StorageUnit`, `FolioMarbete`, `Fecha`, `Usuario`, `Estatus`, `Conteo`) VALUES (?, ?, ?, ?, 'A', 'PRIMER CONTEO')");
+$stmt = $conex->prepare("INSERT INTO `Bitacora_Inventario`(`StorageUnit`, `FolioMarbete`, `Fecha`, `Usuario`, `Estatus`, `Conteo`) VALUES (?, ?, ?, ?, '1', '1')");
 
 foreach ($storageUnits as $storageUnit) {
     $stmt->bind_param("ssss", $storageUnit, $folioMarbete, $DateAndTime, $nombre);
