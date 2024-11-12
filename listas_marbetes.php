@@ -29,10 +29,6 @@
     ?>
       <main role="main" class="main-content">
         <div class="container-fluid">
-
-
-
-
           <div class="row justify-content-center">
             <div class="col-12">
               <h2 class="mb-2 page-title">Lista de marbetes capturados</h2>
@@ -127,7 +123,7 @@
                       { data: 'Numero_Parte' },
                         { data: 'Fecha' },
                       { data: 'Usuario' },
-                        { data: 'Usuario' }
+                        { data: 'BOTON' }
                     ],
                     autoWidth: true,
                     "lengthMenu": [

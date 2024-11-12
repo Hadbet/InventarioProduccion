@@ -74,10 +74,10 @@
         <div class="container-fluid" id="pasoUno">
             <div class="row justify-content-center">
                 <div class="col-12">
-                    <h2 class="page-title">Paso 1 : Escaneo de marbete</h2>
+                    <h2 class="page-title">Verificación de marbete</h2>
                     <div class="card shadow mb-4">
                         <div class="card-header">
-                            <strong class="card-title">Captura</strong>
+                            <strong class="card-title">Consulta de información</strong>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -114,7 +114,7 @@
         <div class="container-fluid" id="pasoDos" style="display: none">
             <div class="row justify-content-center">
                 <div class="col-12">
-                    <h2 class="page-title">Paso 2 : Escaneo de Storage Unit</h2>
+                    <h2 class="page-title">Marbete</h2>
                     <div class="card shadow mb-4">
                             <div class="card-header">
                                 <strong id="Ubicacion" class="card-title h4"></strong>
@@ -360,12 +360,35 @@
                     document.getElementById("pasoUno").style.display = 'none';
                     html5QrcodeScanner.clear();
                     html5QrcodeScanner.pause();
+
                 } else {
                     alert('Id_Marbete no existe en el objeto data');
                 }
             }
         });
 
+    }
+
+    function cargarTabla(marbete) {
+
+        $.getJSON('https://grammermx.com/Inventario/dao/consultaMarbeteV.php?marbete='+marbete, function (data) {
+            for (var i = 0; i < data.data.length; i++) {
+                if (data.data[i].Id_Bitacora) {
+
+                    var table = document.getElementById("data-table");
+                    var row = table.insertRow(-1); // Crea una nueva fila al final de la tabla
+                    var cell1 = row.insertCell(0); // Crea una nueva celda en la fila
+                    var cell2 = row.insertCell(1); // Crea otra nueva celda en la fila
+                    var cell3 = row.insertCell(2); // Crea otra nueva celda en la fila
+                    cell1.innerHTML = data.data[i].StorageUnit; // Agrega el número de parte a la primera celda
+                    cell2.innerHTML = data.data[i].Usuario; // Agrega la cantidad a la segunda celda
+                    cell3.innerHTML = data.data[i].NumeroParte; // Agrega la cantidad a la segunda celda
+
+                } else {
+                    alert('Id_Marbete no existe en el objeto data');
+                }
+            }
+        });
     }
 
     function errorLectura(error) {
@@ -398,23 +421,22 @@
                             return;
                         }
 
-                        addedStorageUnits[data.data[i].Id_StorageUnit] = {
-                            numeroParte: data.data[i].Numero_Parte,
-                            cantidad: data.data[i].Cantidad
-                        };
+                        addedStorageUnits[data.data[i].Id_StorageUnit] = true;
 
                         numeroParteUnit = data.data[i].Numero_Parte;
                         if (numeroParteUnit === numeroParte) {
                             cantidad = data.data[i].Cantidad;
                             var table = document.getElementById("data-table");
-                            var row = table.insertRow(-1);
-                            var cell1 = row.insertCell(0);
-                            var cell2 = row.insertCell(1);
-                            var cell3 = row.insertCell(2);
-                            cell1.innerHTML = data.data[i].Id_StorageUnit;
-                            cell2.innerHTML = numeroParteUnit;
-                            cell3.innerHTML = cantidad;
+                            var row = table.insertRow(-1); // Crea una nueva fila al final de la tabla
+                            var cell1 = row.insertCell(0); // Crea una nueva celda en la fila
+                            var cell2 = row.insertCell(1); // Crea otra nueva celda en la fila
+                            var cell3 = row.insertCell(2); // Crea otra nueva celda en la fila
+                            cell1.innerHTML = numeroParteUnit; // Agrega el número de parte a la primera celda
+                            cell2.innerHTML = numeroParteUnit; // Agrega la cantidad a la segunda celda
+                            cell3.innerHTML = cantidad; // Agrega la cantidad a la segunda celda
 
+                            //html5QrcodeScannerUnit.clear();
+                            //html5QrcodeScannerUnit.pause();
                             Swal.fire({
                                 title: "Storage unit escaneado",
                                 text: "Unit : " + data.data[i].Id_StorageUnit,
@@ -520,9 +542,9 @@
         var comentarios = document.getElementById("txtComentarios").value;
         var folioMarbete = document.getElementById("scanner_input").value;
 
-        var storageUnits = addedStorageUnits;
+        var storageUnits = Object.keys(addedStorageUnits);
 
-        fetch('https://grammermx.com/Logistica/Inventario/dao/guardarMarbete.php', {
+        fetch('https://grammermx.com/Logistica/Inventario/dao/guardarMarbete.php', { // Cambia esto por la URL de tu script PHP
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
