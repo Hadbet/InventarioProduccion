@@ -29,9 +29,13 @@
     ?>
       <main role="main" class="main-content">
         <div class="container-fluid">
+
+
+
+
           <div class="row justify-content-center">
             <div class="col-12">
-              <h2 class="mb-2 page-title">Lista de facturas pendientes por revisar</h2>
+              <h2 class="mb-2 page-title">Lista de marbetes capturados</h2>
               <div class="row my-4">
                 <!-- Small table -->
                 <div class="col-md-12">
@@ -41,14 +45,11 @@
                       <table class="table datatables" id="dataTable-1">
                         <thead>
                           <tr>
-                              <th>ID</th>
-                            <th>Folio 45</th>
-                              <th>Factura</th>
-                            <th>Documento</th>
-                            <th>Fecha</th>
+                              <th>Marbete</th>
+                            <th>Numero de parte</th>
+                          <th>Fecha de captura</th>
                             <th>Usuario</th>
-                            <th>Aceptar</th>
-                            <th>Rechazar</th>
+                            <th>Ver detalles</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -116,20 +117,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
     <script>
               $.ajax({
-                url: 'https://grammermx.com/Trafico/Facturas/dao/consultaFacturasPendientesConf.php', // Reemplaza esto con la URL de tus datos
+                url: 'https://grammermx.com/Logistica/Inventario/dao/consultaCapturista.php', // Reemplaza esto con la URL de tus datos
                 dataType: 'json',
                 success: function(data) {
                   $('#dataTable-1').DataTable({
                     data: data.data,
                     columns: [
-                      { data: 'IdFactura' },
-                      { data: 'Folio' },
-                        { data: 'FacturaId' },
-                      { data: 'DocumentoLink' },
-                      { data: 'FechaRegistro' },
-                      { data: 'Usuario' },
-                      { data: 'Aceptar' },
-                        { data: 'Rechazar' }
+                      { data: 'FolioMarbete' },
+                      { data: 'Numero_Parte' },
+                        { data: 'Fecha' },
+                      { data: 'Usuario ' }
                     ],
                     autoWidth: true,
                     "lengthMenu": [

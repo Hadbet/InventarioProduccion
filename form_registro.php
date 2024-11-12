@@ -384,50 +384,58 @@
     var addedStorageUnits = {};
 
     function storageUnitManual() {
-        $.getJSON('https://grammermx.com/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value, function (data) {
-            for (var i = 0; i < data.data.length; i++) {
-                if (data.data[i].Id_StorageUnit) {
-                    if (addedStorageUnits[data.data[i].Id_StorageUnit]) {
-                        return;
-                    }
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value, function (data) {
+            if (data.Estatus) {
+                Swal.fire({
+                    title: "El storage unit ya fue registrado por otro usuario",
+                    text: "Escanea otro storage unit",
+                    icon: "error"
+                });
+            } else {
+                for (var i = 0; i < data.data.length; i++) {
+                    if (data.data[i].Id_StorageUnit) {
+                        if (addedStorageUnits[data.data[i].Id_StorageUnit]) {
+                            return;
+                        }
 
-                    addedStorageUnits[data.data[i].Id_StorageUnit] = true;
+                        addedStorageUnits[data.data[i].Id_StorageUnit] = true;
 
-                    numeroParteUnit=data.data[i].Numero_Parte;
-                    if (numeroParteUnit===numeroParte){
-                        cantidad=data.data[i].Cantidad;
-                        var table = document.getElementById("data-table");
-                        var row = table.insertRow(-1); // Crea una nueva fila al final de la tabla
-                        var cell1 = row.insertCell(0); // Crea una nueva celda en la fila
-                        var cell2 = row.insertCell(1); // Crea otra nueva celda en la fila
-                        var cell3 = row.insertCell(2); // Crea otra nueva celda en la fila
-                        cell1.innerHTML = numeroParteUnit; // Agrega el número de parte a la primera celda
-                        cell2.innerHTML = numeroParteUnit; // Agrega la cantidad a la segunda celda
-                        cell3.innerHTML = cantidad; // Agrega la cantidad a la segunda celda
+                        numeroParteUnit = data.data[i].Numero_Parte;
+                        if (numeroParteUnit === numeroParte) {
+                            cantidad = data.data[i].Cantidad;
+                            var table = document.getElementById("data-table");
+                            var row = table.insertRow(-1); // Crea una nueva fila al final de la tabla
+                            var cell1 = row.insertCell(0); // Crea una nueva celda en la fila
+                            var cell2 = row.insertCell(1); // Crea otra nueva celda en la fila
+                            var cell3 = row.insertCell(2); // Crea otra nueva celda en la fila
+                            cell1.innerHTML = numeroParteUnit; // Agrega el número de parte a la primera celda
+                            cell2.innerHTML = numeroParteUnit; // Agrega la cantidad a la segunda celda
+                            cell3.innerHTML = cantidad; // Agrega la cantidad a la segunda celda
 
-                        //html5QrcodeScannerUnit.clear();
-                        //html5QrcodeScannerUnit.pause();
-                        Swal.fire({
-                            title: "Storage unit escaneado",
-                            text: "Unit : "+data.data[i].Id_StorageUnit,
-                            icon: "success"
-                        });
-                        document.getElementById("txtStorageUnit").value = '';
+                            //html5QrcodeScannerUnit.clear();
+                            //html5QrcodeScannerUnit.pause();
+                            Swal.fire({
+                                title: "Storage unit escaneado",
+                                text: "Unit : " + data.data[i].Id_StorageUnit,
+                                icon: "success"
+                            });
+                            document.getElementById("txtStorageUnit").value = '';
+                        } else {
+                            Swal.fire({
+                                title: "El número de parte no corresponde",
+                                text: "Escanea el storage unit correcto",
+                                icon: "error"
+                            });
+                            document.getElementById("txtStorageUnit").value = '';
+                        }
                     } else {
                         Swal.fire({
-                            title: "El número de parte no corresponde",
+                            title: "El storage unit no es correcto",
                             text: "Escanea el storage unit correcto",
                             icon: "error"
                         });
                         document.getElementById("txtStorageUnit").value = '';
                     }
-                } else {
-                    Swal.fire({
-                        title: "El storage unit no es correcto",
-                        text: "Escanea el storage unit correcto",
-                        icon: "error"
-                    });
-                    document.getElementById("txtStorageUnit").value = '';
                 }
             }
         });
