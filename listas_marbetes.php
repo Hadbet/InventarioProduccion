@@ -126,7 +126,8 @@
                       { data: 'FolioMarbete' },
                       { data: 'Numero_Parte' },
                         { data: 'Fecha' },
-                      { data: 'Usuario ' }
+                      { data: 'Usuario' },
+                        { data: 'Usuario' }
                     ],
                     autoWidth: true,
                     "lengthMenu": [

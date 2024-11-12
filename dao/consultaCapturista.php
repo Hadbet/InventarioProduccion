@@ -12,7 +12,7 @@ function ContadorApu()
     $con = new LocalConector();
     $conex = $con->conectar();
 
-    $datos = mysqli_query($conex, "SELECT B.FolioMarbete, M.Numero_Parte, B.Fecha, B.Usuario FROM Bitacora_Inventario B JOIN Marbete_Inventario M ON B.FolioMarbete = M.Id_Marbete WHERE 1;");
+    $datos = mysqli_query($conex, "SELECT B.FolioMarbete, M.Numero_Parte, B.Fecha, B.Usuario, CONCAT('<button class=\"btn btn-primary\" onclick=\"detallesRegistro(\'', B.FolioMarbete, '\')\">Ver</button>') as BOTON FROM Bitacora_Inventario B JOIN Marbete_Inventario M ON B.FolioMarbete = M.Id_Marbete WHERE 1 GROUP BY B.FolioMarbete;");
 
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
     echo json_encode(array("data" => $resultado));
