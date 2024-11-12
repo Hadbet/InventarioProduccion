@@ -9,6 +9,7 @@ $storageUnits = $data['storageUnits'];
 
 $con = new LocalConector();
 $conex=$con->conectar();
+$failedUnits = array();
 
 $Object = new DateTime();
 $Object->setTimezone(new DateTimeZone('America/Denver'));
@@ -18,7 +19,15 @@ $stmt = $conex->prepare("INSERT INTO `Bitacora_Inventario`(`StorageUnit`, `Folio
 
 foreach ($storageUnits as $storageUnit) {
     $stmt->bind_param("ssss", $storageUnit, $folioMarbete, $DateAndTime, $nombre);
-    $stmt->execute();
+    if (!$stmt->execute()) {
+        array_push($failedUnits, $storageUnit);
+    }
+}
+
+if (count($failedUnits) > 0) {
+    echo json_encode(["success" => false, "failedUnits" => $failedUnits]);
+} else {
+    echo json_encode(["success" => true]);
 }
 
 $stmt->close();

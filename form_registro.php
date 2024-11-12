@@ -518,12 +518,12 @@
         })
             .then(response => response.json())
             .then(data => {
-                // Aquí puedes manejar la respuesta de tu servidor
-                console.log(data);
-            })
-            .catch((error) => {
-                // Aquí puedes manejar los errores
-                console.error('Error:', error);
+                if (data.success) {
+                    console.log("La operación fue exitosa");
+                } else {
+                    console.log("Hubo un error en la operación");
+                    console.log("Las unidades de almacenamiento que fallaron son: ", data.failedUnits);
+                }
             });
     }
 
