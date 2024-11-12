@@ -384,10 +384,10 @@
     var addedStorageUnits = {};
 
     function storageUnitManual() {
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value, function (data) {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value+'&bin='+storageBin, function (data) {
             if (data.Estatus) {
                 Swal.fire({
-                    title: "El storage unit ya fue registrado por otro usuario",
+                    title: data.Estatus,
                     text: "Escanea otro storage unit",
                     icon: "error"
                 });
