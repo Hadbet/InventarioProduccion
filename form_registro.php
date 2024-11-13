@@ -379,6 +379,7 @@
         });
     }
 
+
     function lecturaCorrectaUnit(decodedText, decodedResult) {
         $.getJSON('https://grammermx.com/Inventario/dao/consultaStorageUnit.php?storageUnit='+decodedText, function (data) {
 
