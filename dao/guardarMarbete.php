@@ -20,12 +20,12 @@ $Object = new DateTime();
 $Object->setTimezone(new DateTimeZone('America/Denver'));
 $DateAndTime = $Object->format("Y/m/d h:i:s");
 
-$stmt = $conex->prepare("INSERT INTO `Bitacora_Inventario`(`StorageUnit`, `NumeroParte`, `Cantidad`, `FolioMarbete`, `Fecha`, `Usuario`, `Estatus`, `Conteo`) VALUES (?, ?, ?, ?, ?, ?, '1', ?)");
+$stmt = $conex->prepare("INSERT INTO `Bitacora_Inventario`(`StorageUnit`, `NumeroParte`, `Cantidad`, `FolioMarbete`, `Fecha`, `Usuario`, `Estatus`, `Conteo`, `Comentario`) VALUES (?, ?, ?, ?, ?, ?, '1', ?, ?)");
 
 foreach ($storageUnits as $storageUnit => $details) {
     $numeroParte = $details['numeroParte'];
     $cantidad = $details['cantidad'];
-    $stmt->bind_param("ssssssi", $storageUnit, $numeroParte, $cantidad, $marbete, $DateAndTime, $nombre,$conteo);
+    $stmt->bind_param("ssssssis", $storageUnit, $numeroParte, $cantidad, $marbete, $DateAndTime, $nombre,$conteo,$comentarios);
     if (!$stmt->execute()) {
         array_push($failedUnits, $storageUnit);
     }

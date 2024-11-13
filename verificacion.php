@@ -69,189 +69,131 @@
 
     <main role="main" class="main-content">
         <center><img src="images/tituloInventario.png" style="width: 50%"></center>
-        <br><br>
 
-        <div class="container-fluid" id="pasoUno">
+        <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-12">
-                    <h2 class="page-title">Verificación de marbete</h2>
-                    <div class="card shadow mb-4">
-                        <div class="card-header">
-                            <strong class="card-title">Consulta de información</strong>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                               <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNomina" name="txtNomina" value="00001606">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNombre" name="txtNombre" value="Nancy Goiz">
-                                            <label for="txtFolio">Escanea el marbete</label>
-                                            <div id="reader" width="600px"></div>
-                                            <input type="text" class="form-control"
-                                                   id="scanner_input">
-                                            <br>
-                                       </div>
-                                    </div> <!-- /.col -->
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <br>
-                                            <button class="btn btn-success text-white mt-2" onclick="escaneo()">Escanear</button>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn mb-2 btn-success float-right text-white" onclick="manualMarbete()">Siguiente<span
-                                    class="fe fe-chevron-right fe-16 ml-2"></span></button>
-                        </div>
-                    </div> <!-- / .card -->
-                </div> <!-- .col-12 -->
-            </div> <!-- .row -->
-        </div> <!-- .container-fluid -->
-
-        <div class="container-fluid" id="pasoDos" style="display: none">
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <h2 class="page-title">Marbete</h2>
-                    <div class="card shadow mb-4">
-                            <div class="card-header">
-                                <strong id="Ubicacion" class="card-title h4"></strong>
-                                <button
-                                        class="btn btn-info float-right text-white" data-toggle="modal" data-target=".modal-right">Caja Abierta<span
-                                            class="fe fe-chevron-right fe-16 ml-2"></span></button>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNomina" name="txtNomina" value="00001606">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNombre" name="txtNombre" value="Nancy Goiz">
-                                            <label for="txtFolio">Escanea el Storage Unit</label>
-                                            <div id="readerDos" width="600px"></div>
-                                            <input type="text" class="form-control"
-                                                   id="txtStorageUnit" name="txtStorageUnit" value="">
-                                            <br>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <br>
-                                            <button class="btn btn-warning text-white mt-2" onclick="storageUnitManual()">Ingresar Manual</button>
-                                            <button class="btn btn-success text-white mt-2" onclick="escaneoUnit()">Activar Escaner</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <table id="data-table" class="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>Storage Unit</th>
-                                        <th>Numero Parte</th>
-                                        <th>Cantidad</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNomina" name="txtNomina" value="00001606">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNombre" name="txtNombre" value="Nancy Goiz">
-                                            <label for="txtFolio">Capturado por :</label>
-                                            <input type="text" class="form-control"
-                                                   id="txtNombre" name="txtNombre" value="" disabled>
-                                            <br>
-                                        </div>
-                                    </div> <!-- /.col -->
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-
-                                            <label for="txtFolio">Comentarios</label>
-                                            <input type="text" class="form-control"
-                                                   id="txtComentarios" name="txtComentarios" value="">
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <div class="card-footer">
-                                <button type="submit"
-                                        class="btn mb-2 btn-success float-right text-white" onclick="enviarDatos()">Finalizar Captura<span
-                                            class="fe fe-chevron-right fe-16 ml-2"></span></button>
-                            </div>
-                    </div> <!-- / .card -->
-                </div> <!-- .col-12 -->
-            </div> <!-- .row -->
-        </div> <!-- .container-fluid -->
-
-        <div class="container-fluid" id="pasoTres" style="display: none">
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <h2 class="page-title">Paso 3 : Verifica la informacion</h2>
-                    <div class="card shadow mb-4">
-                        <form action="dao/subirMasArchivos.php" method="post" enctype="multipart/form-data">
-                            <div class="card-header">
-                                <strong class="card-title">Captura</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNomina" name="txtNomina" value="00001606">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNombre" name="txtNombre" value="Nancy Goiz">
-                                            <label for="txtFolio">Capturado por :</label>
-                                            <input type="text" class="form-control"
-                                                   id="txtFolio" name="txtFolio" value="" disabled>
-                                            <br>
-                                        </div>
-                                    </div> <!-- /.col -->
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-
-                                            <label for="txtFolio">Comentarios</label>
-                                            <input type="text" class="form-control"
-                                                   id="txtFolio" name="txtFolio" value="">
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <table  id="data-tableD" class="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>Storage Unit</th>
-                                        <th>Numero Parte</th>
-                                        <th>Cantidad</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-
-
-
-                            </div>
-                            <div class="card-footer">
-                                <button type="submit"
-                                        class="btn mb-2 btn-success float-right text-white">Finalizar Captura<span
-                                            class="fe fe-chevron-right fe-16 ml-2"></span></button>
-                            </div>
-
+                    <div class="w-50 mx-auto text-center justify-content-center py-5 my-5">
+                        <h2 class="page-title mb-0">Ingresa o escanea el marbete</h2>
+                        <p class="lead text-muted mb-4">Si lo vas a ingresar manual recuerda que es marbete.conteo.</p>
+                        <form class="searchform searchform-lg">
+                            <input class="form-control form-control-lg bg-white rounded-pill pl-5" type="search" placeholder="Search" aria-label="Search">
+                            <p class="help-text mt-2 text-muted">Ejemplo 185.1 o 185.2 o 185.3.</p>
                         </form>
-                    </div> <!-- / .card -->
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-6 col-lg-3">
+                            <div class="card shadow mb-4">
+                                <div class="card-body">
+                                    <i class="fe fe-info fe-32 text-primary"></i>
+                                    <a href="#">
+                                        <h3 class="h5 mt-4 mb-1">Getting start</h3>
+                                    </a>
+                                    <p class="text-muted">Start working with theme</p>
+                                </div> <!-- .card-body -->
+                            </div> <!-- .card -->
+                        </div> <!-- .col-md-->
+                        <div class="col-6 col-lg-3">
+                            <div class="card shadow mb-4">
+                                <div class="card-body">
+                                    <i class="fe fe-help-circle fe-32 text-success"></i>
+                                    <a href="./page-faqs.html">
+                                        <h3 class="h5 mt-4 mb-1">FAQs</h3>
+                                    </a>
+                                    <p class="text-muted">Frequently asked questions</p>
+                                </div> <!-- .card-body -->
+                            </div> <!-- .card -->
+                        </div> <!-- .col-md-->
+                        <div class="col-6 col-lg-3">
+                            <div class="card shadow mb-4">
+                                <div class="card-body">
+                                    <i class="fe fe-globe fe-32 text-warning"></i>
+                                    <a href="#">
+                                        <h3 class="h5 mt-4 mb-1">Marbete : 185</h3>
+                                    </a>
+                                    <p class="text-muted">Learn more about products?</p>
+                                </div> <!-- .card-body -->
+                            </div> <!-- .card -->
+                        </div> <!-- .col-md-->
+                        <div class="col-6 col-lg-3">
+                            <div class="card shadow">
+                                <div class="card-body">
+                                    <i class="fe fe-alert-triangle fe-32 text-danger"></i>
+                                    <a href="#">
+                                        <h3 class="h5 mt-4 mb-1">Reporting</h3>
+                                    </a>
+                                    <p class="text-muted">Report a bug</p>
+                                </div> <!-- .card-body -->
+                            </div> <!-- .card -->
+                        </div> <!-- .col-md-->
+                    </div> <!-- .row -->
+                    <div class="my-5 p-5">
+                        <div class="text-center">
+                            <h2 class="mb-0">Marbete : 185</h2>
+                            <p class="lead text-muted mb-5">Primer conteo.</p>
+                        </div>
+                        <div class="row my-5">
+                            <div class="col-md-4">
+                                <h3 class="h5 mt-4 mb-1">Getting start</h3>
+                                <p class="text-muted mb-4">Start working with theme</p>
+                                <ul class="list-unstyled">
+                                    <li class="my-1"><i class="fe fe-file-text mr-2 text-muted"></i>Lorem ipsum dolor sit amet</li>
+                                    <li class="my-1"><i class="fe fe-file-text mr-2 text-muted"></i>Consectetur adipiscing elit</li>
+                                    <li class="my-1"><i class="fe fe-file-text mr-2 text-muted"></i>Integer molestie lorem at massa</li>
+                                    <li class="my-1"><i class="fe fe-file-text mr-2 text-muted"></i>Facilisis in pretium nisl aliquet</li>
+                                    <li class="my-1"><i class="fe fe-file-text mr-2 text-muted"></i>Nulla volutpat aliquam velit</li>
+                                </ul>
+                            </div> <!-- .col-md-->
+                            <div class="col-md-4">
+                                <h3 class="h5 mt-4 mb-1">Integrations</h3>
+                                <p class="text-muted mb-4">How to integrate the theme?</p>
+                                <ul class="list-unstyled">
+                                    <li class="my-1"><i class="fe fe-file-text mr-2 text-muted"></i>Lorem ipsum dolor sit amet</li>
+                                    <li class="my-1"><i class="fe fe-file-text mr-2 text-muted"></i>Consectetur adipiscing elit</li>
+                                    <li class="my-1"><i class="fe fe-file-text mr-2 text-muted"></i>Integer molestie lorem at massa</li>
+                                    <li class="my-1"><i class="fe fe-file-text mr-2 text-muted"></i>Facilisis in pretium nisl aliquet</li>
+                                    <li class="my-1"><i class="fe fe-file-text mr-2 text-muted"></i>Nulla volutpat aliquam velit</li>
+                                </ul>
+                            </div> <!-- .col-md-->
+                            <div class="col-md-4">
+                                <h3 class="h5 mt-4 mb-1">Reporting</h3>
+                                <p class="text-muted mb-4">Report a bug or request a feature</p>
+                                <ul class="list-unstyled">
+                                    <li class="my-1"><i class="fe fe-file-text mr-2 text-muted"></i>Lorem ipsum dolor sit amet</li>
+                                    <li class="my-1"><i class="fe fe-file-text mr-2 text-muted"></i>Consectetur adipiscing elit</li>
+                                    <li class="my-1"><i class="fe fe-file-text mr-2 text-muted"></i>Integer molestie lorem at massa</li>
+                                    <li class="my-1"><i class="fe fe-file-text mr-2 text-muted"></i>Facilisis in pretium nisl aliquet</li>
+                                    <li class="my-1"><i class="fe fe-file-text mr-2 text-muted"></i>Nulla volutpat aliquam velit</li>
+                                </ul>
+                            </div> <!-- .col-md-->
+                        </div> <!-- .row -->
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-md-6">
+                            <div class="card shadow bg-primary text-center mb-4">
+                                <div class="card-body p-5">
+                      <span class="circle circle-md bg-primary-light">
+                        <i class="fe fe-navigation fe-24 text-white"></i>
+                      </span>
+                                    <h3 class="h4 mt-4 mb-1 text-white">Sumit a ticket</h3>
+                                    <p class="text-white mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                    <a href="#" class="btn btn-lg bg-primary-light text-white">New Ticket<i class="fe fe-arrow-right fe-16 ml-2"></i></a>
+                                </div> <!-- .card-body -->
+                            </div> <!-- .card -->
+                        </div> <!-- .col-md-->
+                        <div class="col-md-6">
+                            <div class="card shadow bg-success text-center mb-4">
+                                <div class="card-body p-5">
+                      <span class="circle circle-md bg-success-light">
+                        <i class="fe fe-message-circle fe-24 text-white"></i>
+                      </span>
+                                    <h3 class="h4 mt-4 mb-1 text-white">Live chart</h3>
+                                    <p class="text-white mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                    <a href="#" class="btn btn-lg bg-success-light text-white">Let chat<i class="fe fe-arrow-right fe-16 ml-2"></i></a>
+                                </div> <!-- .card-body -->
+                            </div> <!-- .card -->
+                        </div> <!-- .col-md-->
+                    </div> <!-- .row -->
                 </div> <!-- .col-12 -->
             </div> <!-- .row -->
         </div> <!-- .container-fluid -->
