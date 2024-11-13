@@ -146,7 +146,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <table id="data-table" class="table table-hover">
                                     <thead>
                                     <tr>
@@ -158,7 +157,6 @@
                                     <tbody>
                                     </tbody>
                                 </table>
-
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
@@ -182,75 +180,12 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                             <div class="card-footer">
                                 <button type="submit"
                                         class="btn mb-2 btn-success float-right text-white" onclick="enviarDatos()">Finalizar Captura<span
                                             class="fe fe-chevron-right fe-16 ml-2"></span></button>
                             </div>
-                    </div> <!-- / .card -->
-                </div> <!-- .col-12 -->
-            </div> <!-- .row -->
-        </div> <!-- .container-fluid -->
-
-        <div class="container-fluid" id="pasoTres" style="display: none">
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <h2 class="page-title">Paso 3 : Verifica la informacion</h2>
-                    <div class="card shadow mb-4">
-                        <form action="dao/subirMasArchivos.php" method="post" enctype="multipart/form-data">
-                            <div class="card-header">
-                                <strong class="card-title">Captura</strong>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNomina" name="txtNomina" value="00001606">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNombre" name="txtNombre" value="Nancy Goiz">
-                                            <label for="txtFolio">Capturado por :</label>
-                                            <input type="text" class="form-control"
-                                                   id="txtFolio" name="txtFolio" value="" disabled>
-                                            <br>
-                                        </div>
-                                    </div> <!-- /.col -->
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-
-                                            <label for="txtFolio">Comentarios</label>
-                                            <input type="text" class="form-control"
-                                                   id="txtFolio" name="txtFolio" value="">
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <table  id="data-tableD" class="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>Storage Unit</th>
-                                        <th>Numero Parte</th>
-                                        <th>Cantidad</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
-
-
-
-                            </div>
-                            <div class="card-footer">
-                                <button type="submit"
-                                        class="btn mb-2 btn-success float-right text-white">Finalizar Captura<span
-                                            class="fe fe-chevron-right fe-16 ml-2"></span></button>
-                            </div>
-
-                        </form>
                     </div> <!-- / .card -->
                 </div> <!-- .col-12 -->
             </div> <!-- .row -->
@@ -270,8 +205,9 @@
                 </button>
             </div>
             <div class="modal-body">
-
-                <form action="dao/daoActualizarWere.php" method="post" enctype="multipart/form-data">
+                    <div id="readerAbierto" width="600px"></div>
+                    <button onclick="escaneoUnitAbierto()" id="" class="btn btn-primary">Activar escaner</button>
+                <br><br>
                     <label for="txtFolio">Storage Unit</label>
                     <input type="text" class="form-control"
                            id="txtStorageUnitA" name="txtStorageUnitA" value="">
@@ -284,11 +220,10 @@
                     <input type="text" class="form-control"
                            id="txtCantidadA" name="txtCantidadA" value="">
                     <br>
-                    <button type="submit" id="btnEnviarNuevos" class="btn btn-primary">Enviar</button>
-                </form>
+                    <button onclick="cargaCajaAbierta()" id="btnEnviarNuevos" class="btn btn-primary">Enviar</button>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button id="btnCerrarModal" type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
@@ -314,6 +249,8 @@
 
     let html5QrcodeScanner;
     let html5QrcodeScannerUnit;
+    let html5QrcodeScannerUnitA;
+
     var numeroParte;
     var storageBin;
 
@@ -537,12 +474,136 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    console.log("La operación fue exitosa");
+                    let timerInterval;
+                    Swal.fire({
+                        title: "¡Gracias!.Se finalizo la captura de tu marbete",
+                        html: "Te regresaremos a la pagina <b></b> milliseconds.",
+                        timer: 1500,
+                        timerProgressBar: true,
+                        icon: "success",
+                        didOpen: () => {
+                            Swal.showLoading();
+                            const timer = Swal.getPopup().querySelector("b");
+                            timerInterval = setInterval(() => {
+                                timer.textContent = `${Swal.getTimerLeft()}`;
+                            }, 100);
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval);
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            location.reload();
+                        }
+                    });
                 } else {
                     console.log("Hubo un error en la operación");
                     console.log("Las unidades de almacenamiento que fallaron son: ", data.failedUnits);
                 }
             });
+    }
+
+
+
+
+    function lecturaCorrectaUnitAbierto(decodedText, decodedResult) {
+        $.getJSON('https://grammermx.com/Inventario/dao/consultaStorageUnit.php?storageUnit='+decodedText, function (data) {
+
+            if (data.Estatus) {
+                Swal.fire({
+                    title: "El storage unit ya existe",
+                    text: "Escanea otro storage unit",
+                    icon: "error"
+                });
+            } else {
+                for (var i = 0; i < data.data.length; i++) {
+                    if (data.data[i].Id_StorageUnit) {
+                        numeroParteUnit=data.data[i].Numero_Parte;
+                        if (numeroParteUnit===numeroParte){
+                            document.getElementById("txtStorageUnitA").value = decodedText;
+                            document.getElementById("txtNumeroParteA").value = numeroParteUnit;
+                            html5QrcodeScannerUnitA.clear();
+                            html5QrcodeScannerUnitA.pause();
+                            document.getElementById("readerAbierto").style.display = 'none';
+                            Swal.fire({
+                                title: "Storage unit escaneado",
+                                text: "Unit : "+data.data[i].Id_StorageUnit,
+                                icon: "success"
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "El número de parte no corresponde",
+                                text: "Escanea el storage unit correcto",
+                                icon: "error"
+                            });
+                        }
+                    } else {
+                        Swal.fire({
+                            title: "El storage unit no es correcto",
+                            text: "Escanea el storage unit correcto",
+                            icon: "error"
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    function errorLecturaAbierto(error) {
+        console.warn(`Code scan error = ${error}`);
+    }
+
+    function escaneoUnitAbierto() {
+        html5QrcodeScannerUnitA = new Html5QrcodeScanner(
+            "readerAbierto",
+            { fps: 10, qrbox: {width: 250, height: 250} },
+            /* verbose= */ false);
+        document.getElementById("readerAbierto").style.display = 'block';
+        html5QrcodeScannerUnitA.render(lecturaCorrectaUnitAbierto, errorLecturaAbierto);
+    }
+
+    function cargaCajaAbierta() {
+
+        var storageA = document.getElementById("txtStorageUnitA").value;
+        var numeroParteA = document.getElementById("txtNumeroParteA").value;
+        var cantidadA = document.getElementById("txtCantidadA").value;
+
+        if (addedStorageUnits[storageA]) {
+            Swal.fire({
+                title: "Storage unit ya esta ingresado en la tabla",
+                text: "Verifique",
+                icon: "error"
+            });
+            return;
+        }
+
+        addedStorageUnits[storageA] = {
+            numeroParte: numeroParteA,
+            cantidad: cantidadA
+        };
+
+            var table = document.getElementById("data-table");
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML = storageA;
+            cell2.innerHTML = numeroParteA;
+            cell3.innerHTML = cantidadA;
+
+            document.getElementById("btnCerrarModal").click();
+
+            document.getElementById("txtStorageUnitA").value = "";
+            document.getElementById("txtNumeroParteA").value = "";
+            document.getElementById("txtCantidadA").value = "";
+
+            Swal.fire({
+                title: "Storage unit escaneado",
+                text: "Unit : " + storageA,
+                icon: "success"
+            });
+            document.getElementById("txtStorageUnit").value = '';
     }
 
 </script>

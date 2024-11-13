@@ -7,6 +7,11 @@ $comentarios = $data['comentarios'];
 $folioMarbete = $data['folioMarbete'];
 $storageUnits = $data['storageUnits'];
 
+$parts = explode('.', $folioMarbete);
+
+$marbete = $parts[0];
+$conteo = $parts[1];
+
 $con = new LocalConector();
 $conex=$con->conectar();
 $failedUnits = array();
@@ -15,12 +20,12 @@ $Object = new DateTime();
 $Object->setTimezone(new DateTimeZone('America/Denver'));
 $DateAndTime = $Object->format("Y/m/d h:i:s");
 
-$stmt = $conex->prepare("INSERT INTO `Bitacora_Inventario`(`StorageUnit`, `NumeroParte`, `Cantidad`, `FolioMarbete`, `Fecha`, `Usuario`, `Estatus`, `Conteo`) VALUES (?, ?, ?, ?, ?, ?, '1', '1')");
+$stmt = $conex->prepare("INSERT INTO `Bitacora_Inventario`(`StorageUnit`, `NumeroParte`, `Cantidad`, `FolioMarbete`, `Fecha`, `Usuario`, `Estatus`, `Conteo`) VALUES (?, ?, ?, ?, ?, ?, '1', ?)");
 
 foreach ($storageUnits as $storageUnit => $details) {
     $numeroParte = $details['numeroParte'];
     $cantidad = $details['cantidad'];
-    $stmt->bind_param("ssssss", $storageUnit, $numeroParte, $cantidad, $folioMarbete, $DateAndTime, $nombre);
+    $stmt->bind_param("ssssssi", $storageUnit, $numeroParte, $cantidad, $marbete, $DateAndTime, $nombre,$conteo);
     if (!$stmt->execute()) {
         array_push($failedUnits, $storageUnit);
     }
