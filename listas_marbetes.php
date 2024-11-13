@@ -54,7 +54,7 @@
                       </table>
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn mb-2 btn-outline-success" data-toggle="modal" data-target="#verticalModal" id="btnModal"> Launch demo modal </button>
+                        <button style="display: none" type="button" class="btn mb-2 btn-outline-success" data-toggle="modal" data-target="#verticalModal" id="btnModal"> Launch demo modal </button>
                         <!-- Modal -->
                         <div class="modal fade" id="verticalModal" tabindex="-1" role="dialog" aria-labelledby="verticalModalTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -66,6 +66,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
+                                        <label id="lblFecha" class="col-form-label"></label>
                                         <h4>Marbete : <span id="txtFolioMarbete">185</span></h4>
                                         <div class="form-group">
                                             <label for="recipient-name" class="col-form-label">Responsable:</label>
@@ -156,9 +157,10 @@
 
       function detallesRegistro(folio,comentarios,usuario,fecha) {
 
-          document.getElementById("txtFolioModal").innerText = folio;
-          document.getElementById("txtComentarios").innerText = comentarios;
-          document.getElementById("txtResponsable").innerText = usuario;
+          document.getElementById("txtFolioMarbete").innerText = folio;
+          document.getElementById("txtComentario").value = comentarios;
+          document.getElementById("txtResponsable").value = usuario;
+          document.getElementById("lblFecha").innerText = fecha;
 
           var table = document.getElementById("data-table");
 
@@ -172,10 +174,11 @@
                   var cell1 = row.insertCell(0);
                   var cell2 = row.insertCell(1);
                   var cell3 = row.insertCell(2);
-                  cell1.innerHTML = data.data[i].Id_StorageUnit;
-                  cell2.innerHTML = data.data[i].Numero_Parte;
+                  cell1.innerHTML = data.data[i].StorageUnit;
+                  cell2.innerHTML = data.data[i].NumeroParte;
                   cell3.innerHTML = data.data[i].Cantidad;
               }
+              document.getElementById("btnModal").click();
           });
       }
 
