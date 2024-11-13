@@ -76,18 +76,17 @@
                     <div class="w-50 mx-auto text-center justify-content-center py-5 my-5">
                         <h2 class="page-title mb-0">Ingresa o escanea el marbete</h2>
                         <p class="lead text-muted mb-4">Si lo vas a ingresar manual recuerda que es marbete.conteo.</p>
-                        <form class="searchform searchform-lg">
-                            <input class="form-control form-control-lg bg-white rounded-pill pl-5" type="search" placeholder="Search" aria-label="Search">
+                            <input class="form-control form-control-lg bg-white rounded-pill pl-5" type="search" id="txtBuscar" placeholder="Search" aria-label="Search">
                             <p class="help-text mt-2 text-muted">Ejemplo 185.1 o 185.2 o 185.3.</p>
                             <br>
-                            <button class="btn btn-success text-white" onclick="">Buscar</button>
-                            </form>
+                            <button class="btn btn-success text-white" onclick="verificacionRegistro()">Buscar</button>
                     </div>
                     <!-- .row -->
                     <div class="my-5 p-5">
                         <div class="text-center">
                             <h2 class="mb-0">Marbete : <span id="txtFolioMarbete"></span></h2>
-                            <p class="lead text-muted mb-5" id="txtConteo">Primer conteo.</p>
+                            <p class="lead text-muted mb-5">Conteo : <span id="txtConteo"></span></p>
+                            <p class="lead text-muted mb-5">Responsable : <span id="txtResponsable"></span></p>
                         </div>
 
                         <table id="data-table" class="table table-hover">
@@ -101,6 +100,9 @@
                             <tbody>
                             </tbody>
                         </table>
+                        <div class="text-center">
+                            <h2 class="mb-0">Cantidad Total : <span id="txtCantidadTotal"></span></h2>
+                        </div>
                     </div>
                 </div> <!-- .col-12 -->
             </div> <!-- .row -->
@@ -127,7 +129,7 @@
 
 <script>
 
-    function verificacionRegistro(folio,comentarios,usuario,fecha) {
+    function verificacionRegistro() {
         /*
         document.getElementById("txtFolioMarbete").innerText = folio;
         document.getElementById("txtComentario").value = comentarios;
@@ -135,12 +137,12 @@
         document.getElementById("lblFecha").innerText = fecha;*/
 
         var table = document.getElementById("data-table");
-
+        var suma = 0;
         while (table.rows.length > 1) {
             table.deleteRow(1);
         }
 
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaVerificacion.php?marbete='+folio, function (data) {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaVerificacion.php?marbete='+document.getElementById("txtBuscar").value, function (data) {
             for (var i = 0; i < data.data.length; i++) {
                 var row = table.insertRow(-1);
                 var cell1 = row.insertCell(0);
@@ -149,7 +151,15 @@
                 cell1.innerHTML = data.data[i].StorageUnit;
                 cell2.innerHTML = data.data[i].NumeroParte;
                 cell3.innerHTML = data.data[i].Cantidad;
+
+                if (i==0){
+                    document.getElementById("txtFolioMarbete").innerText = data.data[i].StorageUnit;
+                    document.getElementById("txtConteo").innerText = data.data[i].Conteo;
+                    document.getElementById("txtResponsable").innerText = data.data[i].Usuario;
+                }
+                suma += Number(data.data[i].Cantidad);
             }
+            document.getElementById("txtCantidadTotal").innerText = suma;
         });
     }
 

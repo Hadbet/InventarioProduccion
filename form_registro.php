@@ -395,7 +395,10 @@
                             return;
                         }
 
-                        addedStorageUnits[data.data[i].Id_StorageUnit] = true;
+                        addedStorageUnits[data.data[i].Id_StorageUnit] = {
+                            numeroParte: data.data[i].Numero_Parte,
+                            cantidad: data.data[i].Cantidad
+                        };
 
                         numeroParteUnit=data.data[i].Numero_Parte;
                         if (numeroParteUnit===numeroParte){
@@ -409,10 +412,9 @@
                             var cell1 = row.insertCell(0); // Crea una nueva celda en la fila
                             var cell2 = row.insertCell(1); // Crea otra nueva celda en la fila
                             var cell3 = row.insertCell(2); // Crea otra nueva celda en la fila
-                            cell1.innerHTML = numeroParteUnit; // Agrega el número de parte a la primera celda
-                            cell2.innerHTML = numeroParteUnit; // Agrega la cantidad a la segunda celda
-                            cell3.innerHTML = cantidad; // Agrega la cantidad a la segunda celda
-
+                            cell1.innerHTML = data.data[i].Id_StorageUnit;
+                            cell2.innerHTML = numeroParteUnit;
+                            cell3.innerHTML = cantidad;
                             //html5QrcodeScannerUnit.clear();
                             //html5QrcodeScannerUnit.pause();
                             Swal.fire({
