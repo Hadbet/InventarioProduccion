@@ -190,7 +190,12 @@
                                     <p class="small text-muted mb-1" id="lblRol">Capturista</p>
                                 </div>
                             </div>
-                            <button id="btnFin" disabled class="btn mb-2 btn-success float-right text-white" onclick="manualMarbete()">Finalizar Captura<span
+                            <hr>
+                            <label for="basic-url">Comentarios</label>
+                            <div class="input-group mb-3">
+                                <input type="text" id="txtComentarios" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            </div>
+                            <button id="btnFin" disabled class="btn mb-2 btn-success float-right text-white" onclick="enviarDatos()">Finalizar Captura<span
                                         class="fe fe-chevron-right fe-16 ml-2" ></span></button>
                         </div> <!-- .card-body -->
                     </div> <!-- .card -->
@@ -396,7 +401,7 @@
     function enviarDatos() {
 
         var marbete = document.getElementById("scanner_input").value
-        var nombre = document.getElementById("txtNombre").value;
+        var nombre = document.getElementById("lblNombre").innerText;
         var comentarios = document.getElementById("txtComentarios").value;
         var numeroParte = document.getElementById("txtNumeroParte").value;
         var cantidad = document.getElementById("txtCantidad").value;

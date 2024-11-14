@@ -21,14 +21,14 @@ try {
     $DateAndTime = $Object->format("Y/m/d h:i:s");
 
 
-    $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `Fecha`=?, `Usuario`=?, `Estatus`='1', `PrimerConteo`=?, `SegundoConteo`=?, `TercerConteo`=?, `Comentario`=? WHERE `FolioMarbete`=?");
+    $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `Fecha`=?, `Usuario`=?, `Estatus`='1', `PrimerConteo`=?, `SegundoConteo`=?, `TercerConteo`=?, `Comentario`=?, `NumeroParte`=?, `StorageBin`=? WHERE `FolioMarbete`=?");
 
     // Dependiendo del valor de conteo, asignamos la cantidad a la columna correspondiente
     $primerConteo = $conteo == 1 ? $cantidad : null;
     $segundoConteo = $conteo == 2 ? $cantidad : null;
     $tercerConteo = $conteo == 3 ? $cantidad : null;
 
-    $stmt->bind_param("sssssss", $DateAndTime, $nombre, $primerConteo, $segundoConteo, $tercerConteo, $comentarios, $marbete);
+    $stmt->bind_param("sssssssss", $DateAndTime, $nombre, $primerConteo, $segundoConteo, $tercerConteo, $comentarios,$numeroParte,$storageBin, $marbete);
 
     $stmt->execute();
 
