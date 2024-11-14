@@ -265,7 +265,7 @@
             for (var i = 0; i < data.data.length; i++) {
                 if (data.data[i].FolioMarbete) {
                     if (data.data[i].Estatus === '0'){
-                        numeroParte=data.data[i].Numero_Parte;
+                        numeroParte=data.data[i].NumeroParte;
                         storageBin=data.data[i].StorageBin;
                         document.getElementById("reader").style.display = 'none';
                         document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
