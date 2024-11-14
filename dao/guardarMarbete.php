@@ -39,9 +39,10 @@ try {
         throw new Exception('Error al ejecutar la consulta');
     } else {
         // Actualizar el estatus de los Storage_Unit
-        $stmt2 = $conex->prepare("UPDATE `Storage_Unit` SET `Estatus`='1' WHERE `Id_StorageUnit` = ?");
+        $stmt2 = $conex->prepare("UPDATE `Storage_Unit` SET `Estatus`='1',`Conteo`=?,`FolioMarbete`=?,`Cantidad`=? WHERE `Id_StorageUnit` = ?");
         foreach ($storageUnits as $storageUnit => $details) {
-            $stmt2->bind_param("s", $storageUnit);
+            $cantidad = $details['cantidad'];
+            $stmt2->bind_param("ssss", $conteo,$marbete,$cantidad,$storageUnit);
             $stmt2->execute();
         }
         $stmt2->close();
