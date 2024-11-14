@@ -34,7 +34,7 @@ try {
     $segundoConteo = $conteo == 2 ? $totalCantidad : 0;
     $tercerConteo = $conteo == 3 ? $totalCantidad : 0;
 
-    $stmt->bind_param("ssssiiiss", $numeroParte, $marbete, $DateAndTime, $nombre, $conteo, $primerConteo, $segundoConteo, $tercerConteo, $comentarios);
+    $stmt->bind_param("sssssssss", $numeroParte, $marbete, $DateAndTime, $nombre, $conteo, $primerConteo, $segundoConteo, $tercerConteo, $comentarios);
 
     if (!$stmt->execute()) {
         echo json_encode(["success" => false]);

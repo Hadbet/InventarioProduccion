@@ -485,6 +485,7 @@
         var folioMarbete = document.getElementById("scanner_input").value;
 
         var storageUnits = addedStorageUnits;
+        console.log(storageUnits);
 
         fetch('https://grammermx.com/Logistica/Inventario/dao/guardarMarbete.php', {
             method: 'POST',
