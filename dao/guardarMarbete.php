@@ -19,7 +19,7 @@ try {
     $Object->setTimezone(new DateTimeZone('America/Denver'));
     $DateAndTime = $Object->format("Y/m/d h:i:s");
 
-    $stmt = $conex->prepare("INSERT INTO `Bitacora_Inventario`(`NumeroParte`, `FolioMarbete`, `Fecha`, `Usuario`, `Estatus`, `PrimerConteo`, `SegundoConteo`, `TercerConteo`, `Comentario`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `Fecha`=?, `Usuario`=?, `Estatus`='1', `PrimerConteo`=?, `SegundoConteo`=?, `TercerConteo`=?, `Comentario`=? WHERE `FolioMarbete`=?");
 
     $totalCantidad = 0;
 
@@ -33,8 +33,7 @@ try {
     $segundoConteo = $conteo == 2 ? $totalCantidad : 0;
     $tercerConteo = $conteo == 3 ? $totalCantidad : 0;
 
-    $stmt->bind_param("sssssssss", $numeroParte, $marbete, $DateAndTime, $nombre, $conteo, $primerConteo, $segundoConteo, $tercerConteo, $comentarios);
-
+    $stmt->bind_param("sssssss", $DateAndTime, $nombre, $primerConteo, $segundoConteo, $tercerConteo, $comentarios, $marbete);
     if (!$stmt->execute()) {
         echo json_encode(["success" => false]);
         throw new Exception('Error al ejecutar la consulta');
