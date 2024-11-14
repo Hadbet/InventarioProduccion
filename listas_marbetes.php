@@ -174,8 +174,8 @@
                   var cell1 = row.insertCell(0);
                   var cell2 = row.insertCell(1);
                   var cell3 = row.insertCell(2);
-                  cell1.innerHTML = data.data[i].StorageUnit;
-                  cell2.innerHTML = data.data[i].NumeroParte;
+                  cell1.innerHTML = data.data[i].Id_StorageUnit;
+                  cell2.innerHTML = data.data[i].Numero_Parte;
                   cell3.innerHTML = data.data[i].Cantidad;
               }
               document.getElementById("btnModal").click();
