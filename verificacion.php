@@ -138,7 +138,6 @@
         document.getElementById("lblFecha").innerText = fecha;*/
 
         var table = document.getElementById("data-table");
-        var suma = 0;
         while (table.rows.length > 1) {
             table.deleteRow(1);
         }
@@ -149,18 +148,17 @@
                 var cell1 = row.insertCell(0);
                 var cell2 = row.insertCell(1);
                 var cell3 = row.insertCell(2);
-                cell1.innerHTML = data.data[i].StorageUnit;
+                cell1.innerHTML = data.data[i].Id_StorageUnit;
                 cell2.innerHTML = data.data[i].NumeroParte;
                 cell3.innerHTML = data.data[i].Cantidad;
 
                 if (i==0){
-                    document.getElementById("txtFolioMarbete").innerText = data.data[i].StorageUnit;
+                    document.getElementById("txtFolioMarbete").innerText = data.data[i].FolioMarbete;
                     document.getElementById("txtConteo").innerText = data.data[i].Conteo;
                     document.getElementById("txtResponsable").innerText = data.data[i].Usuario;
                 }
-                suma += Number(data.data[i].Cantidad);
             }
-            document.getElementById("txtCantidadTotal").innerText = suma;
+            document.getElementById("txtCantidadTotal").innerText = data.data[0].PrimerConteo;
             document.getElementById("divMarbete").style.display='block';
             document.getElementById("divMarbete").scrollIntoView({behavior: "smooth"});
 
