@@ -15,7 +15,7 @@ function ContadorApu($storageUnit,$bin)
     $datos = mysqli_query($conex, "SELECT * FROM `Storage_Unit` WHERE `Id_StorageUnit` = '$storageUnit' and `Storage_Bin`='$bin'");
 
     if (mysqli_num_rows($datos) == 0) {
-        echo json_encode(array("Estatus" => "No coincide el storage unit con el storage bin"));
+        echo json_encode(array("Estatus" => "No coincide el storage unit con el storage bin "));
         return;
     }
 
