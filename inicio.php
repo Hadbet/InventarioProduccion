@@ -55,23 +55,12 @@
                             <div class="card-body">
                                 <div class="row mt-1 align-items-center">
                                     <div class="col-12 col-lg-4 text-left pl-4">
-                                        <span class="h3">Proceso</span>
+                                        <span class="h3">Proceso del inventario</span>
                                     </div>
                                 </div>
                                 <div class="map-box">
                                     <div id="areaChartTres"></div>
                                 </div>
-
-                                <div class="row mt-1 align-items-center">
-                                    <div class="col-12 col-lg-4 text-left pl-4">
-                                        <span class="h3">Ausentismos por APU</span>
-                                    </div>
-                                </div>
-
-                                <div class="map-box">
-                                    <div id="areaChartApu"></div>
-                                </div>
-
                             </div> <!-- .card-body -->
                         </div> <!-- .card -->
                     </div>
@@ -119,9 +108,10 @@
 <script src="js/apps.js"></script>
 
 <script>
-
+    var chart;
 
     Apu();
+    setInterval(Apu, 60000); // Actualiza cada minuto
     function Apu() {
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/graficaGeneral.php', function (data) {
             var AreaNombre = [];
@@ -130,10 +120,10 @@
             var Estandar = [];
 
             for (var i = 0; i < data.data.length; i++) {
-                AreaNombre.push(data.data[i].AreaNombre ? data.data[i].AreaNombre : '');
-                PrimerConteo.push(data.data[i].PorcentajePrimerConteo ? data.data[i].PorcentajePrimerConteo : 0);
-                SegundoConteo.push(data.data[i].PorcentajeSegundoConteo ? data.data[i].PorcentajeSegundoConteo : 0);
-                Estandar.push("100");
+                AreaNombre.push((data.data[i].AreaNombre ? data.data[i].AreaNombre : '')+"("+data.data[i].PrimerConteoLiberado+"/"+data.data[i].TotalPrimerConteo+")");
+                PrimerConteo.push(data.data[i].PorcentajePrimerConteo ? parseFloat(data.data[i].PorcentajePrimerConteo) : 0);
+                SegundoConteo.push(data.data[i].PorcentajeSegundoConteo ? parseFloat(data.data[i].PorcentajeSegundoConteo) : 0);
+                Estandar.push(100.00);
             }
 
             console.log(AreaNombre);
@@ -159,34 +149,61 @@
                 data: Estandar
             }],
             chart: {
-                height: 350,
+                height: 500,
                 type: 'line',
+                stacked: false,
             },
             stroke: {
-                width: [0, 4]
+                width: [0, 2, 5],
+                curve: 'smooth'
             },
-            title: {
-                text: 'Traffic Sources'
+            plotOptions: {
+                bar: {
+                    columnWidth: '50%'
+                }
             },
-            dataLabels: {
-                enabled: true,
-                enabledOnSeries: [1]
+            fill: {
+                opacity: [0.85, 0.25, 1],
+                gradient: {
+                    inverseColors: false,
+                    shade: 'light',
+                    type: "vertical",
+                    opacityFrom: 0.85,
+                    opacityTo: 0.55,
+                    stops: [0, 100, 100, 100]
+                }
             },
             labels: AreaNombre,
-            yaxis: [{
+            markers: {
+                size: 0
+            },
+            xaxis: {
+                type: 'category'
+            },
+            yaxis: {
                 title: {
-                    text: 'Website Blog',
-                },
-
-            }, {
-                opposite: true,
-                title: {
-                    text: 'Social Media'
+                    text: 'Proceso',
                 }
-            }]
+            },
+            tooltip: {
+                shared: true,
+                intersect: false,
+                y: {
+                    formatter: function (y) {
+                        if (typeof y !== "undefined") {
+                            return y.toFixed(0) + " %";
+                        }
+                        return y;
+                    }
+                }
+            }
         };
 
-        var chart = new ApexCharts(document.querySelector("#areaChartTres"), options);
+        if(chart) {
+            chart.destroy(); // Destruye el gráfico anterior si existe
+        }
+
+        chart = new ApexCharts(document.querySelector("#areaChartTres"), options);
         chart.render();
     }
 

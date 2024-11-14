@@ -25,7 +25,7 @@
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="forms">
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="listas_pendientes.php"><span class="ml-1 item-text">DashBoard</span></a>
+                        <a class="nav-link pl-3" href="inicio.php"><span class="ml-1 item-text">DashBoard</span></a>
                     </li>
                 </ul>
             </li>
