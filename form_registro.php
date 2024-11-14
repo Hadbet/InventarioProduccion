@@ -296,7 +296,7 @@
         var marbete = decodedText.split('.')[0];
 
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbete.php?marbete='+marbete, function (data) {
-            for (var i = 0; i < data.data.length; i++) {{
+            for (var i = 0; i < data.data.length; i++) {
                 if (data.data[i].FolioMarbete) {
                     if (data.data[i].Estatus === '0'){
                         numeroParte=data.data[i].Numero_Parte;

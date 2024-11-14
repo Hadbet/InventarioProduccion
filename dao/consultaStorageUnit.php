@@ -21,7 +21,7 @@ function ContadorApu($storageUnit,$bin)
 
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
 
-    $datosBitacora = mysqli_query($conex, "SELECT * FROM `Storage_Unit` WHERE `StorageUnit` = '$storageUnit' and `Estatus` = 0");
+    $datosBitacora = mysqli_query($conex, "SELECT * FROM `Storage_Unit` WHERE `Id_StorageUnit` = '$storageUnit' and `Estatus` = 0");
 
     if (mysqli_num_rows($datosBitacora) > 0) {
         echo json_encode(array("Estatus" => "Ya fue escaneado por otro usuario este storage unit"));
