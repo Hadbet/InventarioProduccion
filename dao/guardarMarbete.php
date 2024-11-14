@@ -57,7 +57,7 @@ try {
 
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(["success" => false, "message" => $e->getMessage().$data.$nombre.$storageUnits.$numeroParte. $marbete. $DateAndTime]);
+    echo json_encode(["success" => false, "message" => $e->getMessage()."data".$data.$nombre.$storageUnits.$numeroParte. $marbete. $DateAndTime]);
 }
 
 ?>
