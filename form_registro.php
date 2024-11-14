@@ -495,9 +495,6 @@
 
         fetch('https://grammermx.com/Logistica/Inventario/dao/guardarMarbete.php', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
             body: formData
         })
             .then(response => response.json())
