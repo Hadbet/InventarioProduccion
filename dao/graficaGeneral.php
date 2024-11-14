@@ -13,18 +13,23 @@ function ContadorApu()
     $conex = $con->conectar();
 
     $datos = mysqli_query($conex, "SELECT 
-    A.IdArea, 
-    A.AreaNombre, 
-    A.AreaProduccion, 
-    A.StLocation, 
-    A.StBin,
-    (SELECT COUNT(*) FROM Marbete_Inventario M WHERE M.Area = A.IdArea AND M.Estatus = 1) AS Liberados,
-    (SELECT COUNT(*) FROM Marbete_Inventario M WHERE M.Area = A.IdArea) AS Total,
-    (SELECT COUNT(*) FROM Marbete_Inventario M WHERE M.Area = A.IdArea AND M.Estatus = 1) * 100.0 / (SELECT COUNT(*) FROM Marbete_Inventario M WHERE M.Area = A.IdArea) AS PorcentajeLiberados
+    A.`AreaNombre`,
+    COUNT(CASE WHEN BI.`PrimerConteo` > 0 AND BI.`Estatus` = 1 THEN 1 END) AS 'PrimerConteoLiberado',
+    COUNT(CASE WHEN BI.`PrimerConteo` = 0 AND BI.`Estatus` IN (0, 1) THEN 1 END) AS 'PrimerConteoNoLiberado',
+    COUNT(CASE WHEN BI.`SegundoConteo` > 0 AND BI.`Estatus` = 1 THEN 1 END) AS 'SegundoConteoLiberado',
+    COUNT(CASE WHEN BI.`SegundoConteo` = 0 AND BI.`Estatus` IN (0, 1) THEN 1 END) AS 'SegundoConteoNoLiberado',
+    COUNT(CASE WHEN BI.`TercerConteo` > 0 AND BI.`Estatus` = 1 THEN 1 END) AS 'TercerConteoLiberado',
+    COUNT(CASE WHEN BI.`TercerConteo` = 0 AND BI.`Estatus` IN (0, 1) THEN 1 END) AS 'TercerConteoNoLiberado',
+    AVG(CASE WHEN BI.`Estatus` = 1 THEN 1 ELSE 0 END) * 100 AS 'PorcentajeLiberado',
+    COUNT(BI.`PrimerConteo`) AS 'TotalPrimerConteo',
+    COUNT(BI.`SegundoConteo`) AS 'TotalSegundoConteo',
+    COUNT(BI.`TercerConteo`) AS 'TotalTercerConteo'
 FROM 
-    Area A
-WHERE 
-    1;");
+    `Area` AS A
+LEFT JOIN 
+    `Bitacora_Inventario` AS BI ON A.`IdArea` = BI.`Area`
+GROUP BY 
+    A.`AreaNombre`;");
 
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
     echo json_encode(array("data" => $resultado));

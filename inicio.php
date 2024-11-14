@@ -841,52 +841,142 @@
 
     //Apu();
     function Apu() {
-        $.getJSON('https://grammermx.com/RH/Cursos/dao/ausentismo/consultaApu.php', function (data) {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/gradicaGeneral.php', function (data) {
+            var AreaNombre = [];
+            var PrimerConteo = [];
+            var SegundoConteo = [];
+            var Estandar = [];
 
             for (var i = 0; i < data.data.length; i++) {
-
+                AreaNombre.push(data.data[i].AreaNombre);
+                PrimerConteo.push(data.data[i].PorcentajePrimerConteo);
+                SegundoConteo.push(data.data[i].PorcentajeSegundoConteo);
+                Estandar.push("100");
             }
+
+            console.log(AreaNombre);
+            console.log(PrimerConteo);
+            console.log(SegundoConteo);
+            graficaAusentismosApu(AreaNombre,PrimerConteo,SegundoConteo,Estandar);
         });
     }
 
-    graficaAusentismosApu();
-    function graficaAusentismosApu() {
+    function graficaAusentismosApu(AreaNombre,PrimerConteo,SegundoConteo,Estandar) {
         var options = {
             series: [{
-                name: 'Website Blog',
+                name: 'Primer Conteo',
                 type: 'column',
-                data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
+                data: PrimerConteo
             }, {
-                name: 'Social Media',
+                name: 'Segundo Conteo',
+                type: 'column',
+                data: SegundoConteo
+            }, {
+                name: 'Revenue',
                 type: 'line',
-                data: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+                data: Estandar
             }],
             chart: {
-                height: 500,
+                height: 350,
                 type: 'line',
-            },
-            stroke: {
-                width: [0, 4]
-            },
-            title: {
-                text: 'Traffic Sources'
+                stacked: false
             },
             dataLabels: {
-                enabled: true,
-                enabledOnSeries: [1]
+                enabled: false
             },
-            labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
-            yaxis: [{
-                title: {
-                    text: 'Website Blog',
+            stroke: {
+                width: [1, 1, 4]
+            },
+            title: {
+                text: 'XYZ - Stock Analysis (2009 - 2016)',
+                align: 'left',
+                offsetX: 110
+            },
+            xaxis: {
+                categories: AreaNombre,
+            },
+            yaxis: [
+                {
+                    seriesName: 'Income',
+                    axisTicks: {
+                        show: true,
+                    },
+                    axisBorder: {
+                        show: true,
+                        color: '#008FFB'
+                    },
+                    labels: {
+                        style: {
+                            colors: '#008FFB',
+                        }
+                    },
+                    title: {
+                        text: "Income (thousand crores)",
+                        style: {
+                            color: '#008FFB',
+                        }
+                    },
+                    tooltip: {
+                        enabled: true
+                    }
                 },
-
-            }, {
-                opposite: true,
-                title: {
-                    text: 'Objetivo'
-                }
-            }]
+                {
+                    seriesName: 'Cashflow',
+                    opposite: true,
+                    axisTicks: {
+                        show: true,
+                    },
+                    axisBorder: {
+                        show: true,
+                        color: '#00E396'
+                    },
+                    labels: {
+                        style: {
+                            colors: '#00E396',
+                        }
+                    },
+                    title: {
+                        text: "Operating Cashflow (thousand crores)",
+                        style: {
+                            color: '#00E396',
+                        }
+                    },
+                },
+                {
+                    seriesName: 'Revenue',
+                    opposite: true,
+                    axisTicks: {
+                        show: true,
+                    },
+                    axisBorder: {
+                        show: true,
+                        color: '#FEB019'
+                    },
+                    labels: {
+                        style: {
+                            colors: '#FEB019',
+                        },
+                    },
+                    title: {
+                        text: "Revenue (thousand crores)",
+                        style: {
+                            color: '#FEB019',
+                        }
+                    }
+                },
+            ],
+            tooltip: {
+                fixed: {
+                    enabled: true,
+                    position: 'topLeft', // topRight, topLeft, bottomRight, bottomLeft
+                    offsetY: 30,
+                    offsetX: 60
+                },
+            },
+            legend: {
+                horizontalAlign: 'left',
+                offsetX: 40
+            }
         };
 
         var chart = new ApexCharts(document.querySelector("#areaChartApu"), options);
