@@ -1,6 +1,5 @@
 <?php
 include_once('db/db_Inventario.php');
-try {
     $data = json_decode(file_get_contents('php://input'), true);
 
     $nombre = $data['nombre'];
@@ -31,10 +30,5 @@ try {
     $tercerConteo = $conteo == 3 ? $totalCantidad : 0;
     echo json_encode(["success" => false, "message" => "data".$data.$nombre.$storageUnits.$numeroParte. $marbete. $DateAndTime]);
 
-
-} catch (Exception $e) {
-    http_response_code(500);
-    echo json_encode(["success" => false, "message" => $e->getMessage()]);
-}
 
 ?>
