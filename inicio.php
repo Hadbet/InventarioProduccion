@@ -55,48 +55,7 @@
                             <div class="card-body">
                                 <div class="row mt-1 align-items-center">
                                     <div class="col-12 col-lg-4 text-left pl-4">
-                                        <span class="h3">Entramientos y cursos.</span>
-                                    </div>
-                                    <div class="col-6 col-lg-2 text-center py-4">
-                                        <p class="mb-1 small text-muted">Aprobados</p>
-                                        <span class="h3" id="1"></span><br/>
-                                    </div>
-                                    <div class="col-6 col-lg-2 text-center py-4 mb-2">
-                                        <p class="mb-1 small text-muted">Reprobados</p>
-                                        <span class="h3" id="txtReprobados">$</span><br/>
-                                    </div>
-                                    <div class="col-6 col-lg-2 text-center py-4">
-                                        <p class="mb-1 small text-muted">Asistencia</p>
-                                        <span class="h3" id="txtAsistencia"></span><br/>
-                                    </div>
-                                    <div class="col-6 col-lg-2 text-center py-4">
-                                        <p class="mb-1 small text-muted">Inasistencia</p>
-                                        <span class="h3" id="txtInasistencia"></span><br/>
-                                    </div>
-                                </div>
-
-                                <div class="map-box">
-                                    <div id="areaChartDos"></div>
-                                </div>
-
-                                <hr>
-
-                                <div class="col-12 col-lg-4 text-left pl-4">
-                                    <span class="h3">Horas de capacitacion por mes.</span>
-                                </div>
-
-                                <div class="map-box">
-                                    <div id="capacitacionChartDos"></div>
-                                </div>
-
-                            </div> <!-- .card-body -->
-                        </div> <!-- .card -->
-
-                        <div class="card shadow mb-4">
-                            <div class="card-body">
-                                <div class="row mt-1 align-items-center">
-                                    <div class="col-12 col-lg-4 text-left pl-4">
-                                        <span class="h3">Ausentismos Generales</span>
+                                        <span class="h3">Proceso</span>
                                     </div>
                                 </div>
                                 <div class="map-box">
@@ -880,196 +839,56 @@
     }
 
 
-    Apu();
+    //Apu();
     function Apu() {
         $.getJSON('https://grammermx.com/RH/Cursos/dao/ausentismo/consultaApu.php', function (data) {
 
-            var Ene1 = 0, Feb1 = 0, Mar1 = 0, Abril1 = 0, May1 = 0, Jun1 = 0, Jul1 = 0, Ago1 = 0,
-                Sep1 = 0, Oct1 = 0, Nov1 = 0, Dic1 = 0;
-
-            var Ene2 = 0, Feb2 = 0, Mar2 = 0, Abril2 = 0, May2 = 0, Jun2 = 0, Jul2 = 0, Ago2 = 0,
-                Sep2 = 0, Oct2 = 0, Nov2 = 0, Dic2 = 0;
-
-            var Ene3 = 0, Feb3 = 0, Mar3 = 0, Abril3 = 0, May3 = 0, Jun3 = 0, Jul3 = 0, Ago3 = 0,
-                Sep3 = 0, Oct3 = 0, Nov3 = 0, Dic3 = 0;
-
             for (var i = 0; i < data.data.length; i++) {
-                if (data.data[i].Encargado === "APU 1"){
-                    if (data.data[i].Mes === '1') {
-                        Ene1 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '2') {
-                        Feb1 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '3') {
-                        Mar1 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '4') {
-                        Abril1 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '5') {
-                        May1 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '6') {
-                        Jun1 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '7') {
-                        Jul1 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '8') {
-                        Ago1 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '9') {
-                        Sep1 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '10') {
-                        Oct1 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '11') {
-                        Nov1 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '12') {
-                        Dic1 = data.data[i].Asistencias;
-                    }
-                }
-
-                if (data.data[i].Encargado === "APU 2"){
-                    if (data.data[i].Mes === '1') {
-                        Ene2 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '2') {
-                        Feb2 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '3') {
-                        Mar2 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '4') {
-                        Abril2 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '5') {
-                        May2 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '6') {
-                        Jun2 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '7') {
-                        Jul2 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '8') {
-                        Ago2 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '9') {
-                        Sep2 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '10') {
-                        Oct2 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '11') {
-                        Nov2 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '12') {
-                        Dic2 = data.data[i].Asistencias;
-                    }
-                }
-
-                if (data.data[i].Encargado === "APU 3"){
-                    if (data.data[i].Mes === '1') {
-                        Ene3 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '2') {
-                        Feb3 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '3') {
-                        Mar3 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '4') {
-                        Abril3 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '5') {
-                        May3 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '6') {
-                        Jun3 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '7') {
-                        Jul3 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '8') {
-                        Ago3 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '9') {
-                        Sep3 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '10') {
-                        Oct3 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '11') {
-                        Nov3 = data.data[i].Asistencias;
-                    }
-                    if (data.data[i].Mes === '12') {
-                        Dic3 = data.data[i].Asistencias;
-                    }
-                }
 
             }
-            graficaAusentismosApu(Ene1, Feb1, Mar1, Abril1, May1, Jun1, Jul1, Ago1, Sep1, Oct1, Nov1, Dic1,Ene2, Feb2, Mar2, Abril2, May2, Jun2, Jul2, Ago2, Sep2, Oct2, Nov2, Dic2,Ene3, Feb3, Mar3, Abril3, May3, Jun3, Jul3, Ago3, Sep3, Oct3, Nov3, Dic3);
         });
     }
 
-    function graficaAusentismosApu(Ene1, Feb1, Mar1, Abril1, May1, Jun1, Jul1, Ago1, Sep1, Oct1, Nov1, Dic1,Ene2, Feb2, Mar2, Abril2, May2, Jun2, Jul2, Ago2, Sep2, Oct2, Nov2, Dic2,Ene3, Feb3, Mar3, Abril3, May3, Jun3, Jul3, Ago3, Sep3, Oct3, Nov3, Dic3) {
+    graficaAusentismosApu();
+    function graficaAusentismosApu() {
         var options = {
             series: [{
-                name: 'Apu 1',
-                data: [Ene1, Feb1, Mar1, Abril1, May1, Jun1, Jul1, Ago1, Sep1, Oct1, Nov1, Dic1]
-            },
-                {
-                    name: 'Apu 2',
-                    data: [Ene2, Feb2, Mar2, Abril2, May2, Jun2, Jul2, Ago2, Sep2, Oct2, Nov2, Dic2]
-                },
-                {
-                    name: 'Apu 3',
-                    data: [Ene3, Feb3, Mar3, Abril3, May3, Jun3, Jul3, Ago3, Sep3, Oct3, Nov3, Dic3]
-                }
-
-            ],
+                name: 'Website Blog',
+                type: 'column',
+                data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
+            }, {
+                name: 'Social Media',
+                type: 'line',
+                data: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+            }],
             chart: {
-                type: 'bar',
-                height: 350
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    columnWidth: '65%',
-                    endingShape: 'rounded'
-                },
-            },
-            dataLabels: {
-                enabled: false
+                height: 500,
+                type: 'line',
             },
             stroke: {
-                show: true,
-                width: 5,
-                colors: ['transparent']
+                width: [0, 4]
             },
-            xaxis: {
-                categories: ['Ene', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dic'],
+            title: {
+                text: 'Traffic Sources'
             },
-            yaxis: {
+            dataLabels: {
+                enabled: true,
+                enabledOnSeries: [1]
+            },
+            labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
+            yaxis: [{
                 title: {
-                    text: 'Personas'
+                    text: 'Website Blog',
+                },
+
+            }, {
+                opposite: true,
+                title: {
+                    text: 'Objetivo'
                 }
-            },
-            fill: {
-                opacity: 1
-            },
-            tooltip: {
-                y: {
-                    formatter: function (val) {
-                        return " " + val + " personas"
-                    }
-                }
-            }
+            }]
         };
+
         var chart = new ApexCharts(document.querySelector("#areaChartApu"), options);
         chart.render();
     }

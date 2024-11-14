@@ -79,10 +79,10 @@
                             <input class="form-control form-control-lg bg-white rounded-pill pl-5" type="search" id="txtBuscar" placeholder="Search" aria-label="Search">
                             <p class="help-text mt-2 text-muted">Ejemplo 185.1 o 185.2 o 185.3.</p>
                             <br>
-                            <button class="btn btn-success text-white" onclick="verificacionRegistro()">Buscar</button>
+                            <button class="btn btn-success text-white" onclick="verificacionRegistro()" >Buscar</button>
                     </div>
                     <!-- .row -->
-                    <div class="my-5 p-5">
+                    <div class="my-5 p-5" id="divMarbete" style="display: none">
                         <div class="text-center">
                             <h2 class="mb-0">Marbete : <span id="txtFolioMarbete"></span></h2>
                             <p class="lead text-muted mb-5">Conteo : <span id="txtConteo"></span></p>
@@ -161,6 +161,9 @@
                 suma += Number(data.data[i].Cantidad);
             }
             document.getElementById("txtCantidadTotal").innerText = suma;
+            document.getElementById("divMarbete").style.display='block';
+            document.getElementById("divMarbete").scrollIntoView({behavior: "smooth"});
+
         });
     }
 

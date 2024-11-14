@@ -60,7 +60,7 @@
                     <span class="ml-3 item-text">Historicos</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="support">
-                    <a class="nav-link pl-3" href="listas_base.php"><span class="ml-1">Reporte</span></a>
+                    <a class="nav-link pl-3" href="listas_marbetes.php"><span class="ml-1">Reporte</span></a>
                 </ul>
             </li>
         </ul>
@@ -70,20 +70,20 @@
         </p>
         <ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item dropdown">
-                <a href="#contact" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                <a href="#Auditor" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
                     <i class="fe fe-smile fe-16"></i>
                     <span class="ml-3 item-text">Verificacion</span>
                 </a>
-                <ul class="collapse list-unstyled pl-4 w-100" id="contact">
-                    <a class="nav-link pl-3" href="form_registro.php"><span class="ml-1">Escaner</span></a>
+                <ul class="collapse list-unstyled pl-4 w-100" id="Auditor">
+                    <a class="nav-link pl-3" href="verificacion.php"><span class="ml-1">Escaner</span></a>
                 </ul>
             </li>
             <li class="nav-item dropdown">
-                <a href="#support" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                <a href="#Historico" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
                     <i class="fe fe-compass fe-16"></i>
                     <span class="ml-3 item-text">Historicos</span>
                 </a>
-                <ul class="collapse list-unstyled pl-4 w-100" id="support">
+                <ul class="collapse list-unstyled pl-4 w-100" id="Historico">
                     <a class="nav-link pl-3" href="listas_base.php"><span class="ml-1">Reporte</span></a>
                 </ul>
             </li>

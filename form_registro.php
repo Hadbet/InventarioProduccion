@@ -263,17 +263,29 @@
 
         $.getJSON('https://grammermx.com/Inventario/dao/consultaMarbete.php?marbete='+marbete, function (data) {
             for (var i = 0; i < data.data.length; i++) {
-                if (data.data[i].Id_Marbete) {
-                    numeroParte=data.data[i].Numero_Parte;
-                    storageBin=data.data[i].StorageBin;
-                    document.getElementById("reader").style.display = 'none';
-                    document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
-                    document.getElementById("pasoDos").style.display = 'block';
-                    document.getElementById("pasoUno").style.display = 'none';
-                    html5QrcodeScanner.clear();
-                    html5QrcodeScanner.pause();
+                if (data.data[i].FolioMarbete) {
+                    if (data.data[i].Estatus === '1'){
+                        numeroParte=data.data[i].Numero_Parte;
+                        storageBin=data.data[i].StorageBin;
+                        document.getElementById("reader").style.display = 'none';
+                        document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
+                        document.getElementById("pasoDos").style.display = 'block';
+                        document.getElementById("pasoUno").style.display = 'none';
+                        html5QrcodeScanner.clear();
+                        html5QrcodeScanner.pause();
+                    }else{
+                        Swal.fire({
+                            title: "El marbete ya fue registrado",
+                            text: "Escanea otro marbete",
+                            icon: "error"
+                        });
+                    }
                 } else {
-                    alert('Id_Marbete no existe en el objeto data');
+                    Swal.fire({
+                        title: "El marbete no esta cargado",
+                        text: "Verificalo con la mesa central",
+                        icon: "error"
+                    });
                 }
             }
         });
