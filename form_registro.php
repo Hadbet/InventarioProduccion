@@ -487,17 +487,21 @@
         var storageUnits = addedStorageUnits;
         console.log(storageUnits);
 
+        var body = JSON.stringify({
+            nombre: nombre,
+            comentarios: comentarios,
+            storageUnits: storageUnits,
+            folioMarbete: folioMarbete
+        });
+
+        console.log(body);
+
         fetch('https://grammermx.com/Logistica/Inventario/dao/guardarMarbete.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                nombre: nombre,
-                comentarios: comentarios,
-                storageUnits: storageUnits,
-                folioMarbete: folioMarbete
-            })
+            body: body
         })
             .then(response => response.json())
             .then(data => {
