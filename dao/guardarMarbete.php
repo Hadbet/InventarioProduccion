@@ -41,8 +41,7 @@ try {
         // Actualizar el estatus de los Storage_Unit
         $stmt2 = $conex->prepare("UPDATE `Storage_Unit` SET `Estatus`='1' WHERE `Id_StorageUnit` = ?");
         foreach ($storageUnits as $storageUnit => $details) {
-            $idStorageUnit = $details['idStorageUnit'];
-            $stmt2->bind_param("s", $idStorageUnit);
+            $stmt2->bind_param("s", $storageUnit);
             $stmt2->execute();
         }
         $stmt2->close();
