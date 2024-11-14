@@ -24,7 +24,7 @@ try {
     $stmt = $conex->prepare("INSERT INTO `Bitacora_Inventario`(`NumeroParte`, `FolioMarbete`, `Fecha`, `Usuario`, `Estatus`, `PrimerConteo`, `SegundoConteo`, `TercerConteo`, `Comentario`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
     $totalCantidad = 0;
-    foreach ($storageUnits as $storageUnit => $details) {
+    foreach ($storageUnits as $idStorageUnit => $details) {
         $numeroParte = $details['numeroParte'];
         $cantidad = $details['cantidad'];
         $totalCantidad += $cantidad;
