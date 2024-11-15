@@ -58,7 +58,7 @@
                             <div class="col-md-3" >
                                 <div class="form-group mb-3">
                                     <label for="cbInstructor">Rol</label>
-                                    <select class="custom-select" id="cbInstructor">
+                                    <select class="custom-select" id="cbRol">
                                         <option selected>Abrir menu</option>
                                         <option value="1">Capturista</option>
                                         <option value="2">Auditor</option>
@@ -70,7 +70,7 @@
                             <div class="col-md-3" >
                                 <div class="form-group mb-3">
                                     <label for="cbInstructor">Estatus</label>
-                                    <select class="custom-select" id="cbInstructor">
+                                    <select class="custom-select" id="cbEstatus">
                                         <option selected>Abrir menu</option>
                                         <option value="1">Activo</option>
                                         <option value="0">Inactivo</option>
@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="button" onclick="registrarCursoNuevo();" class="btn mb-2 btn-success float-right text-white">Registrar<span
+                        <button type="button" onclick="enviarDatos();" class="btn mb-2 btn-success float-right text-white">Registrar<span
                                     class="fe fe-send fe-16 ml-2"></span></button>
                     </div>
                 </div> <!-- / .card -->
@@ -238,6 +238,26 @@
               }
               document.getElementById("btnModal").click();
           });
+      }
+
+      function enviarDatos() {
+          var user = document.getElementById("txtNombre").value;
+          var password = document.getElementById("txtContra").value;
+          var rol = document.getElementById("cbRol").value;
+          var estatus = document.getElementById("cbEstatus").value;
+
+          var formData = new FormData();
+          formData.append('user', user);
+          formData.append('password', password);
+          formData.append('rol', rol);
+          formData.append('estatus', estatus);
+
+          fetch('https://grammermx.com/Logistica/Inventario/dao/guardarUsuario.php', {
+              method: 'POST',
+              body: formData
+          })
+              .then(response => response.json())
+              .then(data => console.log(data));
       }
 
     </script>
