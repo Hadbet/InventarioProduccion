@@ -10,7 +10,7 @@ try {
     $con = new LocalConector();
     $conex=$con->conectar();
 
-    $stmt = $conex->prepare("INSERT INTO `Usuarios`( `User`, `Password`, `Rol`, `Estatus`) VALUES (?, ?, ?, ?, ?)");
+    $stmt = $conex->prepare("INSERT INTO `Usuarios`( `User`, `Password`, `Rol`, `Estatus`) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $user, $password, $rol, $estatus);
 
     $stmt->execute();
