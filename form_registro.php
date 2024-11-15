@@ -299,12 +299,11 @@
             for (var i = 0; i < data.data.length; i++) {
                 if (data.data[i].FolioMarbete) {
                     if (data.data[i].Estatus === '0'){
-                        numeroParte=data.data[i].Numero_Parte;
+                        numeroParte=data.data[i].NumeroParte;
                         storageBin=data.data[i].StorageBin;
                         console.log(`Code matched = ${decodedText}`, decodedResult);
                         document.getElementById("scanner_input").value = decodedText;
                         document.getElementById("reader").style.display = 'none';
-                        //document.getElementById("lblNumeroParte").innerText = "Número de parte : "+numeroParte;
                         document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
                         document.getElementById("pasoDos").style.display = 'block';
                         document.getElementById("pasoUno").style.display = 'none';
