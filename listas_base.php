@@ -80,6 +80,7 @@
                                             <th>Comentario</th>
                                             <th>StorageBin</th>
                                             <th>StorageType</th>
+                                            <th>Usuario</th>
                                             <th>Estatus</th>
                                         </tr>
                                         </thead>
@@ -93,6 +94,7 @@
                                             <th>Comentario</th>
                                             <th>StorageBin</th>
                                             <th>StorageType</th>
+                                            <th>Usuario</th>
                                             <th>Estatus</th>
                                         </tr>
                                         </tfoot>
@@ -145,6 +147,7 @@
                     { data: 'Comentario' },
                     { data: 'StorageBin' },
                     { data: 'StorageType' },
+                    { data: 'Usuario' },
                     { data: 'Estatus' }
                 ],
                 autoWidth: true,
