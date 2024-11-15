@@ -38,7 +38,7 @@
                 <div class="col-12">
                     <div class="row align-items-center mb-2">
                         <div class="col">
-                            <h2 class="h5 page-title">Bienvenido al sistema integral de RH</h2>
+                            <h2 class="h5 page-title">Bienvenido al sistema de inventario</h2>
                         </div>
                         <div class="col-auto">
                             <form class="form-inline">

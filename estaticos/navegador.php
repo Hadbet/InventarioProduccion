@@ -27,6 +27,12 @@
                     <li class="nav-item">
                         <a class="nav-link pl-3" href="inicio.php"><span class="ml-1 item-text">DashBoard</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link pl-3" href="crear_user.php"><span class="ml-1 item-text">Usuarios</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link pl-3" href="crear_user.php"><span class="ml-1 item-text">Importación de tablas</span></a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -36,7 +42,7 @@
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="tables">
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="listas_base.php"><span class="ml-1 item-text">Tablas</span></a>
+                        <a class="nav-link pl-3" href="listas_base.php"><span class="ml-1 item-text">Marbetes</span></a>
                     </li>
                 </ul>
             </li>
@@ -51,7 +57,10 @@
                     <span class="ml-3 item-text">Inicio</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="contact">
-                    <a class="nav-link pl-3" href="form_registro.php"><span class="ml-1">Captura de marbetes</span></a>
+                    <a class="nav-link pl-3" href="form_registro.php"><span class="ml-1">Captura Almacen</span></a>
+                </ul>
+                <ul class="collapse list-unstyled pl-4 w-100" id="contact">
+                    <a class="nav-link pl-3" href="form_registro_produccion.php"><span class="ml-1">Captura Produccion</span></a>
                 </ul>
             </li>
             <li class="nav-item dropdown">

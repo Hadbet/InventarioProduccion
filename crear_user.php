@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
-    <title>GRAMMER FACTURAS</title>
+    <title>GRAMMER INVENTARIO</title>
     <!-- Simple bar CSS -->
     <link rel="stylesheet" href="css/simplebar.css">
 
@@ -97,11 +97,11 @@
                       <table class="table datatables" id="dataTable-1">
                         <thead>
                           <tr>
-                              <th>Marbete</th>
-                            <th>Numero de parte</th>
-                          <th>Fecha de captura</th>
-                            <th>Usuario</th>
-                            <th>Ver detalles</th>
+                              <th>ID</th>
+                              <th>Usuario</th>
+                              <th>Password</th>
+                              <th>Rol</th>
+                              <th>Estatus</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -257,7 +257,27 @@
               body: formData
           })
               .then(response => response.json())
-              .then(data => console.log(data));
+              .then(data => {
+                  console.log(data);
+                  actualizarTabla();
+                  document.getElementById("txtNombre").value="";
+                  document.getElementById("txtContra").value="";
+                  document.getElementById("cbRol").value="";
+                  document.getElementById("cbEstatus").value="";
+              });
+      }
+
+      function actualizarTabla() {
+          $.ajax({
+              url: 'https://grammermx.com/Logistica/Inventario/dao/consultaUser.php', // Reemplaza esto con la URL de tus datos
+              dataType: 'json',
+              success: function(data) {
+                  var table = $('#dataTable-1').DataTable();
+                  table.clear();
+                  table.rows.add(data.data);
+                  table.draw();
+              }
+          });
       }
 
     </script>
