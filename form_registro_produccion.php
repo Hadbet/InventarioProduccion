@@ -179,6 +179,13 @@
                                 </div>
                             </div>
                             <hr>
+                            <div class="d-flex">
+                                <div class="flex-fill">
+                                    <span class="card-title">Monto Total</span>
+                                    <h4 class="mb-0" id="lblMontoTotal"></h4>
+                                </div>
+                            </div>
+                            <hr>
                             <div class="row align-items-center">
                                 <div class="col-auto">
                                     <a href="profile-posts.html" class="avatar avatar-md">

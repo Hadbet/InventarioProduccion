@@ -22,7 +22,9 @@ function ContadorApu()
     IF(`Estatus` = 1, 
         '<span class=\"badge badge-pill badge-success\">Activo</span>', 
         '<span class=\"badge badge-pill badge-info\">Inactivo</span>'
-    ) AS `Estatus`
+    ) AS `Estatus`,
+    CONCAT('<button class=\"btn btn-danger text-white\" onclick=\"miFuncion1(', `Id_Usuario`, ')\">Botón 1</button>') AS `Boton1`,
+    CONCAT('<button class=\"btn btn-warning text-white\" onclick=\"miFuncion2(\'', `User`, '\', \'', `Password`, '\', ', `Rol`, ', ', `Estatus`, ')\">Botón 2</button>') AS `Boton2`
 FROM `Usuarios` WHERE 1;");
 
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);

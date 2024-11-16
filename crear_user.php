@@ -189,7 +189,9 @@
                       { data: 'User' },
                         { data: 'Password' },
                       { data: 'Rol' },
-                        { data: 'Estatus' }
+                        { data: 'Estatus' },
+                        { data: 'Boton1' },
+                        { data: 'Boton2' }
                     ],
                     autoWidth: true,
                     "lengthMenu": [
