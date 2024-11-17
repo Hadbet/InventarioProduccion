@@ -102,6 +102,8 @@
                               <th>Password</th>
                               <th>Rol</th>
                               <th>Estatus</th>
+                              <th>Eliminar</th>
+                              <th>Actualizar</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -141,6 +143,8 @@
                                                 <th>Password</th>
                                                 <th>Rol</th>
                                                 <th>Estatus</th>
+                                                <th>Eliminar</th>
+                                                <th>Actualizar</th>
                                             </tr>
                                             </thead>
                                             <tbody>
