@@ -8,7 +8,7 @@ try {
     $con = new LocalConector();
     $conex=$con->conectar();
 
-    $stmt = $conex->prepare("UPDATE `Usuarios` SET `Estatus`='?' WHERE `Id_Usuario` = '?';");
+    $stmt = $conex->prepare("UPDATE `Usuarios` SET `Estatus`=? WHERE `Id_Usuario` = ?;");
     $stmt->bind_param("is", $estado, $id);
 
     $stmt->execute();
