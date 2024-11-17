@@ -24,8 +24,8 @@ function ContadorApu()
         '<span class=\"badge badge-pill badge-info\">Inactivo</span>'
     ) AS `Estatus`,
     IF(`Estatus` = 1, 
-        CONCAT('<button class=\"btn btn-danger text-white\" onclick=\"miFuncion1(', `Id_Usuario`, ')\">Desactivar</button>'), 
-        CONCAT('<button class=\"btn btn-danger text-white\" onclick=\"miFuncion1(', `Id_Usuario`, ')\">Activar</button>')
+        CONCAT('<button class=\"btn btn-danger text-white\" onclick=\"estatus(', `Id_Usuario`, ',0)\">Desactivar</button>'), 
+        CONCAT('<button class=\"btn btn-success text-white\" onclick=\"estatus(', `Id_Usuario`, ',1)\">Activar</button>')
     ) AS `Boton1`,
     CONCAT('<button class=\"btn btn-warning text-white\" onclick=\"miFuncion2(\'', `User`, '\', \'', `Password`, '\', ', `Rol`, ', ', `Estatus`, ')\">Actualizar</button>') AS `Boton2`
 FROM `Usuarios` WHERE 1;");

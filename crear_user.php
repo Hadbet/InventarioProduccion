@@ -286,6 +286,27 @@
           });
       }
 
+      function estatus(id,estado) {
+
+          var formData = new FormData();
+          formData.append('id', id);
+          formData.append('estado', estado);
+
+          fetch('https://grammermx.com/Logistica/Inventario/dao/guardarEstatus.php', {
+              method: 'POST',
+              body: formData
+          })
+              .then(response => response.json())
+              .then(data => {
+                  console.log(data);
+                  actualizarTabla();
+              });
+      }
+
+      function configuracion() {
+
+      }
+
     </script>
   </body>
 </html>
