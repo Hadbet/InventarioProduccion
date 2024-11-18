@@ -65,6 +65,20 @@
                         </div> <!-- .card -->
                     </div>
 
+                    <div class="mb-2 align-items-center">
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                                <div class="row mt-1 align-items-center">
+                                    <div class="col-12 col-lg-4 text-left pl-4">
+                                        <span class="h3">Proceso del Inventario en dinero</span>
+                                    </div>
+                                </div>
+                                <div class="map-box">
+                                    <div id="areaChartCuatro"></div>
+                                </div>
+                            </div> <!-- .card-body -->
+                        </div> <!-- .card -->
+                    </div>
 
                 </div> <!-- .col-12 -->
             </div> <!-- .row -->
@@ -108,12 +122,114 @@
 <script src="js/apps.js"></script>
 
 <script>
+
+
+    var chartDos;
+    graficaCostoCarga();
+    function graficaCostoCarga() {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/graficaCosto.php', function (data) {
+            var AreaNombre = [];
+            var PrimerConteo = [];
+            var SegundoConteo = [];
+            var Estandar = [];
+
+            for (var i = 0; i < data.data.length; i++) {
+                AreaNombre.push((data.data[i].AreaNombre ? data.data[i].AreaNombre : '')+"("+data.data[i].PrimerConteoLiberado+"/"+data.data[i].TotalPrimerConteo+")");
+                PrimerConteo.push(data.data[i].TotalContado ? parseFloat(data.data[i].TotalContado) : 0);
+                SegundoConteo.push(data.data[i].TotalEsperado ? parseFloat(data.data[i].TotalEsperado) : 0);
+                Estandar.push(data.data[i].TotalEsperado ? parseFloat(data.data[i].TotalEsperado) : 0);
+            }
+
+            console.log(AreaNombre);
+            console.log(PrimerConteo);
+            console.log(SegundoConteo);
+            graficaCosto(AreaNombre,PrimerConteo,SegundoConteo,Estandar);
+        });
+    }
+
+    function graficaCosto(AreaNombre,PrimerConteo,SegundoConteo,Estandar) {
+        var options = {
+            series: [{
+                name: 'Primer Conteo',
+                type: 'column',
+                data: PrimerConteo
+            }, {
+                name: 'Segundo Conteo',
+                type: 'column',
+                data: SegundoConteo
+            }, {
+                name: 'Estandar',
+                type: 'line',
+                data: Estandar
+            }],
+            chart: {
+                height: 500,
+                type: 'line',
+                stacked: false,
+            },
+            stroke: {
+                width: [0, 2, 5],
+                curve: 'smooth'
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '50%'
+                }
+            },
+            fill: {
+                opacity: [0.85, 0.25, 1],
+                gradient: {
+                    inverseColors: false,
+                    shade: 'light',
+                    type: "vertical",
+                    opacityFrom: 0.85,
+                    opacityTo: 0.55,
+                    stops: [0, 100, 100, 100]
+                }
+            },
+            labels: AreaNombre,
+            markers: {
+                size: 0
+            },
+            xaxis: {
+                type: 'category'
+            },
+            yaxis: {
+                title: {
+                    text: 'Proceso',
+                }
+            },
+            tooltip: {
+                shared: true,
+                intersect: false,
+                y: {
+                    formatter: function (y) {
+                        if (typeof y !== "undefined") {
+                            return y.toFixed(0) + " %";
+                        }
+                        return y;
+                    }
+                }
+            }
+        };
+
+        if(chartDos) {
+            chartDos.destroy(); // Destruye el gráfico anterior si existe
+        }
+
+        chartDos = new ApexCharts(document.querySelector("#areaChartCuatro"), options);
+        chartDos.render();
+    }
+
+
+
+
     var chart;
 
     Apu();
     setInterval(Apu, 60000); // Actualiza cada minuto
     function Apu() {
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/graficaGeneral.php', function (data) {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/graficaCosto.php', function (data) {
             var AreaNombre = [];
             var PrimerConteo = [];
             var SegundoConteo = [];
