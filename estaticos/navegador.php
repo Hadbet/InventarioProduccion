@@ -125,6 +125,7 @@
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="Lider">
                     <a class="nav-link pl-3" href="verificacion.php"><span class="ml-1">Control</span></a>
+                    <a class="nav-link pl-3" href="cancelacion_marbete.php"><span class="ml-1">Cancelacion</span></a>
                 </ul>
             </li>
         </ul>

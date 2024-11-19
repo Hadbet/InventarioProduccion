@@ -157,7 +157,7 @@
 
       function actualizarTabla() {
           $.ajax({
-              url: 'https://grammermx.com/Logistica/Inventario/dao/consultaUser.php', // Reemplaza esto con la URL de tus datos
+              url: 'https://grammermx.com/Logistica/Inventario/dao/consultaMarbeteLider.php?area='+2, // Reemplaza esto con la URL de tus datos
               dataType: 'json',
               success: function(data) {
                   var table = $('#dataTable-1').DataTable();

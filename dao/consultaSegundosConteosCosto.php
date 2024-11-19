@@ -15,7 +15,7 @@ function ContadorApu($area)
     $datos = mysqli_query($conex, "SELECT * FROM (
     SELECT 
         (SELECT SUM(Cantidad) FROM InventarioSap WHERE AreaCve = $area) AS TotalInventarioSap, 
-        (SELECT SUM(PrimerConteo) FROM Bitacora_Inventario WHERE Area = $area) AS TotalPrimerConteoBitacora, 
+        (SELECT SUM(PrimerConteo) FROM Bitacora_Inventario WHERE Area = $area AND Estatus = 1) AS TotalPrimerConteoBitacora, 
         (SELECT SUM(InventarioSap.Cantidad * (Parte.Costo / Parte.Por)) 
          FROM InventarioSap 
          INNER JOIN Parte ON InventarioSap.GrammerNo = Parte.GrammerNo 
@@ -23,10 +23,9 @@ function ContadorApu($area)
         (SELECT SUM(Bitacora_Inventario.PrimerConteo * (Parte.Costo / Parte.Por)) 
          FROM Bitacora_Inventario 
          INNER JOIN Parte ON Bitacora_Inventario.NumeroParte = Parte.GrammerNo 
-         WHERE Bitacora_Inventario.Area = $area) AS CostoTotalPrimerConteoBitacora
+         WHERE Bitacora_Inventario.Area = $area AND Bitacora_Inventario.Estatus = 1) AS CostoTotalPrimerConteoBitacora
 ) AS Subquery
 WHERE ABS(Subquery.CostoTotalInventarioSap - Subquery.CostoTotalPrimerConteoBitacora) >= 3000;");
-
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
     echo json_encode(array("data" => $resultado));
 }

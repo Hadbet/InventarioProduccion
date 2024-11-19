@@ -25,6 +25,7 @@ LEFT JOIN
     AND Bitacora_Inventario.StorageBin = InventarioSap.STBin 
 WHERE 
     Bitacora_Inventario.Area = $area
+    AND Bitacora_Inventario.Estatus = 1
     AND (InventarioSap.GrammerNo IS NULL 
     OR Bitacora_Inventario.PrimerConteo != InventarioSap.Cantidad
     OR InventarioSap.Cantidad = 0
@@ -51,6 +52,9 @@ WHERE
     OR InventarioSap.Cantidad = 0
     OR IFNULL(Bitacora_Inventario.PrimerConteo, 0) = 0
     OR ABS(IFNULL(Bitacora_Inventario.PrimerConteo, 0) - InventarioSap.Cantidad) >= 10000);");
+
+    $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
+    echo json_encode(array("data" => $resultado));
 
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
     echo json_encode(array("data" => $resultado));
