@@ -10,7 +10,7 @@ try {
     $conex=$con->conectar();
 
     // Buscamos al usuario en la base de datos
-    $stmt = $conex->prepare("SELECT `Password` FROM `Usuarios` WHERE `User` = ? and `Estatus` = 3 and `Area` = ?");
+    $stmt = $conex->prepare("SELECT `Password` FROM `Usuarios` WHERE `User` = ? and `Estatus` = 1 and `Rol` = 3  and `Area` = ?");
     $stmt->bind_param("ss", $user,$area);
 
     $stmt->execute();

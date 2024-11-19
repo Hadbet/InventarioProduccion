@@ -21,6 +21,8 @@
     <!-- App CSS -->
     <link rel="stylesheet" href="css/app-light.css" id="lightTheme">
     <link rel="stylesheet" href="css/app-dark.css" id="darkTheme" disabled>
+      <!-- CSS -->
+      <link rel="stylesheet" href="lib/sweetalert2.css">
   </head>
   <body class="vertical  light  ">
     <div class="wrapper">
@@ -149,6 +151,7 @@
                                         <hr>
                                     </div>
                                     <div class="modal-footer">
+                                        <button type="button" class="btn mb-2 btn-success text-white" onclick="actualizarDatos()">Actualizar</button>
                                         <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal" id="btnCloseM">Close</button>
                                     </div>
                                 </div>
@@ -178,6 +181,7 @@
     <script src='js/jquery.dataTables.min.js'></script>
     <script src='js/dataTables.bootstrap4.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
               $.ajax({
                 url: 'https://grammermx.com/Logistica/Inventario/dao/consultaUser.php', // Reemplaza esto con la URL de tus datos
