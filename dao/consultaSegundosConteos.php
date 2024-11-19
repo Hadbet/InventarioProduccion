@@ -23,13 +23,13 @@ FROM
 LEFT JOIN 
     InventarioSap ON Bitacora_Inventario.NumeroParte = InventarioSap.GrammerNo 
     AND Bitacora_Inventario.StorageBin = InventarioSap.STBin 
-    AND Bitacora_Inventario.Area = $area
 WHERE 
-    InventarioSap.GrammerNo IS NULL 
+    Bitacora_Inventario.Area = $area
+    AND (InventarioSap.GrammerNo IS NULL 
     OR Bitacora_Inventario.PrimerConteo != InventarioSap.Cantidad
     OR InventarioSap.Cantidad = 0
     OR Bitacora_Inventario.PrimerConteo = 0
-    OR ABS(Bitacora_Inventario.PrimerConteo - IFNULL(InventarioSap.Cantidad, 0)) >= 10000
+    OR ABS(Bitacora_Inventario.PrimerConteo - IFNULL(InventarioSap.Cantidad, 0)) >= 10000)
 
 UNION
 
@@ -44,13 +44,13 @@ FROM
 LEFT JOIN 
     Bitacora_Inventario ON InventarioSap.GrammerNo = Bitacora_Inventario.NumeroParte 
     AND InventarioSap.STBin = Bitacora_Inventario.StorageBin 
-    AND InventarioSap.AreaCve = $area
 WHERE 
-    Bitacora_Inventario.NumeroParte IS NULL 
+    InventarioSap.AreaCve = $area
+    AND (Bitacora_Inventario.NumeroParte IS NULL 
     OR Bitacora_Inventario.PrimerConteo != InventarioSap.Cantidad
     OR InventarioSap.Cantidad = 0
     OR IFNULL(Bitacora_Inventario.PrimerConteo, 0) = 0
-    OR ABS(IFNULL(Bitacora_Inventario.PrimerConteo, 0) - InventarioSap.Cantidad) >= 10000;");
+    OR ABS(IFNULL(Bitacora_Inventario.PrimerConteo, 0) - InventarioSap.Cantidad) >= 10000);");
 
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
     echo json_encode(array("data" => $resultado));

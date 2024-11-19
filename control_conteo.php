@@ -14,6 +14,7 @@
           rel="stylesheet">
     <!-- Icons CSS -->
     <link rel="stylesheet" href="css/feather.css">
+    <link rel="stylesheet" href="css/dataTables.bootstrap4.css">
     <!-- Date Range Picker CSS -->
     <link rel="stylesheet" href="css/daterangepicker.css">
     <!-- App CSS -->
@@ -122,6 +123,19 @@
                 </div>
             </div>
 
+            <table class="table datatables" id="dataTable-1">
+                <thead>
+                <tr>
+                    <th>Marbete</th>
+                    <th>Numero Parte</th>
+                    <th>Storage Bin</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
 
         </div> <!-- .container-fluid -->
     </main> <!-- main -->
@@ -141,20 +155,45 @@
 <script src="js/config.js"></script>
 <script src="js/apps.js"></script>
 <script src="assets/scanapp.min.js"></script>
+<script src='js/jquery.dataTables.min.js'></script>
+<script src='js/dataTables.bootstrap4.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
 
 <script>
-
+    verificacionDiferencia();
     function verificacionDiferencia() {
 
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaSegundosConteos.php?area='+2, function (data) {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaSegundosConteosCosto.php?area='+2, function (data) {
             for (var i = 0; i < data.data.length; i++) {
-                document.getElementById("lblCosto").innerText = data.data[i].CostoTotalInventarioSap - data.data[i].CostoTotalPrimerConteoBitacora;
-                document.getElementById("txtResponsable").innerText = data.data[i].TotalPrimerConteoBitacora-data.data[i].CostoTotalInventarioSap;
+                document.getElementById("lblDinero").innerText = data.data[i].CostoTotalInventarioSap - data.data[i].CostoTotalPrimerConteoBitacora;
+                document.getElementById("lblCantidad").innerText = data.data[i].TotalInventarioSap-data.data[i].TotalPrimerConteoBitacora;
+                crearTabla();
             }
 
+        });
+    }
+
+    function crearTabla() {
+        $.ajax({
+            url: 'https://grammermx.com/Logistica/Inventario/dao/consultaSegundosConteos.php?area='+2, // Reemplaza esto con la URL de tus datos
+            dataType: 'json',
+            success: function(data) {
+                $('#dataTable-1').DataTable({
+                    data: data.data,
+                    columns: [
+                        { data: 'FolioMarbete' },
+                        { data: 'NumeroParte' },
+                        { data: 'StorageBin' }
+                    ],
+                    autoWidth: true,
+                    "lengthMenu": [
+                        [16, 32, 64, -1],
+                        [16, 32, 64, "All"]
+                    ]
+                });
+            }
         });
     }
 
