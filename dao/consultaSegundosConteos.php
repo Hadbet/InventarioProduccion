@@ -55,9 +55,6 @@ WHERE
 
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
     echo json_encode(array("data" => $resultado));
-
-    $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
-    echo json_encode(array("data" => $resultado));
 }
 
 
