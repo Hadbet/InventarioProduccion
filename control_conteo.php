@@ -60,6 +60,37 @@
         }
     </style>
 
+    <style>
+        #dataTable-1 tfoot input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .copyButton {
+            color: white;
+            background-color: blue !important;
+        }
+
+        .csvButton {
+            color: white;
+            background-color: forestgreen !important; /* Reemplaza 'strongGreen' con el color verde fuerte que quieras */
+        }
+
+        .excelButton {
+            color: white;
+            background-color: green !important;
+        }
+
+        .pdfButton {
+            color: white;
+            background-color: red !important;
+        }
+
+        .printButton {
+            color: white;
+            background-color: gray !important;
+        }
+    </style>
+
 </head>
 <body class="vertical  light  ">
 <div class="wrapper">
@@ -160,6 +191,13 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
 
 <script>
     verificacionDiferencia();
@@ -180,7 +218,7 @@
             url: 'https://grammermx.com/Logistica/Inventario/dao/consultaSegundosConteos.php?area='+2, // Reemplaza esto con la URL de tus datos
             dataType: 'json',
             success: function(data) {
-                $('#dataTable-1').DataTable({
+                var table = $('#dataTable-1').DataTable({
                     data: data.data,
                     columns: [
                         { data: 'FolioMarbete' },
@@ -191,7 +229,43 @@
                     "lengthMenu": [
                         [16, 32, 64, -1],
                         [16, 32, 64, "All"]
-                    ]
+                    ],
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            extend: 'copy',
+                            className: 'btn btn-sm copyButton'
+                        },
+                        {
+                            extend: 'csv',
+                            className: 'btn btn-sm csvButton'
+                        },
+                        {
+                            extend: 'excel',
+                            className: 'btn btn-sm excelButton'
+                        },
+                        {
+                            extend: 'pdf',
+                            className: 'btn btn-sm pdfButton'
+                        },
+                        {
+                            extend: 'print',
+                            className: 'btn btn-sm printButton'
+                        }
+                    ],
+                    initComplete: function () {
+                        this.api().columns().every( function () {
+                            var column = this;
+                            var input = document.createElement("input");
+                            input.className = 'form-control form-control-sm';
+                            $(input).appendTo($(column.footer()).empty())
+                                .on('keyup change clear', function () {
+                                    if (column.search() !== this.value) {
+                                        column.search(this.value).draw();
+                                    }
+                                });
+                        });
+                    }
                 });
             }
         });
