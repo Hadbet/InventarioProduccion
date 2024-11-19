@@ -20,7 +20,10 @@ function ContadorApu($area)
     `Usuario`,
     IF(`Estatus` = 1, 
         '<span class=\"badge badge-pill badge-success\">Liberado</span>', 
-        '<span class=\"badge badge-pill badge-danger\">Pendiente</span>'
+        IF(`Estatus` = 5, 
+            '<span class=\"badge badge-pill badge-warning\">Cancelado</span>', 
+            '<span class=\"badge badge-pill badge-danger\">Pendiente</span>'
+        )
     ) AS `Estatus`,
     `PrimerConteo`, 
     `SegundoConteo`, 
