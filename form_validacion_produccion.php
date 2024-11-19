@@ -421,19 +421,16 @@
 
         var marbete = document.getElementById("scanner_input").value
         var nombre = document.getElementById("lblNombre").innerText;
-        var comentarios = document.getElementById("txtComentarios").value;
         var numeroParte = document.getElementById("txtNumeroParte").value;
         var cantidad = document.getElementById("txtCantidad").value;
 
         var formData = new FormData();
         formData.append('nombre', nombre);
-        formData.append('comentarios', comentarios);
         formData.append('folioMarbete', marbete);
         formData.append('numeroParte', numeroParte);
         formData.append('cantidad', cantidad);
-        formData.append('storageBin', storageBin);
 
-        fetch('https://grammermx.com/Logistica/Inventario/dao/guardarMarbeteProduccion.php', {
+        fetch('https://grammermx.com/Logistica/Inventario/dao/actualizarMarbeteProduccion.php', {
             method: 'POST',
             body: formData
         })
@@ -465,7 +462,7 @@
                     });
                 } else {
                     console.log("Hubo un error en la operación");
-                    console.log("Las unidades de almacenamiento que fallaron son: ", data.failedUnits);
+                    console.log("Las unidades de almacenamiento que fallaron son: ", data.message);
                 }
             });
     }
