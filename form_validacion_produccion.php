@@ -235,8 +235,8 @@
                         <hr>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn mb-2 btn-success text-white" data-dismiss="modal">Validar</button>
-                        <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn mb-2 btn-success text-white" onclick="verificarUsuario()" data-dismiss="modal">Validar</button>
+                        <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal" id="btnCloseM">Close</button>
                     </div>
                 </div>
             </div>
@@ -457,6 +457,52 @@
                 } else {
                     console.log("Hubo un error en la operación");
                     console.log("Las unidades de almacenamiento que fallaron son: ", data.failedUnits);
+                }
+            });
+    }
+
+    function verificarUsuario() {
+
+        var usuario = document.getElementById("txtUsuarioM").value
+        var contra = document.getElementById("txtPasswordM").value;
+
+        var formData = new FormData();
+        formData.append('user', usuario);
+        formData.append('password', contra);
+
+        fetch('https://grammermx.com/Logistica/Inventario/dao/consultaVerificarUsuario.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    let timerInterval;
+                    Swal.fire({
+                        title: "Ya puedes modificar el numero de parte,
+                        html: "Te regresaremos a la pagina <b></b> milliseconds.",
+                        timer: 1500,
+                        timerProgressBar: true,
+                        icon: "success",
+                        didOpen: () => {
+                            Swal.showLoading();
+                            const timer = Swal.getPopup().querySelector("b");
+                            timerInterval = setInterval(() => {
+                                timer.textContent = `${Swal.getTimerLeft()}`;
+                            }, 100);
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval);
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            document.getElementById("btnCloseM").click();
+                        }
+                    });
+                } else {
+                    console.log("Hubo un error en la operación");
+                    console.log("Error: ", data.message);
                 }
             });
     }
