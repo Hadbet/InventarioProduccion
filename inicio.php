@@ -128,39 +128,29 @@
     graficaCostoCarga();
     function graficaCostoCarga() {
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/graficaCosto.php', function (data) {
-            var AreaNombre = [];
-            var PrimerConteo = [];
-            var SegundoConteo = [];
-            var Estandar = [];
+            var AreaNombreCosto = [];
+            var PrimerConteoCosto = [];
+            var SegundoConteoCosto = [];
 
             for (var i = 0; i < data.data.length; i++) {
-                AreaNombre.push((data.data[i].AreaNombre ? data.data[i].AreaNombre : '')+"("+data.data[i].PrimerConteoLiberado+"/"+data.data[i].TotalPrimerConteo+")");
-                PrimerConteo.push(data.data[i].TotalContado ? parseFloat(data.data[i].TotalContado) : 0);
-                SegundoConteo.push(data.data[i].TotalEsperado ? parseFloat(data.data[i].TotalEsperado) : 0);
-                Estandar.push(data.data[i].TotalEsperado ? parseFloat(data.data[i].TotalEsperado) : 0);
+                AreaNombreCosto.push((data.data[i].AreaNombre ? data.data[i].AreaNombre : '')+"("+data.data[i].TotalContado+"/"+data.data[i].TotalEsperado+")");
+                PrimerConteoCosto.push(data.data[i].TotalContado ? parseFloat(parseFloat(data.data[i].TotalContado).toFixed(2)) : 0);
+                SegundoConteoCosto.push(data.data[i].TotalEsperado ? parseFloat(parseFloat(data.data[i].TotalEsperado).toFixed(2)) : 0);
             }
-
-            console.log(AreaNombre);
-            console.log(PrimerConteo);
-            console.log(SegundoConteo);
-            graficaCosto(AreaNombre,PrimerConteo,SegundoConteo,Estandar);
+            graficaCosto(AreaNombreCosto,PrimerConteoCosto,SegundoConteoCosto);
         });
     }
 
-    function graficaCosto(AreaNombre,PrimerConteo,SegundoConteo,Estandar) {
+    function graficaCosto(AreaNombreCosto,PrimerConteoCosto,SegundoConteoCosto) {
         var options = {
             series: [{
-                name: 'Primer Conteo',
+                name: 'Monto actual',
                 type: 'column',
-                data: PrimerConteo
+                data: PrimerConteoCosto
             }, {
-                name: 'Segundo Conteo',
+                name: 'Monto Estimado',
                 type: 'column',
-                data: SegundoConteo
-            }, {
-                name: 'Estandar',
-                type: 'line',
-                data: Estandar
+                data: SegundoConteoCosto
             }],
             chart: {
                 height: 500,
@@ -187,7 +177,7 @@
                     stops: [0, 100, 100, 100]
                 }
             },
-            labels: AreaNombre,
+            labels: AreaNombreCosto,
             markers: {
                 size: 0
             },
@@ -229,7 +219,7 @@
     Apu();
     setInterval(Apu, 60000); // Actualiza cada minuto
     function Apu() {
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/graficaCosto.php', function (data) {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/graficaGeneral.php', function (data) {
             var AreaNombre = [];
             var PrimerConteo = [];
             var SegundoConteo = [];
