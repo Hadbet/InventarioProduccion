@@ -12,7 +12,7 @@ try {
     $conex=$con->conectar();
 
     $stmt = $conex->prepare("INSERT INTO `Usuarios`( `User`, `Password`, `Rol`, `Estatus`, `Area`) VALUES (?, ?, ?, ?,?)");
-    $stmt->bind_param("ssss", $user, $password, $rol, $estatus,$area);
+    $stmt->bind_param("ssssi", $user, $password, $rol, $estatus,$area);
 
     $stmt->execute();
 
