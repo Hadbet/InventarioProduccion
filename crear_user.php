@@ -134,31 +134,19 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <label id="lblFecha" class="col-form-label"></label>
-                                        <h4>Marbete : <span id="txtFolioMarbete">185</span></h4>
                                         <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Responsable:</label>
-                                            <input type="text" class="form-control" id="txtResponsable" readonly>
+                                            <label for="recipient-name" class="col-form-label">Id:</label>
+                                            <input type="text" class="form-control" id="txtIdM" readonly>
                                         </div>
                                         <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Comentarios:</label>
-                                            <input type="text" class="form-control" id="txtComentario" readonly>
+                                            <label for="recipient-name" class="col-form-label">Usuario:</label>
+                                            <input type="text" class="form-control" id="txtUsuarioM">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="recipient-name" class="col-form-label">Password:</label>
+                                            <input type="password" class="form-control" id="txtPasswordM">
                                         </div>
                                         <hr>
-                                        <table id="data-table" class="table table-hover">
-                                            <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Usuario</th>
-                                                <th>Rol</th>
-                                                <th>Estatus</th>
-                                                <th>Eliminar</th>
-                                                <th>Actualizar</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
@@ -323,6 +311,13 @@
                   $('#cbArea').append(option);
               }
           });
+      }
+
+      function configuracion(user,id,rol,estatus) {
+          document.getElementById("btnModal").click();
+          document.getElementById("txtUsuarioM").value = user;
+          document.getElementById("txtIdM").value = id;
+
       }
     </script>
   </body>

@@ -27,7 +27,7 @@ function ContadorApu()
         CONCAT('<button class=\"btn btn-danger text-white\" onclick=\"estatus(', U.`Id_Usuario`, ',0)\">Desactivar</button>'), 
         CONCAT('<button class=\"btn btn-success text-white\" onclick=\"estatus(', U.`Id_Usuario`, ',1)\">Activar</button>')
     ) AS `Boton1`,
-    CONCAT('<button class=\"btn btn-warning text-white\" onclick=\"miFuncion2(\'', U.`User`, '\', \'', U.`Password`, '\', ', U.`Rol`, ', ', U.`Estatus`, ')\">Actualizar</button>') AS `Boton2`,
+    CONCAT('<button class=\"btn btn-warning text-white\" onclick=\"configuracion(\'', U.`User`, '\', \'', U.`Id_Usuario`, '\', ', U.`Rol`, ', ', U.`Estatus`, ')\">Actualizar</button>') AS `Boton2`,
     A.`AreaNombre`
 FROM `Usuarios` U
 LEFT JOIN `Area` A ON U.`Area` = A.`IdArea`
