@@ -128,7 +128,7 @@
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="verticalModalTitle">Detalles</h5>
+                                        <h5 class="modal-title" id="verticalModalTitle">Modificación de usuarios</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -149,7 +149,7 @@
                                         <hr>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal" id="btnCloseM">Close</button>
                                     </div>
                                 </div>
                             </div>
@@ -318,6 +318,45 @@
           document.getElementById("txtUsuarioM").value = user;
           document.getElementById("txtIdM").value = id;
 
+      }
+
+      function actualizarDatos() {
+          var user = document.getElementById("txtUsuarioM").value;
+          var password = document.getElementById("txtPasswordM").value;
+          var id = document.getElementById("txtIdM").value;
+
+          var formData = new FormData();
+          formData.append('user', user);
+          formData.append('password', password);
+          formData.append('id', id);
+
+          fetch('https://grammermx.com/Logistica/Inventario/dao/actualizarUsuario.php', {
+              method: 'POST',
+              body: formData
+          })
+              .then(response => response.json())
+              .then(data => {
+
+                  if (data.success) {
+
+                      document.getElementById("txtUsuarioM").value="";
+                      document.getElementById("txtPasswordM").value="";
+                      document.getElementById("txtIdM").value="";
+                      Swal.fire({
+                          title: data.message,
+                          text: "Actualización correcta",
+                          icon: "success"
+                      });
+                      document.getElementById("btnCloseM").click();
+                      actualizarTabla();
+                  } else {
+                      Swal.fire({
+                          title: data.message,
+                          text: "Verificalo con la mesa central",
+                          icon: "error"
+                      });
+                  }
+              });
       }
     </script>
   </body>
