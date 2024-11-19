@@ -71,9 +71,37 @@
         <center><img src="images/tituloInventario.png" style="width: 50%"></center>
         <br><br>
 
+
+
         <div class="container-fluid" id="pasoUno">
 
+            <h2 class="page-title">Folios pendientes</h2>
+            <br>
+            <div class="row justify-content-center">
 
+
+
+
+                <div class="card shadow bg-primary text-white">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-3 text-center">
+                          <span class="circle circle-sm bg-primary-light">
+                            <i class="fe fe-16 fe-shopping-bag text-white mb-0"></i>
+                          </span>
+                            </div>
+                            <div class="col pr-0">
+                                <p class="small text-light mb-0">Folio</p>
+                                <span class="h3 mb-0 text-white">185.1</span>
+                                <span class="small text-muted">marbete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <br>
             <div class="row justify-content-center">
                 <div class="col-12">
                     <h2 class="page-title">Paso 1 : Escaneo de marbete</h2>
@@ -96,12 +124,6 @@
                                             <br>
                                        </div>
                                     </div> <!-- /.col -->
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <br>
-                                            <button class="btn btn-success text-white mt-2" onclick="escaneo()">Escanear</button>
-                                        </div>
-                                    </div>
                             </div>
                         </div>
                         <div class="card-footer">
@@ -265,6 +287,17 @@
 
 <script>
 
+    var auxConteo=0;
+    estatusConteo();
+    function estatusConteo() {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaAreaDetalle.php?area='+2, function (data) {
+            for (var i = 0; i < data.data.length; i++) {
+                auxConteo = data.data[i].Conteo;
+            }
+        });
+    }
+
+
     var banderaModal=false;
 
     $(document).ready(function(){
@@ -289,11 +322,6 @@
     var costoUnitario=0;
     var bandera=0;
 
-
-    let html5QrcodeScanner;
-    let html5QrcodeScannerUnit;
-    let html5QrcodeScannerUnitA;
-
     var numeroParte;
     var storageBin;
     var cantidad=0;
@@ -304,40 +332,50 @@
 
         var marbete = document.getElementById("scanner_input").value.split('.')[0];
 
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbeteValidacion.php?marbete='+marbete, function (data) {
-            for (var i = 0; i < data.data.length; i++) {
-                if (data.data[i].FolioMarbete) {
-                    if (data.data[i].Estatus === '2'){
-                        numeroParte=data.data[i].NumeroParte;
-                        storageBin=data.data[i].StorageBin;
-                        cantidad=data.data[i].PrimerConteo;
-                        document.getElementById("reader").style.display = 'none';
-                        document.getElementById("lblFolio").innerHTML = marbete;
-                        document.getElementById("pasoDos").style.display = 'block';
-                        document.getElementById("pasoUno").style.display = 'none';
-                        document.getElementById("lblStorageBin").innerText = storageBin;
-                        document.getElementById("lblNumeroParte").innerText = numeroParte;
-                        document.getElementById("txtNumeroParte").value = numeroParte;
-                        document.getElementById("lblCantidad").innerText = data.data[i].PrimerConteo;
-                        cargaPrimer(numeroParte);
-                        html5QrcodeScanner.clear();
-                        html5QrcodeScanner.pause();
-                    }else{
+        if (document.getElementById("scanner_input").value.split('.')[1] === auxConteo){
+            $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbeteValidacion.php?marbete='+marbete, function (data) {
+                for (var i = 0; i < data.data.length; i++) {
+                    if (data.data[i].FolioMarbete) {
+                        if (data.data[i].Estatus === '2'){
+                            numeroParte=data.data[i].NumeroParte;
+                            storageBin=data.data[i].StorageBin;
+                            cantidad=data.data[i].PrimerConteo;
+                            document.getElementById("reader").style.display = 'none';
+                            document.getElementById("lblFolio").innerHTML = marbete;
+                            document.getElementById("pasoDos").style.display = 'block';
+                            document.getElementById("pasoUno").style.display = 'none';
+                            document.getElementById("lblStorageBin").innerText = storageBin;
+                            document.getElementById("lblNumeroParte").innerText = numeroParte;
+                            document.getElementById("txtNumeroParte").value = numeroParte;
+                            document.getElementById("lblCantidad").innerText = data.data[i].PrimerConteo;
+                            cargaPrimer(numeroParte);
+                            html5QrcodeScanner.clear();
+                            html5QrcodeScanner.pause();
+                        }else{
+                            Swal.fire({
+                                title: "El marbete ya fue validado",
+                                text: "Escanea otro marbete",
+                                icon: "error"
+                            });
+                        }
+                    } else {
                         Swal.fire({
-                            title: "El marbete ya fue validado",
-                            text: "Escanea otro marbete",
+                            title: "El marbete no esta capturado",
+                            text: "Verificalo con la mesa central",
                             icon: "error"
                         });
                     }
-                } else {
-                    Swal.fire({
-                        title: "El marbete no esta capturado",
-                        text: "Verificalo con la mesa central",
-                        icon: "error"
-                    });
                 }
-            }
-        });
+            });
+        }else{
+            Swal.fire({
+                title: "El marbete no pertenece al conteo: "+auxConteo,
+                text: "Escanea el correcto",
+                icon: "error"
+            });
+        }
+
+
     }
 
 
@@ -364,66 +402,38 @@
         });
     }
 
-    function lecturaCorrecta(decodedText, decodedResult) {
-
-        var marbete = decodedText.split('.')[0];
-
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbete.php?marbete='+marbete, function (data) {
-            for (var i = 0; i < data.data.length; i++) {
-                if (data.data[i].FolioMarbete) {
-                    if (data.data[i].Estatus === '0'){
-                        numeroParte=data.data[i].Numero_Parte;
-                        storageBin=data.data[i].StorageBin;
-                        console.log(`Code matched = ${decodedText}`, decodedResult);
-                        document.getElementById("scanner_input").value = decodedText;
-                        document.getElementById("reader").style.display = 'none';
-                        //document.getElementById("lblNumeroParte").innerText = "Número de parte : "+numeroParte;
-                        document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
-                        document.getElementById("pasoDos").style.display = 'block';
-                        document.getElementById("pasoUno").style.display = 'none';
-                        html5QrcodeScanner.clear();
-                        html5QrcodeScanner.pause();
-                    }else{
-                        Swal.fire({
-                            title: "El marbete ya fue registrado",
-                            text: "Escanea otro marbete",
-                            icon: "error"
-                        });
-                    }
-                } else {
-                    Swal.fire({
-                        title: "El marbete no esta cargado",
-                        text: "Verificalo con la mesa central",
-                        icon: "error"
-                    });
-                }
-            }
-        });
-
-    }
-
-    function errorLectura(error) {
-        console.warn(`Code scan error = ${error}`);
-    }
-
-    function escaneo() {
-        html5QrcodeScanner = new Html5QrcodeScanner(
-            "reader",
-            { fps: 10, qrbox: {width: 250, height: 250} },
-            /* verbose= */ false);
-        document.getElementById("reader").style.display = 'block';
-        html5QrcodeScanner.render(lecturaCorrecta, errorLectura);
-    }
-
-
-
-    function enviarDatos() {
-
-        var marbete = document.getElementById("scanner_input").value
+    async function enviarDatos() {
+        var marbete = document.getElementById("scanner_input").value;
         var nombre = document.getElementById("lblNombre").innerText;
         var numeroParte = document.getElementById("txtNumeroParte").value;
         var cantidad = document.getElementById("txtCantidad").value;
+        var cantidadAnterior = document.getElementById("lblCantidad").innerText;
 
+        if (cantidad === cantidadAnterior || await confirmarCambio()) {
+            enviarSolicitud(nombre, marbete, numeroParte, cantidad);
+        }
+    }
+
+    function confirmarCambio() {
+        return new Promise(resolve => {
+            Swal.fire({
+                title: "¿Quieres guardar los cambios?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Guardar",
+                denyButtonText: "No guardar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    resolve(true);
+                } else if (result.isDenied) {
+                    Swal.fire("Los cambios no se guardaron", "", "info");
+                    resolve(false);
+                }
+            });
+        });
+    }
+
+    function enviarSolicitud(nombre, marbete, numeroParte, cantidad) {
         var formData = new FormData();
         formData.append('nombre', nombre);
         formData.append('folioMarbete', marbete);
@@ -437,34 +447,37 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    let timerInterval;
-                    Swal.fire({
-                        title: "¡Gracias!.Se finalizo la captura de tu marbete",
-                        html: "Te regresaremos a la pagina <b></b> milliseconds.",
-                        timer: 1500,
-                        timerProgressBar: true,
-                        icon: "success",
-                        didOpen: () => {
-                            Swal.showLoading();
-                            const timer = Swal.getPopup().querySelector("b");
-                            timerInterval = setInterval(() => {
-                                timer.textContent = `${Swal.getTimerLeft()}`;
-                            }, 100);
-                        },
-                        willClose: () => {
-                            clearInterval(timerInterval);
-                        }
-                    }).then((result) => {
-                        /* Read more about handling dismissals below */
-                        if (result.dismiss === Swal.DismissReason.timer) {
-                            location.reload();
-                        }
-                    });
+                    mostrarExito();
                 } else {
                     console.log("Hubo un error en la operación");
                     console.log("Las unidades de almacenamiento que fallaron son: ", data.message);
                 }
             });
+    }
+
+    function mostrarExito() {
+        let timerInterval;
+        Swal.fire({
+            title: "¡Gracias!.Se finalizo la captura de tu marbete",
+            html: "Te regresaremos a la pagina <b></b> milliseconds.",
+            timer: 1500,
+            timerProgressBar: true,
+            icon: "success",
+            didOpen: () => {
+                Swal.showLoading();
+                const timer = Swal.getPopup().querySelector("b");
+                timerInterval = setInterval(() => {
+                    timer.textContent = `${Swal.getTimerLeft()}`;
+                }, 100);
+            },
+            willClose: () => {
+                clearInterval(timerInterval);
+            }
+        }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) {
+                location.reload();
+            }
+        });
     }
 
     function verificarUsuario() {
