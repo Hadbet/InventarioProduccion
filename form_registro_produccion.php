@@ -376,6 +376,7 @@
                             document.getElementById("lblFolio").innerHTML = marbete;
                             document.getElementById("pasoDos").style.display = 'block';
                             document.getElementById("pasoUno").style.display = 'none';
+                            document.getElementById('txtNumeroParte').focus();
                             html5QrcodeScanner.clear();
                             html5QrcodeScanner.pause();
                         }else{
@@ -463,7 +464,6 @@
     document.getElementById('scanner_input').addEventListener('keyup', function(event) {
         if (event.key === 'Enter' || event.keyCode === 13) {
             manualMarbete();
-            document.getElementById('txtCantidad').focus();
         }
     });
 

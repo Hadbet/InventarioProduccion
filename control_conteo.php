@@ -70,6 +70,47 @@
     <main role="main" class="main-content">
         <center><img src="images/tituloInventario.png" style="width: 50%"></center>
 
+
+        <div class="row">
+
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <span class="h2 mb-0" id="lblDinero"></span>
+                            <p class="small text-muted mb-0">de diferencia de costo</p>
+                            <span class="badge badge-pill badge-success"></span>
+                        </div>
+                        <div class="col-auto">
+                            <span class="fe fe-32 fe-shopping-bag text-muted mb-0"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <span class="h2 mb-0" id="lblCantidad"></span>
+                            <p class="small text-muted mb-0">de diferencia de coteo</p>
+                            <span class="badge badge-pill badge-success"></span>
+                        </div>
+                        <div class="col-auto">
+                            <span class="fe fe-32 fe-shopping-bag text-muted mb-0"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+
         <div class="container-fluid">
 
             <div class="row align-items-center my-4">
@@ -106,37 +147,13 @@
 
 <script>
 
-    function verificacionRegistro() {
-        /*
-        document.getElementById("txtFolioMarbete").innerText = folio;
-        document.getElementById("txtComentario").value = comentarios;
-        document.getElementById("txtResponsable").value = usuario;
-        document.getElementById("lblFecha").innerText = fecha;*/
+    function verificacionDiferencia() {
 
-        var table = document.getElementById("data-table");
-        while (table.rows.length > 1) {
-            table.deleteRow(1);
-        }
-
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaVerificacion.php?marbete='+document.getElementById("txtBuscar").value, function (data) {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaSegundosConteos.php?area='+2, function (data) {
             for (var i = 0; i < data.data.length; i++) {
-                var row = table.insertRow(-1);
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                var cell3 = row.insertCell(2);
-                cell1.innerHTML = data.data[i].Id_StorageUnit;
-                cell2.innerHTML = data.data[i].NumeroParte;
-                cell3.innerHTML = data.data[i].Cantidad;
-
-                if (i==0){
-                    document.getElementById("txtFolioMarbete").innerText = data.data[i].FolioMarbete;
-                    document.getElementById("txtConteo").innerText = data.data[i].Conteo;
-                    document.getElementById("txtResponsable").innerText = data.data[i].Usuario;
-                }
+                document.getElementById("lblCosto").innerText = data.data[i].CostoTotalInventarioSap - data.data[i].CostoTotalPrimerConteoBitacora;
+                document.getElementById("txtResponsable").innerText = data.data[i].TotalPrimerConteoBitacora-data.data[i].CostoTotalInventarioSap;
             }
-            document.getElementById("txtCantidadTotal").innerText = data.data[0].PrimerConteo;
-            document.getElementById("divMarbete").style.display='block';
-            document.getElementById("divMarbete").scrollIntoView({behavior: "smooth"});
 
         });
     }
