@@ -55,7 +55,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3" >
+                            <div class="col-md-2" >
                                 <div class="form-group mb-3">
                                     <label for="cbInstructor">Rol</label>
                                     <select class="custom-select" id="cbRol">
@@ -67,7 +67,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3" >
+                            <div class="col-md-2" >
                                 <div class="form-group mb-3">
                                     <label for="cbInstructor">Estatus</label>
                                     <select class="custom-select" id="cbEstatus">
@@ -79,7 +79,7 @@
                             </div>
 
 
-                            <div class="col-md-3" >
+                            <div class="col-md-2" >
                                 <div class="form-group mb-3">
                                     <label for="cbArea">Area</label>
                                     <select class="custom-select" id="cbArea">
@@ -112,6 +112,7 @@
                               <th>Password</th>
                               <th>Rol</th>
                               <th>Estatus</th>
+                              <th>Area</th>
                               <th>Eliminar</th>
                               <th>Actualizar</th>
                           </tr>

@@ -12,23 +12,26 @@ function ContadorApu()
     $con = new LocalConector();
     $conex = $con->conectar();
 
-    $datos = mysqli_query($conex, "SELECT `Id_Usuario`, `User`, `Password`,
+    $datos = mysqli_query($conex, "SELECT U.`Id_Usuario`, U.`User`, U.`Password`,
     CASE 
-        WHEN `Rol` = 1 THEN 'Capturista'
-        WHEN `Rol` = 2 THEN 'Auditor'
-        WHEN `Rol` = 3 THEN 'Lider de conteo'
+        WHEN U.`Rol` = 1 THEN 'Capturista'
+        WHEN U.`Rol` = 2 THEN 'Auditor'
+        WHEN U.`Rol` = 3 THEN 'Lider de conteo'
         ELSE 'Rol desconocido'
     END AS `Rol`,
-    IF(`Estatus` = 1, 
+    IF(U.`Estatus` = 1, 
         '<span class=\"badge badge-pill badge-success\">Activo</span>', 
         '<span class=\"badge badge-pill badge-info\">Inactivo</span>'
     ) AS `Estatus`,
-    IF(`Estatus` = 1, 
-        CONCAT('<button class=\"btn btn-danger text-white\" onclick=\"estatus(', `Id_Usuario`, ',0)\">Desactivar</button>'), 
-        CONCAT('<button class=\"btn btn-success text-white\" onclick=\"estatus(', `Id_Usuario`, ',1)\">Activar</button>')
+    IF(U.`Estatus` = 1, 
+        CONCAT('<button class=\"btn btn-danger text-white\" onclick=\"estatus(', U.`Id_Usuario`, ',0)\">Desactivar</button>'), 
+        CONCAT('<button class=\"btn btn-success text-white\" onclick=\"estatus(', U.`Id_Usuario`, ',1)\">Activar</button>')
     ) AS `Boton1`,
-    CONCAT('<button class=\"btn btn-warning text-white\" onclick=\"miFuncion2(\'', `User`, '\', \'', `Password`, '\', ', `Rol`, ', ', `Estatus`, ')\">Actualizar</button>') AS `Boton2`
-FROM `Usuarios` WHERE 1;");
+    CONCAT('<button class=\"btn btn-warning text-white\" onclick=\"miFuncion2(\'', U.`User`, '\', \'', U.`Password`, '\', ', U.`Rol`, ', ', U.`Estatus`, ')\">Actualizar</button>') AS `Boton2`,
+    A.`AreaNombre`
+FROM `Usuarios` U
+LEFT JOIN `Area` A ON U.`Area` = A.`IdArea`
+WHERE 1;");
 
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
     echo json_encode(array("data" => $resultado));
