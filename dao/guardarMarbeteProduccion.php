@@ -21,7 +21,7 @@ try {
     $DateAndTime = $Object->format("Y/m/d h:i:s");
 
 
-    $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `Fecha`=?, `Usuario`=?, `Estatus`='1', `PrimerConteo`=?, `SegundoConteo`=?, `TercerConteo`=?, `Comentario`=?, `NumeroParte`=?, `StorageBin`=? WHERE `FolioMarbete`=?");
+    $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `Fecha`=?, `Usuario`=?, `Estatus`='2', `PrimerConteo`=?, `SegundoConteo`=?, `TercerConteo`=?, `Comentario`=?, `NumeroParte`=?, `StorageBin`=? WHERE `FolioMarbete`=?");
 
     // Dependiendo del valor de conteo, asignamos la cantidad a la columna correspondiente
     $primerConteo = $conteo == 1 ? $cantidad : null;
