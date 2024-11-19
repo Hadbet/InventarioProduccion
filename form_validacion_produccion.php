@@ -158,7 +158,7 @@
                                 </div>
                                 <div class="flex-fill text-right">
                                     <p class="mb-0 small" id="lblCosto"></p>
-                                    <p class="text-muted mb-0 small">Euros</p>
+                                    <p class="text-muted mb-0 small">Pesos</p>
                                 </div>
                             </div>
                             <hr>
@@ -235,7 +235,7 @@
                         <hr>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn mb-2 btn-success text-white" onclick="verificarUsuario()" data-dismiss="modal">Validar</button>
+                        <button type="button" class="btn mb-2 btn-success text-white" onclick="verificarUsuario()" >Validar</button>
                         <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal" id="btnCloseM">Close</button>
                     </div>
                 </div>
@@ -265,6 +265,8 @@
 
 <script>
 
+    var banderaModal=false;
+
     $(document).ready(function(){
         $('#customSwitch1').change(function(){
             if($(this).is(":checked")) {
@@ -273,6 +275,13 @@
                 $('#btnModal').click();
             } else {
                 $('#txtNumeroParte').prop('disabled', true);
+            }
+        });
+
+        $('#verticalModal').on('hidden.bs.modal', function (e) {
+            // Set the checkbox to false
+            if (!banderaModal){
+                $('#customSwitch1').prop('checked', false);
             }
         });
     });
@@ -465,10 +474,12 @@
 
         var usuario = document.getElementById("txtUsuarioM").value
         var contra = document.getElementById("txtPasswordM").value;
+        var area = 2;
 
         var formData = new FormData();
         formData.append('user', usuario);
         formData.append('password', contra);
+        formData.append('area', area);
 
         fetch('https://grammermx.com/Logistica/Inventario/dao/consultaVerificarUsuario.php', {
             method: 'POST',
@@ -479,7 +490,7 @@
                 if (data.success) {
                     let timerInterval;
                     Swal.fire({
-                        title: "Ya puedes modificar el numero de parte,
+                        title: "Ya puedes modificar el numero de parte",
                         html: "Te regresaremos a la pagina <b></b> milliseconds.",
                         timer: 1500,
                         timerProgressBar: true,
@@ -497,12 +508,20 @@
                     }).then((result) => {
                         /* Read more about handling dismissals below */
                         if (result.dismiss === Swal.DismissReason.timer) {
+                            banderaModal=true;
                             document.getElementById("btnCloseM").click();
+                            $('#txtNumeroParte').prop('disabled', false);
                         }
                     });
                 } else {
                     console.log("Hubo un error en la operación");
                     console.log("Error: ", data.message);
+
+                    Swal.fire({
+                        title: data.message,
+                        text: "Verifica que tu lider de conteo pertenezca al area",
+                        icon: "error"
+                    });
                 }
             });
     }

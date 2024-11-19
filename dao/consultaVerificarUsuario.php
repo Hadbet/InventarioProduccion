@@ -2,6 +2,7 @@
 include_once('db/db_Inventario.php');
 
 $user = $_POST['user'];
+$area = $_POST['area'];
 $password = $_POST['password']; // Recibimos la contraseña sin encriptar
 
 try {
@@ -9,8 +10,8 @@ try {
     $conex=$con->conectar();
 
     // Buscamos al usuario en la base de datos
-    $stmt = $conex->prepare("SELECT `Password` FROM `Usuarios` WHERE `User` = ?");
-    $stmt->bind_param("s", $user);
+    $stmt = $conex->prepare("SELECT `Password` FROM `Usuarios` WHERE `User` = ? and `Estatus` = 3 and `Area` = ?");
+    $stmt->bind_param("ss", $user,$area);
 
     $stmt->execute();
     $result = $stmt->get_result();

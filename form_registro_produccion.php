@@ -154,7 +154,7 @@
                                 </div>
                                 <div class="flex-fill text-right">
                                     <p class="mb-0 small" id="lblCosto"></p>
-                                    <p class="text-muted mb-0 small">Euros</p>
+                                    <p class="text-muted mb-0 small">Pesos</p>
                                 </div>
                             </div>
                             <hr>
