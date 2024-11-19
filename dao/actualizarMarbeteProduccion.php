@@ -9,6 +9,7 @@ try {
 
     $parts = explode('.', $folioMarbete);
     $conteo = $parts[1];
+    $marbete = $parts[0];
 
     $con = new LocalConector();
     $conex=$con->conectar();
@@ -22,7 +23,7 @@ try {
         $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `NumeroParte`=?, `UsuarioVerificacion`=?, `Estatus`='1', `TercerConteo`=? WHERE `FolioMarbete`=? AND `Estatus` = 2");
     }
 
-    $stmt->bind_param("ssss", $numeroParte, $nombre, $cantidad, $folioMarbete);
+    $stmt->bind_param("ssss", $numeroParte, $nombre, $cantidad, $marbete);
 
     $stmt->execute();
 
