@@ -313,10 +313,6 @@
               });
       }
 
-      function configuracion() {
-
-      }
-
       llenarAreas();
       function llenarAreas() {
           $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaArea.php', function (data) {

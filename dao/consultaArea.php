@@ -7,6 +7,7 @@ include_once('db/db_Inventario.php');
 
 ContadorApu();
 
+
 function ContadorApu()
 {
     $con = new LocalConector();
