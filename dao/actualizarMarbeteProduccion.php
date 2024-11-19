@@ -15,14 +15,14 @@ try {
 
     // Dependiendo del valor de conteo, asignamos la cantidad a la columna correspondiente
     if ($conteo == 1) {
-        $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `NumeroParte`=?, `FolioMarbete`=?, `UsuarioVerificacion`=?, `Estatus`='2', `PrimerConteo`=? WHERE `FolioMarbete`=? AND `Estatus` = 2");
+        $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `NumeroParte`=?, `UsuarioVerificacion`=?, `Estatus`='1', `PrimerConteo`=? WHERE `FolioMarbete`=? AND `Estatus` = 2");
     } elseif ($conteo == 2) {
-        $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `NumeroParte`=?, `FolioMarbete`=?, `UsuarioVerificacion`=?, `Estatus`='2', `SegundoConteo`=? WHERE `FolioMarbete`=? AND `Estatus` = 2");
+        $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `NumeroParte`=?, `UsuarioVerificacion`=?, `Estatus`='1', `SegundoConteo`=? WHERE `FolioMarbete`=? AND `Estatus` = 2");
     } elseif ($conteo == 3) {
-        $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `NumeroParte`=?, `FolioMarbete`=?, `UsuarioVerificacion`=?, `Estatus`='2', `TercerConteo`=? WHERE `FolioMarbete`=? AND `Estatus` = 2");
+        $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `NumeroParte`=?, `UsuarioVerificacion`=?, `Estatus`='1', `TercerConteo`=? WHERE `FolioMarbete`=? AND `Estatus` = 2");
     }
 
-    $stmt->bind_param("sssss", $numeroParte, $folioMarbete, $nombre, $cantidad, $folioMarbete);
+    $stmt->bind_param("ssss", $numeroParte, $nombre, $cantidad, $folioMarbete);
 
     $stmt->execute();
 
