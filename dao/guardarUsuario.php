@@ -2,6 +2,7 @@
 include_once('db/db_Inventario.php');
 
 $user = $_POST['user'];
+$area = $_POST['area'];
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Encriptamos la contraseña
 $rol = $_POST['rol'];
 $estatus = $_POST['estatus'];
@@ -10,8 +11,8 @@ try {
     $con = new LocalConector();
     $conex=$con->conectar();
 
-    $stmt = $conex->prepare("INSERT INTO `Usuarios`( `User`, `Password`, `Rol`, `Estatus`) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $user, $password, $rol, $estatus);
+    $stmt = $conex->prepare("INSERT INTO `Usuarios`( `User`, `Password`, `Rol`, `Estatus`, `Area`) VALUES (?, ?, ?, ?,?)");
+    $stmt->bind_param("ssss", $user, $password, $rol, $estatus,$area);
 
     $stmt->execute();
 

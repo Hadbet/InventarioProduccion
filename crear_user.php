@@ -109,10 +109,9 @@
                           <tr>
                               <th>ID</th>
                               <th>Usuario</th>
-                              <th>Password</th>
                               <th>Rol</th>
-                              <th>Estatus</th>
                               <th>Area</th>
+                              <th>Estatus</th>
                               <th>Eliminar</th>
                               <th>Actualizar</th>
                           </tr>
@@ -151,7 +150,6 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Usuario</th>
-                                                <th>Password</th>
                                                 <th>Rol</th>
                                                 <th>Estatus</th>
                                                 <th>Eliminar</th>
@@ -202,8 +200,8 @@
                     columns: [
                       { data: 'Id_Usuario' },
                       { data: 'User' },
-                        { data: 'Password' },
                       { data: 'Rol' },
+                        { data: 'AreaNombre' },
                         { data: 'Estatus' },
                         { data: 'Boton1' },
                         { data: 'Boton2' }
@@ -262,12 +260,14 @@
           var password = document.getElementById("txtContra").value;
           var rol = document.getElementById("cbRol").value;
           var estatus = document.getElementById("cbEstatus").value;
+          var area = document.getElementById("cbArea").value;
 
           var formData = new FormData();
           formData.append('user', user);
           formData.append('password', password);
           formData.append('rol', rol);
           formData.append('estatus', estatus);
+          formData.append('area', area);
 
           fetch('https://grammermx.com/Logistica/Inventario/dao/guardarUsuario.php', {
               method: 'POST',
