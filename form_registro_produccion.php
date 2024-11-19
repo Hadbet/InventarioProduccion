@@ -120,12 +120,12 @@
 
                             <label for="basic-url">Numero de parte</label>
                             <div class="input-group mb-3">
-                                <input type="text" id="txtNumeroParte" class="form-control"  aria-label="Recipient's username" aria-describedby="button-addon2">
+                                <input type="text" id="txtNumeroParte" class="form-control" autocomplete="off"  aria-label="Recipient's username" aria-describedby="button-addon2">
                             </div>
 
                             <label for="basic-url">Cantidad</label>
                             <div class="input-group mb-3">
-                                <input type="text" id="txtCantidad" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <input type="text" id="txtCantidad" disabled class="form-control" aria-label="Recipient's username" autocomplete="off" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="txtUnidadMedida" style=""></span>
                                 </div>
@@ -133,7 +133,7 @@
 
                             <label for="basic-url">Storage Bin</label>
                             <div class="input-group mb-3">
-                                <input type="text" id="txtStorageBin" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <input type="text" id="txtStorageBin" disabled class="form-control" aria-label="Recipient's username" autocomplete="off" aria-describedby="basic-addon2">
                             </div>
 
                         </div>
@@ -232,6 +232,21 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
 
 <script>
+
+    var auxConteo=0;
+    var auxStorage=0;
+    estatusConteo();
+    function estatusConteo() {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaAreaDetalle.php?area='+2, function (data) {
+            for (var i = 0; i < data.data.length; i++) {
+                auxConteo = data.data[i].Conteo;
+                auxStorage = data.data[i].StBin
+                document.getElementById("txtStorageBin").value = auxStorage;
+                document.getElementById("lblStorageBin").innerText = auxStorage;
+            }
+        });
+    }
+
     var costoUnitario=0;
     var bandera=0;
     // Cuando se suelta una tecla en el campo de entrada del número de parte
@@ -246,7 +261,10 @@
                         document.getElementById('txtUnidadMedida').innerText = data.data[i].UM;
                         costoUnitario = data.data[i].Costo / data.data[i].Por;
                         document.getElementById('lblCosto').innerText = costoUnitario;
-                        document.getElementById('txtCantidad').focus();
+
+                        document.getElementById('txtCantidad').disabled = false;
+                        //document.getElementById('txtStorageBin').disabled = false;
+                        document.getElementById('txtCantidad').focus()
                         bandera=1;
                     } else {
                         bandera=0;
@@ -266,9 +284,38 @@
     document.getElementById('txtCantidad').addEventListener('keyup', function(event) {
         // Si la tecla fue Enter
         document.getElementById('lblCantidad').textContent = this.value;
+
+        document.getElementById('lblMontoTotal').innerText = costoUnitario*this.value;
         if (event.key === 'Enter' || event.keyCode === 13) {
             document.getElementById('lblCantidad').textContent = this.value;
-            document.getElementById('txtStorageBin').focus();
+
+            if (document.getElementById('txtCantidad').value!==""){
+                if (document.getElementById('txtStorageBin').value!==""){
+                    if (bandera!=="0"){
+                        document.getElementById('btnFin').disabled = false;
+                        document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
+                    }else{
+                        Swal.fire({
+                            title: "No haz validado el NP",
+                            text: "Verifica antes de entrar",
+                            icon: "error"
+                        });
+                    }
+                }else{
+                    Swal.fire({
+                        title: "Ingresa el storage bin",
+                        text: "Verifica antes de entrar",
+                        icon: "error"
+                    });
+                }
+            }else{
+                Swal.fire({
+                    title: "Ingresa la cantidad",
+                    text: "Verifica antes de entrar",
+                    icon: "error"
+                });
+            }
+
         }
     });
 
@@ -308,10 +355,6 @@
         }
     });
 
-    let html5QrcodeScanner;
-    let html5QrcodeScannerUnit;
-    let html5QrcodeScannerUnitA;
-
     var numeroParte;
     var storageBin;
 
@@ -322,87 +365,45 @@
 
         var marbete = document.getElementById("scanner_input").value.split('.')[0];
 
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbete.php?marbete='+marbete, function (data) {
-            for (var i = 0; i < data.data.length; i++) {
-                if (data.data[i].FolioMarbete) {
-                    if (data.data[i].Estatus === '0'){
-                        numeroParte=data.data[i].NumeroParte;
-                        storageBin=data.data[i].StorageBin;
-                        document.getElementById("reader").style.display = 'none';
-                        document.getElementById("lblFolio").innerHTML = marbete;
-                        document.getElementById("pasoDos").style.display = 'block';
-                        document.getElementById("pasoUno").style.display = 'none';
-                        html5QrcodeScanner.clear();
-                        html5QrcodeScanner.pause();
-                    }else{
+        if (document.getElementById("scanner_input").value.split('.')[1] === auxConteo){
+            $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbete.php?marbete='+marbete, function (data) {
+                for (var i = 0; i < data.data.length; i++) {
+                    if (data.data[i].FolioMarbete) {
+                        if (data.data[i].Estatus === '0'){
+                            numeroParte=data.data[i].NumeroParte;
+                            storageBin=data.data[i].StorageBin;
+                            document.getElementById("reader").style.display = 'none';
+                            document.getElementById("lblFolio").innerHTML = marbete;
+                            document.getElementById("pasoDos").style.display = 'block';
+                            document.getElementById("pasoUno").style.display = 'none';
+                            html5QrcodeScanner.clear();
+                            html5QrcodeScanner.pause();
+                        }else{
+                            Swal.fire({
+                                title: "El marbete ya fue registrado",
+                                text: "Escanea otro marbete",
+                                icon: "error"
+                            });
+                        }
+                    } else {
                         Swal.fire({
-                            title: "El marbete ya fue registrado",
-                            text: "Escanea otro marbete",
+                            title: "El marbete no esta cargado",
+                            text: "Verificalo con la mesa central",
                             icon: "error"
                         });
                     }
-                } else {
-                    Swal.fire({
-                        title: "El marbete no esta cargado",
-                        text: "Verificalo con la mesa central",
-                        icon: "error"
-                    });
                 }
-            }
-        });
-    }
+            });
+        }else{
+            Swal.fire({
+                title: "El marbete no pertenece al conteo: "+auxConteo,
+                text: "Escanea el correcto",
+                icon: "error"
+            });
+        }
 
-    function lecturaCorrecta(decodedText, decodedResult) {
-
-        var marbete = decodedText.split('.')[0];
-
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbete.php?marbete='+marbete, function (data) {
-            for (var i = 0; i < data.data.length; i++) {
-                if (data.data[i].FolioMarbete) {
-                    if (data.data[i].Estatus === '0'){
-                        numeroParte=data.data[i].Numero_Parte;
-                        storageBin=data.data[i].StorageBin;
-                        console.log(`Code matched = ${decodedText}`, decodedResult);
-                        document.getElementById("scanner_input").value = decodedText;
-                        document.getElementById("reader").style.display = 'none';
-                        //document.getElementById("lblNumeroParte").innerText = "Número de parte : "+numeroParte;
-                        document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
-                        document.getElementById("pasoDos").style.display = 'block';
-                        document.getElementById("pasoUno").style.display = 'none';
-                        html5QrcodeScanner.clear();
-                        html5QrcodeScanner.pause();
-                    }else{
-                        Swal.fire({
-                            title: "El marbete ya fue registrado",
-                            text: "Escanea otro marbete",
-                            icon: "error"
-                        });
-                    }
-                } else {
-                    Swal.fire({
-                        title: "El marbete no esta cargado",
-                        text: "Verificalo con la mesa central",
-                        icon: "error"
-                    });
-                }
-            }
-        });
 
     }
-
-    function errorLectura(error) {
-        console.warn(`Code scan error = ${error}`);
-    }
-
-    function escaneo() {
-        html5QrcodeScanner = new Html5QrcodeScanner(
-            "reader",
-            { fps: 10, qrbox: {width: 250, height: 250} },
-            /* verbose= */ false);
-        document.getElementById("reader").style.display = 'block';
-        html5QrcodeScanner.render(lecturaCorrecta, errorLectura);
-    }
-
 
 
     function enviarDatos() {
@@ -459,7 +460,12 @@
             });
     }
 
-
+    document.getElementById('scanner_input').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            manualMarbete();
+            document.getElementById('txtCantidad').focus();
+        }
+    });
 
 </script>
 </body>

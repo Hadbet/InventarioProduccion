@@ -70,37 +70,7 @@
     <main role="main" class="main-content">
         <center><img src="images/tituloInventario.png" style="width: 50%"></center>
         <br><br>
-
-
-
         <div class="container-fluid" id="pasoUno">
-
-            <h2 class="page-title">Folios pendientes</h2>
-            <br>
-            <div class="row justify-content-center">
-
-
-
-
-                <div class="card shadow bg-primary text-white">
-                    <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col-3 text-center">
-                          <span class="circle circle-sm bg-primary-light">
-                            <i class="fe fe-16 fe-shopping-bag text-white mb-0"></i>
-                          </span>
-                            </div>
-                            <div class="col pr-0">
-                                <p class="small text-light mb-0">Folio</p>
-                                <span class="h3 mb-0 text-white">185.1</span>
-                                <span class="small text-muted">marbete</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
             <br>
             <div class="row justify-content-center">
                 <div class="col-12">
@@ -215,11 +185,11 @@
                             <div class="row align-items-center">
                                 <div class="col-auto">
                                     <a href="profile-posts.html" class="avatar avatar-md">
-                                        <img src="https://grammermx.com/Fotos/00001004.png" alt="..." class="avatar-img rounded-circle">
+                                        <img src="https://grammermx.com/Fotos/<?php echo "00001007"?>.png" alt="..." class="avatar-img rounded-circle">
                                     </a>
                                 </div>
                                 <div class="col ml-n2">
-                                    <strong class="mb-1" id="lblNombre">Aaron Asher</strong><span class="dot dot-lg bg-success ml-1"></span>
+                                    <strong class="mb-1" id="lblNombre"><?php echo "Luis Olvera"?></strong><span class="dot dot-lg bg-success ml-1"></span>
                                     <p class="small text-muted mb-1" id="lblRol">Capturista</p>
                                 </div>
                             </div>
@@ -538,6 +508,19 @@
 
 
 
+    document.getElementById('scanner_input').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            manualMarbete();
+            document.getElementById('txtCantidad').focus();
+        }
+    });
+
+
+    document.getElementById('txtCantidad').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
+        }
+    });
 </script>
 </body>
 </html>
