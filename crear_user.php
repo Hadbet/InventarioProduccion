@@ -78,6 +78,16 @@
                                 </div>
                             </div>
 
+
+                            <div class="col-md-3" >
+                                <div class="form-group mb-3">
+                                    <label for="cbArea">Area</label>
+                                    <select class="custom-select" id="cbArea">
+                                        <option selected>Abrir Area</option>
+                                    </select>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="card-footer">
@@ -307,6 +317,16 @@
 
       }
 
+      llenarAreas();
+      function llenarAreas() {
+          $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaArea.php', function (data) {
+              for (var i = 0; i < data.data.length; i++) {
+                  var option = $('<option/>');
+                  option.attr({ 'value': data.data[i].IdArea }).text(data.data[i].AreaNombre);
+                  $('#cbArea').append(option);
+              }
+          });
+      }
     </script>
   </body>
 </html>

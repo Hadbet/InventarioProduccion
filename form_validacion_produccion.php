@@ -118,11 +118,18 @@
                 <div class="col-md-6">
                     <div class="card shadow mb-4">
                         <div class="card-body">
-                            <p class="mb-3"><strong>Captura</strong></p>
+                            <p class="mb-3"><strong>Verificacion</strong></p>
+
+                            <label for="basic-url">Selecciona esto si quieres cambiar el NP</label>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                <label class="custom-control-label" for="customSwitch1">Desbloquear</label>
+                            </div>
+                            <br>
 
                             <label for="basic-url">Numero de parte</label>
                             <div class="input-group mb-3">
-                                <input type="text" id="txtNumeroParte" class="form-control"  aria-label="Recipient's username" aria-describedby="button-addon2">
+                                <input type="text" id="txtNumeroParte" class="form-control"  aria-label="Recipient's username" aria-describedby="button-addon2" disabled>
                             </div>
 
                             <label for="basic-url">Cantidad</label>
@@ -131,11 +138,6 @@
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="txtUnidadMedida" style=""></span>
                                 </div>
-                            </div>
-
-                            <label for="basic-url">Storage Bin</label>
-                            <div class="input-group mb-3">
-                                <input type="text" id="txtStorageBin" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
                             </div>
 
                         </div>
@@ -200,10 +202,6 @@
                                 </div>
                             </div>
                             <hr>
-                            <label for="basic-url">Comentarios</label>
-                            <div class="input-group mb-3">
-                                <input type="text" id="txtComentarios" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            </div>
                             <button id="btnFin" disabled class="btn mb-2 btn-success float-right text-white" onclick="enviarDatos()">Finalizar Captura<span
                                         class="fe fe-chevron-right fe-16 ml-2" ></span></button>
                         </div> <!-- .card-body -->
@@ -212,6 +210,38 @@
 
             </div> <!-- .row -->
         </div> <!-- .container-fluid -->
+
+        <!-- Button trigger modal -->
+        <button style="display: none" type="button" class="btn mb-2 btn-outline-success" data-toggle="modal" data-target="#verticalModal" id="btnModal"> Launch demo modal </button>
+        <!-- Modal -->
+        <div class="modal fade" id="verticalModal" tabindex="-1" role="dialog" aria-labelledby="verticalModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="verticalModalTitle">Desbloquear</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Usuario:</label>
+                            <input type="text" class="form-control" id="txtUsuarioM">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Contraseña:</label>
+                            <input type="password" class="form-control" id="txtPasswordM">
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn mb-2 btn-success text-white" data-dismiss="modal">Validar</button>
+                        <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     </main> <!-- main -->
 
@@ -234,81 +264,22 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
 
 <script>
+
+    $(document).ready(function(){
+        $('#customSwitch1').change(function(){
+            if($(this).is(":checked")) {
+                //$('#txtNumeroParte').prop('disabled', false);
+
+                $('#btnModal').click();
+            } else {
+                $('#txtNumeroParte').prop('disabled', true);
+            }
+        });
+    });
+
     var costoUnitario=0;
     var bandera=0;
-    // Cuando se suelta una tecla en el campo de entrada del número de parte
-    document.getElementById('txtNumeroParte').addEventListener('keyup', function(event) {
-        // Si la tecla fue Enter
-        document.getElementById('lblNumeroParte').textContent = this.value;
-        if (event.key === 'Enter' || event.keyCode === 13) {
-            $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaParte.php?parte='+this.value, function (data) {
-                for (var i = 0; i < data.data.length; i++) {
-                    if (data.data[i].GrammerNo) {
-                        document.getElementById('lblDescripcion').innerText = data.data[i].Descripcion;
-                        document.getElementById('txtUnidadMedida').innerText = data.data[i].UM;
-                        costoUnitario = data.data[i].Costo / data.data[i].Por;
-                        document.getElementById('lblCosto').innerText = costoUnitario;
-                        document.getElementById('txtCantidad').focus();
-                        bandera=1;
-                    } else {
-                        bandera=0;
-                        Swal.fire({
-                            title: "El numero de parte no existe",
-                            text: "Verificalo con la mesa de control",
-                            icon: "error"
-                        });
-                    }
-                }
-            });
 
-        }
-    });
-
-    // Cuando se suelta una tecla en el campo de entrada de la cantidad
-    document.getElementById('txtCantidad').addEventListener('keyup', function(event) {
-        // Si la tecla fue Enter
-        document.getElementById('lblCantidad').textContent = this.value;
-        if (event.key === 'Enter' || event.keyCode === 13) {
-            document.getElementById('lblCantidad').textContent = this.value;
-            document.getElementById('txtStorageBin').focus();
-        }
-    });
-
-    // Cuando se suelta una tecla en el campo de entrada del storage bin
-    document.getElementById('txtStorageBin').addEventListener('keyup', function(event) {
-        // Si la tecla fue Enter
-        document.getElementById('lblStorageBin').textContent = this.value;
-        if (event.key === 'Enter' || event.keyCode === 13) {
-            // Actualiza el texto del elemento lblStorageBin
-            document.getElementById('lblStorageBin').textContent = this.value;
-
-            if (document.getElementById('txtCantidad').value!==""){
-                if (document.getElementById('txtStorageBin').value!==""){
-                    if (bandera!=="0"){
-                        document.getElementById('btnFin').disabled = false;
-                    }else{
-                        Swal.fire({
-                            title: "No haz validado el NP",
-                            text: "Verifica antes de entrar",
-                            icon: "error"
-                        });
-                    }
-                }else{
-                    Swal.fire({
-                        title: "Ingresa el storage bin",
-                        text: "Verifica antes de entrar",
-                        icon: "error"
-                    });
-                }
-            }else{
-                Swal.fire({
-                    title: "Ingresa la cantidad",
-                    text: "Verifica antes de entrar",
-                    icon: "error"
-                });
-            }
-        }
-    });
 
     let html5QrcodeScanner;
     let html5QrcodeScannerUnit;
@@ -316,9 +287,9 @@
 
     var numeroParte;
     var storageBin;
+    var cantidad=0;
 
     var numeroParteUnit;
-    var cantidad;
 
     function manualMarbete() {
 
@@ -327,18 +298,24 @@
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbeteValidacion.php?marbete='+marbete, function (data) {
             for (var i = 0; i < data.data.length; i++) {
                 if (data.data[i].FolioMarbete) {
-                    if (data.data[i].Estatus === '0'){
+                    if (data.data[i].Estatus === '2'){
                         numeroParte=data.data[i].NumeroParte;
                         storageBin=data.data[i].StorageBin;
+                        cantidad=data.data[i].PrimerConteo;
                         document.getElementById("reader").style.display = 'none';
                         document.getElementById("lblFolio").innerHTML = marbete;
                         document.getElementById("pasoDos").style.display = 'block';
                         document.getElementById("pasoUno").style.display = 'none';
+                        document.getElementById("lblStorageBin").innerText = storageBin;
+                        document.getElementById("lblNumeroParte").innerText = numeroParte;
+                        document.getElementById("txtNumeroParte").value = numeroParte;
+                        document.getElementById("lblCantidad").innerText = data.data[i].PrimerConteo;
+                        cargaPrimer(numeroParte);
                         html5QrcodeScanner.clear();
                         html5QrcodeScanner.pause();
                     }else{
                         Swal.fire({
-                            title: "El marbete ya fue registrado",
+                            title: "El marbete ya fue validado",
                             text: "Escanea otro marbete",
                             icon: "error"
                         });
@@ -347,6 +324,30 @@
                     Swal.fire({
                         title: "El marbete no esta capturado",
                         text: "Verificalo con la mesa central",
+                        icon: "error"
+                    });
+                }
+            }
+        });
+    }
+
+
+    function cargaPrimer(numeroParte) {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaParte.php?parte='+numeroParte, function (data) {
+            for (var i = 0; i < data.data.length; i++) {
+                if (data.data[i].GrammerNo) {
+                    document.getElementById('lblDescripcion').innerText = data.data[i].Descripcion;
+                    document.getElementById('txtUnidadMedida').innerText = data.data[i].UM;
+                    costoUnitario = data.data[i].Costo / data.data[i].Por;
+                    document.getElementById('lblCosto').innerText = costoUnitario;
+                    document.getElementById('lblMontoTotal').innerText = costoUnitario*cantidad;
+                    document.getElementById('txtCantidad').focus();
+                    bandera=1;
+                } else {
+                    bandera=0;
+                    Swal.fire({
+                        title: "El numero de parte no existe",
+                        text: "Verificalo con la mesa de control",
                         icon: "error"
                     });
                 }
@@ -414,7 +415,6 @@
         var comentarios = document.getElementById("txtComentarios").value;
         var numeroParte = document.getElementById("txtNumeroParte").value;
         var cantidad = document.getElementById("txtCantidad").value;
-        var storageBin = document.getElementById("txtStorageBin").value;
 
         var formData = new FormData();
         formData.append('nombre', nombre);
