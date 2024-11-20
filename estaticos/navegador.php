@@ -1,3 +1,17 @@
+
+<?php
+session_start();
+
+if ($_SESSION["nominaCurso"] == "" && $_SESSION["nominaCurso"]== null && $_SESSION["rol"]== "" && $_SESSION["rol"]== null) {
+    echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=login.html'>";
+    session_destroy();
+}else{
+    session_start();
+    $rol =$_SESSION['rol'];
+    $area =$_SESSION['area'];
+}
+?>
+
 <nav class="topnav navbar navbar-light">
     <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
         <i class="fe fe-menu navbar-toggler-icon"></i>
@@ -14,13 +28,16 @@
                 <img src="assets/images/Grammer_Logo.ico" style="width: 30%">
             </a>
         </div>
-        <p class="text-muted nav-heading mt-4 mb-1">
+
+        <?php
+        if ($rol==4){
+            echo '<p class="text-muted nav-heading mt-4 mb-1">
             <span>Administración</span>
         </p>
         <ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item dropdown">
                 <a href="#forms" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                    <i class="fe fe-credit-card fe-16"></i>
+                <i class="fe fe-credit-card fe-16"></i>
                     <span class="ml-3 item-text">Inicio</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="forms">
@@ -46,14 +63,19 @@
                     </li>
                 </ul>
             </li>
-        </ul>
-        <p class="text-muted nav-heading mt-4 mb-1">
+        </ul>';
+        }
+        ?>
+
+        <?php
+        if($rol==1){
+            echo '<p class="text-muted nav-heading mt-4 mb-1">
             <span>Capturistas</span>
         </p>
         <ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item dropdown">
                 <a href="#contact" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                    <i class="fe fe-smile fe-16"></i>
+    <i class="fe fe-smile fe-16"></i>
                     <span class="ml-3 item-text">Inicio</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="contact">
@@ -75,15 +97,20 @@
                     <a class="nav-link pl-3" href="listas_marbetes.php"><span class="ml-1">Reporte</span></a>
                 </ul>
             </li>
-        </ul>
+        </ul>';
+        }
+        ?>
 
-        <p class="text-muted nav-heading mt-4 mb-1">
+
+        <?php
+        if($rol==2){
+            echo '<p class="text-muted nav-heading mt-4 mb-1">
             <span>Auditores</span>
         </p>
         <ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item dropdown">
                 <a href="#Auditor" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                    <i class="fe fe-smile fe-16"></i>
+    <i class="fe fe-smile fe-16"></i>
                     <span class="ml-3 item-text">Verificacion</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="Auditor">
@@ -99,10 +126,14 @@
                     <a class="nav-link pl-3" href="listas_base.php"><span class="ml-1">Reporte</span></a>
                 </ul>
             </li>
-        </ul>
+        </ul>';
+        }
+        ?>
 
 
-        <p class="text-muted nav-heading mt-4 mb-1">
+        <?php
+        if($rol==3){
+            echo '<p class="text-muted nav-heading mt-4 mb-1">
             <span>Lider de conteo</span>
         </p>
         <ul class="navbar-nav flex-fill w-100 mb-2">
@@ -116,7 +147,12 @@
                     <a class="nav-link pl-3" href="cancelacion_marbete.php"><span class="ml-1">Cancelacion</span></a>
                 </ul>
             </li>
-        </ul>
+        </ul>';
+        }
+        ?>
+
+
+        
 
         <div class="btn-box w-100 mt-4 mb-1">
             <a href="index.html"
