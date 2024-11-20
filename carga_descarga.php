@@ -68,7 +68,7 @@ if (strlen($nomina) == 7) {
           <div class="row justify-content-center">
             <div class="col-12">
 
-              <h2 class="mb-2 page-title">Rellenar txt</h2>
+              <h2 class="mb-2 page-title">Importar marbetes o Rellenar txt</h2>
               <div class="row my-4">
                 <!-- Small table -->
                 <div class="col-md-12">

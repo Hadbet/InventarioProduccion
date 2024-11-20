@@ -30,6 +30,8 @@ FROM
     `Area` AS A
 LEFT JOIN 
     `Bitacora_Inventario` AS BI ON A.`IdArea` = BI.`Area`
+WHERE 
+    A.`AreaNombre` <> 'Mesa Central'
 GROUP BY 
     A.`AreaNombre`;");
 
