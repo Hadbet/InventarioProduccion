@@ -6,6 +6,7 @@ $area =$_SESSION['area'];
 $areaNombre =$_SESSION['AreaNombre'];
 $bin =$_SESSION['StBin'];
 $nomina =$_SESSION['nomina'];
+$nombre =$_SESSION['nombre'];
 
 if (strlen($nomina) == 1) {
     $nomina = "0000000" . $nomina;
@@ -226,7 +227,7 @@ if (strlen($nomina) == 7) {
                                     </a>
                                 </div>
                                 <div class="col ml-n2">
-                                    <strong class="mb-1" id="lblNombre">Aaron Asher</strong><span class="dot dot-lg bg-success ml-1"></span>
+                                    <strong class="mb-1" id="lblNombre"><?php echo $nombre; ?></strong><span class="dot dot-lg bg-success ml-1"></span>
                                     <p class="small text-muted mb-1" id="lblRol">Capturista</p>
                                 </div>
                             </div>
