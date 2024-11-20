@@ -89,7 +89,7 @@ if ($areaNombre!='N/A' || $areaNombre!='' || $areaNombre!=null){
         ?>
 
         <?php
-        if($rol==1){
+        if($rol==1 || $rol==5){
             echo '<p class="text-muted nav-heading mt-4 mb-1">
             <span>Capturistas</span>
         </p>
