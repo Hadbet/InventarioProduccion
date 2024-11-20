@@ -13,7 +13,18 @@ if ($statusLogin['status'] == 1) {
     $_SESSION['passwordCurso'] = $Password;
     $_SESSION['rol'] = $statusLogin['rol'];
     $_SESSION['area'] = $statusLogin['area'];
-    echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../inicio.php'>";
+    if ($statusLogin['rol'] == 1){
+        echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../form_registro.php'>";
+    }
+    if ($statusLogin['rol'] == 2){
+        echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../verificacion.php'>";
+    }
+    if ($statusLogin['rol'] == 3){
+        echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../control_conteo.php'>";
+    }
+    if ($statusLogin['rol'] == 4){
+        echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../inicio.php'>";
+    }
 } else if ($statusLogin['status'] == 0) {
     echo "<script>alert('Ocurrio un error')</script>";
     echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../index.php'>";
