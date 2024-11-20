@@ -115,7 +115,7 @@ if (strlen($nomina) == 7) {
                 </div> <!-- .col-12 -->
             </div> <!-- .row -->
 
-            <div class="row">
+            <div class="row" id="divMarbete" style="display: none">
 
                 <div class="col-md-6 col-xl-6 mb-4">
                     <div class="card shadow">
@@ -271,6 +271,9 @@ if (strlen($nomina) == 7) {
                     document.getElementById('lblCosto').innerText = costoUnitario;
                     document.getElementById('lblMontoTotal').innerText = costoUnitario*cantidad;
                     bandera=1;
+
+                    document.getElementById("divMarbete").style.display='block';
+                    document.getElementById("divMarbete").scrollIntoView({behavior: "smooth"});
                 } else {
                     bandera=0;
                     Swal.fire({
