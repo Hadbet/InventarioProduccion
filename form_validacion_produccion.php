@@ -1,3 +1,37 @@
+
+<?php
+session_start();
+$rol =$_SESSION['rol'];
+$area =$_SESSION['area'];
+$areaNombre =$_SESSION['AreaNombre'];
+$bin =$_SESSION['StBin'];
+$nomina =$_SESSION['nomina'];
+$nombre =$_SESSION['nombre'];
+
+if (strlen($nomina) == 1) {
+    $nomina = "0000000" . $nomina;
+}
+if (strlen($nomina) == 2) {
+    $nomina = "000000" . $nomina;
+}
+if (strlen($nomina) == 3) {
+    $nomina = "00000" . $nomina;
+}
+if (strlen($nomina) == 4) {
+    $nomina = "0000" . $nomina;
+}
+if (strlen($nomina) == 5) {
+    $nomina = "000" . $nomina;
+}
+if (strlen($nomina) == 6) {
+    $nomina = "00" . $nomina;
+}
+if (strlen($nomina) == 7) {
+    $nomina = "0" . $nomina;
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -120,6 +154,18 @@
                                 </div>
                             </div>
 
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <a href="profile-posts.html" class="avatar avatar-md">
+                                        <img src="https://grammermx.com/Fotos/<?php echo $nomina?>.png" alt="..." class="avatar-img rounded-circle">
+                                    </a>
+                                </div>
+                                <div class="col ml-n2">
+                                    <strong class="mb-1" id="lblNombre"><?php echo $nombre?></strong><span class="dot dot-lg bg-success ml-1"></span>
+                                    <p class="small text-muted mb-1" id="lblRol">Verificador</p>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div> <!-- /.col -->
@@ -173,11 +219,11 @@
                             <div class="row align-items-center">
                                 <div class="col-auto">
                                     <a href="profile-posts.html" class="avatar avatar-md">
-                                        <img src="https://grammermx.com/Fotos/<?php echo "00001007"?>.png" alt="..." class="avatar-img rounded-circle">
+                                        <img id="imagenCapturador" alt="..." class="avatar-img rounded-circle">
                                     </a>
                                 </div>
                                 <div class="col ml-n2">
-                                    <strong class="mb-1" id="lblNombre"><?php echo "Luis Olvera"?></strong><span class="dot dot-lg bg-success ml-1"></span>
+                                    <strong class="mb-1" id="lblNombreCapturador"></strong><span class="dot dot-lg bg-success ml-1"></span>
                                     <p class="small text-muted mb-1" id="lblRol">Capturista</p>
                                 </div>
                             </div>
@@ -298,6 +344,12 @@
                             numeroParte=data.data[i].NumeroParte;
                             storageBin=data.data[i].StorageBin;
                             cantidad=data.data[i].PrimerConteo;
+                            var usuario = data.data[i].Usuario;
+                            var separado = usuario.split("-"); // Esto dividirá la cadena en dos partes en el lugar donde se encuentra el guión.
+                            var numeroNomina = separado[0]; // Esto te dará la primera parte, que es el número de nómina.
+                            var nombre = separado[1]; // Esto te dará la segunda parte, que es el nombre.
+                            document.getElementById("lblNombreCapturador").innerText = nombre;
+                            document.getElementById("imagenCapturador").src = 'https://grammermx.com/Fotos/'+numeroNomina+'.png';
                             document.getElementById("reader").style.display = 'none';
                             document.getElementById("lblFolio").innerHTML = marbete;
                             document.getElementById("pasoDos").style.display = 'block';
