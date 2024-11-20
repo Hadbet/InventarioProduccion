@@ -238,7 +238,7 @@ if (strlen($nomina) == 7) {
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaSegundosConteosValidacion.php?area='+<?php echo $area;?>, function (data) {
             var marbete='';
             for (var i = 0; i < data.data.length; i++) {
-                marbete+= data.data[i].TotalInventarioSap+', ';
+                marbete+= data.data[i].FolioMarbete+', ';
             }
             if (marbete=''){
                 verificacionDiferencia();
