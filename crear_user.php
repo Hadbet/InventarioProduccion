@@ -290,6 +290,8 @@
                   console.log(data);
                   actualizarTabla();
                   document.getElementById("txtNombre").value="";
+                  document.getElementById("txtUsuario").value="";
+                  document.getElementById("txtNomina").value="";
                   document.getElementById("txtContra").value="";
                   document.getElementById("cbRol").value="";
                   document.getElementById("cbEstatus").value="";

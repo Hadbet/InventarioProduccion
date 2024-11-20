@@ -13,6 +13,8 @@ if ($statusLogin['status'] == 1) {
     $_SESSION['passwordCurso'] = $Password;
     $_SESSION['rol'] = $statusLogin['rol'];
     $_SESSION['area'] = $statusLogin['area'];
+    $_SESSION['nombre'] = $statusLogin['nombre'];
+    $_SESSION['nomina'] = $statusLogin['nomina'];
 
     // Realizamos la segunda consulta para obtener los detalles del área
     $areaDetails = consultarAreaDetails($statusLogin['area']);
