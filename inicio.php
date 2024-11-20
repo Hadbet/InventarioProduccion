@@ -155,7 +155,7 @@
                 data: SegundoConteoCosto
             }],
             chart: {
-                height: 500,
+                height: 700,
                 stacked: false,
             },
             stroke: {
@@ -256,7 +256,7 @@
                 data: Estandar
             }],
             chart: {
-                height: 500,
+                height: 800,
                 type: 'line',
                 stacked: false,
             },
