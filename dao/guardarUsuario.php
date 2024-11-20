@@ -6,13 +6,15 @@ $area = $_POST['area'];
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Encriptamos la contraseña
 $rol = $_POST['rol'];
 $estatus = $_POST['estatus'];
+$nombre = $_POST['nombre'];
+$nomina = $_POST['nomina'];
 
 try {
     $con = new LocalConector();
     $conex=$con->conectar();
 
-    $stmt = $conex->prepare("INSERT INTO `Usuarios`( `User`, `Password`, `Rol`, `Estatus`, `Area`) VALUES (?, ?, ?, ?,?)");
-    $stmt->bind_param("ssssi", $user, $password, $rol, $estatus,$area);
+    $stmt = $conex->prepare("INSERT INTO `Usuarios`( `User`, `Password`, `Rol`, `Estatus`, `Area`, `Nomina`, `Nombre`) VALUES (?, ?, ?, ?,?,?,?)");
+    $stmt->bind_param("ssssiis", $user, $password, $rol, $estatus,$area,$nomina,$nombre);
 
     $stmt->execute();
 

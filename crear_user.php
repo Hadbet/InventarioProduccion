@@ -264,7 +264,9 @@
       }
 
       function enviarDatos() {
-          var user = document.getElementById("txtNombre").value;
+          var user = document.getElementById("txtUsuario").value;
+          var nombre = document.getElementById("txtNombre").value;
+          var nomina = document.getElementById("txtNomina").value;
           var password = document.getElementById("txtContra").value;
           var rol = document.getElementById("cbRol").value;
           var estatus = document.getElementById("cbEstatus").value;
@@ -276,6 +278,8 @@
           formData.append('rol', rol);
           formData.append('estatus', estatus);
           formData.append('area', area);
+          formData.append('nombre', nombre);
+          formData.append('nomina', nomina);
 
           fetch('https://grammermx.com/Logistica/Inventario/dao/guardarUsuario.php', {
               method: 'POST',
