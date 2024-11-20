@@ -60,22 +60,10 @@
                     <a class="nav-link pl-3" href="form_registro.php"><span class="ml-1">Captura Almacen</span></a>
                 </ul>
                 <ul class="collapse list-unstyled pl-4 w-100" id="contact">
-                    <a class="nav-link pl-3" href="form_registro_produccion.php"><span class="ml-1">Primer Captura Produccion</span></a>
+                    <a class="nav-link pl-3" href="form_registro_produccion.php"><span class="ml-1">Captura Produccion</span></a>
                 </ul>
                 <ul class="collapse list-unstyled pl-4 w-100" id="contact">
-                    <a class="nav-link pl-3" href="form_registro_produccion.php"><span class="ml-1">Segunda Captura Produccion</span></a>
-                </ul>
-                <ul class="collapse list-unstyled pl-4 w-100" id="contact">
-                    <a class="nav-link pl-3" href="form_registro_produccion.php"><span class="ml-1">Tercer Captura Produccion</span></a>
-                </ul>
-                <ul class="collapse list-unstyled pl-4 w-100" id="contact">
-                    <a class="nav-link pl-3" href="form_validacion_produccion.php"><span class="ml-1">Primer Verificacion Produccion</span></a>
-                </ul>
-                <ul class="collapse list-unstyled pl-4 w-100" id="contact">
-                    <a class="nav-link pl-3" href="form_registro_produccion.php"><span class="ml-1">Segunda Verificacion Produccion</span></a>
-                </ul>
-                <ul class="collapse list-unstyled pl-4 w-100" id="contact">
-                    <a class="nav-link pl-3" href="form_registro_produccion.php"><span class="ml-1">Tercer Verificacion Produccion</span></a>
+                    <a class="nav-link pl-3" href="form_validacion_produccion.php"><span class="ml-1">Verificacion Produccion</span></a>
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -124,7 +112,7 @@
                     <span class="ml-3 item-text">Control de conteos</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="Lider">
-                    <a class="nav-link pl-3" href="verificacion.php"><span class="ml-1">Control</span></a>
+                    <a class="nav-link pl-3" href="control_conteo.php"><span class="ml-1">Control</span></a>
                     <a class="nav-link pl-3" href="cancelacion_marbete.php"><span class="ml-1">Cancelacion</span></a>
                 </ul>
             </li>

@@ -133,9 +133,11 @@
             var SegundoConteoCosto = [];
 
             for (var i = 0; i < data.data.length; i++) {
-                AreaNombreCosto.push((data.data[i].AreaNombre ? data.data[i].AreaNombre : '')+"("+data.data[i].TotalContado+"/"+data.data[i].TotalEsperado+")");
-                PrimerConteoCosto.push(data.data[i].TotalContado ? parseFloat(parseFloat(data.data[i].TotalContado).toFixed(2)) : 0);
-                SegundoConteoCosto.push(data.data[i].TotalEsperado ? parseFloat(parseFloat(data.data[i].TotalEsperado).toFixed(2)) : 0);
+                var totalContado = data.data[i].TotalContado ? parseFloat(data.data[i].TotalContado).toFixed(2) : '0.00';
+                var totalEsperado = data.data[i].TotalEsperado ? parseFloat(data.data[i].TotalEsperado).toFixed(2) : '0.00';
+                AreaNombreCosto.push((data.data[i].AreaNombre ? data.data[i].AreaNombre : '') + "(" + totalContado + "/" + totalEsperado + ")");
+                PrimerConteoCosto.push(totalContado);
+                SegundoConteoCosto.push(totalEsperado);
             }
             graficaCosto(AreaNombreCosto,PrimerConteoCosto,SegundoConteoCosto);
         });
@@ -154,7 +156,6 @@
             }],
             chart: {
                 height: 500,
-                type: 'line',
                 stacked: false,
             },
             stroke: {
@@ -167,7 +168,7 @@
                 }
             },
             fill: {
-                opacity: [0.85, 0.25, 1],
+                opacity: [0.85, 0.85, 1],
                 gradient: {
                     inverseColors: false,
                     shade: 'light',
@@ -195,7 +196,7 @@
                 y: {
                     formatter: function (y) {
                         if (typeof y !== "undefined") {
-                            return y.toFixed(0) + " %";
+                            return  "$ "+y.toFixed(2);
                         }
                         return y;
                     }

@@ -1,38 +1,37 @@
 <?php
 include_once('db/db_Inventario.php');
+function consultarUsuarioVerificacion($usuario,$contra){
+    try {
+        $con = new LocalConector();
+        $conex=$con->conectar();
 
-$user = $_POST['user'];
-$area = $_POST['area'];
-$password = $_POST['password']; // Recibimos la contraseña sin encriptar
+        // Buscamos al usuario en la base de datos
+        $stmt = $conex->prepare("SELECT `Password`, `Rol`, `Area` FROM `Usuarios` WHERE `User` = ? and `Estatus` = 1");
+        $stmt->bind_param("s", $usuario);
 
-try {
-    $con = new LocalConector();
-    $conex=$con->conectar();
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    // Buscamos al usuario en la base de datos
-    $stmt = $conex->prepare("SELECT `Password` FROM `Usuarios` WHERE `User` = ? and `Estatus` = 1 and `Rol` = 3  and `Area` = ?");
-    $stmt->bind_param("ss", $user,$area);
-
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        // Si el usuario existe, verificamos la contraseña
-        $row = $result->fetch_assoc();
-        if (password_verify($password, $row['Password'])) {
-            echo json_encode(["success" => true, "message" => "Inicio de sesión exitoso"]);
+        if ($result->num_rows > 0) {
+            // Si el usuario existe, verificamos la contraseña
+            $row = $result->fetch_assoc();
+            if (password_verify($contra, $row['Password'])) {
+                // Devolvemos un array con el rol y el área si la contraseña es correcta
+                return ['status' => 1, 'rol' => $row['Rol'], 'area' => $row['Area']];
+            } else {
+                return ['status' => 0];
+            }
         } else {
-            echo json_encode(["success" => false, "message" => "Contraseña incorrecta"]);
+            return ['status' => 2];
         }
-    } else {
-        echo json_encode(["success" => false, "message" => "Usuario no encontrado"]);
+
+        $stmt->close();
+        $conex->close();
+
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(["success" => false, "message" => $e->getMessage()]);
     }
-
-    $stmt->close();
-    $conex->close();
-
-} catch (Exception $e) {
-    http_response_code(500);
-    echo json_encode(["success" => false, "message" => $e->getMessage()]);
 }
+
 ?>
