@@ -14,12 +14,16 @@ if ($_SESSION["nominaCurso"] == "" && $_SESSION["nominaCurso"]== null && $_SESSI
 }
 
 if ($areaNombre!='N/A' || $areaNombre!='' || $areaNombre!=null){
-    $captura = '<ul class="collapse list-unstyled pl-4 w-100" id="contact">
+    if ($rol==1){
+        $captura = '<ul class="collapse list-unstyled pl-4 w-100" id="contact">
                     <a class="nav-link pl-3" href="form_registro_produccion.php"><span class="ml-1">Captura Produccion</span></a>
-                </ul>
-                <ul class="collapse list-unstyled pl-4 w-100" id="contact">
+                </ul>';
+    }else{
+        $captura = '<ul class="collapse list-unstyled pl-4 w-100" id="contact">
                     <a class="nav-link pl-3" href="form_validacion_produccion.php"><span class="ml-1">Verificacion Produccion</span></a>
                 </ul>';
+    }
+
 }else{
     $captura ='<ul class="collapse list-unstyled pl-4 w-100" id="contact">
                     <a class="nav-link pl-3" href="form_registro.php"><span class="ml-1">Captura Almacen</span></a>

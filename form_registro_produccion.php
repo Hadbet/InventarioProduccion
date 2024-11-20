@@ -452,7 +452,7 @@ if (strlen($nomina) == 7) {
         var storageBin = document.getElementById("txtStorageBin").value;
 
         var formData = new FormData();
-        formData.append('nombre', nombre);
+        formData.append('nombre', '<?php echo $nomina;?>-'+nombre);
         formData.append('comentarios', comentarios);
         formData.append('folioMarbete', marbete);
         formData.append('numeroParte', numeroParte);

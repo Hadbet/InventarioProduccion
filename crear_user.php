@@ -81,6 +81,9 @@
                                         <option value="1">Capturista</option>
                                         <option value="2">Auditor</option>
                                         <option value="3">Lider Conteo</option>
+                                        <option value="4">Super User</option>
+                                        <option value="5">Validador</option>
+                                        <option value="6">Administrador</option>
                                     </select>
                                 </div>
                             </div>
