@@ -106,6 +106,76 @@
                     </div>
                 </div> <!-- .col-12 -->
             </div> <!-- .row -->
+
+            <div class="row">
+
+                <div class="col-md-6 col-xl-6 mb-4">
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <span class="card-title">Marbete : <span id="lblFolio"></span></span>
+                            <a class="float-right small text-muted" href="#!"><i class="fe fe-more-vertical fe-12"></i></a>
+                        </div>
+                        <div class="card-body my-n2">
+                            <div class="d-flex">
+                                <div class="flex-fill">
+                                    <span class="card-title">Numero de parte</span>
+                                    <h4 class="mb-0" id="lblNumeroParte"></h4>
+                                </div>
+                                <div class="flex-fill text-right">
+                                    <p class="mb-0 small" id="lblCosto"></p>
+                                    <p class="text-muted mb-0 small">Pesos</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex">
+                                <div class="flex-fill">
+                                    <span class="card-title">Cantidad</span>
+                                    <h4 class="mb-0" id="lblCantidad"> <span id="lblUm"></span></h4>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex">
+                                <div class="flex-fill">
+                                    <span class="card-title">Descripcion</span>
+                                    <h4 class="mb-0" id="lblDescripcion"></h4>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex">
+                                <div class="flex-fill">
+                                    <span class="card-title">Storage Bin</span>
+                                    <h4 class="mb-0" id="lblStorageBin"></h4>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex">
+                                <div class="flex-fill">
+                                    <span class="card-title">Monto Total</span>
+                                    <h4 class="mb-0" id="lblMontoTotal"></h4>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <a href="profile-posts.html" class="avatar avatar-md">
+                                        <img id="imagenCapturador" alt="..." class="avatar-img rounded-circle">
+                                    </a>
+                                </div>
+                                <div class="col ml-n2">
+                                    <strong class="mb-1" id="lblNombreCapturador"></strong><span class="dot dot-lg bg-success ml-1"></span>
+                                    <p class="small text-muted mb-1" id="lblRol">Capturista</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <button id="btnFin" class="btn mb-2 btn-success float-right text-white" onclick="enviarDatos()">Finalizar Captura<span
+                                        class="fe fe-chevron-right fe-16 ml-2" ></span></button>
+                        </div> <!-- .card-body -->
+                    </div> <!-- .card -->
+                </div> <!-- .col -->
+
+            </div>
+
+
         </div> <!-- .container-fluid -->
     </main> <!-- main -->
 </div> <!-- .wrapper -->
