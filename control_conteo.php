@@ -235,7 +235,7 @@ if (strlen($nomina) == 7) {
     verificacionDiferencia();
     function verificacionDiferencia() {
 
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaSegundosConteosCosto.php?area='+2, function (data) {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaSegundosConteosCosto.php?area='+<?php echo $area;?>, function (data) {
             for (var i = 0; i < data.data.length; i++) {
                 document.getElementById("lblDinero").innerText ="$ "+parseFloat(data.data[i].CostoTotalInventarioSap - data.data[i].CostoTotalPrimerConteoBitacora).toFixed(2) ;
                 document.getElementById("lblCantidad").innerText = data.data[i].TotalInventarioSap-data.data[i].TotalPrimerConteoBitacora;
