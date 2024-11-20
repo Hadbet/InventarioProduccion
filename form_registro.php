@@ -285,7 +285,6 @@ $bin =$_SESSION['StBin'];
             for (var i = 0; i < data.data.length; i++) {
                 if (data.data[i].FolioMarbete) {
                     if (data.data[i].Estatus === '0'){
-                        if (data.data[i].StorageBin==='<?php echo $bin?>'){
                             numeroParte=data.data[i].NumeroParte;
                             storageBin=data.data[i].StorageBin;
                             document.getElementById("reader").style.display = 'none';
@@ -294,13 +293,6 @@ $bin =$_SESSION['StBin'];
                             document.getElementById("pasoUno").style.display = 'none';
                             html5QrcodeScanner.clear();
                             html5QrcodeScanner.pause();
-                        }else{
-                        Swal.fire({
-                            title: "El marbete le pertenece al area : "+ data.data[i].StorageBin,
-                            text: "Escanea el marbete correcto",
-                            icon: "error"
-                        });
-                        }
                     }else{
                         Swal.fire({
                             title: "El marbete ya fue registrado",

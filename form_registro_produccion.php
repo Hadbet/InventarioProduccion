@@ -1,3 +1,12 @@
+
+<?php
+session_start();
+$rol =$_SESSION['rol'];
+$area =$_SESSION['area'];
+$areaNombre =$_SESSION['AreaNombre'];
+$bin =$_SESSION['StBin'];
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -233,6 +242,9 @@
 
 <script>
 
+    document.getElementById("txtStorageBin").value = '<?php echo $bin; ?>';
+    document.getElementById("lblStorageBin").innerText = '<?php echo $bin;?>';
+
     var auxConteo=0;
     var auxStorage=0;
     estatusConteo();
@@ -241,8 +253,7 @@
             for (var i = 0; i < data.data.length; i++) {
                 auxConteo = data.data[i].Conteo;
                 auxStorage = data.data[i].StBin
-                document.getElementById("txtStorageBin").value = auxStorage;
-                document.getElementById("lblStorageBin").innerText = auxStorage;
+
             }
         });
     }
@@ -371,7 +382,6 @@
                     if (data.data[i].FolioMarbete) {
                         if (data.data[i].Estatus === '0'){
                             numeroParte=data.data[i].NumeroParte;
-                            storageBin=data.data[i].StorageBin;
                             document.getElementById("reader").style.display = 'none';
                             document.getElementById("lblFolio").innerHTML = marbete;
                             document.getElementById("pasoDos").style.display = 'block';
