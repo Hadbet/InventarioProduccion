@@ -1,6 +1,6 @@
 <?php
-
 require 'consultaVerificarUsuario.php';
+require 'consultaAreaUsuario.php';
 
 session_start();
 $Nomina = $_POST['nomina'];
@@ -13,6 +13,12 @@ if ($statusLogin['status'] == 1) {
     $_SESSION['passwordCurso'] = $Password;
     $_SESSION['rol'] = $statusLogin['rol'];
     $_SESSION['area'] = $statusLogin['area'];
+
+    // Realizamos la segunda consulta para obtener los detalles del área
+    $areaDetails = consultarAreaDetails($statusLogin['area']);
+    $_SESSION['AreaNombre'] = $areaDetails['area'];
+    $_SESSION['StBin'] = $areaDetails['bin'];
+
     if ($statusLogin['rol'] == 1){
         echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../form_registro.php'>";
     }
@@ -32,4 +38,5 @@ if ($statusLogin['status'] == 1) {
     echo "<script>alert('Usuario no encontrado')</script>";
     echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../index.html'>";
 }
+
 ?>

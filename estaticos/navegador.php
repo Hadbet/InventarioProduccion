@@ -162,3 +162,4 @@ if ($_SESSION["nominaCurso"] == "" && $_SESSION["nominaCurso"]== null && $_SESSI
         </div>
     </nav>
 </aside>
+
