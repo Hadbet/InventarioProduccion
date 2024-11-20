@@ -1,3 +1,23 @@
+
+<?php
+session_start();
+/*
+if ($_SESSION["nominaCurso"] == "" && $_SESSION["nominaCurso"]== null && $_SESSION["rol"]== "" && $_SESSION["rol"]== null) {
+    echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=login.html'>";
+    session_destroy();
+}else{
+    session_start();
+    $rol =$_SESSION['rol'];
+    $area =$_SESSION['area'];
+}*/
+
+session_start();
+$rol =$_SESSION['rol'];
+$area =$_SESSION['area'];
+$areaNombre =$_SESSION['AreaNombre'];
+$bin =$_SESSION['StBin'];
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -253,6 +273,7 @@
 
     var numeroParte;
     var storageBin;
+    var binArea = <?php echo $bin?>;
 
     var numeroParteUnit;
     var cantidad;
@@ -265,14 +286,22 @@
             for (var i = 0; i < data.data.length; i++) {
                 if (data.data[i].FolioMarbete) {
                     if (data.data[i].Estatus === '0'){
-                        numeroParte=data.data[i].NumeroParte;
-                        storageBin=data.data[i].StorageBin;
-                        document.getElementById("reader").style.display = 'none';
-                        document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
-                        document.getElementById("pasoDos").style.display = 'block';
-                        document.getElementById("pasoUno").style.display = 'none';
-                        html5QrcodeScanner.clear();
-                        html5QrcodeScanner.pause();
+                        if (data.data[i].StorageBin===binArea){
+                            numeroParte=data.data[i].NumeroParte;
+                            storageBin=data.data[i].StorageBin;
+                            document.getElementById("reader").style.display = 'none';
+                            document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
+                            document.getElementById("pasoDos").style.display = 'block';
+                            document.getElementById("pasoUno").style.display = 'none';
+                            html5QrcodeScanner.clear();
+                            html5QrcodeScanner.pause();
+                        }else{
+                        Swal.fire({
+                            title: "El marbete le pertenece al area : "+ data.data[i].StorageBin,
+                            text: "Escanea el marbete correcto",
+                            icon: "error"
+                        });
+                        }
                     }else{
                         Swal.fire({
                             title: "El marbete ya fue registrado",
