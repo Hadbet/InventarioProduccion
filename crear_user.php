@@ -56,7 +56,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-1">
                                 <div class="form-group mb-3">
                                     <label for="cbCurso">Usuario</label>
                                     <input type="text" class="form-control drgpicker" id="txtUsuario"
@@ -65,7 +65,7 @@
                             </div>
 
                             <!-- /.col -->
-                            <div class="col-md-3">
+                            <div class="col-md-1">
                                 <div class="form-group mb-3">
                                     <label for="cbCurso">Contraseña</label>
                                     <input type="password" class="form-control drgpicker" id="txtContra"
@@ -86,7 +86,7 @@
                             </div>
 
                             <div class="col-md-2" >
-                                <div class="form-group mb-3">
+                                <div class="form-group mb-1">
                                     <label for="cbInstructor">Estatus</label>
                                     <select class="custom-select" id="cbEstatus">
                                         <option selected>Abrir menu</option>
