@@ -273,7 +273,6 @@ $bin =$_SESSION['StBin'];
 
     var numeroParte;
     var storageBin;
-    var binArea = <?php echo $bin?>;
 
     var numeroParteUnit;
     var cantidad;
@@ -286,7 +285,7 @@ $bin =$_SESSION['StBin'];
             for (var i = 0; i < data.data.length; i++) {
                 if (data.data[i].FolioMarbete) {
                     if (data.data[i].Estatus === '0'){
-                        if (data.data[i].StorageBin===binArea){
+                        if (data.data[i].StorageBin==='<?php echo $bin?>'){
                             numeroParte=data.data[i].NumeroParte;
                             storageBin=data.data[i].StorageBin;
                             document.getElementById("reader").style.display = 'none';
