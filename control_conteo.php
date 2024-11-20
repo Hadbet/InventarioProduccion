@@ -182,7 +182,7 @@ if (strlen($nomina) == 7) {
                     <h2 class="h3 mb-0 page-title">Control de conteos</h2>
                 </div>
                 <div class="col-auto">
-                    <button type="button" class="btn btn-primary"><span class="fe fe-filter fe-12 mr-2"></span>Pasar a segundos conteos</button>
+                    <button type="button" onclick="verificacion()" class="btn btn-primary"><span class="fe fe-filter fe-12 mr-2"></span>Pasar a segundos conteos</button>
                 </div>
             </div>
 
@@ -232,7 +232,26 @@ if (strlen($nomina) == 7) {
 <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
 
 <script>
-    verificacionDiferencia();
+
+    function verificacion() {
+
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaSegundosConteosValidacion.php?area='+<?php echo $area;?>, function (data) {
+            var marbete='';
+            for (var i = 0; i < data.data.length; i++) {
+                marbete+= data.data[i].TotalInventarioSap+', ';
+            }
+            if (marbete=''){
+                verificacionDiferencia();
+            }else {
+                Swal.fire({
+                    title: "Te faltan capturar marbetes folios: "+marbete,
+                    text: "Verificalo con tu equipo",
+                    icon: "error"
+                });
+            }
+        });
+    }
+
     function verificacionDiferencia() {
 
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaSegundosConteosCosto.php?area='+<?php echo $area;?>, function (data) {
