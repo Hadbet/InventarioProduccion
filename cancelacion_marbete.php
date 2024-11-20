@@ -1,3 +1,37 @@
+<?php
+
+session_start();
+$rol =$_SESSION['rol'];
+$area =$_SESSION['area'];
+$areaNombre =$_SESSION['AreaNombre'];
+$bin =$_SESSION['StBin'];
+$nomina =$_SESSION['nomina'];
+$nombre =$_SESSION['nombre'];
+
+if (strlen($nomina) == 1) {
+    $nomina = "0000000" . $nomina;
+}
+if (strlen($nomina) == 2) {
+    $nomina = "000000" . $nomina;
+}
+if (strlen($nomina) == 3) {
+    $nomina = "00000" . $nomina;
+}
+if (strlen($nomina) == 4) {
+    $nomina = "0000" . $nomina;
+}
+if (strlen($nomina) == 5) {
+    $nomina = "000" . $nomina;
+}
+if (strlen($nomina) == 6) {
+    $nomina = "00" . $nomina;
+}
+if (strlen($nomina) == 7) {
+    $nomina = "0" . $nomina;
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -157,7 +191,7 @@
 
       function actualizarTabla() {
           $.ajax({
-              url: 'https://grammermx.com/Logistica/Inventario/dao/consultaMarbeteLider.php?area='+2, // Reemplaza esto con la URL de tus datos
+              url: 'https://grammermx.com/Logistica/Inventario/dao/consultaMarbeteLider.php?area='+<?php echo $area; ?>, // Reemplaza esto con la URL de tus datos
               dataType: 'json',
               success: function(data) {
                   var table = $('#dataTable-1').DataTable();

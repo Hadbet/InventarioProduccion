@@ -244,7 +244,7 @@ if (strlen($nomina) == 7) {
                 verificacionDiferencia();
             }else {
                 Swal.fire({
-                    title: "Te faltan capturar marbetes folios: "+marbete,
+                    title: "Te faltan capturar marbetes folios",
                     text: "Verificalo con tu equipo",
                     icon: "error"
                 });
