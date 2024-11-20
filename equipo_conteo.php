@@ -8,30 +8,9 @@ $rol =$_SESSION['rol'];
 $area =$_SESSION['area'];
 $areaNombre =$_SESSION['AreaNombre'];
 $bin =$_SESSION['StBin'];
-$nomina =$_SESSION['nomina'];
 $nombre =$_SESSION['nombre'];
 
-if (strlen($nomina) == 1) {
-    $nomina = "0000000" . $nomina;
-}
-if (strlen($nomina) == 2) {
-    $nomina = "000000" . $nomina;
-}
-if (strlen($nomina) == 3) {
-    $nomina = "00000" . $nomina;
-}
-if (strlen($nomina) == 4) {
-    $nomina = "0000" . $nomina;
-}
-if (strlen($nomina) == 5) {
-    $nomina = "000" . $nomina;
-}
-if (strlen($nomina) == 6) {
-    $nomina = "00" . $nomina;
-}
-if (strlen($nomina) == 7) {
-    $nomina = "0" . $nomina;
-}
+
 
 
 $con = new LocalConector();
@@ -94,6 +73,28 @@ $result = $stmt->get_result();
                               $usuario = $row['User'];
                               $estatus = $row['Estatus'];
                               $rol = $row['Rol'];
+
+                              if (strlen($nomina) == 1) {
+                                  $nomina = "0000000" . $nomina;
+                              }
+                              if (strlen($nomina) == 2) {
+                                  $nomina = "000000" . $nomina;
+                              }
+                              if (strlen($nomina) == 3) {
+                                  $nomina = "00000" . $nomina;
+                              }
+                              if (strlen($nomina) == 4) {
+                                  $nomina = "0000" . $nomina;
+                              }
+                              if (strlen($nomina) == 5) {
+                                  $nomina = "000" . $nomina;
+                              }
+                              if (strlen($nomina) == 6) {
+                                  $nomina = "00" . $nomina;
+                              }
+                              if (strlen($nomina) == 7) {
+                                  $nomina = "0" . $nomina;
+                              }
 
                               $rolNombre = '';
                               switch ($rol) {
