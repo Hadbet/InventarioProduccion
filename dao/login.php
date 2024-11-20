@@ -1,6 +1,6 @@
 <?php
 
-require 'consultaVerificarUsuario.php.php';
+require 'consultaVerificarUsuario.php';
 
 session_start();
 $Nomina = $_POST['nomina'];
