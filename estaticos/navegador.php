@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-/*
+
 if ($_SESSION["nominaCurso"] == "" && $_SESSION["nominaCurso"]== null && $_SESSION["rol"]== "" && $_SESSION["rol"]== null) {
     echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=login.html'>";
     session_destroy();
@@ -11,11 +11,7 @@ if ($_SESSION["nominaCurso"] == "" && $_SESSION["nominaCurso"]== null && $_SESSI
     $area =$_SESSION['area'];
     $areaNombre =$_SESSION['AreaNombre'];
     $bin =$_SESSION['StBin'];
-}*/
-$rol =$_SESSION['rol'];
-$area =$_SESSION['area'];
-$areaNombre =$_SESSION['AreaNombre'];
-$bin =$_SESSION['StBin'];
+}
 
 if ($areaNombre!='N/A' || $areaNombre!='' || $areaNombre!=null){
     $captura = '<ul class="collapse list-unstyled pl-4 w-100" id="contact">
