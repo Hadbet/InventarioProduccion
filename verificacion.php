@@ -1,3 +1,34 @@
+<?php
+session_start();
+$rol =$_SESSION['rol'];
+$area =$_SESSION['area'];
+$areaNombre =$_SESSION['AreaNombre'];
+$bin =$_SESSION['StBin'];
+$nomina =$_SESSION['nomina'];
+$nombre =$_SESSION['nombre'];
+
+if (strlen($nomina) == 1) {
+    $nomina = "0000000" . $nomina;
+}
+if (strlen($nomina) == 2) {
+    $nomina = "000000" . $nomina;
+}
+if (strlen($nomina) == 3) {
+    $nomina = "00000" . $nomina;
+}
+if (strlen($nomina) == 4) {
+    $nomina = "0000" . $nomina;
+}
+if (strlen($nomina) == 5) {
+    $nomina = "000" . $nomina;
+}
+if (strlen($nomina) == 6) {
+    $nomina = "00" . $nomina;
+}
+if (strlen($nomina) == 7) {
+    $nomina = "0" . $nomina;
+}?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -143,9 +174,6 @@
                                     <p class="small text-muted mb-1" id="lblRol">Capturista</p>
                                 </div>
                             </div>
-                            <hr>
-                            <button id="btnFin" class="btn mb-2 btn-success float-right text-white" onclick="enviarDatos()">Finalizar Captura<span
-                                        class="fe fe-chevron-right fe-16 ml-2" ></span></button>
                         </div> <!-- .card-body -->
                     </div> <!-- .card -->
                 </div> <!-- .col -->
@@ -153,7 +181,7 @@
                 <div class="col-md-6 col-xl-6 mb-4">
                     <div class="card shadow">
                         <div class="card-header">
-                            <span class="card-title">Marbete : <span id="lblFolio"></span></span>
+                            <span class="card-title">Validador</span>
                             <a class="float-right small text-muted" href="#!"><i class="fe fe-more-vertical fe-12"></i></a>
                         </div>
                         <div class="card-body my-n2">
@@ -168,7 +196,6 @@
                                     <p class="small text-muted mb-1" id="lblRol">Verificador</p>
                                 </div>
                             </div>
-                            <hr>
                         </div> <!-- .card-body -->
                     </div> <!-- .card -->
                 </div> <!-- .col -->
@@ -204,7 +231,7 @@
 
     function verificacionRegistro() {
 
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaVerificacionProduccion.php?marbete='+document.getElementById("txtBuscar").value, function (data) {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaVerificacionProduccion.php?marbete='+document.getElementById("txtBuscar").value+'&area='+<?php echo $area;?>, function (data) {
             for (var i = 0; i < data.data.length; i++) {
                 if (i==0){
                     var usuario = data.data[i].Usuario;
