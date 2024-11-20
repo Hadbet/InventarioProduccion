@@ -5,6 +5,30 @@ $rol =$_SESSION['rol'];
 $area =$_SESSION['area'];
 $areaNombre =$_SESSION['AreaNombre'];
 $bin =$_SESSION['StBin'];
+$nomina =$_SESSION['nomina'];
+
+if (strlen($nomina) == 1) {
+    $nomina = "0000000" . $nomina;
+}
+if (strlen($nomina) == 2) {
+    $nomina = "000000" . $nomina;
+}
+if (strlen($nomina) == 3) {
+    $nomina = "00000" . $nomina;
+}
+if (strlen($nomina) == 4) {
+    $nomina = "0000" . $nomina;
+}
+if (strlen($nomina) == 5) {
+    $nomina = "000" . $nomina;
+}
+if (strlen($nomina) == 6) {
+    $nomina = "00" . $nomina;
+}
+if (strlen($nomina) == 7) {
+    $nomina = "0" . $nomina;
+}
+
 ?>
 
 <!doctype html>
@@ -198,7 +222,7 @@ $bin =$_SESSION['StBin'];
                             <div class="row align-items-center">
                                 <div class="col-auto">
                                     <a href="profile-posts.html" class="avatar avatar-md">
-                                        <img src="https://grammermx.com/Fotos/00001004.png" alt="..." class="avatar-img rounded-circle">
+                                        <img src="https://grammermx.com/Fotos/<?php echo $nomina; ?>.png" alt="..." class="avatar-img rounded-circle">
                                     </a>
                                 </div>
                                 <div class="col ml-n2">
