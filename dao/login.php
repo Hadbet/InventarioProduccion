@@ -27,6 +27,6 @@ if ($statusLogin['status'] == 1) {
     }
 } else if ($statusLogin['status'] == 0) {
     echo "<script>alert('Ocurrio un error')</script>";
-    echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../inicio.php'>";
+    echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../index.html'>";
 }
 ?>
