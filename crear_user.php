@@ -40,7 +40,7 @@
                     <div class="card-body">
                         <div class="row">
 
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <div class="form-group mb-3">
                                     <label for="cbCurso">Nomina</label>
                                     <input type="text" class="form-control drgpicker" id="txtNomina"
@@ -49,14 +49,14 @@
                             </div>
 
                             <div class="col-md-3">
-                                <div class="form-group mb-3">
+                                <div class="form-group mb-2">
                                     <label for="cbCurso">Nombre</label>
                                     <input type="text" class="form-control drgpicker" id="txtNombre"
                                            value="" aria-describedby="button-addon2">
                                 </div>
                             </div>
 
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <div class="form-group mb-3">
                                     <label for="cbCurso">Usuario</label>
                                     <input type="text" class="form-control drgpicker" id="txtUsuario"
@@ -65,7 +65,7 @@
                             </div>
 
                             <!-- /.col -->
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <div class="form-group mb-3">
                                     <label for="cbCurso">Contraseña</label>
                                     <input type="password" class="form-control drgpicker" id="txtContra"
@@ -85,8 +85,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-2" >
-                                <div class="form-group mb-1">
+                            <div class="col-md-1" >
+                                <div class="form-group mb-3">
                                     <label for="cbInstructor">Estatus</label>
                                     <select class="custom-select" id="cbEstatus">
                                         <option selected>Abrir menu</option>
