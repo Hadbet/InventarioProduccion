@@ -73,7 +73,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-1" >
+                            <div class="col-md-2" >
                                 <div class="form-group mb-3">
                                     <label for="cbInstructor">Rol</label>
                                     <select class="custom-select" id="cbRol">
