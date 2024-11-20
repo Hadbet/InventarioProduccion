@@ -234,28 +234,37 @@ if (strlen($nomina) == 7) {
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaVerificacionProduccion.php?marbete='+document.getElementById("txtBuscar").value+'&area='+<?php echo $area;?>, function (data) {
             for (var i = 0; i < data.data.length; i++) {
                 if (i==0){
-                    var usuario = data.data[i].Usuario;
-                    var separado = usuario.split("-");
-                    var numeroNomina = separado[0];
-                    var nombre = separado[1];
+                    if (data.data[i].Usuario){
+                        var usuario = data.data[i].Usuario;
+                        var separado = usuario.split("-");
+                        var numeroNomina = separado[0];
+                        var nombre = separado[1];
 
-                    var usuarioVerificador = data.data[i].UsuarioVerificacion;
-                    var separadoVerificador = usuarioVerificador.split("-");
-                    var numeroNominaVerificador = separadoVerificador[0];
-                    var nombreVerificador = separadoVerificador[1];
+                        var usuarioVerificador = data.data[i].UsuarioVerificacion;
+                        var separadoVerificador = usuarioVerificador.split("-");
+                        var numeroNominaVerificador = separadoVerificador[0];
+                        var nombreVerificador = separadoVerificador[1];
 
-                    document.getElementById("imagenCapturador").src = 'https://grammermx.com/Fotos/'+numeroNomina+'.png';
-                    document.getElementById("lblNombreCapturador").innerText = nombre;
+                        document.getElementById("imagenCapturador").src = 'https://grammermx.com/Fotos/'+numeroNomina+'.png';
+                        document.getElementById("lblNombreCapturador").innerText = nombre;
 
-                    document.getElementById("imagenVerificador").src = 'https://grammermx.com/Fotos/'+numeroNominaVerificador+'.png';
-                    document.getElementById("lblNombreVerificador").innerText = nombreVerificador;
+                        document.getElementById("imagenVerificador").src = 'https://grammermx.com/Fotos/'+numeroNominaVerificador+'.png';
+                        document.getElementById("lblNombreVerificador").innerText = nombreVerificador;
 
-                    document.getElementById("lblFolio").innerText = data.data[i].FolioMarbete;
-                    document.getElementById("lblNumeroParte").innerText = data.data[i].NumeroParte;
-                    document.getElementById("lblCantidad").innerText = data.data[i].PrimerConteo;
-                    document.getElementById("lblStorageBin").innerText = data.data[i].StorageBin;
-                    cantidad = data.data[i].PrimerConteo;
-                    cargaPrimer(data.data[i].NumeroParte);
+                        document.getElementById("lblFolio").innerText = data.data[i].FolioMarbete;
+                        document.getElementById("lblNumeroParte").innerText = data.data[i].NumeroParte;
+                        document.getElementById("lblCantidad").innerText = data.data[i].PrimerConteo;
+                        document.getElementById("lblStorageBin").innerText = data.data[i].StorageBin;
+                        cantidad = data.data[i].PrimerConteo;
+                        cargaPrimer(data.data[i].NumeroParte);
+                    }else{
+                        Swal.fire({
+                            title: "El marbete no esta capturado aun o no pertenece a tu area",
+                            text: "Verificalo con la mesa de control",
+                            icon: "error"
+                        });
+                    }
+
                 }
             }
 
@@ -272,7 +281,7 @@ if (strlen($nomina) == 7) {
                     document.getElementById('lblMontoTotal').innerText = costoUnitario*cantidad;
                     bandera=1;
 
-                    document.getElementById("divMarbete").style.display='block';
+                    document.getElementById("divMarbete").style.display='flex';
                     document.getElementById("divMarbete").scrollIntoView({behavior: "smooth"});
                 } else {
                     bandera=0;
