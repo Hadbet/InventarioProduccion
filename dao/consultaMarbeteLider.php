@@ -38,7 +38,7 @@ function ContadorApu($area)
     ) AS `Cancelar`
 FROM 
     `Bitacora_Inventario` 
-WHERE `Area` = $area AND `Estatus` = 1; ");
+WHERE `Area` = $area");
 
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
     echo json_encode(array("data" => $resultado));
