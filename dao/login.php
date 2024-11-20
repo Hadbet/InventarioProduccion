@@ -26,7 +26,10 @@ if ($statusLogin['status'] == 1) {
         echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../inicio.php'>";
     }
 } else if ($statusLogin['status'] == 0) {
-    echo "<script>alert('Ocurrio un error')</script>";
+    echo "<script>alert('Contraseña incorrecta')</script>";
+    echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../index.html'>";
+}else if ($statusLogin['status'] == 2) {
+    echo "<script>alert('Usuario no encontrado')</script>";
     echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../index.html'>";
 }
 ?>
