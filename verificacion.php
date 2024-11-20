@@ -232,9 +232,11 @@ if (strlen($nomina) == 7) {
     function verificacionRegistro() {
 
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaVerificacionProduccion.php?marbete='+document.getElementById("txtBuscar").value+'&area='+<?php echo $area;?>, function (data) {
+
+            if (data && data.data && data.data.length > 0){
+
             for (var i = 0; i < data.data.length; i++) {
                 if (i==0){
-                    if (data.data[i].Usuario){
                         var usuario = data.data[i].Usuario;
                         var separado = usuario.split("-");
                         var numeroNomina = separado[0];
@@ -257,15 +259,16 @@ if (strlen($nomina) == 7) {
                         document.getElementById("lblStorageBin").innerText = data.data[i].StorageBin;
                         cantidad = data.data[i].PrimerConteo;
                         cargaPrimer(data.data[i].NumeroParte);
-                    }else{
-                        Swal.fire({
-                            title: "El marbete no esta capturado aun o no pertenece a tu area",
-                            text: "Verificalo con la mesa de control",
-                            icon: "error"
-                        });
-                    }
+
 
                 }
+            }
+            }else{
+                Swal.fire({
+                    title: "El marbete no esta capturado aun o no pertenece a tu area",
+                    text: "Verificalo con la mesa de control",
+                    icon: "error"
+                });
             }
 
         });
