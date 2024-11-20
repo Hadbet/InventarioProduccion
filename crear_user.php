@@ -40,10 +40,26 @@
                     <div class="card-body">
                         <div class="row">
 
+                            <div class="col-md-2">
+                                <div class="form-group mb-3">
+                                    <label for="cbCurso">Nomina</label>
+                                    <input type="text" class="form-control drgpicker" id="txtNomina"
+                                           value="" aria-describedby="button-addon2">
+                                </div>
+                            </div>
+
                             <div class="col-md-3">
                                 <div class="form-group mb-3">
                                     <label for="cbCurso">Nombre</label>
                                     <input type="text" class="form-control drgpicker" id="txtNombre"
+                                           value="" aria-describedby="button-addon2">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group mb-3">
+                                    <label for="cbCurso">Usuario</label>
+                                    <input type="text" class="form-control drgpicker" id="txtUsuario"
                                            value="" aria-describedby="button-addon2">
                                 </div>
                             </div>
