@@ -170,7 +170,7 @@ if ($areaNombre!='N/A' || $areaNombre!='' || $areaNombre!=null){
         
 
         <div class="btn-box w-100 mt-4 mb-1">
-            <a href="logout.php" target="_blank" class="btn mb-2 btn-danger btn-lg btn-block">
+            <a href="dao/logout.php" target="_blank" class="btn mb-2 btn-danger btn-lg btn-block">
                 <i class="fe fe-log-out fe-12 mx-2 text-white"></i><span class="small text-white">Salir</span>
             </a>
         </div>
