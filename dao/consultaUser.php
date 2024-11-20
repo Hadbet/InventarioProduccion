@@ -17,6 +17,9 @@ function ContadorApu()
         WHEN U.`Rol` = 1 THEN 'Capturista'
         WHEN U.`Rol` = 2 THEN 'Auditor'
         WHEN U.`Rol` = 3 THEN 'Lider de conteo'
+        WHEN U.`Rol` = 4 THEN 'Super'
+        WHEN U.`Rol` = 5 THEN 'Verificador'
+        WHEN U.`Rol` = 6 THEN 'Administrador'
         ELSE 'Rol desconocido'
     END AS `Rol`,
     IF(U.`Estatus` = 1, 
