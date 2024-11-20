@@ -9,6 +9,21 @@ if ($_SESSION["nominaCurso"] == "" && $_SESSION["nominaCurso"]== null && $_SESSI
     session_start();
     $rol =$_SESSION['rol'];
     $area =$_SESSION['area'];
+    $areaNombre =$_SESSION['AreaNombre'];
+    $bin =$_SESSION['StBin'];
+}
+
+if ($areaNombre!='N/A' || $areaNombre!='' || $areaNombre!=null){
+    $captura = '<ul class="collapse list-unstyled pl-4 w-100" id="contact">
+                    <a class="nav-link pl-3" href="form_registro_produccion.php"><span class="ml-1">Captura Produccion</span></a>
+                </ul>
+                <ul class="collapse list-unstyled pl-4 w-100" id="contact">
+                    <a class="nav-link pl-3" href="form_validacion_produccion.php"><span class="ml-1">Verificacion Produccion</span></a>
+                </ul>';
+}else{
+    $captura ='<ul class="collapse list-unstyled pl-4 w-100" id="contact">
+                    <a class="nav-link pl-3" href="form_registro.php"><span class="ml-1">Captura Almacen</span></a>
+                </ul>';
 }
 ?>
 
@@ -78,15 +93,8 @@ if ($_SESSION["nominaCurso"] == "" && $_SESSION["nominaCurso"]== null && $_SESSI
     <i class="fe fe-smile fe-16"></i>
                     <span class="ml-3 item-text">Inicio</span>
                 </a>
-                <ul class="collapse list-unstyled pl-4 w-100" id="contact">
-                    <a class="nav-link pl-3" href="form_registro.php"><span class="ml-1">Captura Almacen</span></a>
-                </ul>
-                <ul class="collapse list-unstyled pl-4 w-100" id="contact">
-                    <a class="nav-link pl-3" href="form_registro_produccion.php"><span class="ml-1">Captura Produccion</span></a>
-                </ul>
-                <ul class="collapse list-unstyled pl-4 w-100" id="contact">
-                    <a class="nav-link pl-3" href="form_validacion_produccion.php"><span class="ml-1">Verificacion Produccion</span></a>
-                </ul>
+                
+                '.$captura.'
             </li>
             <li class="nav-item dropdown">
                 <a href="#support" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
