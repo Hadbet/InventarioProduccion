@@ -153,7 +153,7 @@ if (strlen($nomina) == 7) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
               $.ajax({
-                url: 'https://grammermx.com/Logistica/Inventario/dao/consultaMarbeteLider.php?area='+2, // Reemplaza esto con la URL de tus datos
+                url: 'https://grammermx.com/Logistica/Inventario/dao/consultaMarbeteLider.php?area=<?php echo $area; ?>', // Reemplaza esto con la URL de tus datos
                 dataType: 'json',
                 success: function(data) {
                   $('#dataTable-1').DataTable({
