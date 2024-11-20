@@ -48,7 +48,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group mb-2">
                                     <label for="cbCurso">Nombre</label>
                                     <input type="text" class="form-control drgpicker" id="txtNombre"
@@ -73,7 +73,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-2" >
+                            <div class="col-md-1" >
                                 <div class="form-group mb-3">
                                     <label for="cbInstructor">Rol</label>
                                     <select class="custom-select" id="cbRol">
