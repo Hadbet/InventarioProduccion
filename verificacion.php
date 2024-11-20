@@ -298,6 +298,12 @@ if (strlen($nomina) == 7) {
         });
     }
 
+    document.getElementById('txtBuscar').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            verificacionRegistro();
+        }
+    });
+
 </script>
 </body>
 </html>
