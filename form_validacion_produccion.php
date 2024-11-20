@@ -112,18 +112,6 @@
                         <div class="card-body">
                             <p class="mb-3"><strong>Verificacion</strong></p>
 
-                            <label for="basic-url">Selecciona esto si quieres cambiar el NP</label>
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                                <label class="custom-control-label" for="customSwitch1">Desbloquear</label>
-                            </div>
-                            <br>
-
-                            <label for="basic-url">Numero de parte</label>
-                            <div class="input-group mb-3">
-                                <input type="text" id="txtNumeroParte" class="form-control"  aria-label="Recipient's username" aria-describedby="button-addon2" disabled>
-                            </div>
-
                             <label for="basic-url">Cantidad</label>
                             <div class="input-group mb-3">
                                 <input type="text" id="txtCantidad" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -316,7 +304,6 @@
                             document.getElementById("pasoUno").style.display = 'none';
                             document.getElementById("lblStorageBin").innerText = storageBin;
                             document.getElementById("lblNumeroParte").innerText = numeroParte;
-                            document.getElementById("txtNumeroParte").value = numeroParte;
                             document.getElementById("lblCantidad").innerText = data.data[i].PrimerConteo;
                             cargaPrimer(numeroParte);
                             html5QrcodeScanner.clear();
@@ -375,12 +362,11 @@
     async function enviarDatos() {
         var marbete = document.getElementById("scanner_input").value;
         var nombre = document.getElementById("lblNombre").innerText;
-        var numeroParte = document.getElementById("txtNumeroParte").value;
         var cantidad = document.getElementById("txtCantidad").value;
         var cantidadAnterior = document.getElementById("lblCantidad").innerText;
 
         if (cantidad === cantidadAnterior || await confirmarCambio()) {
-            enviarSolicitud(nombre, marbete, numeroParte, cantidad);
+            enviarSolicitud(nombre, marbete, cantidad);
         }
     }
 
@@ -403,11 +389,10 @@
         });
     }
 
-    function enviarSolicitud(nombre, marbete, numeroParte, cantidad) {
+    function enviarSolicitud(nombre, marbete, cantidad) {
         var formData = new FormData();
         formData.append('nombre', nombre);
         formData.append('folioMarbete', marbete);
-        formData.append('numeroParte', numeroParte);
         formData.append('cantidad', cantidad);
 
         fetch('https://grammermx.com/Logistica/Inventario/dao/actualizarMarbeteProduccion.php', {
@@ -449,63 +434,6 @@
             }
         });
     }
-
-    function verificarUsuario() {
-
-        var usuario = document.getElementById("txtUsuarioM").value
-        var contra = document.getElementById("txtPasswordM").value;
-        var area = 2;
-
-        var formData = new FormData();
-        formData.append('user', usuario);
-        formData.append('password', contra);
-        formData.append('area', area);
-
-        fetch('https://grammermx.com/Logistica/Inventario/dao/consultaVerificarUsuario.php', {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    let timerInterval;
-                    Swal.fire({
-                        title: "Ya puedes modificar el numero de parte",
-                        html: "Te regresaremos a la pagina <b></b> milliseconds.",
-                        timer: 1500,
-                        timerProgressBar: true,
-                        icon: "success",
-                        didOpen: () => {
-                            Swal.showLoading();
-                            const timer = Swal.getPopup().querySelector("b");
-                            timerInterval = setInterval(() => {
-                                timer.textContent = `${Swal.getTimerLeft()}`;
-                            }, 100);
-                        },
-                        willClose: () => {
-                            clearInterval(timerInterval);
-                        }
-                    }).then((result) => {
-                        /* Read more about handling dismissals below */
-                        if (result.dismiss === Swal.DismissReason.timer) {
-                            banderaModal=true;
-                            document.getElementById("btnCloseM").click();
-                            $('#txtNumeroParte').prop('disabled', false);
-                        }
-                    });
-                } else {
-                    console.log("Hubo un error en la operación");
-                    console.log("Error: ", data.message);
-
-                    Swal.fire({
-                        title: data.message,
-                        text: "Verifica que tu lider de conteo pertenezca al area",
-                        icon: "error"
-                    });
-                }
-            });
-    }
-
 
 
     document.getElementById('scanner_input').addEventListener('keyup', function(event) {
