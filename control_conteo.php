@@ -240,7 +240,7 @@ if (strlen($nomina) == 7) {
             for (var i = 0; i < data.data.length; i++) {
                 marbete+= data.data[i].FolioMarbete+', ';
             }
-            if (marbete=''){
+            if (marbete==''){
                 verificacionDiferencia();
             }else {
                 Swal.fire({
