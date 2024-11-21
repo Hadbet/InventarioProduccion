@@ -13,45 +13,45 @@ function ContadorApu($area)
     $conex = $con->conectar();
 
     $datos = mysqli_query($conex, "SELECT 
-    Bitacora_Inventario.NumeroParte, 
-    Bitacora_Inventario.FolioMarbete,
-    Bitacora_Inventario.PrimerConteo AS CantidadBitacora, 
-    IFNULL(InventarioSap.Cantidad, 0) AS CantidadInventarioSap, 
-    Bitacora_Inventario.StorageBin
+    COALESCE(B.NumeroParte, I.GrammerNo) AS NumeroParte, 
+    B.FolioMarbete,
+    COALESCE(B.PrimerConteo, 0) AS CantidadBitacora, 
+    COALESCE(I.Cantidad, 0) AS CantidadInventarioSap, 
+    COALESCE(B.StorageBin, I.STBin) AS StorageBin
 FROM 
-    Bitacora_Inventario 
+    Bitacora_Inventario B
 LEFT JOIN 
-    InventarioSap ON Bitacora_Inventario.NumeroParte = InventarioSap.GrammerNo 
-    AND Bitacora_Inventario.StorageBin = InventarioSap.STBin 
+    InventarioSap I ON B.NumeroParte = I.GrammerNo 
+    AND B.StorageBin = I.STBin 
 WHERE 
-    Bitacora_Inventario.Area = $area
-    AND Bitacora_Inventario.Estatus = 1
-    AND (InventarioSap.GrammerNo IS NULL 
-    OR Bitacora_Inventario.PrimerConteo != InventarioSap.Cantidad
-    OR InventarioSap.Cantidad = 0
-    OR Bitacora_Inventario.PrimerConteo = 0
-    OR ABS(Bitacora_Inventario.PrimerConteo - IFNULL(InventarioSap.Cantidad, 0)) >= 10000)
+    B.Area = $area
+    AND B.Estatus = 1
+    AND (I.GrammerNo IS NULL 
+    OR B.PrimerConteo != I.Cantidad
+    OR I.Cantidad = 0
+    OR B.PrimerConteo = 0
+    OR ABS(B.PrimerConteo - IFNULL(I.Cantidad, 0)) >= 10000)
 
 UNION
 
 SELECT 
-    InventarioSap.GrammerNo AS NumeroParte, 
-    NULL AS FolioMarbete,
-    IFNULL(Bitacora_Inventario.PrimerConteo, 0) AS CantidadBitacora, 
-    InventarioSap.Cantidad AS CantidadInventarioSap, 
-    InventarioSap.STBin AS StorageBin
+    COALESCE(B.NumeroParte, I.GrammerNo) AS NumeroParte, 
+    B.FolioMarbete,
+    COALESCE(B.PrimerConteo, 0) AS CantidadBitacora, 
+    I.Cantidad AS CantidadInventarioSap, 
+    COALESCE(B.StorageBin, I.STBin) AS StorageBin
 FROM 
-    InventarioSap 
+    InventarioSap I
 LEFT JOIN 
-    Bitacora_Inventario ON InventarioSap.GrammerNo = Bitacora_Inventario.NumeroParte 
-    AND InventarioSap.STBin = Bitacora_Inventario.StorageBin 
+    Bitacora_Inventario B ON I.GrammerNo = B.NumeroParte 
+    AND I.STBin = B.StorageBin 
 WHERE 
-    InventarioSap.AreaCve = $area
-    AND (Bitacora_Inventario.NumeroParte IS NULL 
-    OR Bitacora_Inventario.PrimerConteo != InventarioSap.Cantidad
-    OR InventarioSap.Cantidad = 0
-    OR IFNULL(Bitacora_Inventario.PrimerConteo, 0) = 0
-    OR ABS(IFNULL(Bitacora_Inventario.PrimerConteo, 0) - InventarioSap.Cantidad) >= 10000);");
+    I.AreaCve = $area
+    AND (B.NumeroParte IS NULL 
+    OR B.PrimerConteo != I.Cantidad
+    OR I.Cantidad = 0
+    OR IFNULL(B.PrimerConteo, 0) = 0
+    OR ABS(IFNULL(B.PrimerConteo, 0) - I.Cantidad) >= 10000);");
 
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
     echo json_encode(array("data" => $resultado));
