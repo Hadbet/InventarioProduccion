@@ -406,7 +406,7 @@ if (strlen($nomina) == 7) {
                     }
                 }else{
                     Swal.fire({
-                        title: "El marbete no esta cargado par su area o conteo",
+                        title: "El marbete no esta cargado para su area o conteo / o ya fue validado",
                         text: "Ve a la mesa de control para mas informacion",
                         icon: "error"
                     });
