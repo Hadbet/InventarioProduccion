@@ -239,6 +239,26 @@
       gtag('js', new Date());
       gtag('config', 'UA-56159088-1');
 
+      var input = document.getElementById('txtNomina');
+
+      // Agrega el evento 'keypress'
+      input.addEventListener('keypress', function(e){
+          // Verifica si la tecla presionada fue Enter
+          if(e.key === 'Enter' || e.keyCode === 13){
+              document.getElementById("txtNominaCurso").value = generarNomina(document.getElementById("txtNominaCurso").value);
+              $.getJSON('https://grammermx.com/RH/Cursos/dao/consultaEmpleadoGeneral.php?nomina=' + document.getElementById("txtNominaCurso").value, function (data) {
+                  for (var i = 0; i < data.data.length; i++) {
+                      var nombreCompleto = data.data[i].NomUser;
+                      nombreCompleto = nombreCompleto.trim(); // Elimina los espacios en blanco al principio y al final
+                      var nombres = nombreCompleto.split(" "); // Divide la cadena en un array
+                      var primerosDosNombres = nombres[0] + " " + nombres[1]; // Toma los dos primeros elementos
+
+                      document.getElementById("txtNombre").value = primerosDosNombres;
+                  }
+              });
+          }
+      });
+
       function detallesRegistro(folio,comentarios,usuario,fecha) {
 
           document.getElementById("txtFolioMarbete").innerText = folio;

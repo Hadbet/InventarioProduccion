@@ -16,6 +16,30 @@ $rol =$_SESSION['rol'];
 $area =$_SESSION['area'];
 $areaNombre =$_SESSION['AreaNombre'];
 $bin =$_SESSION['StBin'];
+$nomina =$_SESSION['nomina'];
+$nombre =$_SESSION['nombre'];
+
+if (strlen($nomina) == 1) {
+    $nomina = "0000000" . $nomina;
+}
+if (strlen($nomina) == 2) {
+    $nomina = "000000" . $nomina;
+}
+if (strlen($nomina) == 3) {
+    $nomina = "00000" . $nomina;
+}
+if (strlen($nomina) == 4) {
+    $nomina = "0000" . $nomina;
+}
+if (strlen($nomina) == 5) {
+    $nomina = "000" . $nomina;
+}
+if (strlen($nomina) == 6) {
+    $nomina = "00" . $nomina;
+}
+if (strlen($nomina) == 7) {
+    $nomina = "0" . $nomina;
+}
 ?>
 
 <!doctype html>
@@ -285,6 +309,7 @@ $bin =$_SESSION['StBin'];
             for (var i = 0; i < data.data.length; i++) {
                 if (data.data[i].FolioMarbete) {
                     if (data.data[i].Estatus === '0'){
+                        if (data.data[i].Area === '<?php echo $area;?>'){
                             numeroParte=data.data[i].NumeroParte;
                             storageBin=data.data[i].StorageBin;
                             document.getElementById("reader").style.display = 'none';
@@ -293,6 +318,13 @@ $bin =$_SESSION['StBin'];
                             document.getElementById("pasoUno").style.display = 'none';
                             html5QrcodeScanner.clear();
                             html5QrcodeScanner.pause();
+                        }else{
+                            Swal.fire({
+                                title: "El marbete no pertenece al area",
+                                text: "Escanea otro marbete",
+                                icon: "error"
+                            });
+                        }
                     }else{
                         Swal.fire({
                             title: "El marbete ya fue registrado",
@@ -507,7 +539,7 @@ $bin =$_SESSION['StBin'];
         console.log(storageUnits);
 
         var formData = new FormData();
-        formData.append('nombre', nombre);
+        formData.append('nombre', '<?php echo $nomina;?>-'+nombre);
         formData.append('comentarios', comentarios);
         formData.append('storageUnits', JSON.stringify(storageUnits));
         formData.append('folioMarbete', folioMarbete);

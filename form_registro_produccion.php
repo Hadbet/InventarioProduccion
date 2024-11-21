@@ -406,14 +406,20 @@ if (strlen($nomina) == 7) {
                 for (var i = 0; i < data.data.length; i++) {
                     if (data.data[i].FolioMarbete) {
                         if (data.data[i].Estatus === '0'){
-                            numeroParte=data.data[i].NumeroParte;
-                            document.getElementById("reader").style.display = 'none';
-                            document.getElementById("lblFolio").innerHTML = marbete;
-                            document.getElementById("pasoDos").style.display = 'block';
-                            document.getElementById("pasoUno").style.display = 'none';
-                            document.getElementById('txtNumeroParte').focus();
-                            html5QrcodeScanner.clear();
-                            html5QrcodeScanner.pause();
+                            if (data.data[i].Area === '<?php echo $area;?>'){
+                                numeroParte=data.data[i].NumeroParte;
+                                document.getElementById("reader").style.display = 'none';
+                                document.getElementById("lblFolio").innerHTML = marbete;
+                                document.getElementById("pasoDos").style.display = 'block';
+                                document.getElementById("pasoUno").style.display = 'none';
+                                document.getElementById('txtNumeroParte').focus();
+                            }else{
+                                Swal.fire({
+                                    title: "El marbete no pertenece al area",
+                                    text: "Escanea otro marbete",
+                                    icon: "error"
+                                });
+                            }
                         }else{
                             Swal.fire({
                                 title: "El marbete ya fue registrado",
