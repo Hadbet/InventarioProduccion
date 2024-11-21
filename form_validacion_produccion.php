@@ -337,43 +337,52 @@ if (strlen($nomina) == 7) {
         var marbete = document.getElementById("scanner_input").value.split('.')[0];
 
         if (document.getElementById("scanner_input").value.split('.')[1] === auxConteo){
-            $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbeteValidacion.php?marbete='+marbete, function (data) {
-                for (var i = 0; i < data.data.length; i++) {
-                    if (data.data[i].FolioMarbete) {
-                        if (data.data[i].Estatus === '2'){
-                            numeroParte=data.data[i].NumeroParte;
-                            storageBin=data.data[i].StorageBin;
-                            cantidad=data.data[i].PrimerConteo;
-                            var usuario = data.data[i].Usuario;
-                            var separado = usuario.split("-"); // Esto dividirá la cadena en dos partes en el lugar donde se encuentra el guión.
-                            var numeroNomina = separado[0]; // Esto te dará la primera parte, que es el número de nómina.
-                            var nombre = separado[1]; // Esto te dará la segunda parte, que es el nombre.
-                            document.getElementById("lblNombreCapturador").innerText = nombre;
-                            document.getElementById("imagenCapturador").src = 'https://grammermx.com/Fotos/'+numeroNomina+'.png';
-                            document.getElementById("reader").style.display = 'none';
-                            document.getElementById("lblFolio").innerHTML = marbete;
-                            document.getElementById("pasoDos").style.display = 'block';
-                            document.getElementById("pasoUno").style.display = 'none';
-                            document.getElementById("lblStorageBin").innerText = storageBin;
-                            document.getElementById("lblNumeroParte").innerText = numeroParte;
-                            document.getElementById("lblCantidad").innerText = data.data[i].PrimerConteo;
-                            cargaPrimer(numeroParte);
-                            html5QrcodeScanner.clear();
-                            html5QrcodeScanner.pause();
-                        }else{
+            $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbeteValidacion.php?marbete='+marbete+'&conteo='+auxConteo, function (data) {
+
+                if (data && data.data && data.data.length > 0) {
+                    for (var i = 0; i < data.data.length; i++) {
+                        if (data.data[i].FolioMarbete) {
+                            if (data.data[i].Estatus === '2'){
+                                numeroParte=data.data[i].NumeroParte;
+                                storageBin=data.data[i].StorageBin;
+                                cantidad=data.data[i].PrimerConteo;
+                                var usuario = data.data[i].Usuario;
+                                var separado = usuario.split("-"); // Esto dividirá la cadena en dos partes en el lugar donde se encuentra el guión.
+                                var numeroNomina = separado[0]; // Esto te dará la primera parte, que es el número de nómina.
+                                var nombre = separado[1]; // Esto te dará la segunda parte, que es el nombre.
+                                document.getElementById("lblNombreCapturador").innerText = nombre;
+                                document.getElementById("imagenCapturador").src = 'https://grammermx.com/Fotos/'+numeroNomina+'.png';
+                                document.getElementById("reader").style.display = 'none';
+                                document.getElementById("lblFolio").innerHTML = marbete;
+                                document.getElementById("pasoDos").style.display = 'block';
+                                document.getElementById("pasoUno").style.display = 'none';
+                                document.getElementById("lblStorageBin").innerText = storageBin;
+                                document.getElementById("lblNumeroParte").innerText = numeroParte;
+                                document.getElementById("lblCantidad").innerText = data.data[i].PrimerConteo;
+                                cargaPrimer(numeroParte);
+                                html5QrcodeScanner.clear();
+                                html5QrcodeScanner.pause();
+                            }else{
+                                Swal.fire({
+                                    title: "El marbete ya fue validado",
+                                    text: "Escanea otro marbete",
+                                    icon: "error"
+                                });
+                            }
+                        } else {
                             Swal.fire({
-                                title: "El marbete ya fue validado",
-                                text: "Escanea otro marbete",
+                                title: "El marbete no esta capturado",
+                                text: "Verificalo con la mesa central",
                                 icon: "error"
                             });
                         }
-                    } else {
-                        Swal.fire({
-                            title: "El marbete no esta capturado",
-                            text: "Verificalo con la mesa central",
-                            icon: "error"
-                        });
                     }
+                }else{
+                    Swal.fire({
+                        title: "El marbete no esta cargado par su area o conteo",
+                        text: "Ve a la mesa de control para mas informacion",
+                        icon: "success"
+                    });
                 }
             });
         }else{
@@ -418,7 +427,7 @@ if (strlen($nomina) == 7) {
         var cantidadAnterior = document.getElementById("lblCantidad").innerText;
 
         if (cantidad === cantidadAnterior || await confirmarCambio()) {
-            enviarSolicitud('<?php echo $nomina;?>-'+nombre, marbete, cantidad);
+            enviarSolicitud('<?php echo $nomina;?>-'+nombre, marbete, cantidad,auxConteo);
         }
     }
 
@@ -441,7 +450,7 @@ if (strlen($nomina) == 7) {
         });
     }
 
-    function enviarSolicitud(nombre, marbete, cantidad) {
+    function enviarSolicitud(nombre, marbete, cantidad,conteo) {
         var formData = new FormData();
         formData.append('nombre', nombre);
         formData.append('folioMarbete', marbete);
