@@ -20,12 +20,12 @@ function ContadorApu()
     COUNT(CASE WHEN BI.`SegundoConteo` = 0 AND BI.`Estatus` IN (0, 1) THEN 1 END) AS 'SegundoConteoNoLiberado',
     COUNT(CASE WHEN BI.`TercerConteo` > 0 AND BI.`Estatus` = 1 THEN 1 END) AS 'TercerConteoLiberado',
     COUNT(CASE WHEN BI.`TercerConteo` = 0 AND BI.`Estatus` IN (0, 1) THEN 1 END) AS 'TercerConteoNoLiberado',
-    COUNT(CASE WHEN BI.`PrimerConteo` > 0 THEN 1 END) AS 'TotalPrimerConteo',
+    COUNT(CASE WHEN BI.`Estatus` IN (0, 1,2) THEN 1 END) AS 'TotalPrimerConteo',
     COUNT(CASE WHEN BI.`SegundoConteo` > 0 THEN 1 END) AS 'TotalSegundoConteo',
     COUNT(CASE WHEN BI.`TercerConteo` > 0 THEN 1 END) AS 'TotalTercerConteo',
-    (COUNT(CASE WHEN BI.`PrimerConteo` > 0 AND BI.`Estatus` = 1 THEN 1 END) / COUNT(CASE WHEN BI.`Estatus` IN (0, 1) THEN 1 END)) * 100 AS 'PorcentajePrimerConteo',
-    (COUNT(CASE WHEN BI.`SegundoConteo` > 0 AND BI.`Estatus` = 1 THEN 1 END) / COUNT(CASE WHEN BI.`Estatus` IN (0, 1) THEN 1 END)) * 100 AS 'PorcentajeSegundoConteo',
-    (COUNT(CASE WHEN BI.`TercerConteo` > 0 AND BI.`Estatus` = 1 THEN 1 END) / COUNT(CASE WHEN BI.`Estatus` IN (0, 1) THEN 1 END)) * 100 AS 'PorcentajeTercerConteo'
+    (COUNT(CASE WHEN BI.`PrimerConteo` > 0 AND BI.`Estatus` = 1 THEN 1 END) / COUNT(CASE WHEN BI.`Estatus` IN (0, 1,2) THEN 1 END)) * 100 AS 'PorcentajePrimerConteo',
+    (COUNT(CASE WHEN BI.`SegundoConteo` > 0 AND BI.`Estatus` = 1 THEN 1 END) / COUNT(CASE WHEN BI.`SegundoConteo` > 0 THEN 1 END)) * 100 AS 'PorcentajeSegundoConteo',
+    (COUNT(CASE WHEN BI.`TercerConteo` > 0 AND BI.`Estatus` = 1 THEN 1 END) / COUNT(CASE WHEN BI.`TercerConteo` > 0 THEN 1 END)) * 100 AS 'PorcentajeTercerConteo'
 FROM 
     `Area` AS A
 LEFT JOIN 
