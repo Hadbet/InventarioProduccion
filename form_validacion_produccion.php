@@ -391,7 +391,7 @@ if (strlen($nomina) == 7) {
                                 cargaPrimer(numeroParte);
                             }else{
                                 Swal.fire({
-                                    title: "El marbete ya fue validado",
+                                    title: "El marbete ya fue capturado/validado",
                                     text: "Escanea otro marbete",
                                     icon: "error"
                                 });
@@ -408,7 +408,7 @@ if (strlen($nomina) == 7) {
                     Swal.fire({
                         title: "El marbete no esta cargado par su area o conteo",
                         text: "Ve a la mesa de control para mas informacion",
-                        icon: "success"
+                        icon: "error"
                     });
                 }
             });
