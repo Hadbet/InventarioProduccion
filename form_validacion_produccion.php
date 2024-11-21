@@ -104,6 +104,7 @@ if (strlen($nomina) == 7) {
     <main role="main" class="main-content">
         <center><img src="images/tituloInventario.png" style="width: 50%"></center>
         <br><br>
+        <h2 style="display: none" class="page-title" id="conteoAviso"></h2>
         <div class="container-fluid" id="pasoUno">
             <br>
             <div class="row justify-content-center">
@@ -297,6 +298,16 @@ if (strlen($nomina) == 7) {
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaAreaDetalle.php?area=<?php echo $area;?>', function (data) {
             for (var i = 0; i < data.data.length; i++) {
                 auxConteo = data.data[i].Conteo;
+
+                if (auxConteo === 1){
+                    document.getElementById("conteoAviso").style.display="block";
+                    document.getElementById("conteoAviso").innerText="Primer Conteo";
+                }
+
+                if (auxConteo === 2){
+                    document.getElementById("conteoAviso").style.display="block";
+                    document.getElementById("conteoAviso").innerText="Segundo Conteo";
+                }
             }
         });
     }
