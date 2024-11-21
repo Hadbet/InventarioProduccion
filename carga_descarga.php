@@ -79,6 +79,7 @@ if (strlen($nomina) == 7) {
 
                         <button class="btn btn-secondary text-right btnExcel" id="btnTxtBitacora"> Actualizar txt </button>
                         <input type="file" id="fileInputTxt" accept=".txt" style="display: none;" />
+                        <br><br>
                       <!-- table -->
                       <table class="table datatables" id="tablaBitacora">
                         <thead>
