@@ -108,7 +108,7 @@ if ($areaNombre!='N/A' || $areaNombre!='' || $areaNombre!=null){
                     <span class="ml-3 item-text">Historicos</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="support">
-                    <a class="nav-link pl-3" href="listas_marbetes.php"><span class="ml-1">Reporte</span></a>
+                    <a class="nav-link pl-3" href="listas_marbetes_produccion.php"><span class="ml-1">Reporte</span></a>
                 </ul>
             </li>
         </ul>';
@@ -159,6 +159,8 @@ if ($areaNombre!='N/A' || $areaNombre!='' || $areaNombre!=null){
                 <ul class="collapse list-unstyled pl-4 w-100" id="Lider">
                     <a class="nav-link pl-3" href="control_conteo.php"><span class="ml-1">Control</span></a>
                     <a class="nav-link pl-3" href="cancelacion_marbete.php"><span class="ml-1">Cancelacion</span></a>
+                    <a class="nav-link pl-3" href="listas_base_produccion.php"><span class="ml-1">Lista de marbetes</span></a>
+                    <a class="nav-link pl-3" href="listas_marbetes_produccion.php"><span class="ml-1">Lista de captura</span></a>
                     <a class="nav-link pl-3" href="equipo_conteo.php"><span class="ml-1">Tu equipo de trabajo</span></a>
                 </ul>
             </li>
