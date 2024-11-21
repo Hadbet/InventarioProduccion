@@ -105,9 +105,8 @@
                                                 <small class="mb-0 text-muted">Nigeria</small>
                                             </td>
                                             <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="2474">
-                                                    <label class="custom-control-label" for="2474"></label>
+                                                <div class="avatar avatar-md">
+                                                    <img src="./assets/avatars/face-3.jpg" alt="..." class="avatar-img rounded-circle">
                                                 </div>
                                             </td>
                                             <td class="text-muted">13/09/2020</td>
