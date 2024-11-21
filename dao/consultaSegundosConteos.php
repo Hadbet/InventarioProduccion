@@ -54,7 +54,13 @@ WHERE
     OR ABS(IFNULL(B.PrimerConteo, 0) - I.Cantidad) >= 10000);");
 
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
-    echo json_encode(array("data" => $resultado));
+
+    $updateQuery = "UPDATE Area SET Conteo='2' WHERE IdArea = '$area'";
+    if(mysqli_query($conex, $updateQuery)){
+        echo json_encode(array("data" => $resultado));
+    } else {
+        echo "Error updating record: " . mysqli_error($conex);
+    }
 }
 
 
