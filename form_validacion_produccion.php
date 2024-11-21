@@ -299,12 +299,12 @@ if (strlen($nomina) == 7) {
             for (var i = 0; i < data.data.length; i++) {
                 auxConteo = data.data[i].Conteo;
 
-                if (auxConteo === 1){
+                if (auxConteo == 1){
                     document.getElementById("conteoAviso").style.display="block";
                     document.getElementById("conteoAviso").innerText="Primer Conteo";
                 }
 
-                if (auxConteo === 2){
+                if (auxConteo == 2){
                     document.getElementById("conteoAviso").style.display="block";
                     document.getElementById("conteoAviso").innerText="Segundo Conteo";
                 }
