@@ -76,10 +76,14 @@
                                         <tbody>
                                         <tr>
                                             <td>
-                                                <div class="avatar avatar-md">
-                                                    <img src="./assets/avatars/face-3.jpg" alt="..." class="avatar-img rounded-circle">
-                                                    <p class="mb-0 text-muted"><strong>Brown, Asher D.</strong></p>
-                                                    <small class="mb-0 text-muted">2474</small>
+                                                <div class="col-auto">
+                                                    <a href="profile-posts.html" class="avatar avatar-md">
+                                                        <img src="https://grammermx.com/Fotos/00001606.png" alt="..." class="avatar-img rounded-circle">
+                                                    </a>
+                                                </div>
+                                                <div class="col ml-n2">
+                                                    <strong class="mb-1" id="lblNombre">Hadbet</strong><span class="dot dot-lg bg-success ml-1"></span>
+                                                    <p class="small text-muted mb-1" id="lblRol">Capturista</p>
                                                 </div>
                                             </td>
                                             <td>
