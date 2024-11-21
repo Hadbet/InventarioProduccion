@@ -65,12 +65,13 @@
                                         <thead>
                                         <tr>
                                             <th>Capturista</th>
-                                            <th>Nombre</th>
+                                            <th>Marbete</th>
                                             <th>Numero Parte</th>
                                             <th>Primer Conteo</th>
                                             <th>Segundo Conteo</th>
-                                            <th>Storage Unit</th>
-                                            <th class="w-25">Bio</th>
+                                            <th>Storage bin</th>
+                                            <th class="w-25">Monto</th>
+                                            <th>Validador</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -82,35 +83,37 @@
                                                     </a>
                                                 </div>
                                                 <div class="col ml-n2">
-                                                    <strong class="mb-1" id="lblNombre">Hadbet</strong><span class="dot dot-lg bg-success ml-1"></span>
-                                                    <p class="small text-muted mb-1" id="lblRol">Capturista</p>
+                                                    <strong class="mb-1" id="lblNombre">Hadbet</strong>
                                                 </div>
                                             </td>
                                             <td>
-                                                <p class="mb-0 text-muted"><strong>Brown, Asher D.</strong></p>
-                                                <small class="mb-0 text-muted">2474</small>
+                                                <p class="mb-0 text-muted"><strong>300</strong></p>
                                             </td>
                                             <td>
-                                                <p class="mb-0 text-muted">Accumsan Consulting</p>
-                                                <small class="mb-0 text-muted">Ap #331-7123 Lobortis Avenue</small>
+                                                <p class="mb-0 text-muted"><strong>14078546</strong></p>
+                                                <small class="mb-0 text-muted">Cover shotrt</small>
                                             </td>
                                             <td>
-                                                <p class="mb-0 text-muted"><a href="#" class="text-muted">(958) 421-0798</a></p>
-                                                <small class="mb-0 text-muted">Nigeria</small>
+                                                <p class="mb-0 text-muted"><strong>30</strong></p>
                                             </td>
                                             <td>
-                                                <div class="avatar avatar-md">
-                                                    <img src="./assets/avatars/face-3.jpg" alt="..." class="avatar-img rounded-circle">
+                                                <p class="mb-0 text-muted"><strong>30</strong></p>
+                                            </td>
+                                            <td>
+                                                <p class="mb-0 text-muted"><strong>PVB_003</strong></p>
+                                            </td>
+                                            <td>
+                                                <p class="mb-0 text-muted"><strong>30</strong></p>
+                                                <small class="mb-0 text-muted">Pesos</small>
+                                            </td>
+                                            <td>
+                                                <div class="col-auto">
+                                                    <a href="profile-posts.html" class="avatar avatar-md">
+                                                        <img src="https://grammermx.com/Fotos/00001606.png" alt="..." class="avatar-img rounded-circle">
+                                                    </a>
                                                 </div>
-                                            </td>
-                                            <td class="text-muted">13/09/2020</td>
-                                            <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="text-muted sr-only">Action</span>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#">Edit</a>
-                                                    <a class="dropdown-item" href="#">Remove</a>
-                                                    <a class="dropdown-item" href="#">Assign</a>
+                                                <div class="col ml-n2">
+                                                    <strong class="mb-1" id="lblNombre">Hadbet</strong>
                                                 </div>
                                             </td>
                                         </tr>
