@@ -69,7 +69,7 @@ if ($areaNombre!='N/A' || $areaNombre!='' || $areaNombre!=null){
                         <a class="nav-link pl-3" href="crear_user.php"><span class="ml-1 item-text">Usuarios</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="crear_user.php"><span class="ml-1 item-text">Importación de tablas</span></a>
+                        <a class="nav-link pl-3" href="carga_descarga.php"><span class="ml-1 item-text">Importación de tablas</span></a>
                     </li>
                 </ul>
             </li>
