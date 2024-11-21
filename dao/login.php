@@ -22,7 +22,12 @@ if ($statusLogin['status'] == 1) {
     $_SESSION['StBin'] = $areaDetails['bin'];
 
     if ($statusLogin['rol'] == 1){
-        echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../form_registro_produccion.php'>";
+        if ($areaDetails['bin'] == ""){
+            echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../form_registro.php'>";
+        }else{
+            echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../form_registro_produccion.php'>";
+        }
+
     }
     if ($statusLogin['rol'] == 2){
         echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../verificacion.php'>";
