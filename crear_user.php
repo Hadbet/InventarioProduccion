@@ -240,13 +240,14 @@
       gtag('config', 'UA-56159088-1');
 
       var input = document.getElementById('txtNomina');
+      var nominaReal;
 
       // Agrega el evento 'keypress'
       input.addEventListener('keypress', function(e){
           // Verifica si la tecla presionada fue Enter
           if(e.key === 'Enter' || e.keyCode === 13){
-              document.getElementById("txtNominaCurso").value = generarNomina(document.getElementById("txtNominaCurso").value);
-              $.getJSON('https://grammermx.com/RH/Cursos/dao/consultaEmpleadoGeneral.php?nomina=' + document.getElementById("txtNominaCurso").value, function (data) {
+              nominaReal = generarNomina(document.getElementById("txtNomina").value);
+              $.getJSON('https://grammermx.com/RH/Cursos/dao/consultaEmpleadoGeneral.php?nomina=' + nominaReal, function (data) {
                   for (var i = 0; i < data.data.length; i++) {
                       var nombreCompleto = data.data[i].NomUser;
                       nombreCompleto = nombreCompleto.trim(); // Elimina los espacios en blanco al principio y al final
@@ -406,6 +407,21 @@
                       });
                   }
               });
+
+      }
+
+      function generarNomina(nomina) {
+
+          if (nomina.length === 1){return nomina = "0000000"+nomina;}
+          if (nomina.length === 2){return nomina = "000000"+nomina;}
+          if (nomina.length === 3){return nomina = "00000"+nomina;}
+          if (nomina.length === 4){return nomina = "0000"+nomina;}
+          if (nomina.length === 5){return nomina = "000"+nomina;}
+          if (nomina.length === 6){return nomina = "00"+nomina;}
+          if (nomina.length === 7){return nomina = "0"+nomina;}
+          if (nomina.length === 8){return nomina = nomina;}
+
+
       }
     </script>
   </body>
