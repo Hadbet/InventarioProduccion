@@ -1,3 +1,54 @@
+
+<?php
+
+
+include_once('dao/db/db_Inventario.php');
+
+session_start();
+$rol =$_SESSION['rol'];
+$area =$_SESSION['area'];
+$areaNombre =$_SESSION['AreaNombre'];
+$bin =$_SESSION['StBin'];
+$nombre =$_SESSION['nombre'];
+
+
+
+
+$con = new LocalConector();
+$conex = $con->conectar();
+
+$stmt = $conex->prepare("SELECT 
+    B.Id_Bitacora, 
+    B.NumeroParte, 
+    P.Descripcion,
+    P.UM,
+    B.FolioMarbete, 
+    B.Fecha, 
+    B.Usuario, 
+    B.UsuarioVerificacion, 
+    B.Estatus, 
+    B.PrimerConteo, 
+    B.SegundoConteo, 
+    B.TercerConteo, 
+    B.Comentario, 
+    B.StorageBin, 
+    B.StorageType, 
+    B.Area,
+    CASE
+        WHEN B.TercerConteo > 0 THEN (P.Costo / P.Por) * B.TercerConteo
+        WHEN B.SegundoConteo > 0 THEN (P.Costo / P.Por) * B.SegundoConteo
+        ELSE (P.Costo / P.Por) * B.PrimerConteo
+    END AS Monto
+FROM 
+    Bitacora_Inventario B
+LEFT JOIN 
+    Parte P ON B.NumeroParte = P.GrammerNo
+WHERE B.Area = $area");
+$stmt->execute();
+$result = $stmt->get_result();
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -75,48 +126,102 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="col-auto">
+
+                                        <?php
+                                        while ($row = $result->fetch_assoc()) {
+
+                                            $usuarioV = $row['UsuarioVerificacion'];
+                                            $usuarioC = $row['Usuario'];
+                                            $numeroParte = $row['NumeroParte'];
+                                            $descripcion = $row['Descripcion'];
+                                            $um = $row['UM'];
+                                            $folioMarbete = $row['FolioMarbete'];
+                                            $primerConteo = $row['PrimerConteo'];
+                                            $segundoConteo = $row['SegundoConteo'];
+                                            $storageBin = $row['StorageBin'];
+                                            $monto = $row['Monto'];
+                                            $estatus = $row['Estatus'];
+
+                                            if($usuarioV != null && $usuarioV != '') {
+                                                $parts = explode('-', $usuarioV);
+                                                $nominaV = $parts[0];
+                                                $nombreV = isset($parts[1]) ? $parts[1] : 'Vacio';
+                                                $fotoV = '<div class="col-auto">
                                                     <a href="profile-posts.html" class="avatar avatar-md">
-                                                        <img src="https://grammermx.com/Fotos/00001606.png" alt="..." class="avatar-img rounded-circle">
+                                                        <img src="https://grammermx.com/Fotos/'.$nominaV.'.png" alt="..." class="avatar-img rounded-circle">
                                                     </a>
                                                 </div>
                                                 <div class="col ml-n2">
-                                                    <strong class="mb-1" id="lblNombre">Hadbet</strong>
+                                                    <strong class="mb-1" id="lblNombre">'.$nombreV.'</strong>
+                                                </div>';
+                                            } else {
+                                                $nominaV = 'Vacio';
+                                                $nombreV = 'Vacio';
+                                                if ($estatus == 5){
+                                                    $fotoV = 'cancelado';
+                                                }else{
+                                                    $fotoV = '<strong class="mb-1" id="">Vacio</strong>';
+                                                }
+                                            }
+
+                                            // Para Usuario
+                                            if($usuarioC != null && $usuarioC != '') {
+                                                $parts = explode('-', $usuarioC);
+                                                $nominaC = $parts[0];
+                                                $nombreC = isset($parts[1]) ? $parts[1] : 'Vacio';
+                                                $fotoC = '<div class="col-auto">
+                                                    <a href="profile-posts.html" class="avatar avatar-md">
+                                                        <img src="https://grammermx.com/Fotos/'.$nominaC.'.png" alt="..." class="avatar-img rounded-circle">
+                                                    </a>
                                                 </div>
+                                                <div class="col ml-n2">
+                                                    <strong class="mb-1" id="lblNombre">'.$nombreC.'</strong>
+                                                </div>';
+                                            } else {
+                                                $nominaC = 'Vacio';
+                                                $nombreC = 'Vacio';
+                                                $fotoC = '<strong class="mb-1" id="">Vacio</strong>';
+                                            }
+
+
+                                            $estatusNombre = $estatus == 1 ? 'Activo' : 'Inactivo';
+                                            $estatusColor = $estatus == 1 ? 'success' : 'danger';
+
+                                            echo '<tr>
+                                            <td>
+                                                '.$fotoC.'
                                             </td>
                                             <td>
-                                                <p class="mb-0 text-muted"><strong>300</strong></p>
+                                                <p class="mb-0 text-muted"><strong>'.$folioMarbete.'</strong></p>
                                             </td>
                                             <td>
-                                                <p class="mb-0 text-muted"><strong>14078546</strong></p>
-                                                <small class="mb-0 text-muted">Cover shotrt</small>
+                                                <p class="mb-0 text-muted"><strong>'.$numeroParte.'</strong></p>
+                                                <small class="mb-0 text-muted">'.$descripcion.'</small>
                                             </td>
                                             <td>
-                                                <p class="mb-0 text-muted"><strong>30</strong></p>
+                                                <p class="mb-0 text-muted"><strong>'.$primerConteo.'</strong></p>
                                             </td>
                                             <td>
-                                                <p class="mb-0 text-muted"><strong>30</strong></p>
+                                                <p class="mb-0 text-muted"><strong>'.$segundoConteo.'</strong></p>
                                             </td>
                                             <td>
-                                                <p class="mb-0 text-muted"><strong>PVB_003</strong></p>
+                                                <p class="mb-0 text-muted"><strong>'.$storageBin.'</strong></p>
                                             </td>
                                             <td>
-                                                <p class="mb-0 text-muted"><strong>30</strong></p>
+                                                <p class="mb-0 text-muted"><strong>$ '.$monto.'</strong></p>
                                                 <small class="mb-0 text-muted">Pesos</small>
                                             </td>
                                             <td>
-                                                <div class="col-auto">
-                                                    <a href="profile-posts.html" class="avatar avatar-md">
-                                                        <img src="https://grammermx.com/Fotos/00001606.png" alt="..." class="avatar-img rounded-circle">
-                                                    </a>
-                                                </div>
-                                                <div class="col ml-n2">
-                                                    <strong class="mb-1" id="lblNombre">Hadbet</strong>
-                                                </div>
+                                                '.$fotoV.'
                                             </td>
-                                        </tr>
+                                        </tr>';
+                                        }
+                                        ?>
+
+
+
+
+
                                         </tbody>
                                     </table>
                                     <nav aria-label="Table Paging" class="mb-0 text-muted">
