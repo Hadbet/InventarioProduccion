@@ -55,12 +55,25 @@ WHERE
 
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
 
+    foreach($resultado as $row) {
+        $folioMarbete = $row['FolioMarbete'];
+        if($folioMarbete != null) {
+            $updateQuery = "UPDATE `Bitacora_Inventario` SET `SegFolio`='2' WHERE `FolioMarbete` = '$folioMarbete'";
+            if(!mysqli_query($conex, $updateQuery)){
+                echo "Error updating record: " . mysqli_error($conex);
+                return; // Si hay un error, detiene la ejecución
+            }
+        }
+    }
+
+    // Aquí es donde puedes agregar tu segunda consulta UPDATE
     $updateQuery = "UPDATE Area SET Conteo='2' WHERE IdArea = '$area'";
     if(mysqli_query($conex, $updateQuery)){
         echo json_encode(array("data" => $resultado));
     } else {
         echo "Error updating record: " . mysqli_error($conex);
     }
+
 }
 
 
