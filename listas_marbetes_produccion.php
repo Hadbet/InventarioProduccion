@@ -87,27 +87,13 @@ $result = $stmt->get_result();
                     <div class="row">
                         <!-- Small table -->
                         <div class="col-md-12 my-4">
-                            <h2 class="h4 mb-1">Customize table rendering</h2>
-                            <p class="mb-3">Additional table rendering with vertical border, rich content formatting for cell</p>
+                            <h2 class="h4 mb-1">Detalles de captura</h2>
                             <div class="card shadow">
                                 <div class="card-body">
                                     <div class="toolbar">
                                         <form class="form">
                                             <div class="form-row">
-                                                <div class="form-group col-auto mr-auto">
-                                                    <label class="my-1 mr-2 sr-only" for="inlineFormCustomSelectPref1">Show</label>
-                                                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelectPref1">
-                                                        <option value="">...</option>
-                                                        <option value="1">12</option>
-                                                        <option value="2" selected>32</option>
-                                                        <option value="3">64</option>
-                                                        <option value="3">128</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-auto">
-                                                    <label for="search" class="sr-only">Search</label>
-                                                    <input type="text" class="form-control" id="search1" value="" placeholder="Search">
-                                                </div>
+
                                             </div>
                                         </form>
                                     </div>
