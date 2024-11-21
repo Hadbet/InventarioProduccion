@@ -423,6 +423,18 @@
 
 
       }
+
+      document.getElementById('txtNomina').addEventListener('keyup', function(event) {
+          if (event.key === 'Enter' || event.keyCode === 13) {
+              document.getElementById('txtNombre').focus()
+          }
+      });
+
+      document.getElementById('txtNombre').addEventListener('keyup', function(event) {
+          if (event.key === 'Enter' || event.keyCode === 13) {
+              document.getElementById('txtContra').focus()
+          }
+      });
     </script>
   </body>
 </html>
