@@ -188,8 +188,7 @@ if (strlen($nomina) == 7) {
                                     <p class="text-muted mb-0 small">Pesos</p>
                                 </div>
                             </div>
-                            <hr>
-                            <div class="d-flex">
+                            <div class="d-flex" style="display: none">
                                 <div class="flex-fill">
                                     <span class="card-title">Cantidad</span>
                                     <h4 class="mb-0" id="lblCantidad"> <span id="lblUm"></span></h4>
