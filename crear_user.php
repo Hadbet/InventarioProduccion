@@ -432,6 +432,12 @@
 
       document.getElementById('txtNombre').addEventListener('keyup', function(event) {
           if (event.key === 'Enter' || event.keyCode === 13) {
+              document.getElementById('txtUsuario').focus()
+          }
+      });
+
+      document.getElementById('txtUsuario').addEventListener('keyup', function(event) {
+          if (event.key === 'Enter' || event.keyCode === 13) {
               document.getElementById('txtContra').focus()
           }
       });
