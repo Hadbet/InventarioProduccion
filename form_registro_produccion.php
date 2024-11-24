@@ -283,6 +283,29 @@ if (strlen($nomina) == 7) {
         });
     }
 
+    function validarUbicacion(numeroParteU,descripcionU,umU,costoUnitarioU) {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaUbicacionProduccion.php?numeroParte='+numeroParteU, function (data) {
+            for (var i = 0; i < data.data.length; i++) {
+                if (data.data[i].PVB === '<?php echo $bin;?>') {
+                    document.getElementById('lblDescripcion').innerText = descripcionU;
+                    document.getElementById('txtUnidadMedida').innerText = umU;
+                    document.getElementById('lblCosto').innerText = costoUnitarioU;
+                    document.getElementById('txtCantidad').disabled = false;
+                    document.getElementById('txtCantidad').focus()
+                    bandera=1;
+                } else {
+                    bandera=0;
+                    Swal.fire({
+                        title: "El numero de parte no existe en esa ubicacion",
+                        text: "Verificalo con la mesa de control",
+                        icon: "error"
+                    });
+                }
+            }
+        });
+
+    }
+
     var costoUnitario=0;
     var bandera=0;
     // Cuando se suelta una tecla en el campo de entrada del número de parte
@@ -293,15 +316,8 @@ if (strlen($nomina) == 7) {
             $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaParte.php?parte='+this.value, function (data) {
                 for (var i = 0; i < data.data.length; i++) {
                     if (data.data[i].GrammerNo) {
-                        document.getElementById('lblDescripcion').innerText = data.data[i].Descripcion;
-                        document.getElementById('txtUnidadMedida').innerText = data.data[i].UM;
                         costoUnitario = data.data[i].Costo / data.data[i].Por;
-                        document.getElementById('lblCosto').innerText = costoUnitario;
-
-                        document.getElementById('txtCantidad').disabled = false;
-                        //document.getElementById('txtStorageBin').disabled = false;
-                        document.getElementById('txtCantidad').focus()
-                        bandera=1;
+                        validarUbicacion(data.data[i].GrammerNo,data.data[i].Descripcion,data.data[i].UM,costoUnitario);
                     } else {
                         bandera=0;
                         Swal.fire({
