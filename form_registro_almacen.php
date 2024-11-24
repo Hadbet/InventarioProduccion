@@ -282,7 +282,7 @@ if (strlen($nomina) == 7) {
                     document.getElementById('lblNumeroParte').innerText = data.data[i].GrammerNo;
                     document.getElementById('lblDescripcion').innerText = data.data[i].Descripcion;
                     document.getElementById('lblStorageBin').innerText = storageBinF;
-                    document.getElementById('lblUm').innerText = data.data[i].UM;
+                    document.getElementById('txtUnidadMedida').innerText = data.data[i].UM;
                     costoUnitario = data.data[i].Costo / data.data[i].Por;
                     document.getElementById('lblCosto').innerText = costoUnitario;
                     document.getElementById("pasoDos").style.display = 'block';
