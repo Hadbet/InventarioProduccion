@@ -310,6 +310,7 @@ if (strlen($nomina) == 7) {
         if (event.key === 'Enter' || event.keyCode === 13) {
             document.getElementById('lblCantidad').textContent = this.value;
             if (document.getElementById('txtCantidad').value!==""){
+                document.getElementById('btnFin').disabled = false;
                 document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
             }else{
                 Swal.fire({
