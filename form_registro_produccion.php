@@ -215,6 +215,13 @@ if (strlen($nomina) == 7) {
                             <hr>
                             <div class="d-flex">
                                 <div class="flex-fill">
+                                    <span class="card-title">Storage Type</span>
+                                    <h4 class="mb-0" id="lblStorageType"></h4>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex">
+                                <div class="flex-fill">
                                     <span class="card-title">Monto Total</span>
                                     <h4 class="mb-0" id="lblMontoTotal"></h4>
                                 </div>
@@ -279,6 +286,18 @@ if (strlen($nomina) == 7) {
                 auxConteo = data.data[i].Conteo;
                 auxStorage = data.data[i].StBin
 
+            }
+        });
+    }
+
+    function buscarType() {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaTypes.php?bin=<?php echo $bin;?>', function (data) {
+            if (data.data.length > 0) {
+                for (var i = 0; i < data.data.length; i++) {
+                    document.getElementById('lblStorageType').innerText = data.data[i].StType;
+                }
+            } else {
+                console.log('No data received');
             }
         });
     }
@@ -429,6 +448,7 @@ if (strlen($nomina) == 7) {
                                 document.getElementById("pasoDos").style.display = 'block';
                                 document.getElementById("pasoUno").style.display = 'none';
                                 document.getElementById('txtNumeroParte').focus();
+                                buscarType();
                             }else{
                                 Swal.fire({
                                     title: "El marbete no pertenece al area",
