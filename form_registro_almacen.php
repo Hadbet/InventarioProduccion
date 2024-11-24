@@ -257,7 +257,6 @@ if (strlen($nomina) == 7) {
 
 <script>
 
-    document.getElementById("txtStorageBin").value = '<?php echo $bin; ?>';
     document.getElementById("lblStorageBin").innerText = '<?php echo $bin;?>';
 
     var auxConteo=0;
