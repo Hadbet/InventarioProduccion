@@ -14,7 +14,7 @@ function consultarAreaDetails($area){
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            return ['status' => 1, 'area' => $row['AreaNombre'], 'bin' => $row['StBin']];
+            return ['status' => 1, 'area' => $row['AreaNombre'], 'bin' => $row['StBin'], 'tipoArea' => $row['AreaProduccion']];
         } else {
             return ['status' => 2];
         }

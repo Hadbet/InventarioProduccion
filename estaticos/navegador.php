@@ -10,27 +10,28 @@ if ($_SESSION["nominaCurso"] == "" && $_SESSION["nominaCurso"]== null && $_SESSI
     $rol =$_SESSION['rol'];
     $area =$_SESSION['area'];
     $areaNombre =$_SESSION['AreaNombre'];
+    $tipoArea =$_SESSION['tipoArea'];
     $bin =$_SESSION['StBin'];
 }
 
-if ($areaNombre!='N/A' || $areaNombre!='' || $areaNombre!=null){
-    if ($rol==1){
-        $captura = '<ul class="collapse list-unstyled pl-4 w-100" id="contact">
-                    <a class="nav-link pl-3" href="form_registro_produccion.php"><span class="ml-1">Captura Produccion</span></a>
-                </ul>';
-    }
-
-    if($rol==5){
-        $captura = '<ul class="collapse list-unstyled pl-4 w-100" id="contact">
-                    <a class="nav-link pl-3" href="form_validacion_produccion.php"><span class="ml-1">Verificacion Produccion</span></a>
-                </ul>';
-    }
-
-}else{
-    $captura ='<ul class="collapse list-unstyled pl-4 w-100" id="contact">
-                    <a class="nav-link pl-3" href="form_registro.php"><span class="ml-1">Captura Almacen</span></a>
+if ($tipoArea==2){
+    $captura = '<ul class="collapse list-unstyled pl-4 w-100" id="contact">
+                    <a class="nav-link pl-3" href="form_registro.php"><span class="ml-1">Captura SUM</span></a>
                 </ul>';
 }
+
+if ($tipoArea==1){
+    $captura = '<ul class="collapse list-unstyled pl-4 w-100" id="contact">
+                    <a class="nav-link pl-3" href="form_registro_produccion.php"><span class="ml-1">Captura Produccion</span></a>
+                </ul>';
+}
+
+if ($tipoArea==0){
+    $captura = '<ul class="collapse list-unstyled pl-4 w-100" id="contact">
+                    <a class="nav-link pl-3" href="form_registro_almacen.php"><span class="ml-1">Captura Almacen</span></a>
+                </ul>';
+}
+
 ?>
 
 <nav class="topnav navbar navbar-light">
