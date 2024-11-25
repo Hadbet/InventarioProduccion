@@ -68,6 +68,81 @@ if (strlen($nomina) == 7) {
           <div class="row justify-content-center">
             <div class="col-12">
 
+                <div class="card shadow mb-4">
+                    <div class="card-header">
+                        <strong class="card-title">Registro</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-md-1">
+                                <div class="form-group mb-3">
+                                    <label for="txtIdArea">Id</label>
+                                    <input type="text" class="form-control drgpicker" id="txtIdArea"
+                                           value="" aria-describedby="button-addon2">
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group mb-2">
+                                    <label for="txtNombre">Nombre</label>
+                                    <input type="text" class="form-control drgpicker" id="txtNombreArea"
+                                           value="" aria-describedby="button-addon2">
+                                </div>
+                            </div>
+
+                            <div class="col-md-2" >
+                                <div class="form-group mb-3">
+                                    <label for="cbTipo">Tipo</label>
+                                    <select class="custom-select" id="cbTipo">
+                                        <option selected>Abrir menu</option>
+                                        <option value="0">Almacen</option>
+                                        <option value="1">Produccion</option>
+                                        <option value="2">SUM</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group mb-3">
+                                    <label for="txtStLocation">StLocation</label>
+                                    <input type="text" class="form-control drgpicker" id="txtStLocation"
+                                           value="" aria-describedby="button-addon2">
+                                </div>
+                            </div>
+
+                            <!-- /.col -->
+                            <div class="col-md-2">
+                                <div class="form-group mb-3">
+                                    <label for="txtStBin">StBin</label>
+                                    <input type="text" class="form-control drgpicker" id="txtStBin"
+                                           value="" aria-describedby="button-addon2">
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-1" >
+                                <div class="form-group mb-3">
+                                    <label for="cbConteo">Conteo</label>
+                                    <select class="custom-select" id="cbConteo">
+                                        <option selected>Abrir menu</option>
+                                        <option value="1">Primero</option>
+                                        <option value="2">Segundo</option>
+                                        <option value="3">Tercero</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" onclick="enviarDatos();" class="btn mb-2 btn-success float-right text-white">Registrar<span
+                                    class="fe fe-send fe-16 ml-2"></span></button>
+                    </div>
+                </div> <!-- / .card -->
+
               <h2 class="mb-2 page-title">Listas de areas</h2>
               <div class="row my-4">
                 <!-- Small table -->
@@ -235,6 +310,16 @@ if (strlen($nomina) == 7) {
                       actualizarTabla();
                   });
           }
+      }
+
+      function llenarDatos(id,nombre,tipo,stLocation,stBin,conteo) {
+          document.getElementById("txtNombreArea").value = nombre;
+          document.getElementById("txtIdArea").value = id;
+          document.getElementById("cbTipo").value = tipo;
+          document.getElementById("txtStLocation").value = stLocation;
+          document.getElementById("txtStBin").value = stBin;
+          document.getElementById("cbConteo").value = conteo;
+          document.getElementById("txtIdArea").scrollIntoView({behavior: "smooth"});
       }
 
     </script>

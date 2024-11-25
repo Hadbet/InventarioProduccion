@@ -24,7 +24,7 @@ function ContadorApu()
     `StLocation`, 
     `StBin`, 
     `Conteo`,
-    CONCAT('<button class=\"btn btn-danger text-white\"  onclick=\"miFuncion(\'', `IdArea`, '\', \'', `AreaNombre`, '\', \'', `AreaProduccion`, '\', \'', `StLocation`, '\', \'', `StBin`, '\', \'', `Conteo`, '\')\">Mi Botón</button>') AS `Boton`
+    CONCAT('<button class=\"btn btn-info text-white\"  onclick=\"llenarDatos(\'', `IdArea`, '\', \'', `AreaNombre`, '\', \'', `AreaProduccion`, '\', \'', `StLocation`, '\', \'', `StBin`, '\', \'', `Conteo`, '\')\">Modificar</button>') AS `Boton`
 FROM `Area` WHERE 1");
 
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
