@@ -64,7 +64,7 @@ if (strlen($nomina) == 7) {
             require_once('estaticos/navegador.php');
     ?>
       <main role="main" class="main-content">
-        <div class="container-fluid">
+        <div class="container-fluid" id="inicioAux">
           <div class="row">
 
               <div class="col-6">
@@ -79,7 +79,7 @@ if (strlen($nomina) == 7) {
                                   <div class="form-group mb-3">
                                       <label for="txtGrammerNoU">Grammer No</label>
                                       <input type="text" class="form-control drgpicker" id="txtGrammerNoU"
-                                             value="" aria-describedby="button-addon2" disabled>
+                                             value="" aria-describedby="button-addon2">
                                   </div>
                               </div>
 
@@ -94,7 +94,9 @@ if (strlen($nomina) == 7) {
                           </div>
                       </div>
                       <div class="card-footer">
-                          <button type="button" onclick="enviarDatos();" class="btn mb-2 btn-success float-right text-white">Registrar<span
+                          <button type="button" onclick="enviarDatosP(1);" class="btn mb-2 btn-success float-right text-white">Registrar<span
+                                      class="fe fe-send fe-16 ml-2"></span></button>
+                          <button type="button" onclick="enviarDatosP(2);" class="btn mb-2 btn-info float-right text-white">Actualizar<span
                                       class="fe fe-send fe-16 ml-2"></span></button>
                       </div>
                   </div> <!-- / .card -->
@@ -109,15 +111,15 @@ if (strlen($nomina) == 7) {
                       <div class="card-body">
                           <div class="row">
 
-                              <div class="col-md-1">
+                              <div class="col-md-4">
                                   <div class="form-group mb-3">
                                       <label for="txtBinB">StBin</label>
                                       <input type="text" class="form-control drgpicker" id="txtBinB"
-                                             value="" aria-describedby="button-addon2" disabled>
+                                             value="" aria-describedby="button-addon2">
                                   </div>
                               </div>
 
-                              <div class="col-md-2">
+                              <div class="col-md-4">
                                   <div class="form-group mb-2">
                                       <label for="txtStTypeB">StType</label>
                                       <input type="text" class="form-control drgpicker" id="txtStTypeB"
@@ -128,7 +130,9 @@ if (strlen($nomina) == 7) {
                           </div>
                       </div>
                       <div class="card-footer">
-                          <button type="button" onclick="enviarDatos();" class="btn mb-2 btn-success float-right text-white">Registrar<span
+                          <button type="button" onclick="enviarDatosB(1);" class="btn mb-2 btn-success float-right text-white">Agregar<span
+                                      class="fe fe-send fe-16 ml-2"></span></button>
+                          <button type="button" onclick="enviarDatosB(2);" class="btn mb-2 btn-info float-right text-white">Actualizar<span
                                       class="fe fe-send fe-16 ml-2"></span></button>
                       </div>
                   </div> <!-- / .card -->
@@ -148,6 +152,7 @@ if (strlen($nomina) == 7) {
                           <tr>
                               <th>Grammer No</th>
                               <th>Nombre</th>
+                              <th>Modificar</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -173,6 +178,7 @@ if (strlen($nomina) == 7) {
                                       <tr>
                                           <th>StBin</th>
                                           <th>StType</th>
+                                          <th>Modificar</th>
                                       </tr>
                                       </thead>
                                       <tbody>
@@ -216,7 +222,8 @@ if (strlen($nomina) == 7) {
                     data: data.data,
                     columns: [
                       { data: 'GrammerNo' },
-                      { data: 'PVB' }
+                      { data: 'PVB' },
+                        { data: 'Boton' }
                     ],
                     autoWidth: true,
                     "lengthMenu": [
@@ -236,7 +243,8 @@ if (strlen($nomina) == 7) {
                           data: data.data,
                           columns: [
                               { data: 'StBin' },
-                              { data: 'StType' }
+                              { data: 'StType' },
+                              { data: 'Boton' }
                           ],
                           autoWidth: true,
                           "lengthMenu": [
@@ -274,23 +282,29 @@ if (strlen($nomina) == 7) {
           });
       }
 
-      function enviarDatos() {
-          var nombre = document.getElementById("txtNombreArea").value;
-          var id = document.getElementById("txtIdArea").value;
-          var tipo = document.getElementById("cbTipo").value;
-          var location = document.getElementById("txtStLocation").value;
-          var bin = document.getElementById("txtStBin").value;
-          var conteo = document.getElementById("cbConteo").value;
+      function actualizarTablaDos() {
+          $.ajax({
+              url: 'https://grammermx.com/Logistica/Inventario/dao/consultaBinAdmin.php', // Reemplaza esto con la URL de tus datos
+              dataType: 'json',
+              success: function(data) {
+                  var tableDos = $('#dataTable-2').DataTable();
+                  tableDos.clear();
+                  tableDos.rows.add(data.data);
+                  tableDos.draw();
+              }
+          });
+      }
+
+      function enviarDatosP(tipo) {
+          var grammerNo = document.getElementById("txtGrammerNoU").value;
+          var pvb = document.getElementById("txtPvbU").value;
 
           var formData = new FormData();
-          formData.append('id', id);
-          formData.append('nombre', nombre);
+          formData.append('grammerNo', grammerNo);
+          formData.append('pvb', pvb);
           formData.append('tipo', tipo);
-          formData.append('location', location);
-          formData.append('bin', bin);
-          formData.append('conteo', conteo);
 
-          fetch('https://grammermx.com/Logistica/Inventario/dao/guardarArea.php', {
+          fetch('https://grammermx.com/Logistica/Inventario/dao/guardarUbicacionP.php', {
               method: 'POST',
               body: formData
           })
@@ -298,28 +312,57 @@ if (strlen($nomina) == 7) {
               .then(data => {
                   console.log(data);
                   actualizarTabla();
-                  document.getElementById("txtNombreArea").value = "";
-                  document.getElementById("txtIdArea").value = "";
-                  document.getElementById("cbTipo").value = "";
-                  document.getElementById("txtStLocation").value = "";
-                  document.getElementById("txtStBin").value = "";
-                  document.getElementById("cbConteo").value = "";
+                  document.getElementById("txtGrammerNoU").value = "";
+                  document.getElementById('txtGrammerNoU').disabled = false;
+                  document.getElementById("txtPvbU").value = "";
                   Swal.fire({
-                      title: "Listo modifico el area",
+                      title: "Listo modifico el PVB",
                       text: data.message,
                       icon: "success"
                   });
               });
       }
 
-      function llenarDatos(id,nombre,tipo,stLocation,stBin,conteo) {
-          document.getElementById("txtNombreArea").value = nombre;
-          document.getElementById("txtIdArea").value = id;
-          document.getElementById("cbTipo").value = tipo;
-          document.getElementById("txtStLocation").value = stLocation;
-          document.getElementById("txtStBin").value = stBin;
-          document.getElementById("cbConteo").value = conteo;
-          document.getElementById("tituloP").scrollIntoView({behavior: "smooth"});
+      function enviarDatosB(tipo) {
+          var bin = document.getElementById("txtBinB").value;
+          var type = document.getElementById("txtStTypeB").value;
+
+          var formData = new FormData();
+          formData.append('stBin', bin);
+          formData.append('stType', type);
+          formData.append('tipo', tipo);
+
+          fetch('https://grammermx.com/Logistica/Inventario/dao/guardarBinP.php', {
+              method: 'POST',
+              body: formData
+          })
+              .then(response => response.json())
+              .then(data => {
+                  console.log(data);
+                  actualizarTablaDos();
+                  document.getElementById("txtBinB").value = "";
+                  document.getElementById('txtBinB').disabled = false;
+                  document.getElementById("txtStTypeB").value = "";
+                  Swal.fire({
+                      title: "Listo modifico el Bin",
+                      text: data.message,
+                      icon: "success"
+                  });
+              });
+      }
+
+      function llenarPVB(grammerNo,pvb) {
+          document.getElementById("txtGrammerNoU").value = grammerNo;
+          document.getElementById('txtGrammerNoU').disabled = true;
+          document.getElementById("txtPvbU").value = pvb;
+          document.getElementById("inicioAux").scrollIntoView({behavior: "smooth"});
+      }
+
+      function llenarBin(bin,type) {
+          document.getElementById("txtBinB").value = bin;
+          document.getElementById('txtBinB').disabled = true;
+          document.getElementById("txtStTypeB").value = type;
+          document.getElementById("inicioAux").scrollIntoView({behavior: "smooth"});
       }
 
     </script>
