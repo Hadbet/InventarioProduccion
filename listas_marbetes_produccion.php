@@ -174,7 +174,7 @@ $result = $stmt->get_result();
                                             $estatusColor = $estatus == 1 ? 'success' : 'danger';
 
                                             echo '<tr>
-                                            <td>
+                                            <td style="text-align: -webkit-center;">
                                                 '.$fotoC.'
                                             </td>
                                             <td>
@@ -197,7 +197,7 @@ $result = $stmt->get_result();
                                                 <p class="mb-0 text-muted"><strong>$ '.$monto.'</strong></p>
                                                 <small class="mb-0 text-muted">Pesos</small>
                                             </td>
-                                            <td>
+                                            <td style="text-align: -webkit-center;">
                                                 '.$fotoV.'
                                             </td>
                                         </tr>';
