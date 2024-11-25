@@ -94,6 +94,11 @@ if ($tipoArea==0){
                     <li class="nav-item">
                         <a class="nav-link pl-3" href="control_areas_admin.php"><span class="ml-1 item-text">Areas</span></a>
                     </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link pl-3" href="control_ubicaciones_admin.php"><span class="ml-1 item-text">Ubicaciones y bines</span></a>
+                    </li>
+                    
                 </ul>
             </li>
             <li class="nav-item dropdown">
