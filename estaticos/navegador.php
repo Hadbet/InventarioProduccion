@@ -100,7 +100,7 @@ if ($tipoArea==0){
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="reportes">
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="carga_descarga.php"><span class="ml-1 item-text">Areas</span></a>
+                        <a class="nav-link pl-3" href="carga_descarga.php"><span class="ml-1 item-text">Reportes en txt</span></a>
                     </li>
                 </ul>
             </li>
