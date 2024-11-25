@@ -12,7 +12,7 @@ try {
     $con = new LocalConector();
     $conex=$con->conectar();
 
-    $stmt = $conex->prepare("UPDATE `Area` SET ,`AreaNombre`=?,`AreaProduccion`=?,`StLocation`=?,`StBin`=?,`Conteo`=? WHERE `IdArea`=?");
+    $stmt = $conex->prepare("UPDATE `Area` SET `AreaNombre`=?,`AreaProduccion`=?,`StLocation`=?,`StBin`=?,`Conteo`=? WHERE `IdArea`=?");
     $stmt->bind_param("sissii", $nombre, $tipo, $location, $bin,$conteo,$id);
 
     $stmt->execute();
