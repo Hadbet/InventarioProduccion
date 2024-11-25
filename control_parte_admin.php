@@ -233,22 +233,22 @@ if (strlen($nomina) == 7) {
       }
 
       function enviarDatos() {
-          var nombre = document.getElementById("txtNombreArea").value;
-          var id = document.getElementById("txtIdArea").value;
-          var tipo = document.getElementById("cbTipo").value;
-          var location = document.getElementById("txtStLocation").value;
-          var bin = document.getElementById("txtStBin").value;
-          var conteo = document.getElementById("cbConteo").value;
+          var grammerNo = document.getElementById("txtGrammerNo").value;
+          var descripcion = document.getElementById("txtDescripcion").value;
+          var um = document.getElementById("txtUM").value;
+          var profit = document.getElementById("txtProfitCtr").value;
+          var costo = document.getElementById("txtCosto").value;
+          var por = document.getElementById("txtPor").value;
 
           var formData = new FormData();
-          formData.append('id', id);
-          formData.append('nombre', nombre);
-          formData.append('tipo', tipo);
-          formData.append('location', location);
-          formData.append('bin', bin);
-          formData.append('conteo', conteo);
+          formData.append('grammerNo', grammerNo);
+          formData.append('descripcion', descripcion);
+          formData.append('um', um);
+          formData.append('profit', profit);
+          formData.append('costo', costo);
+          formData.append('por', por);
 
-          fetch('https://grammermx.com/Logistica/Inventario/dao/guardarArea.php', {
+          fetch('https://grammermx.com/Logistica/Inventario/dao/guardarParte.php', {
               method: 'POST',
               body: formData
           })
@@ -256,14 +256,14 @@ if (strlen($nomina) == 7) {
               .then(data => {
                   console.log(data);
                   actualizarTabla();
-                  document.getElementById("txtNombreArea").value = "";
-                  document.getElementById("txtIdArea").value = "";
-                  document.getElementById("cbTipo").value = "";
-                  document.getElementById("txtStLocation").value = "";
-                  document.getElementById("txtStBin").value = "";
-                  document.getElementById("cbConteo").value = "";
+                  document.getElementById("txtGrammerNo").value = "";
+                  document.getElementById("txtDescripcion").value = "";
+                  document.getElementById("txtUM").value = "";
+                  document.getElementById("txtProfitCtr").value = "";
+                  document.getElementById("txtCosto").value = "";
+                  document.getElementById("txtPor").value = "";
                   Swal.fire({
-                      title: "Listo modifico el area",
+                      title: "Listo modifico la parte",
                       text: data.message,
                       icon: "success"
                   });
