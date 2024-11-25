@@ -96,8 +96,8 @@ if (strlen($nomina) == 7) {
                       <div class="card-footer">
                           <button type="button" onclick="enviarDatosP(1);" class="btn mb-2 mr-2 btn-success float-right text-white">Registrar<span
                                       class="fe fe-send fe-16 ml-2"></span></button>
-                          <button type="button" onclick="enviarDatosP(2);" class="btn mb-2 btn-info float-right text-white">Actualizar<span
-                                      class="fe fe-send fe-16 ml-2"></span></button>
+                          <button type="button" onclick="enviarDatosP(2);" class="btn mb-2 mr-2 btn-info float-right text-white">Actualizar<span
+                                      class="fe fe-upload-cloud fe-16 ml-2"></span></button>
                       </div>
                   </div> <!-- / .card -->
               </div>
@@ -132,8 +132,8 @@ if (strlen($nomina) == 7) {
                       <div class="card-footer">
                           <button type="button" onclick="enviarDatosB(1);" class="btn mb-2 mr-2 btn-success float-right text-white">Agregar<span
                                       class="fe fe-send fe-16 ml-2"></span></button>
-                          <button type="button" onclick="enviarDatosB(2);" class="btn mb-2 btn-info float-right text-white">Actualizar<span
-                                      class="fe fe-send fe-16 ml-2"></span></button>
+                          <button type="button" onclick="enviarDatosB(2);" class="btn mb-2 mr-2 btn-info float-right text-white">Actualizar<span
+                                      class="fe fe-upload-cloud fe-16 ml-2"></span></button>
                       </div>
                   </div> <!-- / .card -->
               </div>
