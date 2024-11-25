@@ -32,7 +32,7 @@ function ContadorApu($area)
     `StorageBin`, 
     `StorageType`, 
     `Area`,
-    IF(`SegundoConteo` = 0 AND `Estatus` = 1, 
+    IF(`SegundoConteo` = 0 AND `Estatus` IN (1, 0), 
         CONCAT('<button class=\"btn btn-danger text-white\" onclick=\"cancelar(', `Id_Bitacora`, ')\">Cancelar</button>'), 
         ''
     ) AS `Cancelar`
