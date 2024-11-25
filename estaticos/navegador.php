@@ -59,7 +59,7 @@ if ($tipoArea==0){
         <ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item dropdown">
                 <a href="#forms" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                <i class="fe fe-credit-card fe-16"></i>
+                <i class="fe fe-feather fe-16"></i>
                     <span class="ml-3 item-text">Inicio</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="forms">
@@ -69,19 +69,38 @@ if ($tipoArea==0){
                     <li class="nav-item">
                         <a class="nav-link pl-3" href="crear_user.php"><span class="ml-1 item-text">Usuarios</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link pl-3" href="carga_descarga.php"><span class="ml-1 item-text">Importación de tablas</span></a>
-                    </li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
                 <a href="#tables" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                    <i class="fe fe-user-minus fe-16"></i>
+                    <i class="fe fe-archive fe-16"></i>
                     <span class="ml-3 item-text">Historicos</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="tables">
                     <li class="nav-item">
                         <a class="nav-link pl-3" href="listas_base.php"><span class="ml-1 item-text">Marbetes</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#bases" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                    <i class="fe fe-codepen fe-16"></i>
+                    <span class="ml-3 item-text">Bases de datos</span>
+                </a>
+                <ul class="collapse list-unstyled pl-4 w-100" id="bases">
+                    <li class="nav-item">
+                        <a class="nav-link pl-3" href="control_areas_admin.php"><span class="ml-1 item-text">Areas</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#reportes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                    <i class="fe fe-book fe-16"></i>
+                    <span class="ml-3 item-text">Reportes</span>
+                </a>
+                <ul class="collapse list-unstyled pl-4 w-100" id="reportes">
+                    <li class="nav-item">
+                        <a class="nav-link pl-3" href="carga_descarga.php"><span class="ml-1 item-text">Areas</span></a>
                     </li>
                 </ul>
             </li>
@@ -97,7 +116,7 @@ if ($tipoArea==0){
         <ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item dropdown">
                 <a href="#contact" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-    <i class="fe fe-smile fe-16"></i>
+    <i class="fe fe-home fe-16"></i>
                     <span class="ml-3 item-text">Inicio</span>
                 </a>
                 
@@ -105,7 +124,7 @@ if ($tipoArea==0){
             </li>
             <li class="nav-item dropdown">
                 <a href="#support" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                    <i class="fe fe-compass fe-16"></i>
+                    <i class="fe fe-archive fe-16"></i>
                     <span class="ml-3 item-text">Historicos</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="support">
@@ -125,7 +144,7 @@ if ($tipoArea==0){
         <ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item dropdown">
                 <a href="#Auditor" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-    <i class="fe fe-smile fe-16"></i>
+    <i class="fe fe-award fe-16"></i>
                     <span class="ml-3 item-text">Verificacion</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="Auditor">
@@ -134,7 +153,7 @@ if ($tipoArea==0){
             </li>
             <li class="nav-item dropdown">
                 <a href="#Historico" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                    <i class="fe fe-compass fe-16"></i>
+                    <i class="fe fe-archive fe-16"></i>
                     <span class="ml-3 item-text">Historicos</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="Historico">
@@ -154,7 +173,7 @@ if ($tipoArea==0){
         <ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item dropdown">
                 <a href="#Lider" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                    <i class="fe fe-smile fe-16"></i>
+                    <i class="fe fe-trello fe-16"></i>
                     <span class="ml-3 item-text">Control de conteos</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="Lider">
