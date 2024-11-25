@@ -170,10 +170,6 @@ if (strlen($nomina) == 7) {
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNomina" name="txtNomina" value="00001606">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNombre" name="txtNombre" value="Nancy Goiz">
                                             <label for="txtFolio">Escanea el Storage Unit</label>
                                             <div id="readerDos" width="600px"></div>
                                             <input type="text" class="form-control"
@@ -205,12 +201,12 @@ if (strlen($nomina) == 7) {
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
                                             <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNomina" name="txtNomina" value="00001606">
+                                                   id="txtNomina" name="txtNomina" value="<?php echo $nomina;?>">
                                             <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNombre" name="txtNombre" value="Nancy Goiz">
+                                                   id="txtNombre" name="txtNombre" value="<?php echo $nombre;?>">
                                             <label for="txtFolio">Capturado por :</label>
                                             <input type="text" class="form-control"
-                                                   id="txtNombre" name="txtNombre" value="" disabled>
+                                                   id="txtNombre" name="txtNombre" value="<?php echo $nombre;?>" disabled>
                                             <br>
                                         </div>
                                     </div> <!-- /.col -->
