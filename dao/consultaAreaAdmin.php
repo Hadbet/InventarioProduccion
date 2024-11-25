@@ -17,9 +17,9 @@ function ContadorApu()
     `IdArea`, 
     `AreaNombre`, 
     CASE `AreaProduccion`
-        WHEN 1 THEN '<span class=\"badge badge-pill badge-success\">Produccion</span>'
+        WHEN 1 THEN '<span class=\"badge badge-pill badge-success text-white\">Produccion</span>'
         WHEN 2 THEN '<span class=\"badge badge-pill badge-info\">SUM</span>'
-        ELSE '<span class=\"badge badge-pill badge-default\">Almacen</span>'
+        ELSE '<span class=\"badge badge-pill badge-default\" style=\"background: #e9550e; color: white;\">Almacen</span>'
     END AS `AreaProduccion`, 
     `StLocation`, 
     `StBin`, 
