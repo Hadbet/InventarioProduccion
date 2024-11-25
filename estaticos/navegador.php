@@ -69,6 +69,9 @@ if ($tipoArea==0){
                     <li class="nav-item">
                         <a class="nav-link pl-3" href="crear_user.php"><span class="ml-1 item-text">Usuarios</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link pl-3" href="equipo_conteo.php"><span class="ml-1 item-text">Tu equipo de trabajo</span></a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
