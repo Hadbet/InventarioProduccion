@@ -126,6 +126,7 @@ $result = $stmt->get_result();
                                             $segundoConteo = $row['SegundoConteo'];
                                             $storageBin = $row['StorageBin'];
                                             $monto = $row['Monto'];
+                                            $monto = number_format($monto, 2, '.', '');
                                             $estatus = $row['Estatus'];
 
                                             if($usuarioV != null && $usuarioV != '') {
