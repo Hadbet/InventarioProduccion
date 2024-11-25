@@ -75,7 +75,7 @@ if (strlen($nomina) == 7) {
                     <div class="card-body">
                         <div class="row">
 
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <div class="form-group mb-3">
                                     <label for="txtGrammerNo">Grammer No</label>
                                     <input type="text" class="form-control drgpicker" id="txtGrammerNo"
@@ -83,7 +83,7 @@ if (strlen($nomina) == 7) {
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-4">
                                 <div class="form-group mb-2">
                                     <label for="txtDescripcion">Descripcion</label>
                                     <input type="text" class="form-control drgpicker" id="txtDescripcion"
@@ -92,7 +92,7 @@ if (strlen($nomina) == 7) {
                             </div>
 
 
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <div class="form-group mb-3">
                                     <label for="txtUM">UM</label>
                                     <input type="text" class="form-control drgpicker" id="txtUM"
@@ -101,7 +101,7 @@ if (strlen($nomina) == 7) {
                             </div>
 
                             <!-- /.col -->
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <div class="form-group mb-3">
                                     <label for="txtProfitCtr">ProfitCtr</label>
                                     <input type="text" class="form-control drgpicker" id="txtProfitCtr"
@@ -117,7 +117,7 @@ if (strlen($nomina) == 7) {
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <div class="form-group mb-3">
                                     <label for="txtPor">Por</label>
                                     <input type="text" class="form-control drgpicker" id="txtPor"
