@@ -53,6 +53,7 @@ if (strlen($nomina) == 7) {
       <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css">
     <!-- Date Range Picker CSS -->
     <link rel="stylesheet" href="css/daterangepicker.css">
+      <link rel="stylesheet" href="css/styles.css">
     <!-- App CSS -->
     <link rel="stylesheet" href="css/app-light.css" id="lightTheme">
     <link rel="stylesheet" href="css/app-dark.css" id="darkTheme" disabled>
