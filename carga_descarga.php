@@ -106,46 +106,47 @@ if (strlen($nomina) == 7) {
                           <tbody id="bodyBitacora"></tbody>
                       </table>
 
-                        <!-- Button trigger modal -->
-                        <button style="display: none" type="button" class="btn mb-2 btn-outline-success" data-toggle="modal" data-target="#verticalModal" id="btnModal"> Launch demo modal </button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="verticalModal" tabindex="-1" role="dialog" aria-labelledby="verticalModalTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="verticalModalTitle">Modificación de usuarios</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Id:</label>
-                                            <input type="text" class="form-control" id="txtIdM" readonly>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Usuario:</label>
-                                            <input type="text" class="form-control" id="txtUsuarioM">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Password:</label>
-                                            <input type="password" class="form-control" id="txtPasswordM">
-                                        </div>
-                                        <hr>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn mb-2 btn-success text-white" onclick="actualizarDatos()">Actualizar</button>
-                                        <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal" id="btnCloseM">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                   </div>
                 </div> <!-- simple table -->
               </div> <!-- end section -->
             </div> <!-- .col-12 -->
+
+
+              <div class="col-12">
+                  <div class="row my-4">
+                      <!-- Small table -->
+                      <div class="col-md-12">
+                          <div class="card shadow">
+                              <div class="card-body">
+                                  <h2 class="text-center">Tabla Storage</h2>
+                                  <button class="btn btn-success text-right btnExcel" id="btnExcelStorage"> Cargar Excel Storage</button>
+                                  <input type="file" id="fileInputStorage" accept=".xlsx, .xls" style="display: none;" />
+                                  <button class="btn btn-secondary text-right btnExcel" id="tooltipStorage"><i class="far fa-question-circle position-absolute"></i>? Ejemplo excel</button>
+
+                                  <button class="btn btn-primary text-right btnExcel" id="btnTxtStorage"> Actualizar txt </button>
+                                  <input type="file" id="fileInputTxtS" accept=".txt" style="display: none;" />
+                                  <br><br>
+                                  <!-- table -->
+                                  <table class="table table-striped table-bordered mt-3" id="tablaStorage">
+                                      <thead>
+                                      <tr>
+                                          <th>id_StorageUnit</th>
+                                          <th>Numero_Parte</th>
+                                          <th>Cantidad</th>
+                                          <th>Storage_Bin</th>
+                                          <th>Storage_Type</th>
+                                      </tr>
+                                      </thead>
+                                      <tbody id="bodyStorage"></tbody>
+                                  </table>
+
+                              </div>
+                          </div>
+                      </div> <!-- simple table -->
+                  </div> <!-- end section -->
+              </div> <!-- .col-12 -->
+
           </div> <!-- .row -->
         </div> <!-- .container-fluid -->
 
