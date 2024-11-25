@@ -169,7 +169,7 @@ if ($tipoArea==0){
                     <span class="ml-3 item-text">Historicos</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="Historico">
-                    <a class="nav-link pl-3" href="listas_base.php"><span class="ml-1">Reporte</span></a>
+                    <a class="nav-link pl-3" href="listas_marbetes_produccion.php"><span class="ml-1">Reporte</span></a>
                 </ul>
             </li>
         </ul>';
