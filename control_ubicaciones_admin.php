@@ -71,6 +71,8 @@ if (strlen($nomina) == 7) {
                   <div class="card shadow mb-4">
                       <div class="card-header">
                           <strong class="card-title" id="tituloP">Ubicaciones Produccion</strong>
+                          <button type="button" onclick="limpiar(1);" class="btn mb-2 mr-2 btn-info float-right text-white">Refresh<span
+                                      class="fe fe-refresh-ccw fe-16 ml-2"></span></button>
                       </div>
                       <div class="card-body">
                           <div class="row">
@@ -94,9 +96,9 @@ if (strlen($nomina) == 7) {
                           </div>
                       </div>
                       <div class="card-footer">
-                          <button type="button" onclick="enviarDatosP(1);" class="btn mb-2 mr-2 btn-success float-right text-white">Registrar<span
+                          <button id="btnInsertP" type="button" onclick="enviarDatosP(1);" class="btn mb-2 mr-2 btn-success float-right text-white">Registrar<span
                                       class="fe fe-send fe-16 ml-2"></span></button>
-                          <button type="button" onclick="enviarDatosP(2);" class="btn mb-2 mr-2 btn-info float-right text-white">Actualizar<span
+                          <button disabled id="btnUpdateP" type="button" onclick="enviarDatosP(2);" class="btn mb-2 mr-2 btn-info float-right text-white">Actualizar<span
                                       class="fe fe-upload-cloud fe-16 ml-2"></span></button>
                       </div>
                   </div> <!-- / .card -->
@@ -107,6 +109,8 @@ if (strlen($nomina) == 7) {
                   <div class="card shadow mb-4">
                       <div class="card-header">
                           <strong class="card-title" id="tituloP">Bines</strong>
+                          <button type="button" onclick="limpiar(2);" class="btn mb-2 mr-2 btn-info float-right text-white">Refresh<span
+                                      class="fe fe-refresh-ccw fe-16 ml-2"></span></button>
                       </div>
                       <div class="card-body">
                           <div class="row">
@@ -130,9 +134,9 @@ if (strlen($nomina) == 7) {
                           </div>
                       </div>
                       <div class="card-footer">
-                          <button type="button" onclick="enviarDatosB(1);" class="btn mb-2 mr-2 btn-success float-right text-white">Agregar<span
+                          <button id="btnInsertB" type="button" onclick="enviarDatosB(1);" class="btn mb-2 mr-2 btn-success float-right text-white">Agregar<span
                                       class="fe fe-send fe-16 ml-2"></span></button>
-                          <button type="button" onclick="enviarDatosB(2);" class="btn mb-2 mr-2 btn-info float-right text-white">Actualizar<span
+                          <button disabled id="btnUpdateB" type="button" onclick="enviarDatosB(2);" class="btn mb-2 mr-2 btn-info float-right text-white">Actualizar<span
                                       class="fe fe-upload-cloud fe-16 ml-2"></span></button>
                       </div>
                   </div> <!-- / .card -->
@@ -299,61 +303,81 @@ if (strlen($nomina) == 7) {
           var grammerNo = document.getElementById("txtGrammerNoU").value;
           var pvb = document.getElementById("txtPvbU").value;
 
-          var formData = new FormData();
-          formData.append('grammerNo', grammerNo);
-          formData.append('pvb', pvb);
-          formData.append('tipo', tipo);
+          if (grammerNo!=="" && pvb!==""){
+              var formData = new FormData();
+              formData.append('grammerNo', grammerNo);
+              formData.append('pvb', pvb);
+              formData.append('tipo', tipo);
 
-          fetch('https://grammermx.com/Logistica/Inventario/dao/guardarUbicacionP.php', {
-              method: 'POST',
-              body: formData
-          })
-              .then(response => response.json())
-              .then(data => {
-                  console.log(data);
-                  actualizarTabla();
-                  document.getElementById("txtGrammerNoU").value = "";
-                  document.getElementById('txtGrammerNoU').disabled = false;
-                  document.getElementById("txtPvbU").value = "";
-                  Swal.fire({
-                      title: "Listo modifico el PVB",
-                      text: data.message,
-                      icon: "success"
+              fetch('https://grammermx.com/Logistica/Inventario/dao/guardarUbicacionP.php', {
+                  method: 'POST',
+                  body: formData
+              })
+                  .then(response => response.json())
+                  .then(data => {
+                      console.log(data);
+                      actualizarTabla();
+                      document.getElementById("txtGrammerNoU").value = "";
+                      document.getElementById('txtGrammerNoU').disabled = false;
+                      document.getElementById('btnInsertP').disabled = false;
+                      document.getElementById("txtPvbU").value = "";
+                      Swal.fire({
+                          title: "Listo modifico el PVB",
+                          text: data.message,
+                          icon: "success"
+                      });
                   });
+          }else{
+              Swal.fire({
+                  title: "Tienen que estar los campos llenos",
+                  text: "Verifique sus campos",
+                  icon: "error"
               });
+          }
       }
 
       function enviarDatosB(tipo) {
           var bin = document.getElementById("txtBinB").value;
           var type = document.getElementById("txtStTypeB").value;
 
-          var formData = new FormData();
-          formData.append('stBin', bin);
-          formData.append('stType', type);
-          formData.append('tipo', tipo);
+          if (bin!=="" && type!==""){
+              var formData = new FormData();
+              formData.append('stBin', bin);
+              formData.append('stType', type);
+              formData.append('tipo', tipo);
 
-          fetch('https://grammermx.com/Logistica/Inventario/dao/guardarBinP.php', {
-              method: 'POST',
-              body: formData
-          })
-              .then(response => response.json())
-              .then(data => {
-                  console.log(data);
-                  actualizarTablaDos();
-                  document.getElementById("txtBinB").value = "";
-                  document.getElementById('txtBinB').disabled = false;
-                  document.getElementById("txtStTypeB").value = "";
-                  Swal.fire({
-                      title: "Listo modifico el Bin",
-                      text: data.message,
-                      icon: "success"
+              fetch('https://grammermx.com/Logistica/Inventario/dao/guardarBinP.php', {
+                  method: 'POST',
+                  body: formData
+              })
+                  .then(response => response.json())
+                  .then(data => {
+                      console.log(data);
+                      actualizarTablaDos();
+                      document.getElementById("txtBinB").value = "";
+                      document.getElementById('txtBinB').disabled = false;
+                      document.getElementById('btnInsertB').disabled = false;
+                      document.getElementById("txtStTypeB").value = "";
+                      Swal.fire({
+                          title: "Listo modifico el Bin",
+                          text: data.message,
+                          icon: "success"
+                      });
                   });
+          }else{
+              Swal.fire({
+                  title: "Tienen que estar los campos llenos",
+                  text: "Verifique sus campos",
+                  icon: "error"
               });
+          }
       }
 
       function llenarPVB(grammerNo,pvb) {
           document.getElementById("txtGrammerNoU").value = grammerNo;
           document.getElementById('txtGrammerNoU').disabled = true;
+          document.getElementById('btnInsertP').disabled = true;
+          document.getElementById('btnUpdateP').disabled = false;
           document.getElementById("txtPvbU").value = pvb;
           document.getElementById("inicioAux").scrollIntoView({behavior: "smooth"});
       }
@@ -361,8 +385,28 @@ if (strlen($nomina) == 7) {
       function llenarBin(bin,type) {
           document.getElementById("txtBinB").value = bin;
           document.getElementById('txtBinB').disabled = true;
+          document.getElementById('btnInsertB').disabled = true;
+          document.getElementById('btnUpdateB').disabled = false;
           document.getElementById("txtStTypeB").value = type;
           document.getElementById("inicioAux").scrollIntoView({behavior: "smooth"});
+      }
+
+      function limpiar(tipo) {
+
+          if (tipo === 1){
+              document.getElementById("txtGrammerNoU").value = "";
+              document.getElementById('txtGrammerNoU').disabled = false;
+              document.getElementById('btnInsertP').disabled = false;
+              document.getElementById('btnUpdateP').disabled = true;
+              document.getElementById("txtPvbU").value = "";
+          }else{
+              document.getElementById("txtBinB").value = "";
+              document.getElementById('txtBinB').disabled = false;
+              document.getElementById('btnInsertB').disabled = false;
+              document.getElementById('btnUpdateB').disabled = true;
+              document.getElementById("txtStTypeB").value = "";
+          }
+
       }
 
     </script>
