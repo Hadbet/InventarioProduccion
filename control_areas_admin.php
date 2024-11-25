@@ -70,7 +70,7 @@ if (strlen($nomina) == 7) {
 
                 <div class="card shadow mb-4">
                     <div class="card-header">
-                        <strong class="card-title">Registro</strong>
+                        <strong class="card-title" id="tituloP">Registro</strong>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -319,7 +319,7 @@ if (strlen($nomina) == 7) {
           document.getElementById("txtStLocation").value = stLocation;
           document.getElementById("txtStBin").value = stBin;
           document.getElementById("cbConteo").value = conteo;
-          document.getElementById("txtIdArea").scrollIntoView({behavior: "smooth"});
+          document.getElementById("tituloP").scrollIntoView({behavior: "smooth"});
       }
 
     </script>
