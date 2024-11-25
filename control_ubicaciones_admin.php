@@ -75,18 +75,18 @@ if (strlen($nomina) == 7) {
                       <div class="card-body">
                           <div class="row">
 
-                              <div class="col-md-1">
+                              <div class="col-md-4">
                                   <div class="form-group mb-3">
-                                      <label for="txtIdArea">Grammer No</label>
-                                      <input type="text" class="form-control drgpicker" id="txtIdArea"
+                                      <label for="txtGrammerNoU">Grammer No</label>
+                                      <input type="text" class="form-control drgpicker" id="txtGrammerNoU"
                                              value="" aria-describedby="button-addon2" disabled>
                                   </div>
                               </div>
 
-                              <div class="col-md-2">
+                              <div class="col-md-4">
                                   <div class="form-group mb-2">
-                                      <label for="txtNombre">PVB</label>
-                                      <input type="text" class="form-control drgpicker" id="txtNombreArea"
+                                      <label for="txtPvbU">PVB</label>
+                                      <input type="text" class="form-control drgpicker" id="txtPvbU"
                                              value="" aria-describedby="button-addon2">
                                   </div>
                               </div>
@@ -111,16 +111,16 @@ if (strlen($nomina) == 7) {
 
                               <div class="col-md-1">
                                   <div class="form-group mb-3">
-                                      <label for="txtIdArea">StBin</label>
-                                      <input type="text" class="form-control drgpicker" id="txtIdArea"
+                                      <label for="txtBinB">StBin</label>
+                                      <input type="text" class="form-control drgpicker" id="txtBinB"
                                              value="" aria-describedby="button-addon2" disabled>
                                   </div>
                               </div>
 
                               <div class="col-md-2">
                                   <div class="form-group mb-2">
-                                      <label for="txtNombre">StType</label>
-                                      <input type="text" class="form-control drgpicker" id="txtNombreArea"
+                                      <label for="txtStTypeB">StType</label>
+                                      <input type="text" class="form-control drgpicker" id="txtStTypeB"
                                              value="" aria-describedby="button-addon2">
                                   </div>
                               </div>
