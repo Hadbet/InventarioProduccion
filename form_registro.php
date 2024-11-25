@@ -127,10 +127,6 @@ if (strlen($nomina) == 7) {
                             <div class="row">
                                <div class="col-md-6">
                                         <div class="form-group mb-3">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNomina" name="txtNomina" value="00001606">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNombre" name="txtNombre" value="Nancy Goiz">
                                             <label for="txtFolio">Escanea el marbete</label>
                                             <div id="reader" width="600px"></div>
                                             <input type="text" class="form-control"
@@ -200,10 +196,6 @@ if (strlen($nomina) == 7) {
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group mb-3">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNomina" name="txtNomina" value="<?php echo $nomina;?>">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNombre" name="txtNombre" value="<?php echo $nombre;?>">
                                             <label for="txtFolio">Capturado por :</label>
                                             <input type="text" class="form-control"
                                                    id="txtNombre" name="txtNombre" value="<?php echo $nombre;?>" disabled>
@@ -527,7 +519,6 @@ if (strlen($nomina) == 7) {
     }
 
     function enviarDatos() {
-        var nombre = document.getElementById("txtNombre").value;
         var comentarios = document.getElementById("txtComentarios").value;
         var folioMarbete = document.getElementById("scanner_input").value;
 
@@ -535,7 +526,7 @@ if (strlen($nomina) == 7) {
         console.log(storageUnits);
 
         var formData = new FormData();
-        formData.append('nombre', '<?php echo $nomina;?>-'+nombre);
+        formData.append('nombre', '<?php echo $nomina;?>-<?php echo $nombre;?>');
         formData.append('comentarios', comentarios);
         formData.append('storageUnits', JSON.stringify(storageUnits));
         formData.append('folioMarbete', folioMarbete);
