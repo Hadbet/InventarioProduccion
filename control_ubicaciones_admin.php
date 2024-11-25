@@ -65,7 +65,7 @@ if (strlen($nomina) == 7) {
     ?>
       <main role="main" class="main-content">
         <div class="container-fluid">
-          <div class="row justify-content-center">
+          <div class="row">
 
               <div class="col-6">
                   <div class="card shadow mb-4">
