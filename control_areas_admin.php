@@ -307,6 +307,11 @@ if (strlen($nomina) == 7) {
                   document.getElementById("txtStLocation").value = "";
                   document.getElementById("txtStBin").value = "";
                   document.getElementById("cbConteo").value = "";
+                  Swal.fire({
+                      title: "Listo modifico el area",
+                      text: data.message,
+                      icon: "success"
+                  });
               });
       }
 
