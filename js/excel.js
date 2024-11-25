@@ -48,7 +48,7 @@ function mostrarImagenTooltip(idTooltip, imageUrl, width, height) {
 /**********************************************************************************************************************/
 
 function cargarDatosBitacora() {
-    fetch('dao/daoConsultarBitacora.php')
+    fetch('daoAdmin/daoConsultarBitacora.php')
         .then(response => response.json())
         .then(data => {
             const tableBody = document.getElementById('bodyBitacora');
@@ -128,7 +128,7 @@ async function insertarExcelBitacora(file) {
         }
 
         // Enviar los datos al backend
-        const response = await fetch('dao/daoInsertarBitacora.php', {
+        const response = await fetch('daoAdmin/daoInsertarBitacora.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -163,7 +163,7 @@ async function insertarExcelBitacora(file) {
 /********************************************************TABLA AREA****************************************************/
 /**********************************************************************************************************************/
 function cargarDatosArea() {
-    fetch('dao/daoConsultarArea.php')
+    fetch('daoAdmin/daoConsultarArea.php')
         .then(response => response.json())
         .then(data => {
             const tableBody = document.getElementById('bodyArea');
@@ -227,7 +227,7 @@ async function insertarExcelArea(file) {
         });
 
         // Enviar los datos al backend
-        const response = await fetch('dao/daoInsertarArea.php', {
+        const response = await fetch('daoAdmin/daoInsertarArea.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -263,7 +263,7 @@ async function insertarExcelArea(file) {
 /********************************************************TABLA UBICAIONES***************************************************/
 /**********************************************************************************************************************/
 function cargarDatosUbicaciones() {
-    fetch('dao/daoConsultarUbicaciones.php')
+    fetch('daoAdmin/daoConsultarUbicaciones.php')
         .then(response => response.json())
         .then(data => {
             const tableBody = document.getElementById('bodyUbicaciones');
@@ -322,7 +322,7 @@ async function insertarExcelUbicaciones(file) {
         });
 
         // Enviar los datos al backend
-        const response = await fetch('dao/daoInsertarUbicaciones.php', {
+        const response = await fetch('daoAdmin/daoInsertarUbicaciones.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -359,7 +359,7 @@ async function insertarExcelUbicaciones(file) {
 /********************************************************TABLA STORAGE***************************************************/
 /**********************************************************************************************************************/
 function cargarDatosStorage() {
-    fetch('dao/daoConsultarStorage.php')
+    fetch('daoAdmin/daoConsultarStorage.php')
         .then(response => response.json())
         .then(data => {
             console.log('Datos recibidos:', data); // Mensaje de depuración para ver los datos completos
@@ -431,7 +431,7 @@ async function insertarExcelStorage(file) {
         });
 
         // Enviar los datos al backend
-        const response = await fetch('dao/daoInsertarStorage.php', {
+        const response = await fetch('daoAdmin/daoInsertarStorage.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -470,7 +470,7 @@ async function insertarExcelStorage(file) {
 /**********************************************************************************************************************/
 
 function cargarDatosInventario() {
-    fetch('dao/daoConsultarInventario.php')
+    fetch('daoAdmin/daoConsultarInventario.php')
         .then(response => response.json())
         .then(data => {
             const tableBody = document.getElementById('bodyInventario');
@@ -538,7 +538,7 @@ async function insertarExcelInventario(file) {
         });
 
         // Enviar los datos al backend
-        const response = await fetch('dao/daoInsertarInventario.php', {
+        const response = await fetch('daoAdmin/daoInsertarInventario.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -576,7 +576,7 @@ async function insertarExcelInventario(file) {
 /********************************************************TABLA BIN***************************************************/
 /**********************************************************************************************************************/
 function cargarDatosBin() {
-    fetch('dao/daoConsultarBin.php')
+    fetch('daoAdmin/daoConsultarBin.php')
         .then(response => response.json())
         .then(data => {
             const tableBody = document.getElementById('bodyBin');
@@ -643,7 +643,7 @@ async function insertarExcelBin(file) {
         });
 
         // Enviar los datos al backend
-        const response = await fetch('dao/daoInsertarBin.php', {
+        const response = await fetch('daoAdmin/daoInsertarBin.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -681,7 +681,7 @@ async function insertarExcelBin(file) {
 /********************************************************TABLA PARTE***************************************************/
 /**********************************************************************************************************************/
 function cargarDatosParte() {
-    fetch('dao/daoConsultarParte.php')
+    fetch('daoAdmin/daoConsultarParte.php')
         .then(response => response.json())
         .then(data => {
             const tableBody = document.getElementById('bodyParte');
@@ -748,7 +748,7 @@ async function insertarExcelParte(file) {
         });
 
         // Enviar los datos al backend
-        const response = await fetch('dao/daoInsertarParte.php', {
+        const response = await fetch('daoAdmin/daoInsertarParte.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
