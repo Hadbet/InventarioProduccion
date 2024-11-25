@@ -355,8 +355,8 @@ if (strlen($nomina) == 7) {
     document.getElementById('txtCantidad').addEventListener('keyup', function(event) {
         // Si la tecla fue Enter
         document.getElementById('lblCantidad').textContent = this.value;
-
-        document.getElementById('lblMontoTotal').innerText = costoUnitario*this.value;
+        var result = costoUnitario * this.value;
+        document.getElementById('lblMontoTotal').innerText = result.toFixed(2);
         if (event.key === 'Enter' || event.keyCode === 13) {
             document.getElementById('lblCantidad').textContent = this.value;
 

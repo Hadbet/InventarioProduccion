@@ -431,7 +431,8 @@ if (strlen($nomina) == 7) {
                     document.getElementById('txtUnidadMedida').innerText = data.data[i].UM;
                     costoUnitario = data.data[i].Costo / data.data[i].Por;
                     document.getElementById('lblCosto').innerText = costoUnitario;
-                    document.getElementById('lblMontoTotal').innerText = costoUnitario*cantidad;
+                    var resultado = costoUnitario*cantidad;
+                    document.getElementById('lblMontoTotal').innerText = resultado.toFixed(2);
                     document.getElementById('txtCantidad').focus();
                     bandera=1;
                 } else {
