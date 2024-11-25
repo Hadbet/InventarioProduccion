@@ -15,7 +15,7 @@ function ContadorApu()
     $datos = mysqli_query($conex, "SELECT 
     `StBin`, 
     `StType`,
-    CONCAT('<button onclick=\"llenarBin(\'', `StBin`, '\', \'', `StType`, '\')\">Modificar</button>') AS `Boton`
+    CONCAT('<button class=\"btn btn-info text-white\" onclick=\"llenarBin(\'', `StBin`, '\', \'', `StType`, '\')\">Modificar</button>') AS `Boton`
 FROM `Bin` WHERE 1");
 
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
