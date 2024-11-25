@@ -79,7 +79,7 @@ if (strlen($nomina) == 7) {
                                 <div class="form-group mb-3">
                                     <label for="txtIdArea">Id</label>
                                     <input type="text" class="form-control drgpicker" id="txtIdArea"
-                                           value="" aria-describedby="button-addon2">
+                                           value="" aria-describedby="button-addon2" disabled>
                                 </div>
                             </div>
 
@@ -122,7 +122,7 @@ if (strlen($nomina) == 7) {
 
 
 
-                            <div class="col-md-1" >
+                            <div class="col-md-2" >
                                 <div class="form-group mb-3">
                                     <label for="cbConteo">Conteo</label>
                                     <select class="custom-select" id="cbConteo">
@@ -277,39 +277,37 @@ if (strlen($nomina) == 7) {
           });
       }
 
-      async function cancelar(id) {
-          const { value: comentario } = await Swal.fire({
-              title: "Ingresa tus comentarios",
-              input: "text",
-              inputLabel: "¿Por qué lo cancelas?",
-              showCancelButton: true,
-              inputValidator: (value) => {
-                  if (!value) {
-                      return "¡Se requiere que se explique la razón!";
-                  }
-              }
-          });
+      function enviarDatos() {
+          var nombre = document.getElementById("txtNombreArea").value;
+          var id = document.getElementById("txtIdArea").value;
+          var tipo = document.getElementById("cbTipo").value;
+          var location = document.getElementById("txtStLocation").value;
+          var bin = document.getElementById("txtStBin").value;
+          var conteo = document.getElementById("cbConteo").value;
 
-          if (comentario) {
-              var formData = new FormData();
-              formData.append('id', id);
-              formData.append('comentario', comentario);
+          var formData = new FormData();
+          formData.append('id', id);
+          formData.append('nombre', nombre);
+          formData.append('tipo', tipo);
+          formData.append('location', location);
+          formData.append('bin', bin);
+          formData.append('conteo', conteo);
 
-              fetch('https://grammermx.com/Logistica/Inventario/dao/guardarCancelacion.php', {
-                  method: 'POST',
-                  body: formData
-              })
-                  .then(response => response.json())
-                  .then(data => {
-                      console.log(data);
-                      Swal.fire({
-                          title: "El marbete fue cancelado",
-                          text: "Gracias",
-                          icon: "success"
-                      });
-                      actualizarTabla();
-                  });
-          }
+          fetch('https://grammermx.com/Logistica/Inventario/dao/guardarArea.php', {
+              method: 'POST',
+              body: formData
+          })
+              .then(response => response.json())
+              .then(data => {
+                  console.log(data);
+                  actualizarTabla();
+                  document.getElementById("txtNombreArea").value = "";
+                  document.getElementById("txtIdArea").value = "";
+                  document.getElementById("cbTipo").value = "";
+                  document.getElementById("txtStLocation").value = "";
+                  document.getElementById("txtStBin").value = "";
+                  document.getElementById("cbConteo").value = "";
+              });
       }
 
       function llenarDatos(id,nombre,tipo,stLocation,stBin,conteo) {
