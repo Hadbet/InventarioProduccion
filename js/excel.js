@@ -1,8 +1,54 @@
 /**********************************************************************************************************************/
-/********************************************************TABLA BITACORA***********************************************/
+/********************************************************TOOLTIPS******************************************************/
 /**********************************************************************************************************************/
+
+function mostrarImagenTooltip(idTooltip, imageUrl, width, height) {
+    const tooltip = document.getElementById(idTooltip);
+
+    // Configuración de Tippy.js
+    tippy(tooltip, {
+        trigger: 'click', // Mostrar el tooltip al hacer clic
+        animation: 'shift-away',
+        theme: 'light',
+        arrow: true, // Mostrar flecha en el tooltip
+        allowHTML: true, // Permitir contenido HTML dentro del tooltip
+        onShow(instance) {
+            // Crear una estructura HTML personalizada
+            const container = document.createElement('div');
+            container.style.display = 'flex';
+            container.style.flexDirection = 'column';
+            container.style.alignItems = 'center';
+            container.style.padding = '10px';
+            container.style.backgroundColor = '#fff';
+            container.style.borderRadius = '8px';
+            container.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+            container.style.width = `${width}px`;
+            container.style.height = `${height}px`;
+
+            // Crear el elemento de imagen
+            const image = new Image();
+            image.src = imageUrl;
+            image.style.width = '100%'; // Ajustar al ancho del contenedor
+            image.style.height = '100%'; // Ajustar al alto del contenedor
+            image.style.objectFit = 'contain'; // Escalar la imagen para que no se deforme
+            image.style.borderRadius = '5px';
+
+            // Agregar la imagen al contenedor
+            container.appendChild(image);
+
+            // Asignar el contenedor al contenido del tooltip
+            instance.setContent(container);
+        },
+    });
+}
+
+
+/**********************************************************************************************************************/
+/**************************************************TABLA BITACORA******************************************************/
+/**********************************************************************************************************************/
+
 function cargarDatosBitacora() {
-    fetch('daoAdmin/daoConsultarBitacora.php')
+    fetch('dao/daoConsultarBitacora.php')
         .then(response => response.json())
         .then(data => {
             const tableBody = document.getElementById('bodyBitacora');
@@ -55,27 +101,34 @@ document.getElementById('fileInputBitacora').addEventListener('change', (event) 
         insertarExcelBitacora(file);
     }
 });
+
 async function insertarExcelBitacora(file) {
     try {
         // Leer el archivo Excel
         const data = await file.arrayBuffer();
         const workbook = XLSX.read(data, { type: 'array' });
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-        const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
-        // Mapear los datos, asegurándonos de convertir las fechas correctamente
-        const bitacoraData = jsonData.slice(1).map((row) => {
-            return {
-                NumeroParte: row[0],
-                FolioMarbete: row[1],
-                StorageBin: row[2],
-                StorageType: row [3],
-                Area: row [4]
+        // Obtener el rango del Excel
+        const range = XLSX.utils.decode_range(worksheet['!ref']);
+
+        // Crear un array para almacenar los datos
+        const bitacoraData = [];
+
+        // Recorrer fila por fila, asegurándose de incluir todas las columnas (A, B, C, D, E)
+        for (let row = range.s.r; row <= range.e.r; row++) {
+            const registro = {
+                NumeroParte: worksheet[`A${row + 1}`]?.v || "", // Columna A
+                FolioMarbete: worksheet[`B${row + 1}`]?.v || "", // Columna B
+                StorageBin: worksheet[`C${row + 1}`]?.v || "", // Columna C
+                StorageType: worksheet[`D${row + 1}`]?.v || "", // Columna D
+                Area: worksheet[`E${row + 1}`]?.v || "" // Columna E
             };
-        });
+            bitacoraData.push(registro);
+        }
 
         // Enviar los datos al backend
-        const response = await fetch('daoAdmin/daoInsertarBitacora.php', {
+        const response = await fetch('dao/daoInsertarBitacora.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -95,10 +148,8 @@ async function insertarExcelBitacora(file) {
 
             cargarDatosBitacora();
         } else {
-            // Mostrar el mensaje de error que viene del backend
             throw new Error(result.message + ' Detalles: ' + result.detalles);
         }
-
     } catch (error) {
         Swal.fire({
             icon: 'error',
@@ -107,11 +158,12 @@ async function insertarExcelBitacora(file) {
         });
     }
 }
+
 /**********************************************************************************************************************/
-/********************************************************TABLA AREA***************************************************/
+/********************************************************TABLA AREA****************************************************/
 /**********************************************************************************************************************/
 function cargarDatosArea() {
-    fetch('daoAdmin/daoConsultarArea.php')
+    fetch('dao/daoConsultarArea.php')
         .then(response => response.json())
         .then(data => {
             const tableBody = document.getElementById('bodyArea');
@@ -175,7 +227,7 @@ async function insertarExcelArea(file) {
         });
 
         // Enviar los datos al backend
-        const response = await fetch('daoAdmin/daoInsertarArea.php', {
+        const response = await fetch('dao/daoInsertarArea.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -211,7 +263,7 @@ async function insertarExcelArea(file) {
 /********************************************************TABLA UBICAIONES***************************************************/
 /**********************************************************************************************************************/
 function cargarDatosUbicaciones() {
-    fetch('daoAdmin/daoConsultarUbicaciones.php')
+    fetch('dao/daoConsultarUbicaciones.php')
         .then(response => response.json())
         .then(data => {
             const tableBody = document.getElementById('bodyUbicaciones');
@@ -270,7 +322,7 @@ async function insertarExcelUbicaciones(file) {
         });
 
         // Enviar los datos al backend
-        const response = await fetch('daoAdmin/daoInsertarUbicaciones.php', {
+        const response = await fetch('dao/daoInsertarUbicaciones.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -307,30 +359,36 @@ async function insertarExcelUbicaciones(file) {
 /********************************************************TABLA STORAGE***************************************************/
 /**********************************************************************************************************************/
 function cargarDatosStorage() {
-    fetch('daoAdmin/daoConsultarStorage.php')
+    fetch('dao/daoConsultarStorage.php')
         .then(response => response.json())
         .then(data => {
-            const tableBody = document.getElementById('bodyPStorage');
+            console.log('Datos recibidos:', data); // Mensaje de depuración para ver los datos completos
+
+            const tableBody = document.getElementById('bodyStorage');
             tableBody.innerHTML = ''; // Limpiar el contenido anterior
 
             // Verificar si hay datos en "data"
             if (data && data.data) {
+                console.log('Datos disponibles en "data.data":', data.data); // Verifica si hay datos en data.data
                 data.data.forEach(storage => {
+                    console.log('Procesando storage:', storage); // Verifica cada elemento procesado
+
                     const row = document.createElement('tr');
 
                     // Crear celdas para cada columna
                     row.innerHTML = `
-                            <td>${storage.id_StorageUnit}</td>
-                            <td>${storage.Numero_Parte}</td>
-                            <td>${storage.Cantidad}</td>
-                            <td>${storage.Storage_Bin}</td>
-                            <td>${storage.Storage_Type}</td>
-                        `;
+                        <td>${storage.id_StorageUnit}</td>
+                        <td>${storage.Numero_Parte}</td>
+                        <td>${storage.Cantidad}</td>
+                        <td>${storage.Storage_Bin}</td>
+                        <td>${storage.Storage_Type}</td>
+                    `;
 
                     // Agregar la fila a la tabla
                     tableBody.appendChild(row);
                 });
             } else {
+                console.log('No hay datos disponibles'); // Mensaje de depuración cuando no hay datos
                 // Si no hay datos, mostrar un mensaje en la tabla
                 const row = document.createElement('tr');
                 row.innerHTML = '<td colspan="5" class="text-center">No hay datos disponibles</td>';
@@ -338,9 +396,10 @@ function cargarDatosStorage() {
             }
         })
         .catch(error => {
-            console.error('Error al cargar los datos:', error);
+            console.error('Error al cargar los datos:', error); // Captura y muestra el error en consola
         });
 }
+
 /******************Cargar e insertar datos de Excel*******************/
 document.getElementById('btnExcelStorage').addEventListener('click', () => {
     document.getElementById('fileInputStorage').click();
@@ -372,7 +431,7 @@ async function insertarExcelStorage(file) {
         });
 
         // Enviar los datos al backend
-        const response = await fetch('daoAdmin/daoInsertarStorage.php', {
+        const response = await fetch('dao/daoInsertarStorage.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -411,19 +470,19 @@ async function insertarExcelStorage(file) {
 /**********************************************************************************************************************/
 
 function cargarDatosInventario() {
-        fetch('daoAdmin/daoConsultarInventario.php')
-            .then(response => response.json())
-            .then(data => {
-                const tableBody = document.getElementById('bodyInventario');
-                tableBody.innerHTML = ''; // Limpiar el contenido anterior
+    fetch('dao/daoConsultarInventario.php')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('bodyInventario');
+            tableBody.innerHTML = ''; // Limpiar el contenido anterior
 
-                // Verificar si hay datos en "data"
-                if (data && data.data) {
-                    data.data.forEach(inventario => {
-                        const row = document.createElement('tr');
+            // Verificar si hay datos en "data"
+            if (data && data.data) {
+                data.data.forEach(inventario => {
+                    const row = document.createElement('tr');
 
-                        // Crear celdas para cada columna
-                        row.innerHTML = `
+                    // Crear celdas para cada columna
+                    row.innerHTML = `
                             <td>${inventario.STLocation}</td>
                             <td>${inventario.StBin}</td>
                             <td>${inventario.StType}</td>
@@ -432,20 +491,20 @@ function cargarDatosInventario() {
                             <td>${inventario.AreaCve}</td>
                         `;
 
-                        // Agregar la fila a la tabla
-                        tableBody.appendChild(row);
-                    });
-                } else {
-                    // Si no hay datos, mostrar un mensaje en la tabla
-                    const row = document.createElement('tr');
-                    row.innerHTML = '<td colspan="6" class="text-center">No hay datos disponibles</td>';
+                    // Agregar la fila a la tabla
                     tableBody.appendChild(row);
-                }
-            })
-            .catch(error => {
-                console.error('Error al cargar los datos:', error);
-            });
-    }
+                });
+            } else {
+                // Si no hay datos, mostrar un mensaje en la tabla
+                const row = document.createElement('tr');
+                row.innerHTML = '<td colspan="6" class="text-center">No hay datos disponibles</td>';
+                tableBody.appendChild(row);
+            }
+        })
+        .catch(error => {
+            console.error('Error al cargar los datos:', error);
+        });
+}
 
 /******************Cargar e insertar datos de Excel*******************/
 document.getElementById('btnExcelInventario').addEventListener('click', () => {
@@ -479,7 +538,7 @@ async function insertarExcelInventario(file) {
         });
 
         // Enviar los datos al backend
-        const response = await fetch('daoAdmin/daoInsertarInventario.php', {
+        const response = await fetch('dao/daoInsertarInventario.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -517,7 +576,7 @@ async function insertarExcelInventario(file) {
 /********************************************************TABLA BIN***************************************************/
 /**********************************************************************************************************************/
 function cargarDatosBin() {
-    fetch('daoAdmin/daoConsultarBin.php')
+    fetch('dao/daoConsultarBin.php')
         .then(response => response.json())
         .then(data => {
             const tableBody = document.getElementById('bodyBin');
@@ -584,7 +643,7 @@ async function insertarExcelBin(file) {
         });
 
         // Enviar los datos al backend
-        const response = await fetch('daoAdmin/daoInsertarBin.php', {
+        const response = await fetch('dao/daoInsertarBin.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -622,7 +681,7 @@ async function insertarExcelBin(file) {
 /********************************************************TABLA PARTE***************************************************/
 /**********************************************************************************************************************/
 function cargarDatosParte() {
-    fetch('daoAdmin/daoConsultarParte.php')
+    fetch('dao/daoConsultarParte.php')
         .then(response => response.json())
         .then(data => {
             const tableBody = document.getElementById('bodyParte');
@@ -689,7 +748,7 @@ async function insertarExcelParte(file) {
         });
 
         // Enviar los datos al backend
-        const response = await fetch('daoAdmin/daoInsertarParte.php', {
+        const response = await fetch('dao/daoInsertarParte.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

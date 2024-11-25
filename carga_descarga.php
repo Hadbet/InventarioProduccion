@@ -74,10 +74,12 @@ if (strlen($nomina) == 7) {
                 <div class="col-md-12">
                   <div class="card shadow">
                     <div class="card-body">
-                        <button class="btn btn-secondary text-right btnExcel" id="btnExcelBitacora"> Cargar Excel Bitacora</button>
+                        <h2 class="text-center">Tabla Bitacora</h2>
+                        <button class="btn btn-success text-right btnExcel" id="btnExcelBitacora"> Cargar Excel Bitacora</button>
                         <input type="file" id="fileInputBitacora" accept=".xlsx, .xls" style="display: none;" />
+                        <button class="btn btn-secondary text-right btnExcel" id="tooltipBitacora"><i class="far fa-question-circle position-absolute"></i>? Ejemplo excel</button>
 
-                        <button class="btn btn-secondary text-right btnExcel" id="btnTxtBitacora"> Actualizar txt </button>
+                        <button class="btn btn-primary text-right btnExcel" id="btnTxtBitacora"> Actualizar txt </button>
                         <input type="file" id="fileInputTxt" accept=".txt" style="display: none;" />
                         <br><br>
                       <!-- table -->
@@ -319,6 +321,78 @@ if (strlen($nomina) == 7) {
             }
         }
 
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            //cargarDatosParte();
+            //cargarDatosBin();
+            //cargarDatosStorage();
+
+        });
+
+        document.getElementById("tooltipBitacora").addEventListener("click", function() {
+            mostrarImagenTooltip(
+                "tooltipBitacora",
+                "https://grammermx.com/excelInventario/imgs/bitacora.png",
+                320,
+                140
+            );
+        });
+
+        document.getElementById("tooltipStorage").addEventListener("click", function() {
+            mostrarImagenTooltip(
+                "tooltipStorage",
+                "https://grammermx.com/excelInventario/imgs/storage.png",
+                320,
+                100
+            );
+        });
+
+        document.getElementById("tooltipArea").addEventListener("click", function() {
+            mostrarImagenTooltip(
+                "tooltipArea",
+                "https://grammermx.com/excelInventario/imgs/area.png",
+                320,
+                120
+            );
+        });
+
+        document.getElementById("tooltipUbicaciones").addEventListener("click", function() {
+            mostrarImagenTooltip(
+                "tooltipUbicaciones",
+                "https://grammermx.com/excelInventario/imgs/area.png",
+                320,
+                120
+            );
+        });
+
+        document.getElementById("tooltiInventario").addEventListener("click", function() {
+            mostrarImagenTooltip(
+                "tooltiInventario",
+                "https://grammermx.com/excelInventario/imgs/inventarioSap.png",
+                310,
+                120
+            );
+        });
+
+        document.getElementById("tooltiBin").addEventListener("click", function() {
+            mostrarImagenTooltip(
+                "tooltiBin",
+                "https://grammermx.com/excelInventario/imgs/bin.png",
+                250,
+                120
+            );
+        });
+
+        document.getElementById("tooltiParte").addEventListener("click", function() {
+            mostrarImagenTooltip(
+                "tooltiParte",
+                "https://grammermx.com/excelInventario/imgs/parte.png",
+                320,
+                120
+            );
+        });
     </script>
 
     <!-- -Archivos de jQuery-->

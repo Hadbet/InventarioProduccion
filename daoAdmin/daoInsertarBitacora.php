@@ -8,6 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($inputData['bitacoraDatos']) && is_array($inputData['bitacoraDatos'])) {
         $todosExitosos = true;
         $errores = [];
+        $detalles = [];
 
         foreach ($inputData['bitacoraDatos'] as $registroBitacora) {
             // Validar y asignar valores
@@ -28,13 +29,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $errores[] = "Error al insertar el registro FolioMarbete: $FolioMarbete. " . $respuestaInsert['message'];
                     $todosExitosos = false;
                     break;  // Salir del ciclo si ocurre un error
+                }else{
+                    $detalles[] = $respuestaInsert['message'];
                 }
             }
         }
 
         // Respuesta final si todos fueron exitosos
         if ($todosExitosos) {
-            $respuesta = array("status" => 'success', "message" => "Todos los registros en la Tabla Parte fueron actualizados correctamente.");
+            $respuesta = array("status" => 'success', "message" => "Todos los registros en la Tabla Bitacora fueron actualizados correctamente.", "detalles" => $detalles);
         } else {
             $respuesta = array("status" => 'error', "message" => "Se encontraron errores al insertar los registros.", "detalles" => $errores);
         }
@@ -58,13 +61,17 @@ function insertarRegistrosBitacora($NumeroParte, $FolioMarbete, $StorageBin, $St
     $fechaHoy = date('Y-m-d H:i:s');
 
     if($NumeroParte === null){
-        $NumeroParte = "";
+        $NumeroParte = '';
     }
     if($StorageBin === null){
-        $StorageBin = "";
+        $StorageBin = '';
     }
     if($StorageType === null){
-        $StorageType = "";
+        $StorageType = '';
+    }
+
+    if (empty($FolioMarbete)) {
+        return array('status' => 'error', 'message' => 'El FolioMarbete es obligatorio.');
     }
 
     try {
@@ -73,12 +80,15 @@ function insertarRegistrosBitacora($NumeroParte, $FolioMarbete, $StorageBin, $St
         $consultaExistente->bind_param("s", $FolioMarbete);
         $consultaExistente->execute();
         $consultaExistente->store_result();
+        error_log("Número de filas encontradas: " . $consultaExistente->num_rows);
+
 
         if ($consultaExistente->num_rows > 0) {
+            error_log("Actualizando registro con FolioMarbete: $FolioMarbete");
             // Si ya existe, se actualiza el registro
-            $updateParte = $conex->prepare("UPDATE `Bitacora_Inventario` SET `NumeroParte` = ?, `StorageBin` = ?, `StorageType` = ?, `Area` = ?, `Fecha` = ? WHERE `FolioMarbete` = ?");
-            $updateParte->bind_param("ssssss", $NumeroParte, $StorageBin, $StorageType, $Area, $fechaHoy,$FolioMarbete );
-            $resultado = $updateParte->execute();
+            $updateBitacora = $conex->prepare("UPDATE `Bitacora_Inventario` SET `NumeroParte` = ?, `StorageBin` = ?, `StorageType` = ?, `Area` = ?, `Fecha` = ? WHERE `FolioMarbete` = ?");
+            $updateBitacora->bind_param("ssssss", $NumeroParte, $StorageBin, $StorageType, $Area, $fechaHoy,$FolioMarbete );
+            $resultado = $updateBitacora->execute();
 
             if (!$resultado) {
                 $conex->rollback();
@@ -88,15 +98,16 @@ function insertarRegistrosBitacora($NumeroParte, $FolioMarbete, $StorageBin, $St
                 $respuesta = array('status' => 'success', 'message' => 'Registro actualizado correctamente.');
             }
 
-            $updateParte->close();
+            $updateBitacora->close();
 
         } else {
+            error_log("Insertando registro con FolioMarbete: $FolioMarbete");
             // Si no existe, insertar el nuevo registro
-            $insertParte = $conex->prepare("INSERT INTO `Parte` (`NumeroParte`, `StorageBin`, `StorageType`, `Area`, `Fecha`, `FolioMarbete`) 
+            $insertBitacora = $conex->prepare("INSERT INTO `Bitacora_Inventario` (`NumeroParte`, `StorageBin`, `StorageType`, `Area`, `Fecha`, `FolioMarbete`) 
                                             VALUES (?, ?, ?, ?, ?, ?)");
-            $insertParte->bind_param("ssssss", $NumeroParte, $StorageBin, $StorageType, $Area, $fechaHoy, $FolioMarbete);
+            $insertBitacora->bind_param("ssssss", $NumeroParte, $StorageBin, $StorageType, $Area, $fechaHoy, $FolioMarbete);
 
-            $resultado = $insertParte->execute();
+            $resultado = $insertBitacora->execute();
 
             if (!$resultado) {
                 $conex->rollback();
@@ -106,7 +117,7 @@ function insertarRegistrosBitacora($NumeroParte, $FolioMarbete, $StorageBin, $St
                 $respuesta = array('status' => 'success', 'message' => 'Registro insertado correctamente.');
             }
 
-            $insertParte->close();
+            $insertBitacora->close();
         }
 
         $consultaExistente->close();
