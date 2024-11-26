@@ -131,10 +131,10 @@ if (strlen($nomina) == 7) {
                     </div>
                     <div class="card-footer">
 
-                        <button type="button" onclick="enviarDatos(2);" class="btn mb-2 mr-2 btn-info float-right text-white">Actualizar<span
+                        <button disabled type="button" id="btnActualizar" onclick="enviarDatos(2);" class="btn mb-2 mr-2 btn-info float-right text-white">Actualizar<span
                                     class="fe fe-upload-cloud fe-16 ml-2"></span></button>
 
-                        <button type="button" onclick="enviarDatos(1);" class="btn mb-2 mr-2 btn-success float-right text-white">Registrar<span
+                        <button type="button" id="btnInsertar" onclick="enviarDatos(1);" class="btn mb-2 mr-2 btn-success float-right text-white">Registrar<span
                                     class="fe fe-send fe-16 ml-2"></span></button>
 
                     </div>
@@ -287,6 +287,8 @@ if (strlen($nomina) == 7) {
           document.getElementById("txtCosto").value = costo;
           document.getElementById("txtPor").value = por;
           document.getElementById('txtGrammerNo').disabled = true;
+          document.getElementById('btnActualizar').disabled = false;
+          document.getElementById('btnInsertar').disabled = true;
           document.getElementById("tituloP").scrollIntoView({behavior: "smooth"});
       }
 
@@ -298,6 +300,8 @@ if (strlen($nomina) == 7) {
           document.getElementById("txtCosto").value = "";
           document.getElementById("txtPor").value = "";
           document.getElementById('txtGrammerNo').disabled = false;
+          document.getElementById('btnActualizar').disabled = true;
+          document.getElementById('btnInsertar').disabled = false;
       }
 
     </script>
