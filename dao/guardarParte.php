@@ -7,13 +7,19 @@ $um = $_POST['um'];
 $profit = $_POST['profit'];
 $costo = $_POST['costo'];
 $por = $_POST['por'];
+$tipo = $_POST['tipo'];
 
 try {
     $con = new LocalConector();
     $conex=$con->conectar();
 
-    $stmt = $conex->prepare("UPDATE `Parte` SET `Descripcion`=?,`UM`=?,`ProfitCtr`=?,`Costo`=?,`Por`=? WHERE  `GrammerNo`=?");
-    $stmt->bind_param("ssssss", $descripcion, $um, $profit, $costo,$por,$grammerNo);
+    if ($tipo==='1'){
+        $stmt = $conex->prepare("UPDATE `Parte` SET `Descripcion`=?,`UM`=?,`ProfitCtr`=?,`Costo`=?,`Por`=? WHERE  `GrammerNo`=?");
+        $stmt->bind_param("ssssss", $descripcion, $um, $profit, $costo,$por,$grammerNo);
+    }else{
+        $stmt = $conex->prepare("INSERT INTO `Parte`(`GrammerNo`, `Descripcion`, `UM`, `ProfitCtr`, `Costo`, `Por`) VALUES (?,?,?,?,?,?)");
+        $stmt->bind_param("ssssss", $grammerNo,$descripcion, $um, $profit, $costo,$por);
+    }
 
     $stmt->execute();
 

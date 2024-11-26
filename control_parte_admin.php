@@ -71,6 +71,8 @@ if (strlen($nomina) == 7) {
                 <div class="card shadow mb-4">
                     <div class="card-header">
                         <strong class="card-title">Registro</strong>
+                        <button type="button" onclick="limpiar();" class="btn mb-2 btn-info float-right text-white">Refresh<span
+                                    class="fe fe-refresh-ccw fe-16 ml-2"></span></button>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -79,7 +81,7 @@ if (strlen($nomina) == 7) {
                                 <div class="form-group mb-3">
                                     <label for="txtGrammerNo">Grammer No</label>
                                     <input type="text" class="form-control drgpicker" id="txtGrammerNo"
-                                           value="" aria-describedby="button-addon2" disabled>
+                                           value="" aria-describedby="button-addon2">
                                 </div>
                             </div>
 
@@ -128,8 +130,13 @@ if (strlen($nomina) == 7) {
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="button" onclick="enviarDatos();" class="btn mb-2 btn-success float-right text-white">Registrar<span
+
+                        <button type="button" onclick="enviarDatos(2);" class="btn mb-2 btn-info float-right text-white">Actualizar<span
+                                    class="fe fe-upload-cloud fe-16 ml-2"></span></button>
+
+                        <button type="button" onclick="enviarDatos(1);" class="btn mb-2 btn-success float-right text-white">Registrar<span
                                     class="fe fe-send fe-16 ml-2"></span></button>
+
                     </div>
                 </div> <!-- / .card -->
 
@@ -232,7 +239,7 @@ if (strlen($nomina) == 7) {
           });
       }
 
-      function enviarDatos() {
+      function enviarDatos(tipo) {
           var grammerNo = document.getElementById("txtGrammerNo").value;
           var descripcion = document.getElementById("txtDescripcion").value;
           var um = document.getElementById("txtUM").value;
@@ -247,6 +254,7 @@ if (strlen($nomina) == 7) {
           formData.append('profit', profit);
           formData.append('costo', costo);
           formData.append('por', por);
+          formData.append('tipo', tipo);
 
           fetch('https://grammermx.com/Logistica/Inventario/dao/guardarParte.php', {
               method: 'POST',
@@ -262,6 +270,7 @@ if (strlen($nomina) == 7) {
                   document.getElementById("txtProfitCtr").value = "";
                   document.getElementById("txtCosto").value = "";
                   document.getElementById("txtPor").value = "";
+                  document.getElementById('txtGrammerNo').disabled = false;
                   Swal.fire({
                       title: "Listo modifico la parte",
                       text: data.message,
@@ -277,7 +286,18 @@ if (strlen($nomina) == 7) {
           document.getElementById("txtProfitCtr").value = proFit;
           document.getElementById("txtCosto").value = costo;
           document.getElementById("txtPor").value = por;
+          document.getElementById('txtGrammerNo').disabled = true;
           document.getElementById("tituloP").scrollIntoView({behavior: "smooth"});
+      }
+
+      function limpiar() {
+          document.getElementById("txtGrammerNo").value = "";
+          document.getElementById("txtDescripcion").value = "";
+          document.getElementById("txtUM").value = "";
+          document.getElementById("txtProfitCtr").value = "";
+          document.getElementById("txtCosto").value = "";
+          document.getElementById("txtPor").value = "";
+          document.getElementById('txtGrammerNo').disabled = false;
       }
 
     </script>
