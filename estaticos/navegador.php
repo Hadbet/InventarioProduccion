@@ -121,7 +121,7 @@ if ($tipoArea==0){
         ?>
 
         <?php
-        if($rol==1 || $rol==5){
+        if($rol==1){
             echo '<p class="text-muted nav-heading mt-4 mb-1">
             <span>Capturistas</span>
         </p>
@@ -133,6 +133,34 @@ if ($tipoArea==0){
                 </a>
                 
                 '.$captura.'
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#support" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                    <i class="fe fe-archive fe-16"></i>
+                    <span class="ml-3 item-text">Historicos</span>
+                </a>
+                <ul class="collapse list-unstyled pl-4 w-100" id="support">
+                    <a class="nav-link pl-3" href="listas_marbetes_produccion.php"><span class="ml-1">Reporte</span></a>
+                </ul>
+            </li>
+        </ul>';
+        }
+        ?>
+
+        <?php
+        if($rol==5){
+            echo '<p class="text-muted nav-heading mt-4 mb-1">
+            <span>Validador</span>
+        </p>
+        <ul class="navbar-nav flex-fill w-100 mb-2">
+            <li class="nav-item dropdown">
+                <a href="#contact" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+    <i class="fe fe-home fe-16"></i>
+                    <span class="ml-3 item-text">Inicio</span>
+                </a>
+                <ul class="collapse list-unstyled pl-4 w-100" id="contact">
+                    <a class="nav-link pl-3" href="form_validacion_produccion.php"><span class="ml-1">Verificar</span></a>
+                </ul>
             </li>
             <li class="nav-item dropdown">
                 <a href="#support" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
