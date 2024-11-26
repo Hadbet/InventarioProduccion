@@ -19,7 +19,13 @@ try {
     $Object->setTimezone(new DateTimeZone('America/Denver'));
     $DateAndTime = $Object->format("Y/m/d h:i:s");
 
-    $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `Fecha`=?, `Usuario`=?, `Estatus`='1', `PrimerConteo`=?, `SegundoConteo`=?, `TercerConteo`=?, `Comentario`=? WHERE `FolioMarbete`=?");
+    if ($conteo == 1) {
+        $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET  `Usuario`=?, `Estatus`='1', `PrimerConteo`=?,`Comentario`=? WHERE `FolioMarbete`=? AND `Estatus` = 0");
+    } elseif ($conteo == 2) {
+        $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET  `UserSeg`=?, `SegundoConteo`=?, `SegFolio`=1 WHERE `FolioMarbete`=? AND `Estatus` = 1");
+    } elseif ($conteo == 3) {
+        $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET  `UserSeg`=?, `TercerConteo`=? WHERE `FolioMarbete`=? AND `Estatus` = 1");
+    }
 
     $totalCantidad = 0;
 
@@ -33,7 +39,17 @@ try {
     $segundoConteo = $conteo == 2 ? $totalCantidad : 0;
     $tercerConteo = $conteo == 3 ? $totalCantidad : 0;
 
-    $stmt->bind_param("sssssss", $DateAndTime, $nombre, $primerConteo, $segundoConteo, $tercerConteo, $comentarios, $marbete);
+    if ($conteo == 1) {
+        $stmt->bind_param("ssss",  $nombre, $primerConteo, $comentarios, $marbete);
+    } elseif ($conteo == 2) {
+        $stmt->bind_param("sss",  $nombre, $segundoConteo, $marbete);
+    } elseif ($conteo == 3) {
+        $stmt->bind_param("sss",  $nombre, $tercerConteo, $marbete);
+    }
+
+
+
+
     if (!$stmt->execute()) {
         echo json_encode(["success" => false]);
         throw new Exception('Error al ejecutar la consulta');

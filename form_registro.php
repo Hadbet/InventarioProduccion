@@ -202,7 +202,7 @@ if (strlen($nomina) == 7) {
                                             <br>
                                         </div>
                                     </div> <!-- /.col -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-6" id="divComentarios">
                                         <div class="form-group">
 
                                             <label for="txtFolio">Comentarios</label>
@@ -289,44 +289,93 @@ if (strlen($nomina) == 7) {
     var numeroParteUnit;
     var cantidad;
 
+    var auxConteo=0;
+    estatusConteo();
+    function estatusConteo() {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaAreaDetalle.php?area=<?php echo $area;?>', function (data) {
+            for (var i = 0; i < data.data.length; i++) {
+                auxConteo = data.data[i].Conteo;
+                if (auxConteo===2){
+                    document.getElementById("divComentarios").style.display='none';
+                }
+            }
+        });
+    }
+
     function manualMarbete() {
 
         var marbete = document.getElementById("scanner_input").value.split('.')[0];
 
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbete.php?marbete='+marbete, function (data) {
             for (var i = 0; i < data.data.length; i++) {
-                if (data.data[i].FolioMarbete) {
-                    if (data.data[i].Estatus === '0'){
-                        if (data.data[i].Area === '<?php echo $area;?>'){
-                            numeroParte=data.data[i].NumeroParte;
-                            storageBin=data.data[i].StorageBin;
-                            document.getElementById("reader").style.display = 'none';
-                            document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
-                            document.getElementById("pasoDos").style.display = 'block';
-                            document.getElementById("pasoUno").style.display = 'none';
-                            html5QrcodeScanner.clear();
-                            html5QrcodeScanner.pause();
+                if (auxConteo===1){
+                    if (data.data[i].FolioMarbete) {
+                        if (data.data[i].Estatus === '0'){
+                            if (data.data[i].Area === '<?php echo $area;?>'){
+                                numeroParte=data.data[i].NumeroParte;
+                                storageBin=data.data[i].StorageBin;
+                                document.getElementById("reader").style.display = 'none';
+                                document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
+                                document.getElementById("pasoDos").style.display = 'block';
+                                document.getElementById("pasoUno").style.display = 'none';
+                                html5QrcodeScanner.clear();
+                                html5QrcodeScanner.pause();
+                            }else{
+                                Swal.fire({
+                                    title: "El marbete no pertenece al area",
+                                    text: "Escanea otro marbete",
+                                    icon: "error"
+                                });
+                            }
                         }else{
                             Swal.fire({
-                                title: "El marbete no pertenece al area",
+                                title: "El marbete ya fue registrado",
                                 text: "Escanea otro marbete",
                                 icon: "error"
                             });
                         }
-                    }else{
+                    } else {
                         Swal.fire({
-                            title: "El marbete ya fue registrado",
-                            text: "Escanea otro marbete",
+                            title: "El marbete no esta cargado",
+                            text: "Verificalo con la mesa central",
                             icon: "error"
                         });
                     }
-                } else {
-                    Swal.fire({
-                        title: "El marbete no esta cargado",
-                        text: "Verificalo con la mesa central",
-                        icon: "error"
-                    });
+                }else if(auxConteo===2){
+                    if (data.data[i].FolioMarbete) {
+                        if (data.data[i].SegFolio === '2'){
+                            if (data.data[i].Area === '<?php echo $area;?>'){
+                                numeroParte=data.data[i].NumeroParte;
+                                storageBin=data.data[i].StorageBin;
+                                document.getElementById("reader").style.display = 'none';
+                                document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
+                                document.getElementById("pasoDos").style.display = 'block';
+                                document.getElementById("pasoUno").style.display = 'none';
+                                html5QrcodeScanner.clear();
+                                html5QrcodeScanner.pause();
+                            }else{
+                                Swal.fire({
+                                    title: "El marbete no pertenece al area",
+                                    text: "Escanea otro marbete",
+                                    icon: "error"
+                                });
+                            }
+                        }else{
+                            Swal.fire({
+                                title: "El marbete no pertenece al segundo conteo o ya fue registrado",
+                                text: "Escanea otro marbete",
+                                icon: "error"
+                            });
+                        }
+                    } else {
+                        Swal.fire({
+                            title: "El marbete no esta cargado",
+                            text: "Verificalo con la mesa central",
+                            icon: "error"
+                        });
+                    }
                 }
+
             }
         });
     }
@@ -337,32 +386,78 @@ if (strlen($nomina) == 7) {
 
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbete.php?marbete='+marbete, function (data) {
             for (var i = 0; i < data.data.length; i++) {
-                if (data.data[i].FolioMarbete) {
-                    if (data.data[i].Estatus === '0'){
-                        numeroParte=data.data[i].NumeroParte;
-                        storageBin=data.data[i].StorageBin;
-                        console.log(`Code matched = ${decodedText}`, decodedResult);
-                        document.getElementById("scanner_input").value = decodedText;
-                        document.getElementById("reader").style.display = 'none';
-                        document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
-                        document.getElementById("pasoDos").style.display = 'block';
-                        document.getElementById("pasoUno").style.display = 'none';
-                        html5QrcodeScanner.clear();
-                        html5QrcodeScanner.pause();
-                    }else{
+                if (auxConteo===1){
+                    if (data.data[i].FolioMarbete) {
+                        if (data.data[i].Estatus === '0'){
+                            if (data.data[i].Area === '<?php echo $area;?>'){
+                                numeroParte=data.data[i].NumeroParte;
+                                storageBin=data.data[i].StorageBin;
+                                console.log(`Code matched = ${decodedText}`, decodedResult);
+                                document.getElementById("scanner_input").value = decodedText;
+                                document.getElementById("reader").style.display = 'none';
+                                document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
+                                document.getElementById("pasoDos").style.display = 'block';
+                                document.getElementById("pasoUno").style.display = 'none';
+                                html5QrcodeScanner.clear();
+                                html5QrcodeScanner.pause();
+                            }else{
+                                Swal.fire({
+                                    title: "El marbete no pertenece al area",
+                                    text: "Escanea otro marbete",
+                                    icon: "error"
+                                });
+                            }
+                        }else{
+                            Swal.fire({
+                                title: "El marbete ya fue registrado",
+                                text: "Escanea otro marbete",
+                                icon: "error"
+                            });
+                        }
+                    } else {
                         Swal.fire({
-                            title: "El marbete ya fue registrado",
-                            text: "Escanea otro marbete",
+                            title: "El marbete no esta cargado",
+                            text: "Verificalo con la mesa central",
                             icon: "error"
                         });
                     }
-                } else {
-                    Swal.fire({
-                        title: "El marbete no esta cargado",
-                        text: "Verificalo con la mesa central",
-                        icon: "error"
-                    });
+                }else if(auxConteo===2){
+                    if (data.data[i].FolioMarbete) {
+                        if (data.data[i].SegFolio === '2'){
+                            if (data.data[i].Area === '<?php echo $area;?>'){
+                                numeroParte=data.data[i].NumeroParte;
+                                storageBin=data.data[i].StorageBin;
+                                console.log(`Code matched = ${decodedText}`, decodedResult);
+                                document.getElementById("scanner_input").value = decodedText;
+                                document.getElementById("reader").style.display = 'none';
+                                document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
+                                document.getElementById("pasoDos").style.display = 'block';
+                                document.getElementById("pasoUno").style.display = 'none';
+                                html5QrcodeScanner.clear();
+                                html5QrcodeScanner.pause();
+                            }else{
+                                Swal.fire({
+                                    title: "El marbete no pertenece al area",
+                                    text: "Escanea otro marbete",
+                                    icon: "error"
+                                });
+                            }
+                        }else{
+                            Swal.fire({
+                                title: "El marbete no pertenece al segundo conteo o ya fue registrado",
+                                text: "Escanea otro marbete",
+                                icon: "error"
+                            });
+                        }
+                    } else {
+                        Swal.fire({
+                            title: "El marbete no esta cargado",
+                            text: "Verificalo con la mesa central",
+                            icon: "error"
+                        });
+                    }
                 }
+
             }
         });
 
