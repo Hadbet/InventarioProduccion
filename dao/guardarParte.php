@@ -13,7 +13,7 @@ try {
     $con = new LocalConector();
     $conex=$con->conectar();
 
-    if ($tipo==='1'){
+    if ($tipo==='2'){
         $stmt = $conex->prepare("UPDATE `Parte` SET `Descripcion`=?,`UM`=?,`ProfitCtr`=?,`Costo`=?,`Por`=? WHERE  `GrammerNo`=?");
         $stmt->bind_param("ssssss", $descripcion, $um, $profit, $costo,$por,$grammerNo);
     }else{
