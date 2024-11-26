@@ -455,17 +455,18 @@ if (strlen($nomina) == 7) {
             } else {
                 for (var i = 0; i < data.data.length; i++) {
                     if (data.data[i].Id_StorageUnit) {
-                        if (addedStorageUnits[data.data[i].Id_StorageUnit]) {
-                            return;
-                        }
 
-                        addedStorageUnits[data.data[i].Id_StorageUnit] = {
-                            numeroParte: data.data[i].Numero_Parte,
-                            cantidad: data.data[i].Cantidad
-                        };
-
-                        numeroParteUnit=data.data[i].Numero_Parte;
                         if (numeroParteUnit===numeroParte){
+                            if (addedStorageUnits[data.data[i].Id_StorageUnit]) {
+                                return;
+                            }
+
+                            addedStorageUnits[data.data[i].Id_StorageUnit] = {
+                                numeroParte: data.data[i].Numero_Parte,
+                                cantidad: data.data[i].Cantidad
+                            };
+
+                            numeroParteUnit=data.data[i].Numero_Parte;
                             cantidad=data.data[i].Cantidad;
                             console.log(`Code matched = ${decodedText}`, decodedResult);
                             document.getElementById("txtStorageUnit").value = decodedText;
