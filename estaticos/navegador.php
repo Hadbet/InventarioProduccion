@@ -114,6 +114,9 @@ if ($tipoArea==0){
                     <li class="nav-item">
                         <a class="nav-link pl-3" href="carga_descarga.php"><span class="ml-1 item-text">Reportes en txt</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link pl-3" href="reporte_diferencias.php"><span class="ml-1 item-text">Reportes de diferencias</span></a>
+                    </li>
                 </ul>
             </li>
         </ul>';
