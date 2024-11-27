@@ -21,36 +21,8 @@
     <!-- App CSS -->
     <link rel="stylesheet" href="css/app-light.css" id="lightTheme">
     <link rel="stylesheet" href="css/app-dark.css" id="darkTheme" disabled>
-    <style>
-        #dataTable-1 tfoot input {
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .copyButton {
-            color: white;
-            background-color: blue !important;
-        }
 
-        .csvButton {
-            color: white;
-            background-color: forestgreen !important; /* Reemplaza 'strongGreen' con el color verde fuerte que quieras */
-        }
-
-        .excelButton {
-            color: white;
-            background-color: green !important;
-        }
-
-        .pdfButton {
-            color: white;
-            background-color: red !important;
-        }
-
-        .printButton {
-            color: white;
-            background-color: gray !important;
-        }
-    </style>
+    <link rel="stylesheet" href="css/generales.css">
 </head>
 <body class="vertical  light  ">
 <div class="wrapper">
