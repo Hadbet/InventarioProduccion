@@ -179,10 +179,7 @@ if (strlen($nomina) == 7) {
 
             <div class="row align-items-center my-4">
                 <div class="col">
-                    <h2 class="h3 mb-0 page-title">Control de conteos</h2>
-                </div>
-                <div class="col-auto">
-                    <button type="button" onclick="verificacion()" class="btn btn-primary"><span class="fe fe-filter fe-12 mr-2"></span>Pasar a segundos conteos</button>
+                    <h2 class="h3 mb-0 page-title">Reporte de diferencias</h2>
                 </div>
             </div>
 
