@@ -192,6 +192,8 @@ if (strlen($nomina) == 7) {
                     <th>Marbete</th>
                     <th>Numero Parte</th>
                     <th>Storage Bin</th>
+                    <th>Diferencia</th>
+                    <th>Area</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -266,7 +268,9 @@ if (strlen($nomina) == 7) {
                     columns: [
                         { data: 'FolioMarbete' },
                         { data: 'NumeroParte' },
-                        { data: 'StorageBin' }
+                        { data: 'StorageBin' },
+                        { data: 'DiferenciaCantidad' },
+                        { data: 'AreaNombre' }
                     ],
                     autoWidth: true,
                     "lengthMenu": [
