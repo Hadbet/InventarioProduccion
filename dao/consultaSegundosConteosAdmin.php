@@ -1,0 +1,56 @@
+<?php
+
+include_once('db/db_Inventario.php');
+
+ContadorApu();
+
+function ContadorApu()
+{
+    $con = new LocalConector();
+    $conex = $con->conectar();
+
+    $datos = mysqli_query($conex, "SELECT 
+    COALESCE(B.NumeroParte, I.GrammerNo) AS NumeroParte, 
+    B.FolioMarbete,
+    COALESCE(B.PrimerConteo, 0) AS CantidadBitacora, 
+    COALESCE(I.Cantidad, 0) AS CantidadInventarioSap, 
+    COALESCE(B.StorageBin, I.STBin) AS StorageBin
+FROM 
+    Bitacora_Inventario B
+LEFT JOIN 
+    InventarioSap I ON B.NumeroParte = I.GrammerNo 
+    AND B.StorageBin = I.STBin 
+WHERE 
+    B.Estatus = 1
+    AND (I.GrammerNo IS NULL 
+    OR B.PrimerConteo != I.Cantidad
+    OR I.Cantidad = 0
+    OR B.PrimerConteo = 0
+    OR ABS(B.PrimerConteo - IFNULL(I.Cantidad, 0)) >= 10000)
+
+UNION
+
+SELECT 
+    COALESCE(B.NumeroParte, I.GrammerNo) AS NumeroParte, 
+    B.FolioMarbete,
+    COALESCE(B.PrimerConteo, 0) AS CantidadBitacora, 
+    I.Cantidad AS CantidadInventarioSap, 
+    COALESCE(B.StorageBin, I.STBin) AS StorageBin
+FROM 
+    InventarioSap I
+LEFT JOIN 
+    Bitacora_Inventario B ON I.GrammerNo = B.NumeroParte 
+    AND I.STBin = B.StorageBin 
+WHERE 
+    (B.NumeroParte IS NULL 
+    OR B.PrimerConteo != I.Cantidad
+    OR I.Cantidad = 0
+    OR IFNULL(B.PrimerConteo, 0) = 0
+    OR ABS(IFNULL(B.PrimerConteo, 0) - I.Cantidad) >= 10000);");
+
+    $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
+    echo json_encode(array("data" => $resultado));
+
+}
+
+?>
