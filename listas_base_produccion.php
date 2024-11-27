@@ -96,17 +96,9 @@ $nombre =$_SESSION['nombre'];
 
     </main> <!-- main -->
 </div> <!-- .wrapper -->
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/moment.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/simplebar.min.js"></script>
-<script src='js/daterangepicker.js'></script>
-<script src='js/jquery.stickOnScroll.js'></script>
-<script src="js/tinycolor-min.js"></script>
-<script src="js/config.js"></script>
-<script src='js/jquery.dataTables.min.js'></script>
-<script src='js/dataTables.bootstrap4.min.js'></script>
+
+<?php include 'estaticos/scriptEstandar.php'; ?>
+
 <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
