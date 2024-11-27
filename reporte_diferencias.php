@@ -233,24 +233,8 @@ if (strlen($nomina) == 7) {
 
 <script>
 
-    function verificacion() {
 
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaSegundosConteosValidacion.php?area='+<?php echo $area;?>, function (data) {
-            var marbete='';
-            for (var i = 0; i < data.data.length; i++) {
-                marbete+= data.data[i].FolioMarbete+', ';
-            }
-            if (marbete==''){
-                verificacionDiferencia();
-            }else {
-                Swal.fire({
-                    title: "Te faltan capturar marbetes folios",
-                    text: "Verificalo con tu equipo",
-                    icon: "error"
-                });
-            }
-        });
-    }
+    verificacionDiferencia();
 
     function verificacionDiferencia() {
 
