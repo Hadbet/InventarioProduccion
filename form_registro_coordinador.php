@@ -132,7 +132,6 @@ if (strlen($nomina) == 7) {
                                         <th>Storage Unit</th>
                                         <th>Numero Parte</th>
                                         <th>Cantidad</th>
-                                        <th>Eliminar</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -207,9 +206,11 @@ if (strlen($nomina) == 7) {
     var numeroParteUnit;
     var cantidad;
     var addedStorageUnits = {};
+
     var auxConteo="3";
 
     function manualMarbete() {
+
         var marbete = document.getElementById("scanner_input").value.split('.')[0];
         var conteoM = document.getElementById("scanner_input").value.split('.')[1];
 
@@ -220,6 +221,7 @@ if (strlen($nomina) == 7) {
                         if (data.data[i].Estatus === '1'){
                             if (data.data[i].StorageUnit === 'NA'){
 
+
                             }else{
                                 numeroParte=data.data[i].NumeroParte;
                                 storageBin=data.data[i].StorageBin;
@@ -228,41 +230,15 @@ if (strlen($nomina) == 7) {
                                 document.getElementById("pasoDos").style.display = 'block';
                                 document.getElementById("pasoUno").style.display = 'none';
 
-                                addedStorageUnits[data.data[i].Id_StorageUnit] = {
-                                    numeroParte: data.data[i].Numero_Parte,
-                                    cantidad: data.data[i].Cantidad
-                                };
-
                                 var table = document.getElementById("data-table");
                                 var row = table.insertRow(-1);
                                 var cell1 = row.insertCell(0);
                                 var cell2 = row.insertCell(1);
                                 var cell3 = row.insertCell(2);
-                                var cell4 = row.insertCell(3); // Celda para el botón de eliminar
                                 cell1.innerHTML = data.data[i].StorageUnit;
                                 cell2.innerHTML = numeroParte;
-                                cell3.innerHTML = data.data[i].CantidadStorage;
+                                cell3.innerHTML = cantidad;
 
-                                // Hacer las celdas editables
-                                cell1.contentEditable = "true";
-                                cell2.contentEditable = "true";
-                                cell3.contentEditable = "true";
-
-                                // Agregar eventos de escucha para actualizar el array
-                                cell1.addEventListener('input', function () {
-                                    newStorageUnit.StorageUnit = this.innerText;
-                                });
-
-                                cell2.addEventListener('input', function () {
-                                    newStorageUnit.NumeroParte = this.innerText;
-                                });
-
-                                cell3.addEventListener('input', function () {
-                                    newStorageUnit.Cantidad = this.innerText;
-                                });
-
-                                // Agregar el botón de eliminar a la celda
-                                cell4.innerHTML = '<button onclick="eliminarFila(this)">Eliminar</button>';
                             }
                         }else{
                             Swal.fire({
@@ -285,6 +261,7 @@ if (strlen($nomina) == 7) {
                         icon: "error"
                     });
                 }
+
             }
 
             html5QrcodeScanner.clear();
@@ -292,21 +269,13 @@ if (strlen($nomina) == 7) {
         });
     }
 
-    var newStorageUnit = {
-        StorageUnit: "",
-        NumeroParte: "",
-        Cantidad: ""
-    };
-
     function agregarFila() {
         var table = document.getElementById("data-table");
         var row = table.insertRow(-1);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3); // Celda para el botón de eliminar
 
-        // Hacer las celdas editables y vacías
         cell1.contentEditable = "true";
         cell2.contentEditable = "true";
         cell3.contentEditable = "true";
@@ -314,51 +283,274 @@ if (strlen($nomina) == 7) {
         cell2.innerHTML = "";
         cell3.innerHTML = "";
 
-        // Agregar un objeto vacío al array
-        newStorageUnit = {
-            StorageUnit: "",
-            NumeroParte: "",
-            Cantidad: ""
-        };
-        addedStorageUnits.push(newStorageUnit);
-
-        // Agregar eventos de escucha para actualizar el array
-        cell1.addEventListener('input', function () {
-            newStorageUnit.StorageUnit = this.innerText;
-        });
-
-        cell2.addEventListener('input', function () {
-            newStorageUnit.NumeroParte = this.innerText;
-        });
-
-        cell3.addEventListener('input', function () {
-            newStorageUnit.Cantidad = this.innerText;
-        });
-
-        // Agregar el botón de eliminar a la celda
-        cell4.innerHTML = '<button onclick="eliminarFila(this)">Eliminar</button>';
     }
 
-    function eliminarFila(btn) {
-        var row = btn.parentNode.parentNode;
-        var rowIndex = row.rowIndex;
-        var table = document.getElementById("data-table");
+    function lecturaCorrecta(decodedText, decodedResult) {
 
-        // Eliminar la fila de la tabla
-        table.deleteRow(rowIndex);
+        var marbete = decodedText.split('.')[0]
+        var conteoM = decodedText.split('.')[1];
 
-        // Eliminar la correspondiente propiedad del objeto
-        var id = Object.keys(addedStorageUnits)[rowIndex - 1]; // Obtenemos la clave del objeto en la posición rowIndex - 1
-        delete addedStorageUnits[id]; // Eliminamos la propiedad del objeto usando la clave
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbete.php?marbete='+marbete, function (data) {
+            for (var i = 0; i < data.data.length; i++) {
+                if (auxConteo===conteoM && conteoM==="1"){
+                    if (data.data[i].FolioMarbete) {
+                        if (data.data[i].Estatus === '0'){
+                            if (data.data[i].Area === '<?php echo $area;?>'){
+                                numeroParte=data.data[i].NumeroParte;
+                                storageBin=data.data[i].StorageBin;
+                                console.log(`Code matched = ${decodedText}`, decodedResult);
+                                document.getElementById("scanner_input").value = decodedText;
+                                document.getElementById("reader").style.display = 'none';
+                                document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
+                                document.getElementById("pasoDos").style.display = 'block';
+                                document.getElementById("pasoUno").style.display = 'none';
+                                html5QrcodeScanner.clear();
+                                html5QrcodeScanner.pause();
+                            }else{
+                                Swal.fire({
+                                    title: "El marbete no pertenece al area",
+                                    text: "Escanea otro marbete",
+                                    icon: "error"
+                                });
+                            }
+                        }else{
+                            Swal.fire({
+                                title: "El marbete ya fue registrado",
+                                text: "Escanea otro marbete",
+                                icon: "error"
+                            });
+                        }
+                    } else {
+                        Swal.fire({
+                            title: "El marbete no esta cargado",
+                            text: "Verificalo con la mesa central",
+                            icon: "error"
+                        });
+                    }
+                }else if(auxConteo===conteoM && conteoM==="2"){
+                    if (data.data[i].FolioMarbete) {
+                        if (data.data[i].SegFolio === '2'){
+                            if (data.data[i].Area === '<?php echo $area;?>'){
+                                numeroParte=data.data[i].NumeroParte;
+                                storageBin=data.data[i].StorageBin;
+                                console.log(`Code matched = ${decodedText}`, decodedResult);
+                                document.getElementById("scanner_input").value = decodedText;
+                                document.getElementById("reader").style.display = 'none';
+                                document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
+                                document.getElementById("pasoDos").style.display = 'block';
+                                document.getElementById("pasoUno").style.display = 'none';
+                                html5QrcodeScanner.clear();
+                                html5QrcodeScanner.pause();
+                            }else{
+                                Swal.fire({
+                                    title: "El marbete no pertenece al area",
+                                    text: "Escanea otro marbete",
+                                    icon: "error"
+                                });
+                            }
+                        }else{
+                            Swal.fire({
+                                title: "El marbete no pertenece al segundo conteo o ya fue registrado",
+                                text: "Escanea otro marbete",
+                                icon: "error"
+                            });
+                        }
+                    } else {
+                        Swal.fire({
+                            title: "El marbete no esta cargado",
+                            text: "Verificalo con la mesa central",
+                            icon: "error"
+                        });
+                    }
+                }else{
+                    Swal.fire({
+                        title: "El marbete no pertenece al conteo "+auxConteo,
+                        text: "Verificalo con tu lider",
+                        icon: "error"
+                    });
+                }
+            }
+        });
+
     }
 
+    function errorLectura(error) {
+        console.warn(`Code scan error = ${error}`);
+    }
+
+    function escaneo() {
+        html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader",
+            { fps: 10, qrbox: {width: 250, height: 250} },
+            /* verbose= */ false);
+        document.getElementById("reader").style.display = 'block';
+        html5QrcodeScanner.render(lecturaCorrecta, errorLectura);
+    }
+
+
+    function storageUnitManual() {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value+'&bin='+storageBin, function (data) {
+            if (data.Estatus) {
+                Swal.fire({
+                    title: data.Estatus,
+                    text: "Escanea otro storage unit",
+                    icon: "error"
+                });
+            } else {
+                for (var i = 0; i < data.data.length; i++) {
+                    if (data.data[i].Id_StorageUnit) {
+                        numeroParteUnit = data.data[i].Numero_Parte;
+                        if (numeroParteUnit === numeroParte) {
+
+                            if (addedStorageUnits[data.data[i].Id_StorageUnit]) {
+                                Swal.fire({
+                                    title: "El Storage Unit ya fue escaneado",
+                                    text: "Unit : " + data.data[i].Id_StorageUnit,
+                                    icon: "error"
+                                });
+                                return;
+                            }
+
+                            addedStorageUnits[data.data[i].Id_StorageUnit] = {
+                                numeroParte: data.data[i].Numero_Parte,
+                                cantidad: data.data[i].Cantidad
+                            };
+
+                            cantidad = data.data[i].Cantidad;
+                            var table = document.getElementById("data-table");
+                            var row = table.insertRow(-1);
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            var cell3 = row.insertCell(2);
+                            cell1.innerHTML = data.data[i].Id_StorageUnit;
+                            cell2.innerHTML = numeroParteUnit;
+                            cell3.innerHTML = cantidad;
+
+                            Swal.fire({
+                                title: "Storage unit escaneado",
+                                text: "Unit : " + data.data[i].Id_StorageUnit,
+                                icon: "success"
+                            });
+                            document.getElementById("txtStorageUnit").value = '';
+                        } else {
+                            Swal.fire({
+                                title: "El número de parte no corresponde",
+                                text: "Escanea el storage unit correcto",
+                                icon: "error"
+                            });
+                            document.getElementById("txtStorageUnit").value = '';
+                        }
+                    } else {
+                        Swal.fire({
+                            title: "El storage unit no es correcto",
+                            text: "Escanea el storage unit correcto",
+                            icon: "error"
+                        });
+                        document.getElementById("txtStorageUnit").value = '';
+                    }
+                }
+            }
+        });
+    }
+
+
+    function lecturaCorrectaUnit(decodedText, decodedResult) {
+        $.getJSON('https://grammermx.com/Inventario/dao/consultaStorageUnit.php?storageUnit='+decodedText, function (data) {
+
+            if (data.Estatus) {
+                Swal.fire({
+                    title: "El storage unit ya existe",
+                    text: "Escanea otro storage unit",
+                    icon: "error"
+                });
+            } else {
+                for (var i = 0; i < data.data.length; i++) {
+                    if (data.data[i].Id_StorageUnit) {
+                        numeroParteUnit=data.data[i].Numero_Parte;
+                        if (numeroParteUnit===numeroParte){
+                            if (addedStorageUnits[data.data[i].Id_StorageUnit]) {
+                                return;
+                            }
+
+                            addedStorageUnits[data.data[i].Id_StorageUnit] = {
+                                numeroParte: data.data[i].Numero_Parte,
+                                cantidad: data.data[i].Cantidad
+                            };
+
+                            cantidad=data.data[i].Cantidad;
+                            console.log(`Code matched = ${decodedText}`, decodedResult);
+                            document.getElementById("txtStorageUnit").value = decodedText;
+                            //document.getElementById("readerDos").style.display = 'none';
+
+                            var table = document.getElementById("data-table");
+                            var row = table.insertRow(-1); // Crea una nueva fila al final de la tabla
+                            var cell1 = row.insertCell(0); // Crea una nueva celda en la fila
+                            var cell2 = row.insertCell(1); // Crea otra nueva celda en la fila
+                            var cell3 = row.insertCell(2); // Crea otra nueva celda en la fila
+                            cell1.innerHTML = data.data[i].Id_StorageUnit;
+                            cell2.innerHTML = numeroParteUnit;
+                            cell3.innerHTML = cantidad;
+                            //html5QrcodeScannerUnit.clear();
+                            //html5QrcodeScannerUnit.pause();
+                            Swal.fire({
+                                title: "Storage unit escaneado",
+                                text: "Unit : "+data.data[i].Id_StorageUnit,
+                                icon: "success"
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "El número de parte no corresponde",
+                                text: "Escanea el storage unit correcto",
+                                icon: "error"
+                            });
+                        }
+                    } else {
+                        Swal.fire({
+                            title: "El storage unit no es correcto",
+                            text: "Escanea el storage unit correcto",
+                            icon: "error"
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    function errorLecturaUnit(error) {
+        console.warn(`Code scan error = ${error}`);
+    }
+
+    function escaneoUnit() {
+        html5QrcodeScannerUnit = new Html5QrcodeScanner(
+            "readerDos",
+            { fps: 10, qrbox: {width: 250, height: 250} },
+            /* verbose= */ false);
+        document.getElementById("readerDos").style.display = 'block';
+        html5QrcodeScannerUnit.render(lecturaCorrectaUnit, errorLecturaUnit);
+    }
 
     function enviarDatos() {
         var comentarios = "";
         var folioMarbete = document.getElementById("scanner_input").value;
 
+        var table = document.getElementById("data-table");
+        var rows = table.getElementsByTagName("tr");
+        var addedStorageUnits = {};
+
+        for (var i = 1; i < rows.length; i++) { // Empezamos en 1 para saltar el encabezado de la tabla
+            var cells = rows[i].getElementsByTagName("td");
+            var storageUnit = cells[0].innerText;
+            var numeroParte = cells[1].innerText;
+            var cantidad = cells[2].innerText;
+
+            addedStorageUnits[storageUnit] = {
+                numeroParte: numeroParte,
+                cantidad: cantidad
+            };
+        }
+
+
         var storageUnits = addedStorageUnits;
-        console.log(storageUnits);
 
         var formData = new FormData();
         formData.append('nombre', '<?php echo $nomina;?>-<?php echo $nombre;?>');
