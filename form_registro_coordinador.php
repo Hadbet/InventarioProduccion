@@ -206,11 +206,9 @@ if (strlen($nomina) == 7) {
     var numeroParteUnit;
     var cantidad;
     var addedStorageUnits = {};
-
     var auxConteo="3";
 
     function manualMarbete() {
-
         var marbete = document.getElementById("scanner_input").value.split('.')[0];
         var conteoM = document.getElementById("scanner_input").value.split('.')[1];
 
@@ -221,7 +219,6 @@ if (strlen($nomina) == 7) {
                         if (data.data[i].Estatus === '1'){
                             if (data.data[i].StorageUnit === 'NA'){
 
-
                             }else{
                                 numeroParte=data.data[i].NumeroParte;
                                 storageBin=data.data[i].StorageBin;
@@ -230,20 +227,22 @@ if (strlen($nomina) == 7) {
                                 document.getElementById("pasoDos").style.display = 'block';
                                 document.getElementById("pasoUno").style.display = 'none';
 
-                                addedStorageUnits[data.data[i].StorageUnit] = {
-                                    numeroParte: data.data[i].NumeroParte,
-                                    cantidad: data.data[i].CantidadStorage
+                                var newStorageUnit = {
+                                    StorageUnit: data.data[i].StorageUnit,
+                                    NumeroParte: data.data[i].NumeroParte,
+                                    Cantidad: data.data[i].CantidadStorage
                                 };
+                                addedStorageUnits.push(newStorageUnit);
 
-                                cantidad = data.data[i].CantidadStorage;
                                 var table = document.getElementById("data-table");
                                 var row = table.insertRow(-1);
                                 var cell1 = row.insertCell(0);
                                 var cell2 = row.insertCell(1);
                                 var cell3 = row.insertCell(2);
+                                var cell4 = row.insertCell(3); // Celda para el botón de eliminar
                                 cell1.innerHTML = data.data[i].StorageUnit;
                                 cell2.innerHTML = numeroParte;
-                                cell3.innerHTML = cantidad;
+                                cell3.innerHTML = data.data[i].CantidadStorage;
 
                                 // Hacer las celdas editables
                                 cell1.contentEditable = "true";
@@ -252,17 +251,19 @@ if (strlen($nomina) == 7) {
 
                                 // Agregar eventos de escucha para actualizar el array
                                 cell1.addEventListener('input', function () {
-                                    addedStorageUnits[data.data[i].StorageUnit].StorageUnit = this.innerText;
+                                    newStorageUnit.StorageUnit = this.innerText;
                                 });
 
                                 cell2.addEventListener('input', function () {
-                                    addedStorageUnits[data.data[i].StorageUnit].NumeroParte = this.innerText;
+                                    newStorageUnit.NumeroParte = this.innerText;
                                 });
 
                                 cell3.addEventListener('input', function () {
-                                    addedStorageUnits[data.data[i].StorageUnit].Cantidad = this.innerText;
+                                    newStorageUnit.Cantidad = this.innerText;
                                 });
 
+                                // Agregar el botón de eliminar a la celda
+                                cell4.innerHTML = '<button onclick="eliminarFila(this)">Eliminar</button>';
                             }
                         }else{
                             Swal.fire({
@@ -285,7 +286,6 @@ if (strlen($nomina) == 7) {
                         icon: "error"
                     });
                 }
-
             }
 
             html5QrcodeScanner.clear();
@@ -299,6 +299,7 @@ if (strlen($nomina) == 7) {
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3); // Celda para el botón de eliminar
 
         // Hacer las celdas editables y vacías
         cell1.contentEditable = "true";
@@ -328,6 +329,21 @@ if (strlen($nomina) == 7) {
         cell3.addEventListener('input', function () {
             newStorageUnit.Cantidad = this.innerText;
         });
+
+        // Agregar el botón de eliminar a la celda
+        cell4.innerHTML = '<button onclick="eliminarFila(this)">Eliminar</button>';
+    }
+
+    function eliminarFila(btn) {
+        var row = btn.parentNode.parentNode;
+        var rowIndex = row.rowIndex;
+        var table = document.getElementById("data-table");
+
+        // Eliminar la fila de la tabla
+        table.deleteRow(rowIndex);
+
+        // Eliminar el correspondiente objeto del array
+        addedStorageUnits.splice(rowIndex - 1, 1); // Restamos 1 porque los índices de array empiezan en 0, pero los índices de fila empiezan en 1
     }
 
     function lecturaCorrecta(decodedText, decodedResult) {
