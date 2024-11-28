@@ -229,7 +229,7 @@ if (strlen($nomina) == 7) {
                                 document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
                                 document.getElementById("pasoDos").style.display = 'block';
                                 document.getElementById("pasoUno").style.display = 'none';
-
+                                cantidad =  data.data[i].CantidadStorage;
                                 var table = document.getElementById("data-table");
                                 var row = table.insertRow(-1);
                                 var cell1 = row.insertCell(0);
