@@ -118,21 +118,11 @@ if (strlen($nomina) == 7) {
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label for="txtFolio">Escanea el Storage Unit</label>
-                                            <div id="readerDos" width="600px"></div>
-                                            <input type="text" class="form-control"
-                                                   id="txtStorageUnit" name="txtStorageUnit" value="">
-                                            <br>
-                                        </div>
-                                    </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <br>
-                                            <button class="btn btn-warning text-white mt-2" onclick="storageUnitManual()">Ingresar Manual</button>
-                                            <button class="btn btn-success text-white mt-2" onclick="escaneoUnit()">Activar Escaner</button>
+                                            <button class="btn btn-success text-white mt-2" onclick="agregarFila()">Activar Escaner</button>
                                         </div>
                                     </div>
                                 </div>
@@ -585,7 +575,7 @@ if (strlen($nomina) == 7) {
     }
 
     function enviarDatos() {
-        var comentarios = document.getElementById("txtComentarios").value;
+        var comentarios = "";
         var folioMarbete = document.getElementById("scanner_input").value;
 
         var storageUnits = addedStorageUnits;
