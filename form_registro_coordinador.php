@@ -238,6 +238,9 @@ if (strlen($nomina) == 7) {
                                 cell1.innerHTML = data.data[i].StorageUnit;
                                 cell2.innerHTML = numeroParte;
                                 cell3.innerHTML = cantidad;
+                                cell1.contentEditable = "true";
+                                cell2.contentEditable = "true";
+                                cell3.contentEditable = "true";
 
                             }
                         }else{
