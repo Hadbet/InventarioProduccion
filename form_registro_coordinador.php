@@ -228,12 +228,10 @@ if (strlen($nomina) == 7) {
                                 document.getElementById("pasoDos").style.display = 'block';
                                 document.getElementById("pasoUno").style.display = 'none';
 
-                                var newStorageUnit = {
-                                    StorageUnit: data.data[i].StorageUnit,
-                                    NumeroParte: data.data[i].NumeroParte,
-                                    Cantidad: data.data[i].CantidadStorage
+                                addedStorageUnits[data.data[i].Id_StorageUnit] = {
+                                    numeroParte: data.data[i].Numero_Parte,
+                                    cantidad: data.data[i].Cantidad
                                 };
-                                addedStorageUnits.push(newStorageUnit);
 
                                 var table = document.getElementById("data-table");
                                 var row = table.insertRow(-1);
@@ -343,8 +341,9 @@ if (strlen($nomina) == 7) {
         // Eliminar la fila de la tabla
         table.deleteRow(rowIndex);
 
-        // Eliminar el correspondiente objeto del array
-        addedStorageUnits.splice(rowIndex - 1, 1); // Restamos 1 porque los índices de array empiezan en 0, pero los índices de fila empiezan en 1
+        // Eliminar la correspondiente propiedad del objeto
+        var id = Object.keys(addedStorageUnits)[rowIndex - 1]; // Obtenemos la clave del objeto en la posición rowIndex - 1
+        delete addedStorageUnits[id]; // Eliminamos la propiedad del objeto usando la clave
     }
 
     function lecturaCorrecta(decodedText, decodedResult) {
