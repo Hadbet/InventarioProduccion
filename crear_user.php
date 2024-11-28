@@ -70,6 +70,7 @@
                                         <option value="4">Super User</option>
                                         <option value="5">Validador</option>
                                         <option value="6">Administrador</option>
+                                        <option value="7">Coordinador Almacen</option>
                                     </select>
                                 </div>
                             </div>
