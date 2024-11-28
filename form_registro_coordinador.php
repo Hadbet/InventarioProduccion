@@ -235,7 +235,7 @@ if (strlen($nomina) == 7) {
     var numeroParteUnit;
     var cantidad;
 
-    var auxConteo=3;
+    var auxConteo="3";
 
     function manualMarbete() {
 
