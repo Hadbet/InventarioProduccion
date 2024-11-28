@@ -335,11 +335,12 @@ if (strlen($nomina) == 7) {
 
     function lecturaCorrecta(decodedText, decodedResult) {
 
-        var marbete = decodedText.split('.')[0];
+        var marbete = decodedText.split('.')[0]
+        var conteoM = decodedText.split('.')[1];
 
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbete.php?marbete='+marbete, function (data) {
             for (var i = 0; i < data.data.length; i++) {
-                if (auxConteo==="1"){
+                if (auxConteo===conteoM && conteoM==="1"){
                     if (data.data[i].FolioMarbete) {
                         if (data.data[i].Estatus === '0'){
                             if (data.data[i].Area === '<?php echo $area;?>'){
@@ -374,7 +375,7 @@ if (strlen($nomina) == 7) {
                             icon: "error"
                         });
                     }
-                }else if(auxConteo==="2"){
+                }else if(auxConteo===conteoM && conteoM==="2"){
                     if (data.data[i].FolioMarbete) {
                         if (data.data[i].SegFolio === '2'){
                             if (data.data[i].Area === '<?php echo $area;?>'){
