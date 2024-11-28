@@ -29,7 +29,8 @@ function ContadorApu($marbete)
     B.StorageBin, 
     B.StorageType, 
     B.Area, 
-    COALESCE(S.Id_StorageUnit, 'NA') AS StorageUnit
+    COALESCE(S.Id_StorageUnit, 'NA') AS StorageUnit,
+    COALESCE(S.Cantidad, 'NA') AS CantidadStorage
 FROM 
     Bitacora_Inventario B 
 LEFT JOIN 
