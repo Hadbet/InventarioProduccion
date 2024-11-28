@@ -292,6 +292,12 @@ if (strlen($nomina) == 7) {
         });
     }
 
+    var newStorageUnit = {
+        StorageUnit: "",
+        NumeroParte: "",
+        Cantidad: ""
+    };
+
     function agregarFila() {
         var table = document.getElementById("data-table");
         var row = table.insertRow(-1);
@@ -309,7 +315,7 @@ if (strlen($nomina) == 7) {
         cell3.innerHTML = "";
 
         // Agregar un objeto vacío al array
-        var newStorageUnit = {
+        newStorageUnit = {
             StorageUnit: "",
             NumeroParte: "",
             Cantidad: ""
