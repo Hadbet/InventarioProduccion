@@ -132,6 +132,7 @@ if (strlen($nomina) == 7) {
                                         <th>Storage Unit</th>
                                         <th>Numero Parte</th>
                                         <th>Cantidad</th>
+                                        <th>Eliminar</th>
                                     </tr>
                                     </thead>
                                     <tbody>
