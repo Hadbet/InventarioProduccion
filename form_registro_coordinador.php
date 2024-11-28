@@ -317,6 +317,27 @@ if (strlen($nomina) == 7) {
         cell1.innerHTML = "";
         cell2.innerHTML = "";
         cell3.innerHTML = "";
+
+        // Agregar un objeto vacío al array
+        var newStorageUnit = {
+            StorageUnit: "",
+            NumeroParte: "",
+            Cantidad: ""
+        };
+        addedStorageUnits.push(newStorageUnit);
+
+        // Agregar eventos de escucha para actualizar el array
+        cell1.addEventListener('input', function () {
+            newStorageUnit.StorageUnit = this.innerText;
+        });
+
+        cell2.addEventListener('input', function () {
+            newStorageUnit.NumeroParte = this.innerText;
+        });
+
+        cell3.addEventListener('input', function () {
+            newStorageUnit.Cantidad = this.innerText;
+        });
     }
 
     function lecturaCorrecta(decodedText, decodedResult) {
