@@ -241,7 +241,7 @@ if (strlen($nomina) == 7) {
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaAreaDetalle.php?area=<?php echo $area;?>', function (data) {
             for (var i = 0; i < data.data.length; i++) {
                 auxConteo = data.data[i].Conteo;
-                if (auxConteo===2){
+                if (auxConteo==="2"){
                     document.getElementById("divComentarios").style.display='none';
                 }
             }
@@ -320,6 +320,12 @@ if (strlen($nomina) == 7) {
                             icon: "error"
                         });
                     }
+                }else{
+                    Swal.fire({
+                        title: "El marbete no pertenece al conteo "+auxConteo,
+                        text: "Verificalo con tu lider",
+                        icon: "error"
+                    });
                 }
 
             }
@@ -402,8 +408,13 @@ if (strlen($nomina) == 7) {
                             icon: "error"
                         });
                     }
+                }else{
+                    Swal.fire({
+                        title: "El marbete no pertenece al conteo "+auxConteo,
+                        text: "Verificalo con tu lider",
+                        icon: "error"
+                    });
                 }
-
             }
         });
 
