@@ -274,8 +274,6 @@ if (strlen($nomina) == 7) {
                                 cell2.innerHTML = numeroParte;
                                 cell3.innerHTML = cantidad;
 
-                                html5QrcodeScanner.clear();
-                                html5QrcodeScanner.pause();
                             }
                         }else{
                             Swal.fire({
@@ -300,6 +298,9 @@ if (strlen($nomina) == 7) {
                 }
 
             }
+
+            html5QrcodeScanner.clear();
+            html5QrcodeScanner.pause();
         });
     }
 
