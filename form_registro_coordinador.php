@@ -147,25 +147,6 @@ if (strlen($nomina) == 7) {
                                     <tbody>
                                     </tbody>
                                 </table>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label for="txtFolio">Capturado por :</label>
-                                            <input type="text" class="form-control"
-                                                   id="txtNombre" name="txtNombre" value="<?php echo $nombre;?>" disabled>
-                                            <br>
-                                        </div>
-                                    </div> <!-- /.col -->
-                                    <div class="col-md-6" id="divComentarios">
-                                        <div class="form-group">
-
-                                            <label for="txtFolio">Comentarios</label>
-                                            <input type="text" class="form-control"
-                                                   id="txtComentarios" name="txtComentarios" value="">
-
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <div class="card-footer">
                                 <button type="submit"
@@ -274,6 +255,24 @@ if (strlen($nomina) == 7) {
                                 cell2.innerHTML = numeroParte;
                                 cell3.innerHTML = cantidad;
 
+                                // Hacer las celdas editables
+                                cell1.contentEditable = "true";
+                                cell2.contentEditable = "true";
+                                cell3.contentEditable = "true";
+
+                                // Agregar eventos de escucha para actualizar el array
+                                cell1.addEventListener('input', function () {
+                                    addedStorageUnits[data.data[i].StorageUnit].StorageUnit = this.innerText;
+                                });
+
+                                cell2.addEventListener('input', function () {
+                                    addedStorageUnits[data.data[i].StorageUnit].NumeroParte = this.innerText;
+                                });
+
+                                cell3.addEventListener('input', function () {
+                                    addedStorageUnits[data.data[i].StorageUnit].Cantidad = this.innerText;
+                                });
+
                             }
                         }else{
                             Swal.fire({
@@ -302,6 +301,22 @@ if (strlen($nomina) == 7) {
             html5QrcodeScanner.clear();
             html5QrcodeScanner.pause();
         });
+    }
+
+    function agregarFila() {
+        var table = document.getElementById("data-table");
+        var row = table.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+
+        // Hacer las celdas editables y vacías
+        cell1.contentEditable = "true";
+        cell2.contentEditable = "true";
+        cell3.contentEditable = "true";
+        cell1.innerHTML = "";
+        cell2.innerHTML = "";
+        cell3.innerHTML = "";
     }
 
     function lecturaCorrecta(decodedText, decodedResult) {
