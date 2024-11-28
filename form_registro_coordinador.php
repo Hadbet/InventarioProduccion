@@ -234,6 +234,7 @@ if (strlen($nomina) == 7) {
 
     var numeroParteUnit;
     var cantidad;
+    var addedStorageUnits = {};
 
     var auxConteo="3";
 
@@ -404,7 +405,6 @@ if (strlen($nomina) == 7) {
         html5QrcodeScanner.render(lecturaCorrecta, errorLectura);
     }
 
-    var addedStorageUnits = {};
 
     function storageUnitManual() {
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value+'&bin='+storageBin, function (data) {
