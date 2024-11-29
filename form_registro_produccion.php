@@ -307,6 +307,23 @@ if (strlen($nomina) == 7) {
                     if (bandera!=="0"){
                         document.getElementById('btnFin').disabled = false;
                         document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
+
+                        Swal.fire({
+                            title: "¿Quieres guardar la captura?",
+                            showDenyButton: true,
+                            showCancelButton: true,
+                            confirmButtonText: "Guardar",
+                            denyButtonText: "Verificar datos"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                enviarDatos();
+                                resolve(true);
+                            } else if (result.isDenied) {
+                                Swal.fire("Tomate tu tiempo para verificar los datos recuerda dale en el boton verde de finalizar cuando acabes", "", "info");
+                                resolve(false);
+                            }
+                        });
+
                     }else{
                         Swal.fire({
                             title: "No haz validado el NP",
