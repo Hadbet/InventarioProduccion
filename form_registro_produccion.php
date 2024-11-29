@@ -71,12 +71,6 @@ if (strlen($nomina) == 7) {
                             <div class="row">
                                <div class="col-md-6">
                                         <div class="form-group mb-3">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNomina" name="txtNomina" value="00001606">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNombre" name="txtNombre" value="Nancy Goiz">
-                                            <label for="txtFolio">Escanea el marbete</label>
-                                            <div id="reader" width="600px"></div>
                                             <input type="text" class="form-control"
                                                    id="scanner_input">
                                             <br>
@@ -221,6 +215,7 @@ if (strlen($nomina) == 7) {
 
     document.getElementById("txtStorageBin").value = '<?php echo $bin; ?>';
     document.getElementById("lblStorageBin").innerText = '<?php echo $bin;?>';
+    document.getElementById('scanner_input').focus();
 
     var auxConteo=0;
     var auxStorage=0;

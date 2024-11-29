@@ -192,37 +192,6 @@ if (strlen($nomina) == 7) {
             </div> <!-- .row -->
         </div> <!-- .container-fluid -->
 
-        <!-- Button trigger modal -->
-        <button style="display: none" type="button" class="btn mb-2 btn-outline-success" data-toggle="modal" data-target="#verticalModal" id="btnModal"> Launch demo modal </button>
-        <!-- Modal -->
-        <div class="modal fade" id="verticalModal" tabindex="-1" role="dialog" aria-labelledby="verticalModalTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="verticalModalTitle">Desbloquear</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Usuario:</label>
-                            <input type="text" class="form-control" id="txtUsuarioM">
-                        </div>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Contraseña:</label>
-                            <input type="password" class="form-control" id="txtPasswordM">
-                        </div>
-                        <hr>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn mb-2 btn-success text-white" onclick="verificarUsuario()" >Validar</button>
-                        <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal" id="btnCloseM">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
 
     </main> <!-- main -->
 
@@ -236,6 +205,7 @@ if (strlen($nomina) == 7) {
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-56159088-1"></script>
 
 <script>
+    document.getElementById('scanner_input').focus()
 
     var auxConteo=0;
     estatusConteo();
@@ -256,28 +226,6 @@ if (strlen($nomina) == 7) {
             }
         });
     }
-
-
-    var banderaModal=false;
-
-    $(document).ready(function(){
-        $('#customSwitch1').change(function(){
-            if($(this).is(":checked")) {
-                //$('#txtNumeroParte').prop('disabled', false);
-
-                $('#btnModal').click();
-            } else {
-                $('#txtNumeroParte').prop('disabled', true);
-            }
-        });
-
-        $('#verticalModal').on('hidden.bs.modal', function (e) {
-            // Set the checkbox to false
-            if (!banderaModal){
-                $('#customSwitch1').prop('checked', false);
-            }
-        });
-    });
 
     var costoUnitario=0;
     var bandera=0;
