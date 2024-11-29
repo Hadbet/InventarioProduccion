@@ -73,7 +73,7 @@ if (strlen($nomina) == 7) {
                             <div class="row">
                                <div class="col-md-6">
                                         <div class="form-group mb-3">
-                                            <input type="text" class="form-control"
+                                            <input type="number" class="form-control"
                                                    id="scanner_input">
                                             <br>
                                        </div>
@@ -98,7 +98,7 @@ if (strlen($nomina) == 7) {
 
                             <label for="basic-url">Cantidad</label>
                             <div class="input-group mb-3">
-                                <input type="text" id="txtCantidad" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <input type="number" id="txtCantidad" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="txtUnidadMedida" style=""></span>
                                 </div>
@@ -313,24 +313,33 @@ if (strlen($nomina) == 7) {
 
     function cargaPrimer(numeroParte) {
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaParte.php?parte='+numeroParte, function (data) {
-            for (var i = 0; i < data.data.length; i++) {
-                if (data.data[i].GrammerNo) {
-                    document.getElementById('lblDescripcion').innerText = data.data[i].Descripcion;
-                    document.getElementById('txtUnidadMedida').innerText = data.data[i].UM;
-                    costoUnitario = data.data[i].Costo / data.data[i].Por;
-                    document.getElementById('lblCosto').innerText = costoUnitario;
-                    var resultado = costoUnitario*cantidad;
-                    document.getElementById('lblMontoTotal').innerText = resultado.toFixed(2);
-                    document.getElementById('txtCantidad').focus();
-                    bandera=1;
-                } else {
-                    bandera=0;
-                    Swal.fire({
-                        title: "El numero de parte no existe",
-                        text: "Verificalo con la mesa de control",
-                        icon: "error"
-                    });
+            if (data && data.data && data.data.length > 0) {
+                for (var i = 0; i < data.data.length; i++) {
+                    if (data.data[i].GrammerNo) {
+                        document.getElementById('lblDescripcion').innerText = data.data[i].Descripcion;
+                        document.getElementById('txtUnidadMedida').innerText = data.data[i].UM;
+                        costoUnitario = data.data[i].Costo / data.data[i].Por;
+                        document.getElementById('lblCosto').innerText = costoUnitario;
+                        var resultado = costoUnitario*cantidad;
+                        document.getElementById('lblMontoTotal').innerText = resultado.toFixed(2);
+                        document.getElementById('txtCantidad').focus();
+                        bandera=1;
+                    } else {
+                        bandera=0;
+                        Swal.fire({
+                            title: "El numero de parte no existe",
+                            text: "Verificalo con la mesa de control",
+                            icon: "error"
+                        });
+                    }
                 }
+            }else{
+                bandera=0;
+                Swal.fire({
+                    title: "El numero de parte no existe",
+                    text: "Verificalo con la mesa de control",
+                    icon: "error"
+                });
             }
         });
     }
@@ -349,7 +358,7 @@ if (strlen($nomina) == 7) {
     function confirmarCambio() {
         return new Promise(resolve => {
             Swal.fire({
-                title: "¿Quieres guardar los cambios?",
+                title: "La cantidad ingresada es diferente al¿Quieres guardar los cambios?",
                 showDenyButton: true,
                 showCancelButton: true,
                 confirmButtonText: "Guardar",

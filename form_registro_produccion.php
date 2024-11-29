@@ -71,7 +71,7 @@ if (strlen($nomina) == 7) {
                             <div class="row">
                                <div class="col-md-6">
                                         <div class="form-group mb-3">
-                                            <input type="text" class="form-control"
+                                            <input type="number" class="form-control"
                                                    id="scanner_input">
                                             <br>
                                        </div>
@@ -101,7 +101,7 @@ if (strlen($nomina) == 7) {
 
                             <label for="basic-url">Cantidad</label>
                             <div class="input-group mb-3">
-                                <input type="text" id="txtCantidad" disabled class="form-control" aria-label="Recipient's username" autocomplete="off" aria-describedby="basic-addon2">
+                                <input type="number" id="txtCantidad" disabled class="form-control" aria-label="Recipient's username" autocomplete="off" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="txtUnidadMedida" style=""></span>
                                 </div>
