@@ -56,6 +56,16 @@
                     <div class="mb-2 align-items-center">
                         <div class="card shadow mb-4">
                             <div class="card-body">
+
+                                <div class="col-md-2" >
+                                    <div class="form-group mb-3">
+                                        <label for="cbArea">Area</label>
+                                        <select class="custom-select" id="cbArea" onchange="graficaCostoCarga()">
+                                            <option selected value="all">Todas</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="row mt-1 align-items-center">
                                     <div class="col-12 col-lg-4 text-left pl-4">
                                         <span class="h3">Proceso del Inventario en dinero</span>
@@ -111,11 +121,21 @@
 
 <script>
 
+    llenarAreas();
+    function llenarAreas() {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaArea.php', function (data) {
+            for (var i = 0; i < data.data.length; i++) {
+                var option = $('<option/>');
+                option.attr({ 'value': data.data[i].IdArea }).text(data.data[i].AreaNombre);
+                $('#cbArea').append(option);
+            }
+        });
+    }
 
     var chartDos;
     graficaCostoCarga();
     function graficaCostoCarga() {
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/graficaCosto.php', function (data) {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/graficaCosto.php?area='+document.getElementById("cbArea").value, function (data) {
             var AreaNombreCosto = [];
             var PrimerConteoCosto = [];
             var SegundoConteoCosto = [];
