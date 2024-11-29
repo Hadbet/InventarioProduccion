@@ -242,7 +242,7 @@ if (strlen($nomina) == 7) {
                     if (data.data[i].PVB === '<?php echo $bin;?>') {
                         document.getElementById('lblDescripcion').innerText = descripcionU;
                         document.getElementById('txtUnidadMedida').innerText = umU;
-                        document.getElementById('lblCosto').innerText = costoUnitarioU;
+                        document.getElementById('lblCosto').innerText = costoUnitarioU.toFixed(2);
                         document.getElementById('txtCantidad').disabled = false;
                         document.getElementById('txtCantidad').focus()
                         bandera=1;
