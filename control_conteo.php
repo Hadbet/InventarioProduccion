@@ -183,7 +183,7 @@ if (strlen($nomina) == 7) {
 
     function crearTabla() {
         $.ajax({
-            url: 'https://grammermx.com/Logistica/Inventario/dao/consultaSegundosConteos.php?area='+<?php echo $area;?>, // Reemplaza esto con la URL de tus datos
+            url: 'https://grammermx.com/Logistica/Inventario/dao/consultaSegundosConteosUser.php?area='+<?php echo $area;?>, // Reemplaza esto con la URL de tus datos
             dataType: 'json',
             success: function(data) {
                 var table = $('#dataTable-1').DataTable({
