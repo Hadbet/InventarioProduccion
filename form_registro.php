@@ -438,6 +438,7 @@ if (strlen($nomina) == 7) {
     var addedStorageUnits = {};
 
     function storageUnitManual() {
+        console.log('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value+'&bin='+storageBin+'&conteo='+auxConteo);
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value+'&bin='+storageBin+'&conteo='+auxConteo, function (data) {
             if (data.Estatus) {
                 Swal.fire({
@@ -504,6 +505,7 @@ if (strlen($nomina) == 7) {
 
 
     function lecturaCorrectaUnit(decodedText, decodedResult) {
+        console.log('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value+'&bin='+storageBin+'&conteo='+auxConteo);
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value+'&bin='+storageBin+'&conteo='+auxConteo, function (data) {
 
             if (data.Estatus) {
