@@ -75,12 +75,6 @@ if (strlen($nomina) == 7) {
                                                    id="scanner_input">
                                             <br>
                                        </div>
-                                    </div> <!-- /.col -->
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <br>
-                                            <button class="btn btn-success text-white mt-2" onclick="escaneo()">Escanear</button>
-                                        </div>
                                     </div>
                             </div>
                         </div>
