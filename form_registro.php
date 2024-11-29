@@ -681,6 +681,16 @@ if (strlen($nomina) == 7) {
     }
 
     function escaneoUnitAbierto() {
+
+        if (html5QrcodeScanner) {
+            html5QrcodeScanner.clear();
+            html5QrcodeScanner.pause();
+        }
+        if (html5QrcodeScannerUnit) {
+            html5QrcodeScannerUnit.clear();
+            html5QrcodeScannerUnit.pause();
+        }
+
         html5QrcodeScannerUnitA = new Html5QrcodeScanner(
             "readerAbierto",
             { fps: 10, qrbox: {width: 250, height: 250} },
