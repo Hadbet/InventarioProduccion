@@ -850,7 +850,7 @@ if (strlen($nomina) == 7) {
             document.getElementById("txtStorageUnit").value = '';
     }
 
-    async function enviarDatos() {
+    async function enviarDatosPro() {
         var marbete = document.getElementById("scanner_input").value;
         var nombre = document.getElementById("lblNombre").innerText;
         var cantidad = document.getElementById("txtCantidad").value;
