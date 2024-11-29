@@ -73,12 +73,6 @@ if (strlen($nomina) == 7) {
                             <div class="row">
                                <div class="col-md-6">
                                         <div class="form-group mb-3">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNomina" name="txtNomina" value="00001606">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNombre" name="txtNombre" value="Nancy Goiz">
-                                            <label for="txtFolio">Escanea el marbete</label>
-                                            <div id="reader" width="600px"></div>
                                             <input type="text" class="form-control"
                                                    id="scanner_input">
                                             <br>
