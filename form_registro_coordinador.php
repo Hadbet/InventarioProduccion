@@ -341,7 +341,7 @@ if (strlen($nomina) == 7) {
                                 document.getElementById("imagenCapturador").src = 'https://grammermx.com/Fotos/'+numeroNomina+'.png';
                                 document.getElementById("reader").style.display = 'none';
                                 document.getElementById("lblFolio").innerHTML = marbete;
-                                document.getElementById("pasoDos").style.display = 'block';
+                                document.getElementById("pasoTres").style.display = 'block';
                                 document.getElementById("pasoUno").style.display = 'none';
                                 document.getElementById("lblStorageBin").innerText = storageBin;
                                 document.getElementById("lblNumeroParte").innerText = numeroParte;
