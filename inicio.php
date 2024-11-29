@@ -121,6 +121,11 @@
 
 <script>
 
+    document.getElementById("cbArea").addEventListener("change", function(event){
+        event.preventDefault();
+        graficaCostoCarga();
+    });
+
     llenarAreas();
     function llenarAreas() {
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaArea.php', function (data) {
