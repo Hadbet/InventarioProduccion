@@ -250,7 +250,7 @@ if (strlen($nomina) == 7) {
                                 var nombre = separado[1]; // Esto te dará la segunda parte, que es el nombre.
                                 document.getElementById("lblNombreCapturador").innerText = nombre;
                                 document.getElementById("imagenCapturador").src = 'https://grammermx.com/Fotos/'+numeroNomina+'.png';
-                                document.getElementById("reader").style.display = 'none';
+
                                 document.getElementById("lblFolio").innerHTML = marbete;
                                 document.getElementById("pasoDos").style.display = 'block';
                                 document.getElementById("pasoUno").style.display = 'none';
@@ -268,7 +268,7 @@ if (strlen($nomina) == 7) {
                                 var nombre = separado[1]; // Esto te dará la segunda parte, que es el nombre.
                                 document.getElementById("lblNombreCapturador").innerText = nombre;
                                 document.getElementById("imagenCapturador").src = 'https://grammermx.com/Fotos/'+numeroNomina+'.png';
-                                document.getElementById("reader").style.display = 'none';
+
                                 document.getElementById("lblFolio").innerHTML = marbete;
                                 document.getElementById("pasoDos").style.display = 'block';
                                 document.getElementById("pasoUno").style.display = 'none';
