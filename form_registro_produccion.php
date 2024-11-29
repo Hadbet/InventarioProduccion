@@ -269,9 +269,9 @@ if (strlen($nomina) == 7) {
 
     var costoUnitario=0;
     var bandera=0;
-    // Cuando se suelta una tecla en el campo de entrada del número de parte
+
     document.getElementById('txtNumeroParte').addEventListener('keyup', function(event) {
-        // Si la tecla fue Enter
+
         document.getElementById('lblNumeroParte').textContent = this.value;
         if (event.key === 'Enter' || event.keyCode === 13) {
             $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaParte.php?parte='+this.value, function (data) {
@@ -385,7 +385,6 @@ if (strlen($nomina) == 7) {
                         if (data.data[i].Estatus === '0'){
                             if (data.data[i].Area === '<?php echo $area;?>'){
                                 numeroParte=data.data[i].NumeroParte;
-                                document.getElementById("reader").style.display = 'none';
                                 document.getElementById("lblFolio").innerHTML = marbete;
                                 document.getElementById("pasoDos").style.display = 'block';
                                 document.getElementById("pasoUno").style.display = 'none';
