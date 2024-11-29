@@ -148,7 +148,7 @@ if (strlen($nomina) == 7) {
             for (var i = 0; i < data.data.length; i++) {
                 var auxConteo = data.data[i].Conteo;
 
-                if (auxConteo===2){
+                if (auxConteo==="2"){
                     verificacion();
                 }
 
