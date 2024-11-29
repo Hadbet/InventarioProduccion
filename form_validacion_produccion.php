@@ -358,7 +358,7 @@ if (strlen($nomina) == 7) {
     function confirmarCambio() {
         return new Promise(resolve => {
             Swal.fire({
-                title: "La cantidad ingresada es diferente al¿Quieres guardar los cambios?",
+                title: "La cantidad ingresada es diferente a la capturada ¿Quieres guardar los cambios?",
                 showDenyButton: true,
                 showCancelButton: true,
                 confirmButtonText: "Guardar",
@@ -432,6 +432,24 @@ if (strlen($nomina) == 7) {
     document.getElementById('txtCantidad').addEventListener('keyup', function(event) {
         if (event.key === 'Enter' || event.keyCode === 13) {
             document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
+
+            Swal.fire({
+                title: "¿Deseas guardar la verificación? Si es así, presiona 'Enter'.",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Guardar",
+                denyButtonText: "Verificar datos"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    enviarDatos();
+                    resolve(true);
+                } else if (result.isDenied) {
+                    Swal.fire("Por favor, tómate tu tiempo para verificar los datos. Recuerda, cuando hayas terminado, haz clic en el botón verde 'Finalizar'.", "", "info");
+                    resolve(false);
+                }
+            });
+
+
         }
     });
 </script>

@@ -309,7 +309,7 @@ if (strlen($nomina) == 7) {
                         document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
 
                         Swal.fire({
-                            title: "¿Quieres guardar la captura?",
+                            title: "¿Deseas guardar la captura? Si es así, presiona 'Enter'.",
                             showDenyButton: true,
                             showCancelButton: true,
                             confirmButtonText: "Guardar",
@@ -319,7 +319,7 @@ if (strlen($nomina) == 7) {
                                 enviarDatos();
                                 resolve(true);
                             } else if (result.isDenied) {
-                                Swal.fire("Tomate tu tiempo para verificar los datos recuerda dale en el boton verde de finalizar cuando acabes", "", "info");
+                                Swal.fire("Por favor, tómate tu tiempo para verificar los datos. Recuerda, cuando hayas terminado, haz clic en el botón verde 'Finalizar'.", "", "info");
                                 resolve(false);
                             }
                         });
