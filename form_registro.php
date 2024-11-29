@@ -684,11 +684,9 @@ if (strlen($nomina) == 7) {
 
         if (html5QrcodeScanner) {
             html5QrcodeScanner.clear();
-            html5QrcodeScanner.pause();
         }
         if (html5QrcodeScannerUnit) {
             html5QrcodeScannerUnit.clear();
-            html5QrcodeScannerUnit.pause();
         }
 
         html5QrcodeScannerUnitA = new Html5QrcodeScanner(
