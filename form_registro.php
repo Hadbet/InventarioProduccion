@@ -423,6 +423,7 @@ if (strlen($nomina) == 7) {
     }
 
     function escaneo() {
+        limpiarEscan();
         html5QrcodeScanner = new Html5QrcodeScanner(
             "reader",
             { fps: 10, qrbox: {width: 250, height: 250} },
@@ -566,6 +567,7 @@ if (strlen($nomina) == 7) {
     }
 
     function escaneoUnit() {
+        limpiarEscan();
         html5QrcodeScannerUnit = new Html5QrcodeScanner(
             "readerDos",
             { fps: 10, qrbox: {width: 250, height: 250} },
