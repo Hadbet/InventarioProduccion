@@ -22,7 +22,7 @@ function ContadorApu($storageUnit,$bin,$conteo)
 
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
 
-    if ($conteo==2){
+    if ($conteo=="2"){
         $datosBitacora = mysqli_query($conex, "SELECT * FROM `Storage_Unit` WHERE `Id_StorageUnit` = '$storageUnit' and `Estatus` = 1");
 
         if (mysqli_num_rows($datosBitacora) > 0) {
