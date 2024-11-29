@@ -148,6 +148,115 @@ if (strlen($nomina) == 7) {
             </div> <!-- .row -->
         </div> <!-- .container-fluid -->
 
+
+
+
+
+
+
+            <div class="container-fluid" id="pasoTres" style="display: none">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <p class="mb-3"><strong>Verificacion</strong></p>
+
+                            <label for="basic-url">Cantidad</label>
+                            <div class="input-group mb-3">
+                                <input type="text" id="txtCantidad" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="txtUnidadMedida" style=""></span>
+                                </div>
+                            </div>
+
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <a href="profile-posts.html" class="avatar avatar-md">
+                                        <img src="https://grammermx.com/Fotos/<?php echo $nomina?>.png" alt="..." class="avatar-img rounded-circle">
+                                    </a>
+                                </div>
+                                <div class="col ml-n2">
+                                    <strong class="mb-1" id="lblNombre"><?php echo $nombre?></strong><span class="dot dot-lg bg-success ml-1"></span>
+                                    <p class="small text-muted mb-1" id="lblRol">Verificador</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div> <!-- /.col -->
+
+                <div class="col-md-6 col-xl-6 mb-4">
+                    <div class="card shadow">
+                        <div class="card-header">
+                            <span class="card-title">Marbete : <span id="lblFolio"></span></span>
+                            <a class="float-right small text-muted" href="#!"><i class="fe fe-more-vertical fe-12"></i></a>
+                        </div>
+                        <div class="card-body my-n2">
+                            <div class="d-flex">
+                                <div class="flex-fill">
+                                    <span class="card-title">Numero de parte</span>
+                                    <h4 class="mb-0" id="lblNumeroParte"></h4>
+                                </div>
+                                <div class="flex-fill text-right">
+                                    <p class="mb-0 small" id="lblCosto"></p>
+                                    <p class="text-muted mb-0 small">Pesos</p>
+                                </div>
+                            </div>
+                            <div class="d-flex" style="display: none !important">
+                                <div class="flex-fill">
+                                    <span class="card-title">Cantidad</span>
+                                    <h4 class="mb-0" id="lblCantidad"> <span id="lblUm"></span></h4>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex">
+                                <div class="flex-fill">
+                                    <span class="card-title">Descripcion</span>
+                                    <h4 class="mb-0" id="lblDescripcion"></h4>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex">
+                                <div class="flex-fill">
+                                    <span class="card-title">Storage Bin</span>
+                                    <h4 class="mb-0" id="lblStorageBin"></h4>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex">
+                                <div class="flex-fill">
+                                    <span class="card-title">Monto Total</span>
+                                    <h4 class="mb-0" id="lblMontoTotal"></h4>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <a href="profile-posts.html" class="avatar avatar-md">
+                                        <img id="imagenCapturador" alt="..." class="avatar-img rounded-circle">
+                                    </a>
+                                </div>
+                                <div class="col ml-n2">
+                                    <strong class="mb-1" id="lblNombreCapturador"></strong><span class="dot dot-lg bg-success ml-1"></span>
+                                    <p class="small text-muted mb-1" id="lblRol">Capturista</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <button id="btnFin" class="btn mb-2 btn-success float-right text-white" onclick="enviarDatos()">Finalizar Captura<span
+                                        class="fe fe-chevron-right fe-16 ml-2" ></span></button>
+                        </div> <!-- .card-body -->
+                    </div> <!-- .card -->
+                </div> <!-- .col -->
+
+            </div> <!-- .row -->
+        </div> <!-- .container-fluid -->
+
+
+
+
+
+
+
     </main> <!-- main -->
 
 </div> <!-- .wrapper -->
@@ -221,6 +330,22 @@ if (strlen($nomina) == 7) {
                         if (data.data[i].Estatus === '1'){
                             if (data.data[i].StorageUnit === 'NA'){
 
+                                numeroParte=data.data[0].NumeroParte;
+                                storageBin=data.data[0].StorageBin;
+                                cantidad=data.data[0].SegundoConteo;
+                                var usuario = data.data[0].Usuario;
+                                var separado = usuario.split("-"); // Esto dividirá la cadena en dos partes en el lugar donde se encuentra el guión.
+                                var numeroNomina = separado[0]; // Esto te dará la primera parte, que es el número de nómina.
+                                var nombre = separado[1]; // Esto te dará la segunda parte, que es el nombre.
+                                document.getElementById("lblNombreCapturador").innerText = nombre;
+                                document.getElementById("imagenCapturador").src = 'https://grammermx.com/Fotos/'+numeroNomina+'.png';
+                                document.getElementById("reader").style.display = 'none';
+                                document.getElementById("lblFolio").innerHTML = marbete;
+                                document.getElementById("pasoDos").style.display = 'block';
+                                document.getElementById("pasoUno").style.display = 'none';
+                                document.getElementById("lblStorageBin").innerText = storageBin;
+                                document.getElementById("lblNumeroParte").innerText = numeroParte;
+                                document.getElementById("lblCantidad").innerText = data.data[0].SegundoConteo;
 
                             }else{
                                 numeroParte=data.data[i].NumeroParte;
