@@ -54,7 +54,13 @@ try {
         echo json_encode(["success" => false]);
         throw new Exception('Error al ejecutar la consulta');
     } else {
-        // Actualizar el estatus de los Storage_Unit
+
+        $stmt3 = $conex->prepare("UPDATE `Storage_Unit` SET `Estatus`='0' WHERE `FolioMarbete`=?");
+        $stmt3->bind_param("s", $marbete);
+        $stmt3->execute();
+        $stmt3->close();
+
+
         $stmt2 = $conex->prepare("UPDATE `Storage_Unit` SET `Estatus`='1',`Conteo`=?,`FolioMarbete`=?,`Cantidad`=? WHERE `Id_StorageUnit` = ?");
         foreach ($storageUnits as $storageUnit => $details) {
             $cantidad = $details['cantidad'];

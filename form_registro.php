@@ -535,7 +535,7 @@ if (strlen($nomina) == 7) {
                             var row = table.insertRow(-1); // Crea una nueva fila al final de la tabla
                             var cell1 = row.insertCell(0); // Crea una nueva celda en la fila
                             var cell2 = row.insertCell(1); // Crea otra nueva celda en la fila
-                            var cell3 = row.insertCell(2); // Crea otra nueva celda en la fila
+                            var cell3 = row.insertCell(2);
                             cell1.innerHTML = data.data[i].Id_StorageUnit;
                             cell2.innerHTML = numeroParteUnit;
                             cell3.innerHTML = cantidad;
