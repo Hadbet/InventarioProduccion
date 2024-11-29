@@ -246,34 +246,37 @@ if (strlen($nomina) == 7) {
             }
         });
     }
-
-    $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaUbicacionProduccion.php?numeroParte='+numeroParteU, function (data) {
-        if (data && data.data && data.data.length > 0) {
-            for (var i = 0; i < data.data.length; i++) {
-                if (data.data[i].PVB === '<?php echo $bin;?>') {
-                    document.getElementById('lblDescripcion').innerText = descripcionU;
-                    document.getElementById('txtUnidadMedida').innerText = umU;
-                    document.getElementById('lblCosto').innerText = costoUnitarioU;
-                    document.getElementById('txtCantidad').disabled = false;
-                    document.getElementById('txtCantidad').focus()
-                    bandera=1;
-                } else {
-                    bandera=0;
-                    Swal.fire({
-                        title: "El numero de parte no existe en esa ubicacion",
-                        text: "Verificalo con la mesa de control",
-                        icon: "error"
-                    });
+    function validarUbicacion(numeroParteU,descripcionU,umU,costoUnitarioU) {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaUbicacionProduccion.php?numeroParte='+numeroParteU, function (data) {
+            if (data && data.data && data.data.length > 0) {
+                for (var i = 0; i < data.data.length; i++) {
+                    if (data.data[i].PVB === '<?php echo $bin;?>') {
+                        document.getElementById('lblDescripcion').innerText = descripcionU;
+                        document.getElementById('txtUnidadMedida').innerText = umU;
+                        document.getElementById('lblCosto').innerText = costoUnitarioU;
+                        document.getElementById('txtCantidad').disabled = false;
+                        document.getElementById('txtCantidad').focus()
+                        bandera=1;
+                    } else {
+                        bandera=0;
+                        Swal.fire({
+                            title: "El numero de parte no existe en esa ubicacion",
+                            text: "Verificalo con la mesa de control",
+                            icon: "error"
+                        });
+                    }
                 }
+            } else {
+                Swal.fire({
+                    title: "El numero de parte no pertenece a esta ubicacion",
+                    text: "Verificalo con la mesa de control",
+                    icon: "error"
+                });
             }
-        } else {
-            Swal.fire({
-                title: "El numero de parte no pertenece a esta ubicacion",
-                text: "Verificalo con la mesa de control",
-                icon: "error"
-            });
-        }
-    });
+        });
+    }
+
+
 
     var costoUnitario=0;
     var bandera=0;
