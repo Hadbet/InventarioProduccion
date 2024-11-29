@@ -265,8 +265,7 @@ if (strlen($nomina) == 7) {
                                 document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
                                 document.getElementById("pasoDos").style.display = 'block';
                                 document.getElementById("pasoUno").style.display = 'none';
-                                html5QrcodeScanner.clear();
-                                html5QrcodeScanner.pause();
+                                limpiarEscan();
                             }else{
                                 Swal.fire({
                                     title: "El marbete no pertenece al area",
@@ -298,8 +297,7 @@ if (strlen($nomina) == 7) {
                                 document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
                                 document.getElementById("pasoDos").style.display = 'block';
                                 document.getElementById("pasoUno").style.display = 'none';
-                                html5QrcodeScanner.clear();
-                                html5QrcodeScanner.pause();
+                                limpiarEscan();
                             }else{
                                 Swal.fire({
                                     title: "El marbete no pertenece al area",
@@ -352,8 +350,7 @@ if (strlen($nomina) == 7) {
                                 document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
                                 document.getElementById("pasoDos").style.display = 'block';
                                 document.getElementById("pasoUno").style.display = 'none';
-                                html5QrcodeScanner.clear();
-                                html5QrcodeScanner.pause();
+                                limpiarEscan();
                             }else{
                                 Swal.fire({
                                     title: "El marbete no pertenece al area",
@@ -387,8 +384,7 @@ if (strlen($nomina) == 7) {
                                 document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
                                 document.getElementById("pasoDos").style.display = 'block';
                                 document.getElementById("pasoUno").style.display = 'none';
-                                html5QrcodeScanner.clear();
-                                html5QrcodeScanner.pause();
+                                limpiarEscan();
                             }else{
                                 Swal.fire({
                                     title: "El marbete no pertenece al area",
@@ -541,8 +537,6 @@ if (strlen($nomina) == 7) {
                             cell1.innerHTML = data.data[i].Id_StorageUnit;
                             cell2.innerHTML = numeroParteUnit;
                             cell3.innerHTML = cantidad;
-                            //html5QrcodeScannerUnit.clear();
-                            //html5QrcodeScannerUnit.pause();
                             Swal.fire({
                                 title: "Storage unit escaneado",
                                 text: "Unit : "+data.data[i].Id_StorageUnit,
@@ -682,12 +676,7 @@ if (strlen($nomina) == 7) {
 
     function escaneoUnitAbierto() {
 
-        if (html5QrcodeScanner) {
-            html5QrcodeScanner.clear();
-        }
-        if (html5QrcodeScannerUnit) {
-            html5QrcodeScannerUnit.clear();
-        }
+        limpiarEscan();
 
         html5QrcodeScannerUnitA = new Html5QrcodeScanner(
             "readerAbierto",
@@ -695,6 +684,18 @@ if (strlen($nomina) == 7) {
             /* verbose= */ false);
         document.getElementById("readerAbierto").style.display = 'block';
         html5QrcodeScannerUnitA.render(lecturaCorrectaUnitAbierto, errorLecturaAbierto);
+    }
+
+    function limpiarEscan() {
+        if (html5QrcodeScanner) {
+            html5QrcodeScanner.clear();
+        }
+        if (html5QrcodeScannerUnit) {
+            html5QrcodeScannerUnit.clear();
+        }
+        if (html5QrcodeScannerUnitA) {
+            html5QrcodeScannerUnitA.clear();
+        }
     }
 
     function cargaCajaAbierta() {
