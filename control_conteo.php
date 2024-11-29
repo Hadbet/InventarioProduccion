@@ -142,6 +142,20 @@ if (strlen($nomina) == 7) {
 
 <script>
 
+    estatusConteo();
+    function estatusConteo() {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaAreaDetalle.php?area=<?php echo $area;?>', function (data) {
+            for (var i = 0; i < data.data.length; i++) {
+                var auxConteo = data.data[i].Conteo;
+
+                if (auxConteo===2){
+                    verificacion();
+                }
+
+            }
+        });
+    }
+
     function verificacion() {
 
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaSegundosConteosValidacion.php?area='+<?php echo $area;?>, function (data) {
