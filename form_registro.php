@@ -225,25 +225,22 @@ if (strlen($nomina) == 7) {
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body text-center">
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                <form class="form-inline justify-content-center">
-                    <input class="form-control form-control-lg mr-sm-2 bg-transparent" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-primary btn-lg mb-2 my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                <p> Storage Unit. </p>
+                <div class="form-inline justify-content-center">
+                    <input id="txtStorageUnitAgregar" class="form-control form-control-lg mr-sm-2 bg-transparent" type="text">
+                </div>
+
+                <p> Ingresar NP. </p>
+                <div class="form-inline justify-content-center">
+                    <input id="txtNumeroParteAgregar" class="form-control form-control-lg mr-sm-2 bg-transparent" type="text">
+                </div>
+
+                <p> Ingresa Cantidad. </p>
+                <div class="form-inline justify-content-center">
+                    <input  id="txtCantidadAgregar"  class="form-control form-control-lg mr-sm-2 bg-transparent" type="text">
+                </div>
 
                 <div class="form-inline justify-content-center">
-                    <label for="txtStorageUnitAgregar">Storage Unit</label>
-                    <input type="text" class="form-control"
-                           id="txtStorageUnitAgregar" name="txtStorageUnitA" value="">
-                    <br>
-                    <label for="txtNumeroParteAgregar">Ingresar NP</label>
-                    <input type="text" class="form-control"
-                           id="txtNumeroParteAgregar" name="txtNumeroParteA" value="" disabled>
-                    <br>
-                    <label for="txtCantidadAgregar">Ingresar la cantidad</label>
-                    <input type="text" class="form-control"
-                           id="txtCantidadAgregar" name="txtCantidadA" value="">
-                    <br>
                     <button id="btnAgregarStorageUnit" onclick="insertStorage()" type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Agregar</button>
                 </div>
 
