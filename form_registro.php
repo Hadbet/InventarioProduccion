@@ -736,7 +736,7 @@ if (strlen($nomina) == 7) {
                     }).then((result) => {
                         /* Read more about handling dismissals below */
                         if (result.dismiss === Swal.DismissReason.timer) {
-                            location.reload();
+
                         }
                     });
                 } else {
