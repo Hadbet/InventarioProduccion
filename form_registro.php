@@ -229,17 +229,17 @@ if (strlen($nomina) == 7) {
                 <div class="form-inline justify-content-center">
                     <input id="txtStorageUnitAgregar" class="form-control form-control-lg mr-sm-2 bg-transparent" type="text">
                 </div>
-
+                <br>
                 <p> Ingresar NP. </p>
                 <div class="form-inline justify-content-center">
-                    <input id="txtNumeroParteAgregar" class="form-control form-control-lg mr-sm-2 bg-transparent" type="text">
+                    <input disabled id="txtNumeroParteAgregar" class="form-control form-control-lg mr-sm-2 bg-transparent" type="text">
                 </div>
-
+                <br>
                 <p> Ingresa Cantidad. </p>
                 <div class="form-inline justify-content-center">
                     <input  id="txtCantidadAgregar"  class="form-control form-control-lg mr-sm-2 bg-transparent" type="text">
                 </div>
-
+                <br>
                 <div class="form-inline justify-content-center">
                     <button id="btnAgregarStorageUnit" onclick="insertStorage()" type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Agregar</button>
                 </div>
