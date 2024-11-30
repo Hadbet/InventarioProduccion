@@ -216,6 +216,43 @@ if (strlen($nomina) == 7) {
 </div>
 
 
+<button type="button" style="display: none" id="btnAgregarStorage" class="btn mb-2 btn-secondary" data-toggle="modal" data-target=".modal-full">Full Screen</button>
+
+<div class="modal fade modal-full" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <button aria-label="" type="button" class="close px-2" data-dismiss="modal" aria-hidden="true">
+        <span aria-hidden="true">×</span>
+    </button>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                <form class="form-inline justify-content-center">
+                    <input class="form-control form-control-lg mr-sm-2 bg-transparent" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-primary btn-lg mb-2 my-2 my-sm-0" type="submit">Search</button>
+                </form>
+
+                <div class="form-inline justify-content-center">
+                    <label for="txtStorageUnitAgregar">Storage Unit</label>
+                    <input type="text" class="form-control"
+                           id="txtStorageUnitAgregar" name="txtStorageUnitA" value="">
+                    <br>
+                    <label for="txtNumeroParteAgregar">Ingresar NP</label>
+                    <input type="text" class="form-control"
+                           id="txtNumeroParteAgregar" name="txtNumeroParteA" value="" disabled>
+                    <br>
+                    <label for="txtCantidadAgregar">Ingresar la cantidad</label>
+                    <input type="text" class="form-control"
+                           id="txtCantidadAgregar" name="txtCantidadA" value="">
+                    <br>
+                    <button id="btnAgregarStorageUnit" onclick="insertStorage()" type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">Agregar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <?php include 'estaticos/scriptEstandar.php'; ?>
 
 <script src="js/apps.js"></script>
@@ -231,6 +268,7 @@ if (strlen($nomina) == 7) {
 
     var numeroParte;
     var storageBin;
+    var storageType;
 
     var numeroParteUnit;
     var cantidad;
@@ -261,6 +299,7 @@ if (strlen($nomina) == 7) {
                             if (data.data[i].Area === '<?php echo $area;?>'){
                                 numeroParte=data.data[i].NumeroParte;
                                 storageBin=data.data[i].StorageBin;
+                                storageType=data.data[i].StorageType;
                                 document.getElementById("reader").style.display = 'none';
                                 document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
                                 document.getElementById("pasoDos").style.display = 'block';
@@ -435,14 +474,20 @@ if (strlen($nomina) == 7) {
     var addedStorageUnits = {};
 
     function storageUnitManual() {
-        console.log('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value+'&bin='+storageBin+'&conteo='+auxConteo);
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value+'&bin='+storageBin+'&conteo='+auxConteo, function (data) {
             if (data.Estatus) {
-                Swal.fire({
-                    title: data.Estatus,
-                    text: "Escanea otro storage unit",
-                    icon: "error"
-                });
+                if (data.Estatus=='No existe el storage unit'){
+                    document.getElementById("txtStorageUnitAgregar").value = document.getElementById("txtStorageUnit").value;
+                    document.getElementById("txtNumeroParteAgregar").value = numeroParte;
+                    document.getElementById("btnAgregarStorage").click();
+                }else{
+                    Swal.fire({
+                        title: data.Estatus,
+                        text: "Escanea otro storage unit",
+                        icon: "error"
+                    });
+                }
+
             } else {
                 for (var i = 0; i < data.data.length; i++) {
                     if (data.data[i].Id_StorageUnit) {
@@ -627,6 +672,82 @@ if (strlen($nomina) == 7) {
     }
 
 
+
+
+    function insertStorage() {
+        var cantidad = document.getElementById("txtCantidadAgregar").value;
+        var unit = document.getElementById("txtStorageUnitAgregar").value;
+
+        if (addedStorageUnits[unit]) {
+            Swal.fire({
+                title: "El Storage Unit ya fue escaneado",
+                text: "Unit : " + unit,
+                icon: "error"
+            });
+            return;
+        }
+
+        addedStorageUnits[unit] = {
+            numeroParte: numeroParte,
+            cantidad: cantidad
+        };
+
+        var table = document.getElementById("data-table");
+        var row = table.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        cell1.innerHTML = unit;
+        cell2.innerHTML = numeroParte;
+        cell3.innerHTML = cantidad;
+
+        var storageUnits = addedStorageUnits;
+        console.log(storageUnits);
+
+        var formData = new FormData();
+        formData.append('storageUnit', unit);
+        formData.append('numeroParte', numeroParte);
+        formData.append('cantidad', cantidad);
+        formData.append('storageBin', storageBin);
+        formData.append('storageType', storageType);
+        formData.append('conteo', auxConteo);
+
+        fetch('https://grammermx.com/Logistica/Inventario/dao/guardarStorageUnit.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    let timerInterval;
+                    Swal.fire({
+                        title: "¡Gracias!.Se finalizo la creacion del storage unit",
+                        html: "Te regresaremos a la pagina <b></b> milliseconds.",
+                        timer: 1500,
+                        timerProgressBar: true,
+                        icon: "success",
+                        didOpen: () => {
+                            Swal.showLoading();
+                            const timer = Swal.getPopup().querySelector("b");
+                            timerInterval = setInterval(() => {
+                                timer.textContent = `${Swal.getTimerLeft()}`;
+                            }, 100);
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval);
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            location.reload();
+                        }
+                    });
+                } else {
+                    console.log("Hubo un error en la operación");
+                    console.log("Las unidades de almacenamiento que fallaron son: ", data.failedUnits);
+                }
+            });
+    }
 
 
     function lecturaCorrectaUnitAbierto(decodedText, decodedResult) {

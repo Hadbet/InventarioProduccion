@@ -13,6 +13,15 @@ function ContadorApu($storageUnit,$bin,$conteo)
     $con = new LocalConector();
     $conex = $con->conectar();
 
+    // Consulta para verificar si el storageUnit existe
+    $check = mysqli_query($conex, "SELECT * FROM `Storage_Unit` WHERE `Id_StorageUnit` = '$storageUnit'");
+
+    // Si no hay resultados, el storageUnit no existe
+    if (mysqli_num_rows($check) == 0) {
+        echo json_encode(array("Estatus" => "No existe el storage unit"));
+        return;
+    }
+
     $datos = mysqli_query($conex, "SELECT * FROM `Storage_Unit` WHERE `Id_StorageUnit` = '$storageUnit' and `Storage_Bin`='$bin'");
 
     if (mysqli_num_rows($datos) == 0) {
@@ -33,8 +42,6 @@ function ContadorApu($storageUnit,$bin,$conteo)
     }else{
         echo json_encode(array("data" => $resultado));
     }
-
-
 }
 
 ?>
