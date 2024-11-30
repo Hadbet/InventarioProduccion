@@ -548,11 +548,18 @@ if (strlen($nomina) == 7) {
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+decodedText+'&bin='+storageBin+'&conteo='+auxConteo, function (data) {
 
             if (data.Estatus) {
-                Swal.fire({
-                    title: "El storage unit ya existe",
-                    text: "Escanea otro storage unit",
-                    icon: "error"
-                });
+                if (data.Estatus=='No existe el storage unit'){
+                    document.getElementById("txtStorageUnitAgregar").value = decodedText;
+                    document.getElementById("txtNumeroParteAgregar").value = numeroParte;
+                    document.getElementById("btnAgregarStorage").click();
+                }else{
+                    Swal.fire({
+                        title: data.Estatus,
+                        text: "Escanea otro storage unit",
+                        icon: "error"
+                    });
+                }
+
             } else {
                 for (var i = 0; i < data.data.length; i++) {
                     if (data.data[i].Id_StorageUnit) {
