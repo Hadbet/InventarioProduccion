@@ -7,6 +7,7 @@ try {
     $storageBin = $_POST['storageBin'];
     $comentarios = $_POST['comentarios'];
     $folioMarbete = $_POST['folioMarbete'];
+    $storageType = $_POST['storageType'];
 
     $parts = explode('.', $folioMarbete);
 
@@ -21,14 +22,14 @@ try {
     $DateAndTime = $Object->format("Y/m/d h:i:s");
 
 
-    $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `Fecha`=?, `Usuario`=?, `Estatus`='2', `PrimerConteo`=?, `SegundoConteo`=?, `TercerConteo`=?, `Comentario`=?, `NumeroParte`=?, `StorageBin`=? WHERE `FolioMarbete`=?");
+    $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `Fecha`=?, `Usuario`=?, `Estatus`='2', `PrimerConteo`=?, `SegundoConteo`=?, `TercerConteo`=?, `Comentario`=?, `NumeroParte`=?, `StorageBin`=?,`StorageType`=? WHERE `FolioMarbete`=?");
 
     // Dependiendo del valor de conteo, asignamos la cantidad a la columna correspondiente
     $primerConteo = $conteo == 1 ? $cantidad : null;
     $segundoConteo = $conteo == 2 ? $cantidad : null;
     $tercerConteo = $conteo == 3 ? $cantidad : null;
 
-    $stmt->bind_param("sssssssss", $DateAndTime, $nombre, $primerConteo, $segundoConteo, $tercerConteo, $comentarios,$numeroParte,$storageBin, $marbete);
+    $stmt->bind_param("ssssssssss", $DateAndTime, $nombre, $primerConteo, $segundoConteo, $tercerConteo, $comentarios,$numeroParte,$storageBin,$storageType, $marbete);
 
     $stmt->execute();
 
