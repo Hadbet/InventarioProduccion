@@ -260,6 +260,13 @@ if (strlen($nomina) == 7) {
 <script src="https://unpkg.com/tableexport.jquery.plugin/libs/js-xlsx/xlsx.core.min.js"></script>
 <script>
 
+    $('#data-table').find('td').each(function(){
+        var text = $(this).text();
+        if (!isNaN(text)) {
+            $(this).text(text.toString());
+        }
+    });
+
     $('#copy-button').click(function() {
         var range = document.createRange();
         range.selectNode(document.getElementById('data-table'));
