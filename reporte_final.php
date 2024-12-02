@@ -62,12 +62,12 @@ if (strlen($nomina) == 7) {
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-3 text-center">
-                          <span class="circle circle-sm bg-primary-light">
+                          <span class="circle circle-sm bg-danger-light">
                             <i class="fe fe-16 fe-trending-down text-white mb-0"></i>
                           </span>
                                         </div>
                                         <div class="col pr-0">
-                                            <p class="small text-muted mb-0">Partes con negativos</p>
+                                            <p class="small text-muted mb-0 text-white">Partes con negativos</p>
                                             <span class="h3 mb-0 text-white">$1250</span>
                                         </div>
                                     </div>
@@ -80,12 +80,12 @@ if (strlen($nomina) == 7) {
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-3 text-center">
-                          <span class="circle circle-sm bg-primary-light">
+                          <span class="circle circle-sm bg-success-light">
                             <i class="fe fe-16 fe-trending-up text-white mb-0"></i>
                           </span>
                                         </div>
                                         <div class="col pr-0">
-                                            <p class="small text-muted mb-0">Partes con positivos</p>
+                                            <p class="small text-muted mb-0 text-white">Partes con positivos</p>
                                             <span class="h3 mb-0 text-white">$1250</span>
                                         </div>
                                     </div>
@@ -98,12 +98,12 @@ if (strlen($nomina) == 7) {
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-3 text-center">
-                          <span class="circle circle-sm bg-primary-light">
+                          <span class="circle circle-sm bg-danger-light">
                             <i class="fe fe-16 fe-alert-circle text-white mb-0"></i>
                           </span>
                                         </div>
                                         <div class="col pr-0">
-                                            <p class="small text-muted mb-0">Costo Negativo</p>
+                                            <p class="small text-muted mb-0 text-white" >Costo Negativo</p>
                                             <span class="h3 mb-0 text-white">$1250</span>
                                         </div>
                                     </div>
@@ -116,12 +116,12 @@ if (strlen($nomina) == 7) {
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-3 text-center">
-                          <span class="circle circle-sm bg-primary-light">
+                          <span class="circle circle-sm bg-success-light">
                             <i class="fe fe-16 fe-dollar-sign text-white mb-0"></i>
                           </span>
                                         </div>
                                         <div class="col pr-0">
-                                            <p class="small text-muted mb-0">Costo Positivas</p>
+                                            <p class="small text-muted mb-0 text-white">Costo Positivas</p>
                                             <span class="h3 mb-0 text-white">$1250</span>
                                         </div>
                                     </div>
