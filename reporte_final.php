@@ -261,8 +261,8 @@ if (strlen($nomina) == 7) {
 
     // Primera consulta
     $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaReporteFinalUno.php', function (data) {
-        for (var i = 0; i < data.length; i++) {
-            let item = data[i];
+        for (var i = 0; i < data.data.length; i++) {
+            let item = data.data[i];
             formattedData.push({
                 P: '*',
                 L: '',
@@ -284,8 +284,8 @@ if (strlen($nomina) == 7) {
     }).done(function() {
         // Segunda consulta
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaReporteFinalDos.php', function (data) {
-            for (var i = 0; i < data.length; i++) {
-                let item = data[i];
+            for (var i = 0; i < data.data.length; i++) {
+                let item = data.data[i];
                 formattedData.push({
                     P: '',
                     L: '*',
@@ -307,8 +307,8 @@ if (strlen($nomina) == 7) {
         }).done(function() {
             // Tercera consulta
             $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaReporteFinalTres.php', function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    let item = data[i];
+                for (var i = 0; i < data.data.length; i++) {
+                    let item = data.data[i];
                     formattedData.push({
                         P: '',
                         L: '',
