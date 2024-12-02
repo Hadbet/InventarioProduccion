@@ -70,17 +70,17 @@ if (strlen($nomina) == 7) {
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">$</div>
                                             </div>
-                                            <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+                                            <input type="text" class="form-control" id="inlineFormInputGroupUsername2" >
                                         </div>
 
                                         <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Diferencias en cantidad mayor a:</label>
-                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2">
 
                                         <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Numero Parte</label>
-                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2">
 
                                         <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Folio</label>
-                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2">
 
                                         <button type="submit" class="btn btn-primary mb-2">Buscar</button>
                                     </form>
