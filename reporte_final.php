@@ -168,7 +168,7 @@ if (strlen($nomina) == 7) {
                         <div class="col-md-12">
                             <div class="card shadow">
                                 <div class="card-body">
-                                    <button id="export-button" class="btn btn-success">Exportar a Excel</button>
+                                    <button id="export-button" class="btn btn-success text-white">Exportar a Excel</button>
                                     <button id="copy-button" class="btn btn-info">Copiar al portapapeles</button>
                                     <!-- table -->
                                     <table class="table datatables" id="data-table">
