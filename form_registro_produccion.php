@@ -226,6 +226,8 @@ if (strlen($nomina) == 7) {
         });
     }
 
+
+
     function buscarType() {
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaTypes.php?bin=<?php echo $bin;?>', function (data) {
             if (data.data.length > 0) {
