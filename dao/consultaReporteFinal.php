@@ -12,7 +12,7 @@ function ContadorApu()
     $datos = mysqli_query($conex, "SELECT 
     ISap.GrammerNo, 
     ISap.STBin, 
-    ISap.Cantidad AS 'Total InventarioSap', 
+    ISap.Cantidad AS 'Total_InventarioSap', 
     BInv.NumeroParte, 
     BInv.StorageBin, 
     SUM(
@@ -21,11 +21,11 @@ function ContadorApu()
             CASE WHEN BInv.SegundoConteo != 0 THEN BInv.SegundoConteo END, 
             BInv.PrimerConteo 
         )
-    ) AS 'Total Bitacora_Inventario', 
+    ) AS 'Total_Bitacora_Inventario', 
     BInv.FolioMarbete,
     Part.Descripcion,
     Part.UM,
-    (Part.Por / Part.Costo) AS 'Costo Unitario',
+    (Part.Por / Part.Costo) AS 'CostoUnitario',
     CASE 
         WHEN BInv.TercerConteo != 0 THEN 'Con tercer conteo'
         WHEN BInv.SegundoConteo != 0 THEN 'Con segundo conteo'

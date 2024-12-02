@@ -154,8 +154,8 @@ if (strlen($nomina) == 7) {
             var totalSap = 0;
             var totalConteo = 0;
             for (var i = 0; i < data.data.length; i++) {
-                totalSap += parseFloat(data.data[i]['Total InventarioSap']);
-                totalConteo += parseFloat(data.data[i]['Total Bitacora_Inventario']);
+                totalSap += parseFloat(data.data[i].Total_InventarioSap);
+                totalConteo += parseFloat(data.data[i].Total_Bitacora_Inventario);
                 var row = table.insertRow(-1); // Crea una nueva fila al final de la tabla
                 var cell1 = row.insertCell(0); // Crea una nueva celda en la fila
                 var cell2 = row.insertCell(1); // Crea otra nueva celda en la fila
@@ -178,12 +178,12 @@ if (strlen($nomina) == 7) {
                 cell4.innerHTML = data.data[i].GrammerNo; // GrammerNo
                 cell5.innerHTML = data.data[i].Descripcion; // Descripcion
                 cell6.innerHTML = data.data[i].UM; // UM
-                cell7.innerHTML = data.data[i]['Costo Unitario']; // Costo/Und
+                cell7.innerHTML = data.data[i].CostoUnitario; // Costo/Und
                 cell8.innerHTML = ""; // StLocation
                 cell9.innerHTML = data.data[i].STBin; // StBin
                 cell10.innerHTML = data.data[i].FolioMarbete; // Folio
-                cell11.innerHTML = data.data[i]['Total InventarioSap']; // Sap
-                cell12.innerHTML = data.data[i]['Total Bitacora_Inventario']; // Conteo
+                cell11.innerHTML = data.data[i].Total_InventarioSap; // Sap
+                cell12.innerHTML = data.data[i].Total_Bitacora_Inventario; // Conteo
                 cell13.innerHTML = ""; // Dif
                 cell14.innerHTML = ""; // Costo
                 cell15.innerHTML = data.data[i].Comentario; // Comentario
