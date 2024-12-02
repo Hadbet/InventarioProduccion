@@ -337,21 +337,21 @@ if (strlen($nomina) == 7) {
                     let item = formattedData[i];
                     $('#data-table tbody').append(
                         '<tr>' +
-                        '<td>' + item.P + '</td>' +
-                        '<td>' + item.L + '</td>' +
-                        '<td>' + item.M + '</td>' +
-                        '<td>' + item.GrammerNo + '</td>' +
-                        '<td>' + item.Descripcion + '</td>' +
-                        '<td>' + item.UM + '</td>' +
-                        '<td>' + item.Costo_Unitario + '</td>' +
-                        '<td>' + item.StLocation + '</td>' +
-                        '<td>' + item.StBin + '</td>' +
-                        '<td>' + item.Folio + '</td>' +
-                        '<td>' + item.Sap + '</td>' +
-                        '<td>' + item.Conteo + '</td>' +
-                        '<td>' + item.Dif + '</td>' +
-                        '<td>' + item.Costo + '</td>' +
-                        '<td>' + item.Comentario + '</td>' +
+                        '<td>' + (item.P || '') + '</td>' +
+                        '<td>' + (item.L || '') + '</td>' +
+                        '<td>' + (item.M || '') + '</td>' +
+                        '<td>' + (item.GrammerNo || '') + '</td>' +
+                        '<td>' + (item.Descripcion || '') + '</td>' +
+                        '<td>' + (item.UM || '') + '</td>' +
+                        '<td>' + (item.Costo_Unitario || '') + '</td>' +
+                        '<td>' + (item.StLocation || '') + '</td>' +
+                        '<td>' + (item.StBin || '') + '</td>' +
+                        '<td>' + (item.Folio || '') + '</td>' +
+                        '<td>' + (item.Sap || '') + '</td>' +
+                        '<td>' + (item.Conteo || '') + '</td>' +
+                        '<td>' + (item.Dif || '') + '</td>' +
+                        '<td>' + (item.Costo || '') + '</td>' +
+                        '<td>' + (item.Comentario || '') + '</td>' +
                         '</tr>'
                     );
                 }
