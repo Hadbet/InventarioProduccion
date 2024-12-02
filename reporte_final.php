@@ -270,7 +270,28 @@ if (strlen($nomina) == 7) {
     });
 
     $('#export-button').click(function() {
-        $('#data-table').tableExport({type:'xlsx'});
+        $('#data-table').tableExport({
+            type:'xlsx',
+            fileName: 'reporte_final_inventario',
+            displayTableName: true,
+            exportHiddenCells: false,
+            headers: true,
+            footers: true,
+            formats: ['xlsx'],
+            filename: 'reporte_final_inventario',
+            sheetname: 'reporte_final_inventario',
+            bootstrap: false,
+            exportButtons: true,
+            position: 'bottom',
+            ignoreRows: null,
+            ignoreCols: null,
+            trimWhitespace: false,
+            RTL: false,
+            sheetnames: false,
+            onMsoNumberFormat: function(cell, row, col) {
+                if (col === 3) return '\\@';
+            }
+        });
     });
 
     function inicioTabla() {
