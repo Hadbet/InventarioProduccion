@@ -147,6 +147,7 @@ if (strlen($nomina) == 7) {
 <?php include 'estaticos/scriptEstandar.php'; ?>
 
 <script>
+    inicioTabla();
     function inicioTabla() {
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaReporteFinal.php', function (data) {
             var table = document.getElementById("data-table");
