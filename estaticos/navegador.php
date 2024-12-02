@@ -82,7 +82,7 @@ if ($tipoArea==0){
                     <i class="fe fe-archive fe-16"></i>
                     <span class="ml-3 item-text">Historicos</span>
                 </a>
-                <ul class="collapse list-unstyled pl-4 w-100" id="tables">
+                <ul class="collapse list-unstyled pl-4 w-100 collapse show" id="tables">
                     <li class="nav-item">
                         <a class="nav-link pl-3" href="listas_base.php"><span class="ml-1 item-text">Marbetes</span></a>
                     </li>
@@ -93,7 +93,7 @@ if ($tipoArea==0){
                     <i class="fe fe-codepen fe-16"></i>
                     <span class="ml-3 item-text">Bases de datos</span>
                 </a>
-                <ul class="collapse list-unstyled pl-4 w-100" id="bases">
+                <ul class="collapse list-unstyled pl-4 w-100 collapse show" id="bases">
                     <li class="nav-item">
                         <a class="nav-link pl-3" href="control_areas_admin.php"><span class="ml-1 item-text">Areas</span></a>
                     </li>
@@ -113,7 +113,7 @@ if ($tipoArea==0){
                     <i class="fe fe-book fe-16"></i>
                     <span class="ml-3 item-text">Reportes</span>
                 </a>
-                <ul class="collapse list-unstyled pl-4 w-100" id="reportes">
+                <ul class="collapse list-unstyled pl-4 w-100 collapse show" id="reportes">
                     <li class="nav-item">
                         <a class="nav-link pl-3" href="carga_descarga.php"><span class="ml-1 item-text">Reportes en txt</span></a>
                     </li>
