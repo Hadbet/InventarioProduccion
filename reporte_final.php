@@ -168,6 +168,8 @@ if (strlen($nomina) == 7) {
                         <div class="col-md-12">
                             <div class="card shadow">
                                 <div class="card-body">
+                                    <button id="export-button" class="btn btn-success">Exportar a Excel</button>
+                                    <button id="copy-button" class="btn btn-info">Copiar al portapapeles</button>
                                     <!-- table -->
                                     <table class="table datatables" id="data-table">
                                         <thead>
@@ -253,8 +255,23 @@ if (strlen($nomina) == 7) {
 </div> <!-- .wrapper -->
 
 <?php include 'estaticos/scriptEstandar.php'; ?>
-
+<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+<script src="https://unpkg.com/tableexport.jquery.plugin/libs/FileSaver/FileSaver.min.js"></script>
+<script src="https://unpkg.com/tableexport.jquery.plugin/libs/js-xlsx/xlsx.core.min.js"></script>
 <script>
+
+    $('#copy-button').click(function() {
+        var range = document.createRange();
+        range.selectNode(document.getElementById('data-table'));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+    });
+
+    $('#export-button').click(function() {
+        $('#data-table').tableExport({type:'xlsx'});
+    });
 
     function inicioTabla() {
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaReporteFinal.php', function (data) {
