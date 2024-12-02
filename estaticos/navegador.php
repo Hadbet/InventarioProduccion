@@ -58,7 +58,7 @@ if ($tipoArea==0){
         </p>
         <ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item dropdown">
-                <a href="#forms" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                <a href="#forms" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle nav-link">
                 <i class="fe fe-feather fe-16"></i>
                     <span class="ml-3 item-text">Inicio</span>
                 </a>
@@ -78,7 +78,7 @@ if ($tipoArea==0){
                 </ul>
             </li>
             <li class="nav-item dropdown">
-                <a href="#tables" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                <a href="#tables" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle nav-link">
                     <i class="fe fe-archive fe-16"></i>
                     <span class="ml-3 item-text">Historicos</span>
                 </a>
@@ -89,7 +89,7 @@ if ($tipoArea==0){
                 </ul>
             </li>
             <li class="nav-item dropdown">
-                <a href="#bases" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                <a href="#bases" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle nav-link">
                     <i class="fe fe-codepen fe-16"></i>
                     <span class="ml-3 item-text">Bases de datos</span>
                 </a>
@@ -109,7 +109,7 @@ if ($tipoArea==0){
                 </ul>
             </li>
             <li class="nav-item dropdown">
-                <a href="#reportes" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                <a href="#reportes" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle nav-link">
                     <i class="fe fe-book fe-16"></i>
                     <span class="ml-3 item-text">Reportes</span>
                 </a>
@@ -119,6 +119,9 @@ if ($tipoArea==0){
                     </li>
                     <li class="nav-item">
                         <a class="nav-link pl-3" href="reporte_diferencias.php"><span class="ml-1 item-text">Reportes de diferencias</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link pl-3" href="reporte_final.php"><span class="ml-1 item-text">Reportes Final</span></a>
                     </li>
                 </ul>
             </li>
