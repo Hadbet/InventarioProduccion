@@ -62,7 +62,7 @@ if ($tipoArea==0){
                 <i class="fe fe-feather fe-16"></i>
                     <span class="ml-3 item-text">Inicio</span>
                 </a>
-                <ul class="collapse list-unstyled pl-4 w-100" id="forms">
+                <ul class="collapse list-unstyled pl-4 w-100 collapse show" id="forms">
                     <li class="nav-item">
                         <a class="nav-link pl-3" href="inicio.php"><span class="ml-1 item-text">DashBoard</span></a>
                     </li>
