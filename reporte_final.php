@@ -57,6 +57,39 @@ if (strlen($nomina) == 7) {
                     <h2 class="mb-2 page-title">Reporte Final Diferencias</h2>
 
                     <div class="row">
+                        <div class="col-md-12">
+                            <div class="card shadow mb-4">
+                                <div class="card-header">
+                                    <strong class="card-title">Filtros detallados</strong>
+                                </div>
+                                <div class="card-body">
+                                    <form class="form-inline">
+
+                                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Diferencia en pesos mayor a:</label>
+                                        <div class="input-group mb-2 mr-sm-2">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">$</div>
+                                            </div>
+                                            <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+                                        </div>
+
+                                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Diferencias en cantidad mayor a:</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+
+                                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Numero Parte</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+
+                                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Folio</label>
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+
+                                        <button type="submit" class="btn btn-primary mb-2">Buscar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
                         <div class="col-md-6 col-xl-3 mb-4">
                             <div class="card shadow bg-danger text-white border-0">
                                 <div class="card-body">
