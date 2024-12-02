@@ -347,9 +347,9 @@ if (strlen($nomina) == 7) {
                         '<td>' + (item.StLocation || '') + '</td>' +
                         '<td>' + (item.StBin || '') + '</td>' +
                         '<td>' + (item.Folio || '') + '</td>' +
-                        '<td>' + (item.Sap || '') + '</td>' +
-                        '<td>' + (item.Conteo || '') + '</td>' +
-                        '<td>' + (item.Dif || '') + '</td>' +
+                        '<td>' + (parseFloat(item.Sap || '').toFixed(2)) + '</td>' +
+                        '<td>' + (parseFloat(item.Conteo || '').toFixed(2)) + '</td>' +
+                        '<td>' + (parseFloat(item.Dif || '').toFixed(2)) + '</td>' +
                         '<td>' + (parseFloat(item.Costo || 0).toFixed(4)) + '</td>' +
                         '<td>' + (item.Comentario || '') + '</td>' +
                         '</tr>'
