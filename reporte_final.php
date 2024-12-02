@@ -289,7 +289,7 @@ if (strlen($nomina) == 7) {
             RTL: false,
             sheetnames: false,
             onMsoNumberFormat: function(cell, row, col) {
-                if (col === 3) return '\\@';
+                if (col === 4) return '\\@';
             }
         });
     });
