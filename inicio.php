@@ -269,7 +269,7 @@
                 data: Estandar
             }],
             chart: {
-                height: 800,
+                height: 750,
                 type: 'line',
                 stacked: false,
             },
