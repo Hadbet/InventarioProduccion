@@ -147,7 +147,7 @@ if (strlen($nomina) == 7) {
 <?php include 'estaticos/scriptEstandar.php'; ?>
 
 <script>
-    inicioTabla();
+
     function inicioTabla() {
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaReporteFinal.php', function (data) {
             var table = document.getElementById("data-table");
@@ -251,6 +251,113 @@ if (strlen($nomina) == 7) {
                 });
         }
     }
+
+
+
+
+
+
+    let formattedData = [];
+
+    // Primera consulta
+    $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaReporteFinalUno.php', function (data) {
+        for (var i = 0; i < data.length; i++) {
+            let item = data[i];
+            formattedData.push({
+                P: '*',
+                L: '',
+                M: '',
+                GrammerNo: item.GrammerNo,
+                Descripcion: item.Descripcion,
+                UM: item.UM,
+                Costo_Unitario: item.Costo_Unitario,
+                StLocation: '',
+                StBin: '',
+                Folio: '',
+                Sap: item.Total_InventarioSap,
+                Conteo: item.Total_Bitacora_Inventario,
+                Dif: item.Diferencia,
+                Costo: '', // Aquí debes calcular el costo
+                Comentario: ''
+            });
+        }
+    }).done(function() {
+        // Segunda consulta
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaReporteFinalDos.php', function (data) {
+            for (var i = 0; i < data.length; i++) {
+                let item = data[i];
+                formattedData.push({
+                    P: '',
+                    L: '*',
+                    M: '',
+                    GrammerNo: item.GrammerNo,
+                    Descripcion: item.Descripcion,
+                    UM: item.UM,
+                    Costo_Unitario: item.Costo_Unitario,
+                    StLocation: '',
+                    StBin: item.STBin,
+                    Folio: '',
+                    Sap: item.Total_InventarioSap,
+                    Conteo: item.Total_Bitacora_Inventario,
+                    Dif: item.Diferencia,
+                    Costo: '', // Aquí debes calcular el costo
+                    Comentario: ''
+                });
+            }
+        }).done(function() {
+            // Tercera consulta
+            $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaReporteFinalTres.php', function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    let item = data[i];
+                    formattedData.push({
+                        P: '',
+                        L: '',
+                        M: '*',
+                        GrammerNo: item.GrammerNo,
+                        Descripcion: item.Descripcion,
+                        UM: item.UM,
+                        Costo_Unitario: item.Costo_Unitario,
+                        StLocation: '',
+                        StBin: '',
+                        Folio: item.FolioMarbete,
+                        Sap: '',
+                        Conteo: item.Total_Conteo,
+                        Dif: '',
+                        Costo: '', // Aquí debes calcular el costo
+                        Comentario: item.Comentario
+                    });
+                }
+            }).done(function() {
+                // Ordenar datos por GrammerNo
+                formattedData.sort(function(a, b) {
+                    return a.GrammerNo - b.GrammerNo;
+                });
+
+                for (var i = 0; i < formattedData.length; i++) {
+                    let item = formattedData[i];
+                    $('#data-table tbody').append(
+                        '<tr>' +
+                        '<td>' + item.P + '</td>' +
+                        '<td>' + item.L + '</td>' +
+                        '<td>' + item.M + '</td>' +
+                        '<td>' + item.GrammerNo + '</td>' +
+                        '<td>' + item.Descripcion + '</td>' +
+                        '<td>' + item.UM + '</td>' +
+                        '<td>' + item.Costo_Unitario + '</td>' +
+                        '<td>' + item.StLocation + '</td>' +
+                        '<td>' + item.StBin + '</td>' +
+                        '<td>' + item.Folio + '</td>' +
+                        '<td>' + item.Sap + '</td>' +
+                        '<td>' + item.Conteo + '</td>' +
+                        '<td>' + item.Dif + '</td>' +
+                        '<td>' + item.Costo + '</td>' +
+                        '<td>' + item.Comentario + '</td>' +
+                        '</tr>'
+                    );
+                }
+            });
+        });
+    });
 
 </script>
 </body>
