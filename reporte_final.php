@@ -54,6 +54,45 @@ if (strlen($nomina) == 7) {
             <div class="row justify-content-center">
                 <div class="col-12">
 
+                    <div class="row">
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow bg-primary text-white border-0">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-3 text-center">
+                          <span class="circle circle-sm bg-primary-light">
+                            <i class="fe fe-16 fe-shopping-bag text-white mb-0"></i>
+                          </span>
+                                        </div>
+                                        <div class="col pr-0">
+                                            <p class="small text-muted mb-0">Monthly Sales</p>
+                                            <span class="h3 mb-0 text-white">$1250</span>
+                                            <span class="small text-muted">+5.5%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4">
+                            <div class="card shadow border-0">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-3 text-center">
+                          <span class="circle circle-sm bg-primary">
+                            <i class="fe fe-16 fe-shopping-cart text-white mb-0"></i>
+                          </span>
+                                        </div>
+                                        <div class="col pr-0">
+                                            <p class="small text-muted mb-0">Orders</p>
+                                            <span class="h3 mb-0">1,869</span>
+                                            <span class="small text-success">+16.5%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <h2 class="mb-2 page-title">Reporte Final Diferencias</h2>
                     <div class="row my-4">
                         <!-- Small table -->
