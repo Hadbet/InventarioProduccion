@@ -101,7 +101,7 @@ if (strlen($nomina) == 7) {
                                         </div>
                                         <div class="col pr-0">
                                             <p class="small mb-0 text-white">Partes con negativos</p>
-                                            <span class="h3 mb-0 text-white">$1250</span>
+                                            <span class="h3 mb-0 text-white" id="partesNegativo">$1250</span>
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@ if (strlen($nomina) == 7) {
                                         </div>
                                         <div class="col pr-0">
                                             <p class="small mb-0 text-white">Partes con positivos</p>
-                                            <span class="h3 mb-0 text-white">$1250</span>
+                                            <span class="h3 mb-0 text-white" id="partesPositivo">$1250</span>
                                         </div>
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@ if (strlen($nomina) == 7) {
                                         </div>
                                         <div class="col pr-0">
                                             <p class="small mb-0 text-white" >Costo Negativo</p>
-                                            <span class="h3 mb-0 text-white">$1250</span>
+                                            <span class="h3 mb-0 text-white" id="costoNegativo">$1250</span>
                                         </div>
                                     </div>
                                 </div>
@@ -155,7 +155,7 @@ if (strlen($nomina) == 7) {
                                         </div>
                                         <div class="col pr-0">
                                             <p class="small mb-0 text-white">Costo Positivas</p>
-                                            <span class="h3 mb-0 text-white">$1250</span>
+                                            <span class="h3 mb-0 text-white" id="costoPositivo">$1250</span>
                                         </div>
                                     </div>
                                 </div>
@@ -260,6 +260,20 @@ if (strlen($nomina) == 7) {
 <script src="https://unpkg.com/tableexport.jquery.plugin/libs/FileSaver/FileSaver.min.js"></script>
 <script src="https://unpkg.com/tableexport.jquery.plugin/libs/js-xlsx/xlsx.core.min.js"></script>
 <script>
+
+    estatusConteo();
+    function estatusConteo() {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaReporteFinalDetalles.php', function (data) {
+            for (var i = 0; i < data.data.length; i++) {
+
+                document.getElementById("costoNegativo").innerText = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(data.data[i].Costo_Total_Negativo);
+                document.getElementById("costoPositivo").innerText = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(data.data[i].Costo_Total_Positivo);
+                document.getElementById("partesNegativo").innerText=data.data[i].Cantidad_Total_Negativa;
+                document.getElementById("partesPositivo").innerText=data.data[i].Cantidad_Total_Positiva;
+
+            }
+        });
+    }
 
     $('#data-table').find('td').each(function(){
         var text = $(this).text();
