@@ -67,7 +67,7 @@ if (strlen($nomina) == 7) {
                           </span>
                                         </div>
                                         <div class="col pr-0">
-                                            <p class="small text-muted mb-0 text-white">Partes con negativos</p>
+                                            <p class="small mb-0 text-white">Partes con negativos</p>
                                             <span class="h3 mb-0 text-white">$1250</span>
                                         </div>
                                     </div>
@@ -85,7 +85,7 @@ if (strlen($nomina) == 7) {
                           </span>
                                         </div>
                                         <div class="col pr-0">
-                                            <p class="small text-muted mb-0 text-white">Partes con positivos</p>
+                                            <p class="small mb-0 text-white">Partes con positivos</p>
                                             <span class="h3 mb-0 text-white">$1250</span>
                                         </div>
                                     </div>
@@ -103,7 +103,7 @@ if (strlen($nomina) == 7) {
                           </span>
                                         </div>
                                         <div class="col pr-0">
-                                            <p class="small text-muted mb-0 text-white" >Costo Negativo</p>
+                                            <p class="small mb-0 text-white" >Costo Negativo</p>
                                             <span class="h3 mb-0 text-white">$1250</span>
                                         </div>
                                     </div>
@@ -121,7 +121,7 @@ if (strlen($nomina) == 7) {
                           </span>
                                         </div>
                                         <div class="col pr-0">
-                                            <p class="small text-muted mb-0 text-white">Costo Positivas</p>
+                                            <p class="small mb-0 text-white">Costo Positivas</p>
                                             <span class="h3 mb-0 text-white">$1250</span>
                                         </div>
                                     </div>
