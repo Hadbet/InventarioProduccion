@@ -486,7 +486,7 @@ if (strlen($nomina) == 7) {
                         UM: item.UM,
                         Costo_Unitario: item.Costo_Unitario,
                         StLocation: '',
-                        StBin: '',
+                        StBin: item.StorageBin,
                         Folio: item.FolioMarbete,
                         Sap: '',
                         Conteo: item.Total_Conteo,
