@@ -498,7 +498,14 @@ if (strlen($nomina) == 7) {
             }).done(function() {
                 // Ordenar datos por GrammerNo
                 formattedData.sort(function(a, b) {
-                    return a.GrammerNo.localeCompare(b.GrammerNo);
+                    var grammerNoCompare = a.GrammerNo.localeCompare(b.GrammerNo);
+                    if (grammerNoCompare != 0) {
+                        // Si GrammerNo no es igual, ordena por GrammerNo
+                        return grammerNoCompare;
+                    } else {
+                        // Si GrammerNo es igual, ordena por StBin
+                        return a.StBin.localeCompare(b.StBin);
+                    }
                 });
 
                 for (var i = 0; i < formattedData.length; i++) {
