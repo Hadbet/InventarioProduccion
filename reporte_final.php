@@ -498,7 +498,7 @@ if (strlen($nomina) == 7) {
             }).done(function() {
                 // Ordenar datos por GrammerNo
                 formattedData.sort(function(a, b) {
-                    return a.GrammerNo - b.GrammerNo;
+                    return a.GrammerNo.localeCompare(b.GrammerNo);
                 });
 
                 for (var i = 0; i < formattedData.length; i++) {
