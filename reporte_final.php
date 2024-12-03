@@ -44,6 +44,11 @@ if (strlen($nomina) == 7) {
 
     <?php include 'estaticos/stylesEstandar.php'; ?>
     <style>
+        .table-container {
+            height: 300px; /* Ajusta esto a la altura que desees */
+            overflow: auto;
+        }
+
         .table thead th {
             position: sticky;
             top: 0;
