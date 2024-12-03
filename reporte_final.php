@@ -274,6 +274,14 @@ if (strlen($nomina) == 7) {
 <script src="https://unpkg.com/tableexport.jquery.plugin/libs/js-xlsx/xlsx.core.min.js"></script>
 <script>
 
+    $(document).ready(function() {
+        $('#data-table').DataTable({
+            scrollY: '50vh', // Ajusta esto a la altura que desees
+            scrollCollapse: true,
+            paging: false
+        });
+    });
+
     estatusConteo();
     function estatusConteo() {
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaReporteFinalDetalles.php', function (data) {
