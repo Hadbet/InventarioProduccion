@@ -439,6 +439,9 @@ if (strlen($nomina) == 7) {
 
 
     document.getElementById('txtCantidad').addEventListener('keyup', function(event) {
+        if (e.key === '-') {
+            e.preventDefault();
+        }
         if (event.key === 'Enter' || event.keyCode === 13) {
             if (document.getElementById('txtCantidad').value === document.getElementById('lblNumeroParte').innerText){
                 Swal.fire({
