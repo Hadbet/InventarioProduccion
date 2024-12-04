@@ -31,7 +31,7 @@ function ContadorApu()
     ) AS 'Diferencia'
 FROM 
     Parte P
-LEFT JOIN 
+INNER JOIN 
     InventarioSap ISap ON P.GrammerNo = ISap.GrammerNo
 LEFT JOIN 
     Bitacora_Inventario BInv ON P.GrammerNo = BInv.NumeroParte AND BInv.Estatus = 1
