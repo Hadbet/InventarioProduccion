@@ -43,27 +43,6 @@ if (strlen($nomina) == 7) {
     <title>GRAMMER INVENTARIO</title>
 
     <?php include 'estaticos/stylesEstandar.php'; ?>
-    <style>
-        .table-fixed{
-            height: 230px;
-            overflow-y: auto;
-            width: 100%;
-        }
-
-        .table-fixed thead,
-        .table-fixed tbody,
-        .table-fixed td,
-        .table-fixed th{
-            display: block;
-        }
-
-        .table-fixed tbody td,
-        .table-fixed thead > tr > th{
-            float: left;
-            border-bottom-width: 0;
-        }
-
-    </style>
 </head>
 <body class="vertical  light  ">
 <div class="wrapper">
