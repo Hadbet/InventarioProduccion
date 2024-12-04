@@ -157,7 +157,7 @@ if (strlen($nomina) == 7) {
     }
     numerosFaltantes();
     function numerosFaltantes() {
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaFaltantes.php?area=<?php echo area;?>', function (data) {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaFaltantes.php?area=<?php echo $area;?>', function (data) {
             var wb = XLSX.utils.book_new();
             wb.Props = {
                 Title: "SheetJS Tutorial",
