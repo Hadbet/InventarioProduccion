@@ -44,17 +44,25 @@ if (strlen($nomina) == 7) {
 
     <?php include 'estaticos/stylesEstandar.php'; ?>
     <style>
-        .table-container {
-            height: 300px; /* Ajusta esto a la altura que desees */
-            overflow: auto;
+        .table-fixed{
+            height: 230px;
+            overflow-y: auto;
+            width: 100%;
         }
 
-        .table thead th {
-            position: sticky;
-            top: 0;
-            background-color: #fff;
-            z-index: 10;
+        .table-fixed thead,
+        .table-fixed tbody,
+        .table-fixed td,
+        .table-fixed th{
+            display: block;
         }
+
+        .table-fixed tbody td,
+        .table-fixed thead > tr > th{
+            float: left;
+            border-bottom-width: 0;
+        }
+
     </style>
 </head>
 <body class="vertical  light  ">
@@ -185,7 +193,7 @@ if (strlen($nomina) == 7) {
                                     <button id="copy-button" class="btn btn-info">Copiar al portapapeles</button>
                                     <br><br>
                                     <!-- table -->
-                                    <table class="table datatables" id="data-table">
+                                    <table class="table datatables table-fixed" id="data-table">
                                         <thead>
                                         <tr>
                                             <th>P</th>
