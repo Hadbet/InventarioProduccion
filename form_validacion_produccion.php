@@ -177,7 +177,7 @@ if (strlen($nomina) == 7) {
                                 </div>
                             </div>
                             <hr>
-                            <button id="btnFin" class="btn mb-2 btn-success float-right text-white" onclick="enviarDatos()">Finalizar Captura<span
+                            <button disabled id="btnFin" class="btn mb-2 btn-success float-right text-white" onclick="enviarDatos()">Finalizar Captura<span
                                         class="fe fe-chevron-right fe-16 ml-2" ></span></button>
                         </div> <!-- .card-body -->
                     </div> <!-- .card -->
@@ -456,7 +456,7 @@ if (strlen($nomina) == 7) {
                     icon: "error"
                 });
             }else{
-
+                document.getElementById('btnFin').disabled = false;
                 document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
 
                 Swal.fire({
