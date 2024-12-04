@@ -237,9 +237,15 @@ if (strlen($nomina) == 7) {
                     var txtCantidad = document.getElementById('txtCantidad');
 
                     if (data.data[i].UM === 'PC') {
-                        txtCantidad.step = '1'; // Solo permite números enteros
+                        txtCantidad.addEventListener('keypress', function(e) {
+                            var charCode = (e.which) ? e.which : e.keyCode;
+                            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                                e.preventDefault();
+                            }
+                        });
                     } else {
-                        txtCantidad.step = 'any'; // Permite números decimales
+                        // Permite números decimales
+                        txtCantidad.removeEventListener('keypress');
                     }
 
                     bandera=1;
