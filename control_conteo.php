@@ -176,7 +176,8 @@ if (strlen($nomina) == 7) {
                 var ws_data = []; //aquí debes agregar los datos que quieres exportar
                 for (var i = 0; i < data.data.length; i++) {
                     var grammerNo = data.data[i].GrammerNo;
-                    ws_data.push([grammerNo]); //aquí asumí que solo quieres exportar grammerNo, puedes agregar más datos si lo necesitas
+                    var descripcion = data.data[i].Descripcion;
+                    ws_data.push([grammerNo,descripcion]); //aquí asumí que solo quieres exportar grammerNo, puedes agregar más datos si lo necesitas
                 }
                 var ws = XLSX.utils.aoa_to_sheet(ws_data);
                 wb.Sheets["Test Sheet"] = ws;

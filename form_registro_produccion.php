@@ -326,7 +326,7 @@ if (strlen($nomina) == 7) {
             document.getElementById('lblCantidad').textContent = this.value;
             if (document.getElementById('txtCantidad').value===document.getElementById('txtNumeroParte').value){
                 Swal.fire({
-                    title: "Estas ingresando en cantidad el numero de parte",
+                    title: "Estas ingresando el numero de parte en la cantidad",
                     text: "Verifica antes de entrar",
                     icon: "error"
                 });
