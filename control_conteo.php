@@ -104,7 +104,7 @@ if (strlen($nomina) == 7) {
                     <h2 class="h3 mb-0 page-title">Control de conteos</h2>
                 </div>
                 <div class="col-auto">
-                    <button type="button" onclick="verificacion()" class="btn btn-primary"><span class="fe fe-filter fe-12 mr-2"></span>Pasar a segundos conteos</button>
+                    <button type="button" onclick="numerosFaltantes()" class="btn btn-primary"><span class="fe fe-filter fe-12 mr-2"></span>Pasar a segundos conteos</button>
                 </div>
             </div>
 
@@ -156,32 +156,41 @@ if (strlen($nomina) == 7) {
             }
         });
     }
-    numerosFaltantes();
+
     function numerosFaltantes() {
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaFaltantes.php?area=<?php echo $area;?>', function (data) {
-            var wb = XLSX.utils.book_new();
-            wb.Props = {
-                Title: "SheetJS Tutorial",
-                Subject: "Test",
-                Author: "Red Stapler",
-                CreatedDate: new Date(2017,12,19)
-            };
-            wb.SheetNames.push("Test Sheet");
-            var ws_data = []; //aquí debes agregar los datos que quieres exportar
-            for (var i = 0; i < data.data.length; i++) {
-                var grammerNo = data.data[i].GrammerNo;
-                ws_data.push([grammerNo]); //aquí asumí que solo quieres exportar grammerNo, puedes agregar más datos si lo necesitas
+            if (data && data.data && data.data.length > 0) {
+                Swal.fire({
+                    title: "Tienes numeros de parte no contados se te descargara un excel con todos",
+                    text: "Verificalo con tu equipo",
+                    icon: "error"
+                });
+                var wb = XLSX.utils.book_new();
+                wb.Props = {
+                    Title: "SheetJS Tutorial",
+                    Subject: "Test",
+                    Author: "Red Stapler",
+                    CreatedDate: new Date(2017,12,19)
+                };
+                wb.SheetNames.push("Test Sheet");
+                var ws_data = []; //aquí debes agregar los datos que quieres exportar
+                for (var i = 0; i < data.data.length; i++) {
+                    var grammerNo = data.data[i].GrammerNo;
+                    ws_data.push([grammerNo]); //aquí asumí que solo quieres exportar grammerNo, puedes agregar más datos si lo necesitas
+                }
+                var ws = XLSX.utils.aoa_to_sheet(ws_data);
+                wb.Sheets["Test Sheet"] = ws;
+                var wbout = XLSX.write(wb, {bookType:'xlsx',  type: 'binary'});
+                function s2ab(s) {
+                    var buf = new ArrayBuffer(s.length); //convert s to arrayBuffer
+                    var view = new Uint8Array(buf);  //create uint8array as viewer
+                    for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF; //convert to octet
+                    return buf;
+                }
+                saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'test.xlsx');
+            } else {
+                verificacion()
             }
-            var ws = XLSX.utils.aoa_to_sheet(ws_data);
-            wb.Sheets["Test Sheet"] = ws;
-            var wbout = XLSX.write(wb, {bookType:'xlsx',  type: 'binary'});
-            function s2ab(s) {
-                var buf = new ArrayBuffer(s.length); //convert s to arrayBuffer
-                var view = new Uint8Array(buf);  //create uint8array as viewer
-                for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF; //convert to octet
-                return buf;
-            }
-            saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'test.xlsx');
         });
     }
 
