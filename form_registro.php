@@ -283,6 +283,29 @@ if (strlen($nomina) == 7) {
         });
     }
 
+    function cargarNumeroParte(numeroParteF,storageBinF) {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaParte.php?parte='+numeroParteF, function (data) {
+            for (var i = 0; i < data.data.length; i++) {
+                if (data.data[i].GrammerNo) {
+
+                    document.getElementById("reader").style.display = 'none';
+                    document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBinF;
+                    document.getElementById("pasoDos").style.display = 'block';
+                    document.getElementById("pasoUno").style.display = 'none';
+                    limpiarEscan();
+
+                } else {
+                    bandera=0;
+                    Swal.fire({
+                        title: "El numero de parte no existe",
+                        text: "Verificalo con la mesa de control",
+                        icon: "error"
+                    });
+                }
+            }
+        });
+    }
+
     function manualMarbete() {
 
         var marbete = document.getElementById("scanner_input").value.split('.')[0];
@@ -297,11 +320,7 @@ if (strlen($nomina) == 7) {
                                 numeroParte=data.data[i].NumeroParte;
                                 storageBin=data.data[i].StorageBin;
                                 storageType=data.data[i].StorageType;
-                                document.getElementById("reader").style.display = 'none';
-                                document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
-                                document.getElementById("pasoDos").style.display = 'block';
-                                document.getElementById("pasoUno").style.display = 'none';
-                                limpiarEscan();
+                                cargarNumeroParte(numeroParte,storageBin);
                             }else{
                                 Swal.fire({
                                     title: "El marbete no pertenece al area",
@@ -382,11 +401,7 @@ if (strlen($nomina) == 7) {
                                 storageBin=data.data[i].StorageBin;
                                 console.log(`Code matched = ${decodedText}`, decodedResult);
                                 document.getElementById("scanner_input").value = decodedText;
-                                document.getElementById("reader").style.display = 'none';
-                                document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
-                                document.getElementById("pasoDos").style.display = 'block';
-                                document.getElementById("pasoUno").style.display = 'none';
-                                limpiarEscan();
+                                cargarNumeroParte(numeroParte,storageBin);
                             }else{
                                 Swal.fire({
                                     title: "El marbete no pertenece al area",
@@ -475,8 +490,8 @@ if (strlen($nomina) == 7) {
             if (data.Estatus) {
                 if (data.Estatus=='No existe el storage unit'){
                     document.getElementById("txtStorageUnitAgregar").value = document.getElementById("txtStorageUnit").value;
-                    document.getElementById("txtNumeroParteAgregar").value = numeroParte;
                     document.getElementById("btnAgregarStorage").click();
+                    limpiarEscan();
                 }else{
                     Swal.fire({
                         title: data.Estatus,
@@ -550,8 +565,8 @@ if (strlen($nomina) == 7) {
             if (data.Estatus) {
                 if (data.Estatus=='No existe el storage unit'){
                     document.getElementById("txtStorageUnitAgregar").value = decodedText;
-                    document.getElementById("txtNumeroParteAgregar").value = numeroParte;
                     document.getElementById("btnAgregarStorage").click();
+                    limpiarEscan();
                 }else{
                     Swal.fire({
                         title: data.Estatus,
@@ -679,78 +694,88 @@ if (strlen($nomina) == 7) {
 
 
     function insertStorage() {
-        var cantidad = document.getElementById("txtCantidadAgregar").value;
-        var unit = document.getElementById("txtStorageUnitAgregar").value;
 
-        if (addedStorageUnits[unit]) {
+        if (numeroParte===document.getElementById("txtNumeroParteAgregar").value){
+            var cantidad = document.getElementById("txtCantidadAgregar").value;
+            var unit = document.getElementById("txtStorageUnitAgregar").value;
+
+            if (addedStorageUnits[unit]) {
+                Swal.fire({
+                    title: "El Storage Unit ya fue escaneado",
+                    text: "Unit : " + unit,
+                    icon: "error"
+                });
+                return;
+            }
+
+            addedStorageUnits[unit] = {
+                numeroParte: numeroParte,
+                cantidad: cantidad
+            };
+
+            var table = document.getElementById("data-table");
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML = unit;
+            cell2.innerHTML = numeroParte;
+            cell3.innerHTML = cantidad;
+
+            var storageUnits = addedStorageUnits;
+            console.log(storageUnits);
+
+            var formData = new FormData();
+            formData.append('storageUnit', unit);
+            formData.append('numeroParte', numeroParte);
+            formData.append('cantidad', cantidad);
+            formData.append('storageBin', storageBin);
+            formData.append('storageType', storageType);
+            formData.append('conteo', auxConteo);
+
+            fetch('https://grammermx.com/Logistica/Inventario/dao/guardarStorageUnit.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        let timerInterval;
+                        Swal.fire({
+                            title: "¡Gracias!.Se finalizo la creacion del storage unit",
+                            html: "Te regresaremos a la pagina <b></b> milliseconds.",
+                            timer: 1500,
+                            timerProgressBar: true,
+                            icon: "success",
+                            didOpen: () => {
+                                Swal.showLoading();
+                                const timer = Swal.getPopup().querySelector("b");
+                                timerInterval = setInterval(() => {
+                                    timer.textContent = `${Swal.getTimerLeft()}`;
+                                }, 100);
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval);
+                            }
+                        }).then((result) => {
+                            /* Read more about handling dismissals below */
+                            if (result.dismiss === Swal.DismissReason.timer) {
+
+                            }
+                        });
+                    } else {
+                        console.log("Hubo un error en la operación");
+                        console.log("Las unidades de almacenamiento que fallaron son: ", data.failedUnits);
+                    }
+                });
+        }else {
             Swal.fire({
-                title: "El Storage Unit ya fue escaneado",
-                text: "Unit : " + unit,
+                title: "El número de parte no corresponde con el marbete",
+                text: "Verificalo con la mesa centra",
                 icon: "error"
             });
-            return;
         }
 
-        addedStorageUnits[unit] = {
-            numeroParte: numeroParte,
-            cantidad: cantidad
-        };
-
-        var table = document.getElementById("data-table");
-        var row = table.insertRow(-1);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
-        cell1.innerHTML = unit;
-        cell2.innerHTML = numeroParte;
-        cell3.innerHTML = cantidad;
-
-        var storageUnits = addedStorageUnits;
-        console.log(storageUnits);
-
-        var formData = new FormData();
-        formData.append('storageUnit', unit);
-        formData.append('numeroParte', numeroParte);
-        formData.append('cantidad', cantidad);
-        formData.append('storageBin', storageBin);
-        formData.append('storageType', storageType);
-        formData.append('conteo', auxConteo);
-
-        fetch('https://grammermx.com/Logistica/Inventario/dao/guardarStorageUnit.php', {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    let timerInterval;
-                    Swal.fire({
-                        title: "¡Gracias!.Se finalizo la creacion del storage unit",
-                        html: "Te regresaremos a la pagina <b></b> milliseconds.",
-                        timer: 1500,
-                        timerProgressBar: true,
-                        icon: "success",
-                        didOpen: () => {
-                            Swal.showLoading();
-                            const timer = Swal.getPopup().querySelector("b");
-                            timerInterval = setInterval(() => {
-                                timer.textContent = `${Swal.getTimerLeft()}`;
-                            }, 100);
-                        },
-                        willClose: () => {
-                            clearInterval(timerInterval);
-                        }
-                    }).then((result) => {
-                        /* Read more about handling dismissals below */
-                        if (result.dismiss === Swal.DismissReason.timer) {
-
-                        }
-                    });
-                } else {
-                    console.log("Hubo un error en la operación");
-                    console.log("Las unidades de almacenamiento que fallaron son: ", data.failedUnits);
-                }
-            });
     }
 
 
