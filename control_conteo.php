@@ -168,7 +168,7 @@ if (strlen($nomina) == 7) {
                 var wb = XLSX.utils.book_new();
                 wb.Props = {
                     Title: "SheetJS Tutorial",
-                    Subject: "Test",
+                    Subject: "Numeros de parte faltantes",
                     Author: "Red Stapler",
                     CreatedDate: new Date(2017,12,19)
                 };
