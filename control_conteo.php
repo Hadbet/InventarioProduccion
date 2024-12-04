@@ -83,7 +83,7 @@ if (strlen($nomina) == 7) {
                     <div class="row align-items-center">
                         <div class="col">
                             <span class="h2 mb-0" id="lblCantidad"></span>
-                            <p class="small text-muted mb-0">de diferencia de coteo</p>
+                            <p class="small text-muted mb-0">de diferencia en numeros de parte</p>
                             <span class="badge badge-pill badge-success"></span>
                         </div>
                         <div class="col-auto">
