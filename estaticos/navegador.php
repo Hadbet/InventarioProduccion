@@ -15,19 +15,19 @@ if ($_SESSION["nominaCurso"] == "" && $_SESSION["nominaCurso"]== null && $_SESSI
 }
 
 if ($tipoArea==2){
-    $captura = '<ul class="collapse list-unstyled pl-4 w-100" id="contact">
+    $captura = '<ul class="collapse list-unstyled pl-4 w-100 collapse show" id="contact">
                     <a class="nav-link pl-3" href="form_registro.php"><span class="ml-1">Captura SUM</span></a>
                 </ul>';
 }
 
 if ($tipoArea==1){
-    $captura = '<ul class="collapse list-unstyled pl-4 w-100" id="contact">
+    $captura = '<ul class="collapse list-unstyled pl-4 w-100 collapse show" id="contact">
                     <a class="nav-link pl-3" href="form_registro_produccion.php"><span class="ml-1">Captura Produccion</span></a>
                 </ul>';
 }
 
 if ($tipoArea==0){
-    $captura = '<ul class="collapse list-unstyled pl-4 w-100" id="contact">
+    $captura = '<ul class="collapse list-unstyled pl-4 w-100 collapse show" id="contact">
                     <a class="nav-link pl-3" href="form_registro_almacen.php"><span class="ml-1">Captura Almacen</span></a>
                 </ul>';
 }
@@ -148,7 +148,7 @@ if ($tipoArea==0){
                     <i class="fe fe-archive fe-16"></i>
                     <span class="ml-3 item-text">Historicos</span>
                 </a>
-                <ul class="collapse list-unstyled pl-4 w-100" id="support">
+                <ul class="collapse list-unstyled pl-4 w-100 collapse show" id="support">
                     <a class="nav-link pl-3" href="listas_marbetes_produccion.php"><span class="ml-1">Reporte</span></a>
                 </ul>
             </li>
@@ -167,7 +167,7 @@ if ($tipoArea==0){
     <i class="fe fe-home fe-16"></i>
                     <span class="ml-3 item-text">Inicio</span>
                 </a>
-                <ul class="collapse list-unstyled pl-4 w-100" id="contact">
+                <ul class="collapse list-unstyled pl-4 w-100 collapse show" id="contact">
                     <a class="nav-link pl-3" href="form_validacion_produccion.php"><span class="ml-1">Verificar</span></a>
                 </ul>
             </li>
@@ -176,7 +176,7 @@ if ($tipoArea==0){
                     <i class="fe fe-archive fe-16"></i>
                     <span class="ml-3 item-text">Historicos</span>
                 </a>
-                <ul class="collapse list-unstyled pl-4 w-100" id="support">
+                <ul class="collapse list-unstyled pl-4 w-100 collapse show" id="support">
                     <a class="nav-link pl-3" href="listas_marbetes_produccion.php"><span class="ml-1">Reporte</span></a>
                 </ul>
             </li>
@@ -196,7 +196,7 @@ if ($tipoArea==0){
     <i class="fe fe-award fe-16"></i>
                     <span class="ml-3 item-text">Verificacion</span>
                 </a>
-                <ul class="collapse list-unstyled pl-4 w-100" id="Auditor">
+                <ul class="collapse list-unstyled pl-4 w-100 collapse show" id="Auditor">
                     <a class="nav-link pl-3" href="verificacion.php"><span class="ml-1">Escaner</span></a>
                 </ul>
             </li>
@@ -205,7 +205,7 @@ if ($tipoArea==0){
                     <i class="fe fe-archive fe-16"></i>
                     <span class="ml-3 item-text">Historicos</span>
                 </a>
-                <ul class="collapse list-unstyled pl-4 w-100" id="Historico">
+                <ul class="collapse list-unstyled pl-4 w-100 collapse show" id="Historico">
                     <a class="nav-link pl-3" href="listas_marbetes_produccion.php"><span class="ml-1">Reporte</span></a>
                 </ul>
             </li>
@@ -225,7 +225,7 @@ if ($tipoArea==0){
                     <i class="fe fe-trello fe-16"></i>
                     <span class="ml-3 item-text">Control de conteos</span>
                 </a>
-                <ul class="collapse list-unstyled pl-4 w-100" id="Lider">
+                <ul class="collapse list-unstyled pl-4 w-100 collapse show" id="Lider">
                     <a class="nav-link pl-3" href="control_conteo.php"><span class="ml-1">Control</span></a>
                     <a class="nav-link pl-3" href="cancelacion_marbete.php"><span class="ml-1">Cancelacion</span></a>
                     <a class="nav-link pl-3" href="listas_base_produccion.php"><span class="ml-1">Lista de marbetes</span></a>
