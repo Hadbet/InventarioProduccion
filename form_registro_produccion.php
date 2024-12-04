@@ -306,51 +306,57 @@ if (strlen($nomina) == 7) {
         document.getElementById('lblMontoTotal').innerText = result.toFixed(2);
         if (event.key === 'Enter' || event.keyCode === 13) {
             document.getElementById('lblCantidad').textContent = this.value;
+            if (document.getElementById('txtCantidad').value===document.getElementById('txtNumeroParte').value){
+                Swal.fire({
+                    title: "Estas ingresando en cantidad el numero de parte",
+                    text: "Verifica antes de entrar",
+                    icon: "error"
+                });
+            }else{
+                if (document.getElementById('txtCantidad').value!==""){
+                    if (document.getElementById('txtStorageBin').value!==""){
+                        if (bandera!=="0"){
+                            document.getElementById('btnFin').disabled = false;
+                            document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
 
-            if (document.getElementById('txtCantidad').value!==""){
-                if (document.getElementById('txtStorageBin').value!==""){
-                    if (bandera!=="0"){
-                        document.getElementById('btnFin').disabled = false;
-                        document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
+                            Swal.fire({
+                                title: "¿Deseas guardar la captura? Si es así, presiona 'Enter'.",
+                                showDenyButton: true,
+                                showCancelButton: true,
+                                confirmButtonText: "Guardar",
+                                denyButtonText: "Verificar datos"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    enviarDatos();
+                                    resolve(true);
+                                } else if (result.isDenied) {
+                                    Swal.fire("Por favor, tómate tu tiempo para verificar los datos. Recuerda, cuando hayas terminado, haz clic en el botón verde 'Finalizar'.", "", "info");
+                                    resolve(false);
+                                }
+                            });
 
-                        Swal.fire({
-                            title: "¿Deseas guardar la captura? Si es así, presiona 'Enter'.",
-                            showDenyButton: true,
-                            showCancelButton: true,
-                            confirmButtonText: "Guardar",
-                            denyButtonText: "Verificar datos"
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                enviarDatos();
-                                resolve(true);
-                            } else if (result.isDenied) {
-                                Swal.fire("Por favor, tómate tu tiempo para verificar los datos. Recuerda, cuando hayas terminado, haz clic en el botón verde 'Finalizar'.", "", "info");
-                                resolve(false);
-                            }
-                        });
-
+                        }else{
+                            Swal.fire({
+                                title: "No haz validado el NP",
+                                text: "Verifica antes de entrar",
+                                icon: "error"
+                            });
+                        }
                     }else{
                         Swal.fire({
-                            title: "No haz validado el NP",
+                            title: "Ingresa el storage bin",
                             text: "Verifica antes de entrar",
                             icon: "error"
                         });
                     }
                 }else{
                     Swal.fire({
-                        title: "Ingresa el storage bin",
+                        title: "Ingresa la cantidad",
                         text: "Verifica antes de entrar",
                         icon: "error"
                     });
                 }
-            }else{
-                Swal.fire({
-                    title: "Ingresa la cantidad",
-                    text: "Verifica antes de entrar",
-                    icon: "error"
-                });
             }
-
         }
     });
 

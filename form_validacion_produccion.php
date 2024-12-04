@@ -98,7 +98,7 @@ if (strlen($nomina) == 7) {
 
                             <label for="basic-url">Cantidad</label>
                             <div class="input-group mb-3">
-                                <input type="number" id="txtCantidad" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <input type="number" id="txtCantidad" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2"  min="0">
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="txtUnidadMedida" style=""></span>
                                 </div>
@@ -318,6 +318,15 @@ if (strlen($nomina) == 7) {
                     if (data.data[i].GrammerNo) {
                         document.getElementById('lblDescripcion').innerText = data.data[i].Descripcion;
                         document.getElementById('txtUnidadMedida').innerText = data.data[i].UM;
+
+                        var txtCantidad = document.getElementById('txtCantidad');
+
+                        if (data.data[i].UM === 'PC') {
+                            txtCantidad.step = '1'; // Solo permite números enteros
+                        } else {
+                            txtCantidad.step = 'any'; // Permite números decimales
+                        }
+
                         costoUnitario = data.data[i].Costo / data.data[i].Por;
                         document.getElementById('lblCosto').innerText = costoUnitario;
                         var resultado = costoUnitario*cantidad;
@@ -431,24 +440,39 @@ if (strlen($nomina) == 7) {
 
     document.getElementById('txtCantidad').addEventListener('keyup', function(event) {
         if (event.key === 'Enter' || event.keyCode === 13) {
-            document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
+            if (document.getElementById('txtCantidad').value === document.getElementById('lblNumeroParte').innerText){
+                Swal.fire({
+                    title: "En cantidad estas ingresando el numero de parte",
+                    text: "Verificalo antes de capturar",
+                    icon: "error"
+                });
+            }else if(document.getElementById('txtCantidad').value === document.getElementById('lblMontoTotal').innerText){
+                Swal.fire({
+                    title: "En cantidad estas ingresando el monto",
+                    text: "Verificalo antes de capturar",
+                    icon: "error"
+                });
+            }else{
 
-            Swal.fire({
-                title: "¿Deseas guardar la verificación? Si es así, presiona 'Enter'.",
-                showDenyButton: true,
-                showCancelButton: true,
-                confirmButtonText: "Guardar",
-                denyButtonText: "Verificar datos"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    enviarDatos();
-                    resolve(true);
-                } else if (result.isDenied) {
-                    Swal.fire("Por favor, tómate tu tiempo para verificar los datos. Recuerda, cuando hayas terminado, haz clic en el botón verde 'Finalizar'.", "", "info");
-                    resolve(false);
-                }
-            });
+                document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
 
+                Swal.fire({
+                    title: "¿Deseas guardar la verificación? Si es así, presiona 'Enter'.",
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: "Guardar",
+                    denyButtonText: "Verificar datos"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        enviarDatos();
+                        resolve(true);
+                    } else if (result.isDenied) {
+                        Swal.fire("Por favor, tómate tu tiempo para verificar los datos. Recuerda, cuando hayas terminado, haz clic en el botón verde 'Finalizar'.", "", "info");
+                        resolve(false);
+                    }
+                });
+
+            }
 
         }
     });

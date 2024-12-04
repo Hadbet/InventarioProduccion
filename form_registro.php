@@ -486,144 +486,156 @@ if (strlen($nomina) == 7) {
     var addedStorageUnits = {};
 
     function storageUnitManual() {
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value+'&bin='+storageBin+'&conteo='+auxConteo, function (data) {
-            if (data.Estatus) {
-                if (data.Estatus=='No existe el storage unit'){
-                    document.getElementById("txtStorageUnitAgregar").value = document.getElementById("txtStorageUnit").value;
-                    document.getElementById("btnAgregarStorage").click();
-                    limpiarEscan();
-                }else{
-                    Swal.fire({
-                        title: data.Estatus,
-                        text: "Escanea otro storage unit",
-                        icon: "error"
-                    });
-                }
 
-            } else {
-                for (var i = 0; i < data.data.length; i++) {
-                    if (data.data[i].Id_StorageUnit) {
-                        numeroParteUnit = data.data[i].Numero_Parte;
-                        if (numeroParteUnit === numeroParte) {
+        if (decodedText.length === 10){
+            $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value+'&bin='+storageBin+'&conteo='+auxConteo, function (data) {
+                if (data.Estatus) {
+                    if (data.Estatus=='No existe el storage unit'){
+                        document.getElementById("txtStorageUnitAgregar").value = document.getElementById("txtStorageUnit").value;
+                        document.getElementById("btnAgregarStorage").click();
+                        limpiarEscan();
+                    }else{
+                        Swal.fire({
+                            title: data.Estatus,
+                            text: "Escanea otro storage unit",
+                            icon: "error"
+                        });
+                    }
 
-                            if (addedStorageUnits[data.data[i].Id_StorageUnit]) {
+                } else {
+                    for (var i = 0; i < data.data.length; i++) {
+                        if (data.data[i].Id_StorageUnit) {
+                            numeroParteUnit = data.data[i].Numero_Parte;
+                            if (numeroParteUnit === numeroParte) {
+
+                                if (addedStorageUnits[data.data[i].Id_StorageUnit]) {
+                                    Swal.fire({
+                                        title: "El Storage Unit ya fue escaneado",
+                                        text: "Unit : " + data.data[i].Id_StorageUnit,
+                                        icon: "error"
+                                    });
+                                    return;
+                                }
+
+                                addedStorageUnits[data.data[i].Id_StorageUnit] = {
+                                    numeroParte: data.data[i].Numero_Parte,
+                                    cantidad: data.data[i].Cantidad
+                                };
+
+                                cantidad = data.data[i].Cantidad;
+                                var table = document.getElementById("data-table");
+                                var row = table.insertRow(-1);
+                                var cell1 = row.insertCell(0);
+                                var cell2 = row.insertCell(1);
+                                var cell3 = row.insertCell(2);
+                                cell1.innerHTML = data.data[i].Id_StorageUnit;
+                                cell2.innerHTML = numeroParteUnit;
+                                cell3.innerHTML = cantidad;
+
                                 Swal.fire({
-                                    title: "El Storage Unit ya fue escaneado",
+                                    title: "Storage unit escaneado",
                                     text: "Unit : " + data.data[i].Id_StorageUnit,
+                                    icon: "success"
+                                });
+                                document.getElementById("txtStorageUnit").value = '';
+                            } else {
+                                Swal.fire({
+                                    title: "El número de parte no corresponde",
+                                    text: "Escanea el storage unit correcto",
                                     icon: "error"
                                 });
-                                return;
+                                document.getElementById("txtStorageUnit").value = '';
                             }
-
-                            addedStorageUnits[data.data[i].Id_StorageUnit] = {
-                                numeroParte: data.data[i].Numero_Parte,
-                                cantidad: data.data[i].Cantidad
-                            };
-
-                            cantidad = data.data[i].Cantidad;
-                            var table = document.getElementById("data-table");
-                            var row = table.insertRow(-1);
-                            var cell1 = row.insertCell(0);
-                            var cell2 = row.insertCell(1);
-                            var cell3 = row.insertCell(2);
-                            cell1.innerHTML = data.data[i].Id_StorageUnit;
-                            cell2.innerHTML = numeroParteUnit;
-                            cell3.innerHTML = cantidad;
-
-                            Swal.fire({
-                                title: "Storage unit escaneado",
-                                text: "Unit : " + data.data[i].Id_StorageUnit,
-                                icon: "success"
-                            });
-                            document.getElementById("txtStorageUnit").value = '';
                         } else {
                             Swal.fire({
-                                title: "El número de parte no corresponde",
+                                title: "El storage unit no es correcto",
                                 text: "Escanea el storage unit correcto",
                                 icon: "error"
                             });
                             document.getElementById("txtStorageUnit").value = '';
                         }
-                    } else {
-                        Swal.fire({
-                            title: "El storage unit no es correcto",
-                            text: "Escanea el storage unit correcto",
-                            icon: "error"
-                        });
-                        document.getElementById("txtStorageUnit").value = '';
                     }
                 }
-            }
-        });
+            });
+        }else {
+            Swal.fire({
+                title: "Recuerda que el storage unit es de 10 caracteres",
+                text: "verifica lo ingresado",
+                icon: "error"
+            });
+        }
+
     }
 
 
     function lecturaCorrectaUnit(decodedText, decodedResult) {
-        console.log('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value+'&bin='+storageBin+'&conteo='+auxConteo);
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+decodedText+'&bin='+storageBin+'&conteo='+auxConteo, function (data) {
+        if (decodedText.length === 10){
+            console.log('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value+'&bin='+storageBin+'&conteo='+auxConteo);
+            $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+decodedText+'&bin='+storageBin+'&conteo='+auxConteo, function (data) {
 
-            if (data.Estatus) {
-                if (data.Estatus=='No existe el storage unit'){
-                    document.getElementById("txtStorageUnitAgregar").value = decodedText;
-                    document.getElementById("btnAgregarStorage").click();
-                    limpiarEscan();
-                }else{
-                    Swal.fire({
-                        title: data.Estatus,
-                        text: "Escanea otro storage unit",
-                        icon: "error"
-                    });
-                }
+                if (data.Estatus) {
+                    if (data.Estatus=='No existe el storage unit'){
+                        document.getElementById("txtStorageUnitAgregar").value = decodedText;
+                        document.getElementById("btnAgregarStorage").click();
+                        limpiarEscan();
+                    }else{
+                        Swal.fire({
+                            title: data.Estatus,
+                            text: "Escanea otro storage unit",
+                            icon: "error"
+                        });
+                    }
 
-            } else {
-                for (var i = 0; i < data.data.length; i++) {
-                    if (data.data[i].Id_StorageUnit) {
-                        numeroParteUnit=data.data[i].Numero_Parte;
-                        if (numeroParteUnit===numeroParte){
-                            if (addedStorageUnits[data.data[i].Id_StorageUnit]) {
-                                return;
+                } else {
+                    for (var i = 0; i < data.data.length; i++) {
+                        if (data.data[i].Id_StorageUnit) {
+                            numeroParteUnit=data.data[i].Numero_Parte;
+                            if (numeroParteUnit===numeroParte){
+                                if (addedStorageUnits[data.data[i].Id_StorageUnit]) {
+                                    return;
+                                }
+
+                                addedStorageUnits[data.data[i].Id_StorageUnit] = {
+                                    numeroParte: data.data[i].Numero_Parte,
+                                    cantidad: data.data[i].Cantidad
+                                };
+
+                                cantidad=data.data[i].Cantidad;
+                                console.log(`Code matched = ${decodedText}`, decodedResult);
+                                document.getElementById("txtStorageUnit").value = decodedText;
+                                //document.getElementById("readerDos").style.display = 'none';
+
+                                var table = document.getElementById("data-table");
+                                var row = table.insertRow(-1); // Crea una nueva fila al final de la tabla
+                                var cell1 = row.insertCell(0); // Crea una nueva celda en la fila
+                                var cell2 = row.insertCell(1); // Crea otra nueva celda en la fila
+                                var cell3 = row.insertCell(2);
+                                cell1.innerHTML = data.data[i].Id_StorageUnit;
+                                cell2.innerHTML = numeroParteUnit;
+                                cell3.innerHTML = cantidad;
+                                Swal.fire({
+                                    title: "Storage unit escaneado",
+                                    text: "Unit : "+data.data[i].Id_StorageUnit,
+                                    icon: "success"
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: "El número de parte no corresponde",
+                                    text: "Escanea el storage unit correcto",
+                                    icon: "error"
+                                });
                             }
-
-                            addedStorageUnits[data.data[i].Id_StorageUnit] = {
-                                numeroParte: data.data[i].Numero_Parte,
-                                cantidad: data.data[i].Cantidad
-                            };
-
-                            cantidad=data.data[i].Cantidad;
-                            console.log(`Code matched = ${decodedText}`, decodedResult);
-                            document.getElementById("txtStorageUnit").value = decodedText;
-                            //document.getElementById("readerDos").style.display = 'none';
-
-                            var table = document.getElementById("data-table");
-                            var row = table.insertRow(-1); // Crea una nueva fila al final de la tabla
-                            var cell1 = row.insertCell(0); // Crea una nueva celda en la fila
-                            var cell2 = row.insertCell(1); // Crea otra nueva celda en la fila
-                            var cell3 = row.insertCell(2);
-                            cell1.innerHTML = data.data[i].Id_StorageUnit;
-                            cell2.innerHTML = numeroParteUnit;
-                            cell3.innerHTML = cantidad;
-                            Swal.fire({
-                                title: "Storage unit escaneado",
-                                text: "Unit : "+data.data[i].Id_StorageUnit,
-                                icon: "success"
-                            });
                         } else {
                             Swal.fire({
-                                title: "El número de parte no corresponde",
+                                title: "El storage unit no es correcto",
                                 text: "Escanea el storage unit correcto",
                                 icon: "error"
                             });
                         }
-                    } else {
-                        Swal.fire({
-                            title: "El storage unit no es correcto",
-                            text: "Escanea el storage unit correcto",
-                            icon: "error"
-                        });
                     }
                 }
-            }
-        });
+            });
+        }
     }
 
     function errorLecturaUnit(error) {
