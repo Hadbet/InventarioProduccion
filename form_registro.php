@@ -122,7 +122,7 @@ if (strlen($nomina) == 7) {
                                         <div class="form-group mb-3">
                                             <label for="txtFolio">Escanea el Storage Unit</label>
                                             <div id="readerDos" width="600px"></div>
-                                            <input type="text" class="form-control"
+                                            <input type="number" class="form-control"
                                                    id="txtStorageUnit" name="txtStorageUnit" value="">
                                             <br>
                                         </div>
@@ -237,7 +237,7 @@ if (strlen($nomina) == 7) {
                 <br>
                 <p> Ingresa Cantidad. </p>
                 <div class="form-inline justify-content-center">
-                    <input  id="txtCantidadAgregar"  class="form-control form-control-lg mr-sm-2 bg-transparent" type="text">
+                    <input  id="txtCantidadAgregar"  class="form-control form-control-lg mr-sm-2 bg-transparent" type="number">
                 </div>
                 <br>
                 <div class="form-inline justify-content-center">
