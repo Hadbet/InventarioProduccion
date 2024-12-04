@@ -232,7 +232,7 @@ if (strlen($nomina) == 7) {
                 <br>
                 <p> Ingresar NP. </p>
                 <div class="form-inline justify-content-center">
-                    <input disabled id="txtNumeroParteAgregar" class="form-control form-control-lg mr-sm-2 bg-transparent" type="text">
+                    <input id="txtNumeroParteAgregar" class="form-control form-control-lg mr-sm-2 bg-transparent" type="text">
                 </div>
                 <br>
                 <p> Ingresa Cantidad. </p>
