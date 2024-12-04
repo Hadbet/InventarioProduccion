@@ -440,7 +440,7 @@ if (strlen($nomina) == 7) {
 
     document.getElementById('txtCantidad').addEventListener('keyup', function(event) {
         if (event.key === '-') {
-            event.preventDefault();
+            document.getElementById('txtCantidad').value = '';
         }
         if (event.key === 'Enter' || event.keyCode === 13) {
             if (document.getElementById('txtCantidad').value === document.getElementById('lblNumeroParte').innerText){
