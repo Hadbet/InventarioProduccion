@@ -592,6 +592,11 @@ if (strlen($nomina) == 7) {
                             numeroParteUnit=data.data[i].Numero_Parte;
                             if (numeroParteUnit===numeroParte){
                                 if (addedStorageUnits[data.data[i].Id_StorageUnit]) {
+                                    Swal.fire({
+                                        title: "El Storage Unit ya fue escaneado",
+                                        text: "Unit : " + data.data[i].Id_StorageUnit,
+                                        icon: "error"
+                                    });
                                     return;
                                 }
 
