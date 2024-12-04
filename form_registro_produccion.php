@@ -253,7 +253,7 @@ if (strlen($nomina) == 7) {
 
                         var txtCantidad = document.getElementById('txtCantidad');
 
-                        if (data.data[i].UM === 'PC') {
+                        if (umU === 'PC') {
                             txtCantidad.step = '1'; // Solo permite números enteros
                         } else {
                             txtCantidad.step = 'any'; // Permite números decimales
