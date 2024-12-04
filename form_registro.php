@@ -123,7 +123,7 @@ if (strlen($nomina) == 7) {
                                             <label for="txtFolio">Escanea el Storage Unit</label>
                                             <div id="readerDos" width="600px"></div>
                                             <input type="number" class="form-control"
-                                                   id="txtStorageUnit" name="txtStorageUnit" value="">
+                                                   id="txtStorageUnit" name="txtStorageUnit" value="" autocomplete="off">
                                             <br>
                                         </div>
                                     </div>
