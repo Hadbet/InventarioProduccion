@@ -83,7 +83,7 @@ if (strlen($nomina) == 7) {
                                         <div class="form-group mb-3">
                                             <label for="txtFolio">Escanea el marbete</label>
                                             <div id="reader" width="600px"></div>
-                                            <input type="text" class="form-control"
+                                            <input type="number" class="form-control"
                                                    id="scanner_input">
                                             <br>
                                        </div>
