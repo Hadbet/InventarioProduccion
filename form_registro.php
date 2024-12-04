@@ -911,6 +911,12 @@ if (strlen($nomina) == 7) {
         }
     });
 
+    document.getElementById('txtCantidadAgregar').addEventListener('keyup', function(event) {
+        if (event.key === '-') {
+            document.getElementById('txtCantidadAgregar').value = '';
+        }
+    });
+
 </script>
 </body>
 </html>

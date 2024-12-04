@@ -233,6 +233,15 @@ if (strlen($nomina) == 7) {
                     document.getElementById("pasoUno").style.display = 'none';
                     document.getElementById('txtCantidad').disabled = false;
                     document.getElementById('txtCantidad').focus()
+
+                    var txtCantidad = document.getElementById('txtCantidad');
+
+                    if (data.data[i].UM === 'PC') {
+                        txtCantidad.step = '1'; // Solo permite números enteros
+                    } else {
+                        txtCantidad.step = 'any'; // Permite números decimales
+                    }
+
                     bandera=1;
                 } else {
                     bandera=0;
@@ -248,27 +257,39 @@ if (strlen($nomina) == 7) {
 
     // Cuando se suelta una tecla en el campo de entrada de la cantidad
     document.getElementById('txtCantidad').addEventListener('keyup', function(event) {
+        if (event.key === '-') {
+            document.getElementById('txtCantidad').value = '';
+        }
         document.getElementById('lblCantidad').textContent = this.value;
         var result = costoUnitario * this.value;
         document.getElementById('lblMontoTotal').innerText = result.toFixed(2);
         if (event.key === 'Enter' || event.keyCode === 13) {
+
             if (document.getElementById('txtCantidad').value===document.getElementById('lblNumeroParte').innerText){
                 Swal.fire({
                     title: "Estas ingresando en cantidad el numero de parte",
                     text: "Verifica antes de entrar",
                     icon: "error"
                 });
-            }else {
-                document.getElementById('lblCantidad').textContent = this.value;
-                if (document.getElementById('txtCantidad').value!==""){
-                    document.getElementById('btnFin').disabled = false;
-                    document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
-                }else{
+            }else{
+                if (document.getElementById('txtCantidad').value===document.getElementById('lblNumeroParte').innerText){
                     Swal.fire({
-                        title: "Ingresa la cantidad",
+                        title: "Estas ingresando en cantidad el numero de parte",
                         text: "Verifica antes de entrar",
                         icon: "error"
                     });
+                }else {
+                    document.getElementById('lblCantidad').textContent = this.value;
+                    if (document.getElementById('txtCantidad').value!==""){
+                        document.getElementById('btnFin').disabled = false;
+                        document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
+                    }else{
+                        Swal.fire({
+                            title: "Ingresa la cantidad",
+                            text: "Verifica antes de entrar",
+                            icon: "error"
+                        });
+                    }
                 }
             }
         }

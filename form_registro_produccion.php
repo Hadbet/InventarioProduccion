@@ -250,6 +250,15 @@ if (strlen($nomina) == 7) {
                         document.getElementById('lblCosto').innerText = costoUnitarioU.toFixed(2);
                         document.getElementById('txtCantidad').disabled = false;
                         document.getElementById('txtCantidad').focus()
+
+                        var txtCantidad = document.getElementById('txtCantidad');
+
+                        if (data.data[i].UM === 'PC') {
+                            txtCantidad.step = '1'; // Solo permite números enteros
+                        } else {
+                            txtCantidad.step = 'any'; // Permite números decimales
+                        }
+
                         bandera=1;
                     } else {
                         bandera=0;
@@ -300,6 +309,9 @@ if (strlen($nomina) == 7) {
 
     // Cuando se suelta una tecla en el campo de entrada de la cantidad
     document.getElementById('txtCantidad').addEventListener('keyup', function(event) {
+        if (event.key === '-') {
+            document.getElementById('txtCantidad').value = '';
+        }
         // Si la tecla fue Enter
         document.getElementById('lblCantidad').textContent = this.value;
         var result = costoUnitario * this.value;
