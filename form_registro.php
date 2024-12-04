@@ -893,6 +893,12 @@ if (strlen($nomina) == 7) {
             document.getElementById("txtStorageUnit").value = '';
     }
 
+    document.getElementById('scanner_input').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            manualMarbete();
+        }
+    });
+
 </script>
 </body>
 </html>
