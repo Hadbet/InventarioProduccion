@@ -167,25 +167,25 @@ if (strlen($nomina) == 7) {
                 });
                 var wb = XLSX.utils.book_new();
                 wb.Props = {
-                    Title: "SheetJS Tutorial",
+                    Title: "SheetJS",
                     Subject: "Numeros de parte faltantes",
                     Author: "Red Stapler",
                     CreatedDate: new Date(2017,12,19)
                 };
                 wb.SheetNames.push("Test Sheet");
-                var ws_data = []; //aquí debes agregar los datos que quieres exportar
+                var ws_data = [];
                 for (var i = 0; i < data.data.length; i++) {
                     var grammerNo = data.data[i].GrammerNo;
                     var descripcion = data.data[i].Descripcion;
-                    ws_data.push([grammerNo,descripcion]); //aquí asumí que solo quieres exportar grammerNo, puedes agregar más datos si lo necesitas
+                    ws_data.push([grammerNo,descripcion]);
                 }
                 var ws = XLSX.utils.aoa_to_sheet(ws_data);
                 wb.Sheets["Test Sheet"] = ws;
                 var wbout = XLSX.write(wb, {bookType:'xlsx',  type: 'binary'});
                 function s2ab(s) {
-                    var buf = new ArrayBuffer(s.length); //convert s to arrayBuffer
-                    var view = new Uint8Array(buf);  //create uint8array as viewer
-                    for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF; //convert to octet
+                    var buf = new ArrayBuffer(s.length);
+                    var view = new Uint8Array(buf);
+                    for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
                     return buf;
                 }
                 saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'Numeros de parte faltantes.xlsx');
@@ -221,7 +221,25 @@ if (strlen($nomina) == 7) {
             if (data && data.data && data.data.length > 0) {
                 for (var i = 0; i < data.data.length; i++) {
                     document.getElementById("lblDinero").innerText = (parseFloat(data.data[i].CostoTotalInventarioSap - data.data[i].CostoTotalPrimerConteoBitacora).toLocaleString("es-MX", {style: "currency", currency: "MXN"}));
-                    document.getElementById("lblCantidad").innerText = data.data[i].TotalInventarioSap-data.data[i].TotalPrimerConteoBitacora;
+                    verificacionDiferenciaConteoNp();
+                }
+            }else{
+                Swal.fire({
+                    title: "Tu conteo esta bien",
+                    text: "No necesitas ir a segundos conteos",
+                    icon: "success"
+                });
+            }
+        });
+    }
+
+    function verificacionDiferenciaConteoNp() {
+
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaSegundosConteosNumerosParte.php?area='+<?php echo $area;?>, function (data) {
+
+            if (data && data.data && data.data.length > 0) {
+                for (var i = 0; i < data.data.length; i++) {
+                    document.getElementById("lblCantidad").innerText = data.data[i].CantidadDiferencias;
                     crearTabla();
                 }
             }else{
@@ -233,6 +251,9 @@ if (strlen($nomina) == 7) {
             }
         });
     }
+
+
+
 
     function crearTabla() {
         $.ajax({
