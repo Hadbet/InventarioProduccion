@@ -388,8 +388,8 @@ if (strlen($nomina) == 7) {
 
     function lecturaCorrecta(decodedText, decodedResult) {
 
-        var marbete = decodedText.split('.')[0]
         var conteoM = decodedText.split('.')[1];
+        var marbete = parseInt(decodedText.split('.')[0], 10);
 
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbete.php?marbete='+marbete, function (data) {
             for (var i = 0; i < data.data.length; i++) {
