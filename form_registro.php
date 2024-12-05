@@ -537,6 +537,9 @@ if (strlen($nomina) == 7) {
                                     text: "Unit : " + data.data[i].Id_StorageUnit,
                                     icon: "success"
                                 });
+
+                                limpiarEscan();
+
                                 document.getElementById("txtStorageUnit").value = '';
                             } else {
                                 Swal.fire({
@@ -623,6 +626,7 @@ if (strlen($nomina) == 7) {
                                     text: "Unit : "+data.data[i].Id_StorageUnit,
                                     icon: "success"
                                 });
+                                limpiarEscan();
                             } else {
                                 Swal.fire({
                                     title: "El número de parte no corresponde",
