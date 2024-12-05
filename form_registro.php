@@ -487,7 +487,9 @@ if (strlen($nomina) == 7) {
 
     function storageUnitManual() {
 
-        if (decodedText.length === 10){
+
+
+        if (document.getElementById("txtStorageUnit").value.length === 10){
             $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value+'&bin='+storageBin+'&conteo='+auxConteo, function (data) {
                 if (data.Estatus) {
                     if (data.Estatus=='No existe el storage unit'){
