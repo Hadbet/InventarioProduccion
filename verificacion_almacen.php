@@ -194,6 +194,8 @@
             }
             document.getElementById("txtCantidadTotal").innerText = data.data[0].PrimerConteo;
             document.getElementById("divMarbete").style.display='flex';
+            document.getElementById("divMarbete").style.flexDirection='column';
+        }
             document.getElementById("divMarbete").scrollIntoView({behavior: "smooth"});
             verificacionRegistroTotal();
 
