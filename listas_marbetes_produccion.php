@@ -132,7 +132,7 @@ $result = $stmt->get_result();
                                                 $nominaV = 'Vacio';
                                                 $nombreV = 'Vacio';
                                                 if ($estatus == 5){
-                                                    $fotoV = 'cancelado';
+                                                    $fotoV = '<span class=\"badge badge-pill badge-danger text-white\">Cancelado</span>';
                                                 }else{
                                                     $fotoV = '<strong class="mb-1" id="">Vacio</strong>';
                                                 }
