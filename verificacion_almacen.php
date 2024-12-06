@@ -193,7 +193,7 @@
 
             }
             document.getElementById("txtCantidadTotal").innerText = data.data[0].PrimerConteo;
-            document.getElementById("divMarbete").style.display='block';
+            document.getElementById("divMarbete").style.display='flex';
             document.getElementById("divMarbete").scrollIntoView({behavior: "smooth"});
             verificacionRegistroTotal();
 
