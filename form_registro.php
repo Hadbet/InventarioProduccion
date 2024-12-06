@@ -200,7 +200,7 @@ if (strlen($nomina) == 7) {
                     <br>
                     <label for="txtFolio">Ingresar NP</label>
                     <input type="text" class="form-control"
-                           id="txtNumeroParteA" name="txtNumeroParteA" value="">
+                           id="txtNumeroParteA" name="txtNumeroParteA" value="" disabled>
                     <br>
                     <label for="txtFolio">Ingresar la cantidad</label>
                     <input type="text" class="form-control"
@@ -232,7 +232,7 @@ if (strlen($nomina) == 7) {
                 <br>
                 <p> Ingresar NP. </p>
                 <div class="form-inline justify-content-center">
-                    <input id="txtNumeroParteAgregar" class="form-control form-control-lg mr-sm-2 bg-transparent" type="text">
+                    <input id="txtNumeroParteAgregar" class="form-control form-control-lg mr-sm-2 bg-transparent" type="text" disabled>
                 </div>
                 <br>
                 <p> Ingresa Cantidad. </p>
@@ -290,6 +290,8 @@ if (strlen($nomina) == 7) {
 
                     document.getElementById("reader").style.display = 'none';
                     document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBinF;
+                    document.getElementById("txtNumeroParteA").innerHTML = numeroParteF;
+                    document.getElementById("txtNumeroParteAgregar").innerHTML = numeroParteF;
                     document.getElementById("pasoDos").style.display = 'block';
                     document.getElementById("pasoUno").style.display = 'none';
                     limpiarEscan();

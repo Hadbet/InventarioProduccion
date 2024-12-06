@@ -8,8 +8,8 @@ try {
 
     $parts = explode('.', $folioMarbete);
 
-    $marbete = $parts[0];
-    $conteo = $parts[1];
+    $marbete = intval($parts[0]); // Esto es equivalente a parseInt() en JavaScript
+    $conteo = isset($parts[1]) ? $parts[1] : null;
 
     $con = new LocalConector();
     $conex=$con->conectar();
