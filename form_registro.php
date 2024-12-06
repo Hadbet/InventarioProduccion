@@ -294,6 +294,7 @@ if (strlen($nomina) == 7) {
                     document.getElementById("txtNumeroParteAgregar").value = numeroParteF;
                     document.getElementById("pasoDos").style.display = 'block';
                     document.getElementById("pasoUno").style.display = 'none';
+
                     limpiarEscan();
 
                 } else {
@@ -606,7 +607,7 @@ if (strlen($nomina) == 7) {
                                     });
                                     return;
                                 }
-
+                                limpiarEscan();
                                 addedStorageUnits[data.data[i].Id_StorageUnit] = {
                                     numeroParte: data.data[i].Numero_Parte,
                                     cantidad: data.data[i].Cantidad
@@ -625,12 +626,12 @@ if (strlen($nomina) == 7) {
                                 cell1.innerHTML = data.data[i].Id_StorageUnit;
                                 cell2.innerHTML = numeroParteUnit;
                                 cell3.innerHTML = cantidad;
+                                document.getElementById("txtStorageUnit").value = '';
                                 Swal.fire({
                                     title: "Storage unit escaneado",
                                     text: "Unit : "+data.data[i].Id_StorageUnit,
                                     icon: "success"
                                 });
-                                limpiarEscan();
                             } else {
                                 Swal.fire({
                                     title: "El número de parte no corresponde",
