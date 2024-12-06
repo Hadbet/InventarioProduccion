@@ -138,11 +138,11 @@
                             <div class="row align-items-center">
                                 <div class="col-auto">
                                     <a href="profile-posts.html" class="avatar avatar-md">
-                                        <img id="imagenCapturador" alt="..." class="avatar-img rounded-circle">
+                                        <img id="imagenVerificador" alt="..." class="avatar-img rounded-circle">
                                     </a>
                                 </div>
                                 <div class="col ml-n2">
-                                    <strong class="mb-1" id="lblNombreCapturador"></strong><span class="dot dot-lg bg-success ml-1"></span>
+                                    <strong class="mb-1" id="lblNombreVerificador"></strong><span class="dot dot-lg bg-success ml-1"></span>
                                     <p class="small text-muted mb-1" id="lblRol">Verificador</p>
                                 </div>
                             </div>
