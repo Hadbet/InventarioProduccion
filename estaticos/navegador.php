@@ -232,6 +232,12 @@ if ($tipoArea==0){
                     <a class="nav-link pl-3" href="listas_marbetes_produccion.php"><span class="ml-1">Lista de captura</span></a>
                     <a class="nav-link pl-3" href="equipo_conteo.php"><span class="ml-1">Tu equipo de trabajo</span></a>
                 </ul>
+                
+                <a href="#LiderTest" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                    <i class="fe fe-trello fe-16"></i>
+                    <span class="ml-3 item-text">Control captura</span>
+                </a>
+                '.$captura.'
             </li>
         </ul>';
         }
