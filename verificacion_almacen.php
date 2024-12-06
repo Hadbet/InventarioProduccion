@@ -218,34 +218,44 @@ if (strlen($nomina) == 7) {
         }
 
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaVerificacion.php?marbete='+document.getElementById("txtBuscar").value, function (data) {
-            for (var i = 0; i < data.data.length; i++) {
-                var row = table.insertRow(-1);
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                var cell3 = row.insertCell(2);
-                cell1.innerHTML = data.data[i].Id_StorageUnit;
-                cell2.innerHTML = data.data[i].NumeroParte;
-                cell3.innerHTML = data.data[i].Cantidad;
+            if (data && data.data && data.data.length > 0) {
+                for (var i = 0; i < data.data.length; i++) {
+                    var row = table.insertRow(-1);
+                    var cell1 = row.insertCell(0);
+                    var cell2 = row.insertCell(1);
+                    var cell3 = row.insertCell(2);
+                    cell1.innerHTML = data.data[i].Id_StorageUnit;
+                    cell2.innerHTML = data.data[i].NumeroParte;
+                    cell3.innerHTML = data.data[i].Cantidad;
 
-                if (i==0){
-                    document.getElementById("txtFolioMarbete").innerText = data.data[i].FolioMarbete;
-                    document.getElementById("txtConteo").innerText = data.data[i].Conteo;
-                    document.getElementById("txtResponsable").innerText = data.data[i].Usuario;
-                    if (data.data[i].Estatus==='2'){
-                        document.getElementById("marbeteValidador").style.display='block';
-                    }else{
-                        document.getElementById("marbeteValidador").style.display='none';
+                    if (i==0){
+                        document.getElementById("txtFolioMarbete").innerText = data.data[i].FolioMarbete;
+                        document.getElementById("txtConteo").innerText = data.data[i].Conteo;
+                        document.getElementById("txtResponsable").innerText = data.data[i].Usuario;
+                        if (data.data[i].Estatus==='2'){
+                            document.getElementById("marbeteValidador").style.display='block';
+                        }else{
+                            document.getElementById("marbeteValidador").style.display='none';
+                        }
                     }
+
                 }
+                document.getElementById("txtCantidadTotal").innerText = data.data[0].PrimerConteo;
+                document.getElementById("divMarbete").style.display='flex';
+                document.getElementById("divMarbete").style.flexDirection='column';
+                document.getElementById("marbeteCompleto").style.display='block';
 
+                document.getElementById("divMarbete").scrollIntoView({behavior: "smooth"});
+                verificacionRegistroTotal();
+            }else{
+                Swal.fire({
+                    title: "El marbete no se encontro en su area o no existe.",
+                    text: "Verificalo con nuevamente con tu equipo",
+                    icon: "error"
+                });
             }
-            document.getElementById("txtCantidadTotal").innerText = data.data[0].PrimerConteo;
-            document.getElementById("divMarbete").style.display='flex';
-            document.getElementById("divMarbete").style.flexDirection='column';
-            document.getElementById("marbeteCompleto").style.display='block';
 
-            document.getElementById("divMarbete").scrollIntoView({behavior: "smooth"});
-            verificacionRegistroTotal();
+
 
         });
     }
