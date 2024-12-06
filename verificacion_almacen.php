@@ -1,3 +1,34 @@
+
+<?php
+session_start();
+$rol =$_SESSION['rol'];
+$area =$_SESSION['area'];
+$areaNombre =$_SESSION['AreaNombre'];
+$bin =$_SESSION['StBin'];
+$nomina =$_SESSION['nomina'];
+$nombre =$_SESSION['nombre'];
+
+if (strlen($nomina) == 1) {
+    $nomina = "0000000" . $nomina;
+}
+if (strlen($nomina) == 2) {
+    $nomina = "000000" . $nomina;
+}
+if (strlen($nomina) == 3) {
+    $nomina = "00000" . $nomina;
+}
+if (strlen($nomina) == 4) {
+    $nomina = "0000" . $nomina;
+}
+if (strlen($nomina) == 5) {
+    $nomina = "000" . $nomina;
+}
+if (strlen($nomina) == 6) {
+    $nomina = "00" . $nomina;
+}
+if (strlen($nomina) == 7) {
+    $nomina = "0" . $nomina;
+}?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -123,8 +154,6 @@
                                 </div>
                             </div>
                             <hr>
-                            <button id="btnFin" class="btn mb-2 btn-success float-right text-white" onclick="enviarDatos()">Finalizar Captura<span
-                                        class="fe fe-chevron-right fe-16 ml-2" ></span></button>
                         </div> <!-- .card-body -->
                     </div> <!-- .card -->
                 </div> <!-- .col -->
@@ -224,8 +253,8 @@
                         document.getElementById("imagenCapturador").src = 'https://grammermx.com/Fotos/'+numeroNomina+'.png';
                         document.getElementById("lblNombreCapturador").innerText = nombre;
 
-                        document.getElementById("imagenVerificador").src = 'https://grammermx.com/Fotos/'+numeroNominaVerificador+'.png';
-                        document.getElementById("lblNombreVerificador").innerText = nombreVerificador;
+                        document.getElementById("imagenVerificador").src = 'https://grammermx.com/Fotos/<?php echo $nomina;?>.png';
+                        document.getElementById("lblNombreVerificador").innerText = '<?php echo $nombre;?>';
 
                         document.getElementById("lblFolio").innerText = data.data[i].FolioMarbete;
                         document.getElementById("lblNumeroParte").innerText = data.data[i].NumeroParte;
