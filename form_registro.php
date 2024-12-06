@@ -586,10 +586,10 @@ if (strlen($nomina) == 7) {
 
 
     function lecturaCorrectaUnit(decodedText, decodedResult) {
-        if (decodedText.length === 10){
+
+        if (decodedText.length === 10 && parseInt(decodedText) < ultimoSum){
             console.log('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value+'&bin='+storageBin+'&conteo='+auxConteo);
             $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+decodedText+'&bin='+storageBin+'&conteo='+auxConteo, function (data) {
-
                 if (data.Estatus) {
                     if (data.Estatus=='No existe el storage unit'){
                         document.getElementById("txtStorageUnitAgregar").value = decodedText;
