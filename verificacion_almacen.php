@@ -43,7 +43,7 @@
                             <p class="lead text-muted mb-5">Conteo : <span id="txtConteo"></span></p>
                             <p class="lead text-muted mb-5">Responsable : <span id="txtResponsable"></span></p>
                         </div>
-
+                        <br>
                         <table id="data-table" class="table table-hover">
                             <thead>
                             <tr>
@@ -55,6 +55,7 @@
                             <tbody>
                             </tbody>
                         </table>
+                        <br>
                         <div class="text-center">
                             <h2 class="mb-0">Cantidad Total : <span id="txtCantidadTotal"></span></h2>
                         </div>
