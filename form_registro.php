@@ -269,6 +269,7 @@ if (strlen($nomina) == 7) {
 
     var numeroParteUnit;
     var cantidad;
+    var ultimoSum = 0;
 
     var auxConteo=0;
     estatusConteo();
@@ -279,6 +280,15 @@ if (strlen($nomina) == 7) {
                 if (auxConteo==="2"){
                     document.getElementById("divComentarios").style.display='none';
                 }
+            }
+        });
+    }
+
+    sum();
+    function sum() {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaUltimoSum.php', function (data) {
+            for (var i = 0; i < data.data.length; i++) {
+                ultimoSum = data.data[i].Id_StorageUnit;
             }
         });
     }
@@ -489,10 +499,9 @@ if (strlen($nomina) == 7) {
     var addedStorageUnits = {};
 
     function storageUnitManual() {
+        var txtStorageUnitValue = document.getElementById("txtStorageUnit").value;
 
-
-
-        if (document.getElementById("txtStorageUnit").value.length === 10){
+        if (txtStorageUnitValue.length === 10 && parseInt(txtStorageUnitValue) < ultimoSum){
             $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaStorageUnit.php?storageUnit='+document.getElementById("txtStorageUnit").value+'&bin='+storageBin+'&conteo='+auxConteo, function (data) {
                 if (data.Estatus) {
                     if (data.Estatus=='No existe el storage unit'){
@@ -567,7 +576,7 @@ if (strlen($nomina) == 7) {
             });
         }else {
             Swal.fire({
-                title: "Recuerda que el storage unit es de 10 caracteres",
+                title: "Recuerda que el storage unit es de 10 caracteres / y debe ser menor que el ultimo sum en base de datos",
                 text: "verifica lo ingresado",
                 icon: "error"
             });
