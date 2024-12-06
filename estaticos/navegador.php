@@ -209,6 +209,11 @@ if ($tipoArea==0){
                     <a class="nav-link pl-3" href="listas_marbetes_produccion.php"><span class="ml-1">Reporte</span></a>
                 </ul>
             </li>
+            <a href="#LiderTestD" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                    <i class="fe fe-trello fe-16"></i>
+                    <span class="ml-3 item-text">Control captura</span>
+                </a>
+                '.$captura.'
         </ul>';
         }
         ?>
