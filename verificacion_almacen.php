@@ -96,7 +96,7 @@ if (strlen($nomina) == 7) {
 
             <div class="row">
 
-                <div class="col-md-6 col-xl-6 mb-4">
+                <div id="marbeteCompleto" class="col-md-6 col-xl-6 mb-4" style="display: none">
                     <div class="card shadow">
                         <div class="card-header">
                             <span class="card-title">Marbete : <span id="lblFolio"></span></span>
@@ -237,6 +237,8 @@ if (strlen($nomina) == 7) {
             document.getElementById("txtCantidadTotal").innerText = data.data[0].PrimerConteo;
             document.getElementById("divMarbete").style.display='flex';
             document.getElementById("divMarbete").style.flexDirection='column';
+            document.getElementById("marbeteCompleto").style.display='block';
+
             document.getElementById("divMarbete").scrollIntoView({behavior: "smooth"});
             verificacionRegistroTotal();
 
