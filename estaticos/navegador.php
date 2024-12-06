@@ -13,11 +13,14 @@ if ($_SESSION["nominaCurso"] == "" && $_SESSION["nominaCurso"]== null && $_SESSI
     $tipoArea =$_SESSION['tipoArea'];
     $bin =$_SESSION['StBin'];
 }
+$auditor='<a class="nav-link pl-3" href="verificacion.php"><span class="ml-1">Validacion</span></a>';
 
 if ($tipoArea==2){
     $captura = '<ul class="collapse list-unstyled pl-4 w-100 collapse show" id="contact">
                     <a class="nav-link pl-3" href="form_registro.php"><span class="ml-1">Captura SUM</span></a>
                 </ul>';
+
+    $auditor = '<a class="nav-link pl-3" href="form_registro.php"><span class="ml-1">Validacion</span></a>';
 }
 
 if ($tipoArea==1){
@@ -197,7 +200,7 @@ if ($tipoArea==0){
                     <span class="ml-3 item-text">Verificacion</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100 collapse show" id="Auditor">
-                    <a class="nav-link pl-3" href="verificacion.php"><span class="ml-1">Escaner</span></a>
+                    '.$auditor.'
                 </ul>
             </li>
             <li class="nav-item dropdown">
