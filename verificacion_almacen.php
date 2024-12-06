@@ -231,6 +231,11 @@ if (strlen($nomina) == 7) {
                     document.getElementById("txtFolioMarbete").innerText = data.data[i].FolioMarbete;
                     document.getElementById("txtConteo").innerText = data.data[i].Conteo;
                     document.getElementById("txtResponsable").innerText = data.data[i].Usuario;
+                    if (data.data[i].Estatus==='2'){
+                        document.getElementById("marbeteValidador").style.display='block';
+                    }else{
+                        document.getElementById("marbeteValidador").style.display='none';
+                    }
                 }
 
             }
@@ -238,7 +243,6 @@ if (strlen($nomina) == 7) {
             document.getElementById("divMarbete").style.display='flex';
             document.getElementById("divMarbete").style.flexDirection='column';
             document.getElementById("marbeteCompleto").style.display='block';
-            document.getElementById("marbeteValidador").style.display='block';
 
             document.getElementById("divMarbete").scrollIntoView({behavior: "smooth"});
             verificacionRegistroTotal();
