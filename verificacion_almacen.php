@@ -166,6 +166,14 @@ if (strlen($nomina) == 7) {
                         </div>
                         <div class="card-body my-n2">
                             <div class="row align-items-center">
+                                <label for="basic-url">Cantidad</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" id="txtCantidad" disabled class="form-control" aria-label="Recipient's username" autocomplete="off" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="txtUnidadMedida" style=""></span>
+                                    </div>
+                                </div>
+
                                 <div class="col-auto">
                                     <a href="profile-posts.html" class="avatar avatar-md">
                                         <img id="imagenVerificador" alt="..." class="avatar-img rounded-circle">
@@ -175,6 +183,8 @@ if (strlen($nomina) == 7) {
                                     <strong class="mb-1" id="lblNombreVerificador"></strong><span class="dot dot-lg bg-success ml-1"></span>
                                     <p class="small text-muted mb-1" id="lblRol">Verificador</p>
                                 </div>
+                                <button id="btnFin" disabled class="btn mb-2 btn-success float-right text-white" onclick="enviarDatos()">Finalizar Captura<span
+                                            class="fe fe-chevron-right fe-16 ml-2" ></span></button>
                             </div>
                             <hr>
                         </div> <!-- .card-body -->
@@ -285,6 +295,7 @@ if (strlen($nomina) == 7) {
                     costoUnitario = data.data[i].Costo / data.data[i].Por;
                     document.getElementById('lblCosto').innerText = costoUnitario;
                     document.getElementById('lblMontoTotal').innerText = costoUnitario*cantidad;
+                    document.getElementById('txtUnidadMedida').innerText = data.data[i].UM;
                     bandera=1;
 
                     document.getElementById("divMarbete").style.display='flex';
