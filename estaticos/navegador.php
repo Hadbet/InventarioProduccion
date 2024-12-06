@@ -20,7 +20,7 @@ if ($tipoArea==2){
                     <a class="nav-link pl-3" href="form_registro.php"><span class="ml-1">Captura SUM</span></a>
                 </ul>';
 
-    $auditor = '<a class="nav-link pl-3" href="form_registro.php"><span class="ml-1">Validacion</span></a>';
+    $auditor = '<a class="nav-link pl-3" href="verificacion_almacen.php"><span class="ml-1">Validacion</span></a>';
 }
 
 if ($tipoArea==1){
