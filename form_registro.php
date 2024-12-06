@@ -290,8 +290,8 @@ if (strlen($nomina) == 7) {
 
                     document.getElementById("reader").style.display = 'none';
                     document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBinF;
-                    document.getElementById("txtNumeroParteA").innerHTML = numeroParteF;
-                    document.getElementById("txtNumeroParteAgregar").innerHTML = numeroParteF;
+                    document.getElementById("txtNumeroParteA").value = numeroParteF;
+                    document.getElementById("txtNumeroParteAgregar").value = numeroParteF;
                     document.getElementById("pasoDos").style.display = 'block';
                     document.getElementById("pasoUno").style.display = 'none';
                     limpiarEscan();
