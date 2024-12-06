@@ -168,11 +168,6 @@
 <script>
 
     function verificacionRegistro() {
-        /*
-        document.getElementById("txtFolioMarbete").innerText = folio;
-        document.getElementById("txtComentario").value = comentarios;
-        document.getElementById("txtResponsable").value = usuario;
-        document.getElementById("lblFecha").innerText = fecha;*/
 
         var table = document.getElementById("data-table");
         while (table.rows.length > 1) {
@@ -194,13 +189,92 @@
                     document.getElementById("txtConteo").innerText = data.data[i].Conteo;
                     document.getElementById("txtResponsable").innerText = data.data[i].Usuario;
                 }
+
             }
             document.getElementById("txtCantidadTotal").innerText = data.data[0].PrimerConteo;
             document.getElementById("divMarbete").style.display='block';
             document.getElementById("divMarbete").scrollIntoView({behavior: "smooth"});
+            verificacionRegistroTotal();
 
         });
     }
+
+    var cantidad;
+
+    function verificacionRegistroTotal() {
+
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaVerificacionProduccion.php?marbete='+document.getElementById("txtBuscar").value+'&area='+<?php echo $area;?>, function (data) {
+
+            if (data && data.data && data.data.length > 0){
+
+                for (var i = 0; i < data.data.length; i++) {
+                    if (i==0){
+                        var usuario = data.data[i].Usuario;
+                        var separado = usuario.split("-");
+                        var numeroNomina = separado[0];
+                        var nombre = separado[1];
+
+                        var usuarioVerificador = data.data[i].UsuarioVerificacion;
+                        var separadoVerificador = usuarioVerificador.split("-");
+                        var numeroNominaVerificador = separadoVerificador[0];
+                        var nombreVerificador = separadoVerificador[1];
+
+                        document.getElementById("imagenCapturador").src = 'https://grammermx.com/Fotos/'+numeroNomina+'.png';
+                        document.getElementById("lblNombreCapturador").innerText = nombre;
+
+                        document.getElementById("imagenVerificador").src = 'https://grammermx.com/Fotos/'+numeroNominaVerificador+'.png';
+                        document.getElementById("lblNombreVerificador").innerText = nombreVerificador;
+
+                        document.getElementById("lblFolio").innerText = data.data[i].FolioMarbete;
+                        document.getElementById("lblNumeroParte").innerText = data.data[i].NumeroParte;
+                        document.getElementById("lblCantidad").innerText = data.data[i].PrimerConteo;
+                        document.getElementById("lblStorageBin").innerText = data.data[i].StorageBin;
+                        cantidad = data.data[i].PrimerConteo;
+                        cargaPrimer(data.data[i].NumeroParte);
+
+
+                    }
+                }
+            }else{
+                Swal.fire({
+                    title: "El marbete no esta capturado aun o no pertenece a tu area",
+                    text: "Verificalo con la mesa de control",
+                    icon: "error"
+                });
+            }
+
+        });
+    }
+
+    function cargaPrimer(numeroParte) {
+        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaParte.php?parte='+numeroParte, function (data) {
+            for (var i = 0; i < data.data.length; i++) {
+                if (data.data[i].GrammerNo) {
+                    document.getElementById('lblDescripcion').innerText = data.data[i].Descripcion;
+                    costoUnitario = data.data[i].Costo / data.data[i].Por;
+                    document.getElementById('lblCosto').innerText = costoUnitario;
+                    document.getElementById('lblMontoTotal').innerText = costoUnitario*cantidad;
+                    bandera=1;
+
+                    document.getElementById("divMarbete").style.display='flex';
+                    document.getElementById("divMarbete").scrollIntoView({behavior: "smooth"});
+                } else {
+                    bandera=0;
+                    Swal.fire({
+                        title: "El numero de parte no existe",
+                        text: "Verificalo con la mesa de control",
+                        icon: "error"
+                    });
+                }
+            }
+        });
+    }
+
+    document.getElementById('txtBuscar').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            verificacionRegistro();
+        }
+    });
 
 </script>
 </body>
