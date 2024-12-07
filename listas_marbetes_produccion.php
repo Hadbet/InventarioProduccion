@@ -121,7 +121,7 @@ $result = $stmt->get_result();
                                                 $nominaV = $parts[0];
                                                 $nombreV = isset($parts[1]) ? $parts[1] : 'Vacio';
                                                 $fotoV = '<div class="col-auto">
-                                                    <a href="profile-posts.html" class="avatar avatar-md">
+                                                    <a href="#" class="avatar avatar-md">
                                                         <img src="https://grammermx.com/Fotos/'.$nominaV.'.png" alt="..." class="avatar-img rounded-circle">
                                                     </a>
                                                 </div>
@@ -144,7 +144,7 @@ $result = $stmt->get_result();
                                                 $nominaC = $parts[0];
                                                 $nombreC = isset($parts[1]) ? $parts[1] : 'Vacio';
                                                 $fotoC = '<div class="col-auto">
-                                                    <a href="profile-posts.html" class="avatar avatar-md">
+                                                    <a href="#" class="avatar avatar-md">
                                                         <img src="https://grammermx.com/Fotos/'.$nominaC.'.png" alt="..." class="avatar-img rounded-circle">
                                                     </a>
                                                 </div>

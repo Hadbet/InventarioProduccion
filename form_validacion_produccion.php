@@ -167,7 +167,7 @@ if (strlen($nomina) == 7) {
                             <hr>
                             <div class="row align-items-center">
                                 <div class="col-auto">
-                                    <a href="profile-posts.html" class="avatar avatar-md">
+                                    <a href="#" class="avatar avatar-md">
                                         <img id="imagenCapturador" alt="..." class="avatar-img rounded-circle">
                                     </a>
                                 </div>

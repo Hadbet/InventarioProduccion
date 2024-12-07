@@ -171,7 +171,7 @@ if (strlen($nomina) == 7) {
                             <hr>
                             <div class="row align-items-center">
                                 <div class="col-auto">
-                                    <a href="profile-posts.html" class="avatar avatar-md">
+                                    <a href="#" class="avatar avatar-md">
                                         <img src="https://grammermx.com/Fotos/<?php echo $nomina; ?>.png" alt="..." class="avatar-img rounded-circle">
                                     </a>
                                 </div>

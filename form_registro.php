@@ -602,7 +602,6 @@ if (strlen($nomina) == 7) {
                             icon: "error"
                         });
                     }
-
                 } else {
                     for (var i = 0; i < data.data.length; i++) {
                         if (data.data[i].Id_StorageUnit) {
