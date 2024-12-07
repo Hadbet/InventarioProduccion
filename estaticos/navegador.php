@@ -246,6 +246,7 @@ if ($tipoArea==0){
                     <span class="ml-3 item-text">Control captura</span>
                 </a>
                 '.$captura.'
+                '.$auditor.'
             </li>
         </ul>';
         }
