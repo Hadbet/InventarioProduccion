@@ -382,167 +382,93 @@ if (strlen($nomina) == 7) {
     gtag('js', new Date());
     gtag('config', 'UA-56159088-1');
 
-    function actualizarTabla() {
-        $.ajax({
-            url: 'https://grammermx.com/Logistica/Inventario/dao/consultaMarbeteLider.php?area=<?php echo $area; ?>', // Reemplaza esto con la URL de tus datos
-            dataType: 'json',
-            success: function (data) {
-                var table = $('#dataTable-1').DataTable();
-                table.clear();
-                table.rows.add(data.data);
-                table.draw();
-            }
+    async function fetchData(url) {
+        return new Promise((resolve, reject) => {
+            $.getJSON(url, function (data) {
+                resolve(data);
+            }).fail(function (jqxhr, textStatus, error) {
+                reject(error);
+            });
         });
     }
 
-    async function cancelar(id) {
-        const {value: comentario} = await Swal.fire({
-            title: "Ingresa tus comentarios",
-            input: "text",
-            inputLabel: "¿Por qué lo cancelas?",
-            showCancelButton: true,
-            inputValidator: (value) => {
-                if (!value) {
-                    return "¡Se requiere que se explique la razón!";
-                }
-            }
-        });
-
-        if (comentario) {
-            var formData = new FormData();
-            formData.append('id', id);
-            formData.append('comentario', comentario);
-
-            fetch('https://grammermx.com/Logistica/Inventario/dao/guardarCancelacion.php', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    Swal.fire({
-                        title: "El marbete fue cancelado",
-                        text: "Gracias",
-                        icon: "success"
-                    });
-                    actualizarTabla();
-                });
-        }
-    }
-
-
-
-
-
-
-    let formattedData = [];
-
-    // Primera consulta
-    $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaReporteFinalUno.php', function (data) {
-        for (var i = 0; i < data.data.length; i++) {
+    async function processAndAppendData(data, type) {
+        let formattedData = [];
+        for (let i = 0; i < data.data.length; i++) {
             let item = data.data[i];
-            formattedData.push({
-                P: '*',
-                L: '',
-                M: '',
+            let formattedItem = {
+                P: type === 'uno' ? '*' : '',
+                L: type === 'dos' ? '*' : '',
+                M: type === 'tres' ? '*' : '',
                 GrammerNo: item.GrammerNo,
                 Descripcion: item.Descripcion,
                 UM: item.UM,
                 Costo_Unitario: item.Costo_Unitario,
                 StLocation: '',
-                StBin: '',
-                Folio: '',
-                Sap: item.Total_InventarioSap,
-                Conteo: item.Total_Bitacora_Inventario,
-                Dif: item.Diferencia,
+                StBin: type === 'uno' ? '' : item.STBin || item.StorageBin,
+                Folio: type === 'tres' ? item.FolioMarbete : '',
+                Sap: type === 'tres' ? '' : item.Total_InventarioSap,
+                Conteo: type === 'tres' ? item.Total_Conteo : item.Total_Bitacora_Inventario,
+                Dif: type === 'tres' ? '' : item.Diferencia,
                 Costo: '', // Aquí debes calcular el costo
-                Comentario: ''
-            });
+                Comentario: type === 'tres' ? item.Comentario : ''
+            };
+            formattedData.push(formattedItem);
         }
-    }).done(function() {
-        // Segunda consulta
-        $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaReporteFinalDos.php', function (data) {
-            for (var i = 0; i < data.data.length; i++) {
-                let item = data.data[i];
-                formattedData.push({
-                    P: '',
-                    L: '*',
-                    M: '',
-                    GrammerNo: item.GrammerNo,
-                    Descripcion: item.Descripcion,
-                    UM: item.UM,
-                    Costo_Unitario: item.Costo_Unitario,
-                    StLocation: '',
-                    StBin: item.STBin,
-                    Folio: '',
-                    Sap: item.Total_InventarioSap,
-                    Conteo: item.Total_Bitacora_Inventario,
-                    Dif: item.Diferencia,
-                    Costo: '', // Aquí debes calcular el costo
-                    Comentario: ''
-                });
-            }
-        }).done(function() {
-            // Tercera consulta
-            $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaReporteFinalTres.php', function (data) {
-                for (var i = 0; i < data.data.length; i++) {
-                    let item = data.data[i];
-                    formattedData.push({
-                        P: '',
-                        L: '',
-                        M: '*',
-                        GrammerNo: item.GrammerNo,
-                        Descripcion: item.Descripcion,
-                        UM: item.UM,
-                        Costo_Unitario: item.Costo_Unitario,
-                        StLocation: '',
-                        StBin: item.StorageBin,
-                        Folio: item.FolioMarbete,
-                        Sap: '',
-                        Conteo: item.Total_Conteo,
-                        Dif: '',
-                        Costo: '', // Aquí debes calcular el costo
-                        Comentario: item.Comentario
-                    });
-                }
-            }).done(function() {
-                // Ordenar datos por GrammerNo
-                formattedData.sort(function(a, b) {
-                    var grammerNoCompare = a.GrammerNo.localeCompare(b.GrammerNo);
-                    if (grammerNoCompare != 0) {
-                        // Si GrammerNo no es igual, ordena por GrammerNo
-                        return grammerNoCompare;
-                    } else {
-                        // Si GrammerNo es igual, ordena por StBin
-                        return a.StBin.localeCompare(b.StBin);
-                    }
-                });
+        return formattedData;
+    }
 
-                for (var i = 0; i < formattedData.length; i++) {
-                    let item = formattedData[i];
-                    $('#data-table tbody').append(
-                        '<tr>' +
-                        '<td>' + (item.P || '') + '</td>' +
-                        '<td>' + (item.L || '') + '</td>' +
-                        '<td>' + (item.M || '') + '</td>' +
-                        '<td>' + (item.GrammerNo || '') + '</td>' +
-                        '<td>' + (item.Descripcion || '') + '</td>' +
-                        '<td>' + (item.UM || '') + '</td>' +
-                        '<td>' + (parseFloat(item.Costo_Unitario || 0).toFixed(4)) + '</td>' +
-                        '<td>' + (item.StLocation || '') + '</td>' +
-                        '<td>' + (item.StBin || '') + '</td>' +
-                        '<td>' + (item.Folio || '') + '</td>' +
-                        '<td>' + (parseFloat(item.Sap || 0).toFixed(2)) + '</td>' +
-                        '<td>' + (parseFloat(item.Conteo || 0).toFixed(2)) + '</td>' +
-                        '<td>' + (parseFloat(item.Dif || 0).toFixed(2)) + '</td>' +
-                        '<td>' + (parseFloat(item.Costo || 0).toFixed(4)) + '</td>' +
-                        '<td>' + (item.Comentario || '') + '</td>' +
-                        '</tr>'
-                    );
+    async function loadData() {
+        try {
+            const dataUno = await fetchData('https://grammermx.com/Logistica/Inventario/dao/consultaReporteFinalUno.php');
+            const dataDos = await fetchData('https://grammermx.com/Logistica/Inventario/dao/consultaReporteFinalDos.php');
+            const dataTres = await fetchData('https://grammermx.com/Logistica/Inventario/dao/consultaReporteFinalTres.php');
+
+            let formattedData = [];
+            formattedData = formattedData.concat(await processAndAppendData(dataUno, 'uno'));
+            formattedData = formattedData.concat(await processAndAppendData(dataDos, 'dos'));
+            formattedData = formattedData.concat(await processAndAppendData(dataTres, 'tres'));
+
+            // Ordenar datos por GrammerNo
+            formattedData.sort(function(a, b) {
+                var grammerNoCompare = a.GrammerNo.localeCompare(b.GrammerNo);
+                if (grammerNoCompare != 0) {
+                    // Si GrammerNo no es igual, ordena por GrammerNo
+                    return grammerNoCompare;
+                } else {
+                    // Si GrammerNo es igual, ordena por StBin
+                    return a.StBin.localeCompare(b.StBin);
                 }
             });
-        });
-    });
+
+            for (let i = 0; i < formattedData.length; i++) {
+                let item = formattedData[i];
+                $('#data-table tbody').append(
+                    '<tr>' +
+                    '<td>' + (item.P || '') + '</td>' +
+                    '<td>' + (item.L || '') + '</td>' +
+                    '<td>' + (item.M || '') + '</td>' +
+                    '<td>' + (item.GrammerNo || '') + '</td>' +
+                    '<td>' + (item.Descripcion || '') + '</td>' +
+                    '<td>' + (item.UM || '') + '</td>' +
+                    '<td>' + (parseFloat(item.Costo_Unitario || 0).toFixed(4)) + '</td>' +
+                    '<td>' + (item.StLocation || '') + '</td>' +
+                    '<td>' + (item.StBin || '') + '</td>' +
+                    '<td>' + (item.Folio || '') + '</td>' +
+                    '<td>' + (parseFloat(item.Sap || 0).toFixed(2)) + '</td>' +
+                    '<td>' + (parseFloat(item.Conteo || 0).toFixed(2)) + '</td>' +
+                    '<td>' + (parseFloat(item.Dif || 0).toFixed(2)) + '</td>' +
+                    '<td>' + (parseFloat(item.Costo || 0).toFixed(4)) + '</td>' +
+                    '<td>' + (item.Comentario || '') + '</td>' +
+                    '</tr>'
+                );
+            }
+        } catch (error) {
+            console.error("Error loading data: ", error);
+        }
+    }
+
+    loadData();
 
 </script>
 </body>
