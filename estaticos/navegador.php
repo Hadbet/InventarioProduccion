@@ -110,6 +110,10 @@ if ($tipoArea==0){
                         <a class="nav-link pl-3" href="control_parte_admin.php"><span class="ml-1 item-text">Parte</span></a>
                     </li>
                     
+                    <li class="nav-item">
+                        <a class="nav-link pl-3" href="inventario_sap.php"><span class="ml-1 item-text">Inventario Sap</span></a>
+                    </li>
+                    
                 </ul>
             </li>
             <li class="nav-item dropdown">
