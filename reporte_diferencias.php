@@ -176,9 +176,24 @@ if (strlen($nomina) == 7) {
                         { data: 'FolioMarbete' },
                         { data: 'NumeroParte' },
                         { data: 'StorageBin' },
-                        { data: 'CantidadBitacora' },
-                        { data: 'CantidadInventarioSap' },
-                        { data: 'DiferenciaCantidad' },
+                        {
+                            data: 'CantidadBitacora',
+                            render: function(data, type, row) {
+                                return parseFloat(data).toFixed(2);
+                            }
+                        },
+                        {
+                            data: 'CantidadInventarioSap',
+                            render: function(data, type, row) {
+                                return parseFloat(data).toFixed(2);
+                            }
+                        },
+                        {
+                            data: 'DiferenciaCantidad',
+                            render: function(data, type, row) {
+                                return parseFloat(data).toFixed(2);
+                            }
+                        },
                         { data: 'AreaNombre' }
                     ],
                     autoWidth: true,
