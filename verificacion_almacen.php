@@ -237,10 +237,12 @@ if (strlen($nomina) == 7) {
                         document.getElementById("txtResponsable").innerText = data.data[i].Usuario;
                         if (data.data[i].Estatus==='2'){
                             document.getElementById("marbeteValidador").style.display='block';
-                        }else{
-                            document.getElementById("marbeteValidador").style.display='block';
                             document.getElementById("btnFin").style.display='block';
                             document.getElementById("btnSegundos").style.display='block';
+                        }else{
+                            document.getElementById("marbeteValidador").style.display='block';
+                            document.getElementById("btnFin").style.display='none';
+                            document.getElementById("btnSegundos").style.display='none';
                         }
                     }
 
