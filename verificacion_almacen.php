@@ -325,7 +325,7 @@ if (strlen($nomina) == 7) {
                     document.getElementById('lblDescripcion').innerText = data.data[i].Descripcion;
                     costoUnitario = data.data[i].Costo / data.data[i].Por;
                     document.getElementById('lblCosto').innerText = costoUnitario;
-                    document.getElementById('lblMontoTotal').innerText = costoUnitario*cantidad;
+                    document.getElementById('lblMontoTotal').innerText = parseFloat(costoUnitario*cantidad).toFixed(2);
                     document.getElementById('txtUnidadMedida').innerText = data.data[i].UM;
                     bandera=1;
 
