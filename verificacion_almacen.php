@@ -183,10 +183,10 @@ if (strlen($nomina) == 7) {
                                     <strong class="mb-1" id="lblNombreVerificador"></strong><span class="dot dot-lg bg-success ml-1"></span>
                                     <p class="small text-muted mb-1" id="lblRol">Verificador</p>
                                 </div>
-                                <button id="btnFin" class="btn mb-2 btn-success float-right text-white" style="display:none;" onclick="enviarDatos()">Finalizar Captura<span
+                                <button id="btnFin" class="btn mb-2 btn-success float-right text-white" onclick="enviarDatos()">Finalizar Captura<span
                                             class="fe fe-chevron-right fe-16 ml-2" ></span></button>
 
-                                <button id="btnSegundos" class="btn mb-2 btn-warning float-right text-white" style="display:none;" onclick="enviarDatos()">Mandar a segundos conteos<span
+                                <button id="btnFin" class="btn mb-2 btn-warning float-right text-white" onclick="enviarDatos()">Mandar a segundos conteos<span
                                             class="fe fe-chevron-right fe-16 ml-2" ></span></button>
                             </div>
                             <hr>
@@ -237,12 +237,8 @@ if (strlen($nomina) == 7) {
                         document.getElementById("txtResponsable").innerText = data.data[i].Usuario;
                         if (data.data[i].Estatus==='2'){
                             document.getElementById("marbeteValidador").style.display='block';
-                            document.getElementById("btnFin").style.display='block';
-                            document.getElementById("btnSegundos").style.display='block';
                         }else{
-                            document.getElementById("marbeteValidador").style.display='block';
-                            document.getElementById("btnFin").style.display='none';
-                            document.getElementById("btnSegundos").style.display='none';
+                            document.getElementById("marbeteValidador").style.display='none';
                         }
                     }
 
