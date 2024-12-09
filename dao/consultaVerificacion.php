@@ -19,7 +19,7 @@ function ContadorApu($marbeteSolo,$conteo)
     $datos = mysqli_query($conex, "SELECT SU.`Id_StorageUnit`, SU.`Numero_Parte`, SU.`Cantidad`, SU.`Storage_Bin`, SU.`Storage_Type`, SU.`Estatus`, SU.`FolioMarbete`, SU.`Conteo`, BI.* 
 FROM `Storage_Unit` AS SU
 JOIN `Bitacora_Inventario` AS BI ON SU.`FolioMarbete` = BI.`FolioMarbete`
-WHERE SU.FolioMarbete = '$marbeteSolo' and SU.Conteo = '$conteo' and SU.Estatus = 1 and BI.Estatus = 1;");
+WHERE SU.FolioMarbete = '$marbeteSolo' and SU.Conteo = '$conteo' and SU.Estatus in(1,2) and BI.Estatus in(1,2);");
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
     echo json_encode(array("data" => $resultado));
 }
