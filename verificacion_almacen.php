@@ -346,7 +346,7 @@ if (strlen($nomina) == 7) {
         var cantidadAnterior = document.getElementById("lblCantidad").innerText;
 
         if (cantidad === cantidadAnterior || await confirmarCambio()) {
-            enviarSolicitud('<?php echo $nomina;?>-<?php echo $nombre;?>', marbete, cantidad,auxConteo);
+            enviarSolicitud('<?php echo $nomina;?>-<?php echo $nombre;?>', marbete+'.1', cantidad,auxConteo);
         }
     }
 
