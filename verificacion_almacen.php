@@ -166,8 +166,8 @@ if (strlen($nomina) == 7) {
                         </div>
                         <div class="card-body my-n2">
                             <div class="row align-items-center">
-                                <label for="basic-url">Cantidad</label>
-                                <div class="input-group mb-3">
+                                <label for="basic-url" id="divCantidadT">Cantidad</label>
+                                <div class="input-group mb-3" id="divCantidad">
                                     <input type="number" id="txtCantidad" class="form-control" aria-label="Recipient's username" autocomplete="off" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
                                         <span class="input-group-text" id="txtUnidadMedida" style=""></span>
@@ -186,7 +186,7 @@ if (strlen($nomina) == 7) {
                                 <button id="btnFin" class="btn mb-2 btn-success float-right text-white" onclick="enviarDatos()">Finalizar Captura<span
                                             class="fe fe-chevron-right fe-16 ml-2" ></span></button>
 
-                                <button id="btnFin" class="btn mb-2 btn-warning float-right text-white" onclick="enviarDatos()">Mandar a segundos conteos<span
+                                <button id="btnSegundos" class="btn mb-2 btn-warning float-right text-white" onclick="enviarDatos()">Mandar a segundos conteos<span
                                             class="fe fe-chevron-right fe-16 ml-2" ></span></button>
                             </div>
                             <hr>
@@ -237,8 +237,16 @@ if (strlen($nomina) == 7) {
                         document.getElementById("txtResponsable").innerText = data.data[i].Usuario;
                         if (data.data[i].Estatus==='2'){
                             document.getElementById("marbeteValidador").style.display='block';
+                            document.getElementById("divCantidad").style.display='block';
+                            document.getElementById("divCantidadT").style.display='block';
+                            document.getElementById("btnFin").style.display='block';
+                            document.getElementById("btnSegundos").style.display='block';
                         }else{
-                            document.getElementById("marbeteValidador").style.display='none';
+                            document.getElementById("marbeteValidador").style.display='block';
+                            document.getElementById("divCantidad").style.display='none';
+                            document.getElementById("divCantidadT").style.display='none';
+                            document.getElementById("btnFin").style.display='none';
+                            document.getElementById("btnSegundos").style.display='none';
                         }
                     }
 
