@@ -44,14 +44,6 @@ if (strlen($nomina) == 7) {
 
     <?php include 'estaticos/stylesEstandar.php'; ?>
     <style>
-        .table-fixed{
-
-        }
-
-        .table-fixed th{
-            pos
-        }
-
     </style>
 </head>
 <body class="vertical  light  ">
@@ -86,7 +78,7 @@ if (strlen($nomina) == 7) {
                                         <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Diferencias en cantidad mayor a:</label>
                                         <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2">
 
-                                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Numero Parte</label>
+                                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Número Parte</label>
                                         <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2">
 
                                         <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Folio</label>
@@ -111,7 +103,7 @@ if (strlen($nomina) == 7) {
                                         </div>
                                         <div class="col pr-0">
                                             <p class="small mb-0 text-white">Partes con negativos</p>
-                                            <span class="h3 mb-0 text-white" id="partesNegativo">$1250</span>
+                                            <span class="h3 mb-0 text-white" id="partesNegativo"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +121,7 @@ if (strlen($nomina) == 7) {
                                         </div>
                                         <div class="col pr-0">
                                             <p class="small mb-0 text-white">Partes con positivos</p>
-                                            <span class="h3 mb-0 text-white" id="partesPositivo">$1250</span>
+                                            <span class="h3 mb-0 text-white" id="partesPositivo"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -147,7 +139,7 @@ if (strlen($nomina) == 7) {
                                         </div>
                                         <div class="col pr-0">
                                             <p class="small mb-0 text-white" >Costo Negativo</p>
-                                            <span class="h3 mb-0 text-white" id="costoNegativo">$1250</span>
+                                            <span class="h3 mb-0 text-white" id="costoNegativo"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -165,7 +157,7 @@ if (strlen($nomina) == 7) {
                                         </div>
                                         <div class="col pr-0">
                                             <p class="small mb-0 text-white">Costo Positivas</p>
-                                            <span class="h3 mb-0 text-white" id="costoPositivo">$1250</span>
+                                            <span class="h3 mb-0 text-white" id="costoPositivo"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -189,7 +181,7 @@ if (strlen($nomina) == 7) {
                                             <th>L</th>
                                             <th>M</th>
                                             <th>GrammerNo</th>
-                                            <th>Descripcion</th>
+                                            <th>Descripción</th>
                                             <th>UM</th>
                                             <th>Costo/Und</th>
                                             <th>StLocation</th>

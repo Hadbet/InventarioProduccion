@@ -80,7 +80,7 @@ if (strlen($nomina) == 7) {
                                         <thead>
                                         <tr>
                                             <th>Id_Bitacora</th>
-                                            <th>NumeroParte</th>
+                                            <th>NúmeroParte</th>
                                             <th>FolioMarbete</th>
                                             <th>Fecha</th>
                                             <th>Usuario</th>
@@ -91,7 +91,7 @@ if (strlen($nomina) == 7) {
                                             <th>Comentario</th>
                                             <th>StorageBin</th>
                                             <th>StorageType</th>
-                                            <th>Area</th>
+                                            <th>Área</th>
                                         </tr>
                                         </thead>
                                         <tbody id="bodyBitacora"></tbody>

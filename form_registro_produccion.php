@@ -94,7 +94,7 @@ if (strlen($nomina) == 7) {
                         <div class="card-body">
                             <p class="mb-3"><strong>Captura</strong></p>
 
-                            <label for="basic-url">Numero de parte</label>
+                            <label for="basic-url">Número de parte</label>
                             <div class="input-group mb-3">
                                 <input type="text" id="txtNumeroParte" class="form-control" autocomplete="off"  aria-label="Recipient's username" aria-describedby="button-addon2">
                             </div>
@@ -125,7 +125,7 @@ if (strlen($nomina) == 7) {
                         <div class="card-body my-n2">
                             <div class="d-flex">
                                 <div class="flex-fill">
-                                    <span class="card-title">Numero de parte</span>
+                                    <span class="card-title">Número de parte</span>
                                     <h4 class="mb-0" id="lblNumeroParte"></h4>
                                 </div>
                                 <div class="flex-fill text-right">
@@ -143,7 +143,7 @@ if (strlen($nomina) == 7) {
                             <hr>
                             <div class="d-flex">
                                 <div class="flex-fill">
-                                    <span class="card-title">Descripcion</span>
+                                    <span class="card-title">Descripción</span>
                                     <h4 class="mb-0" id="lblDescripcion"></h4>
                                 </div>
                             </div>

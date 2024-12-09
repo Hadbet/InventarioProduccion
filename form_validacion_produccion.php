@@ -94,7 +94,7 @@ if (strlen($nomina) == 7) {
                 <div class="col-md-6">
                     <div class="card shadow mb-4">
                         <div class="card-body">
-                            <p class="mb-3"><strong>Verificacion</strong></p>
+                            <p class="mb-3"><strong>Verificación</strong></p>
 
                             <label for="basic-url">Cantidad</label>
                             <div class="input-group mb-3">
@@ -129,7 +129,7 @@ if (strlen($nomina) == 7) {
                         <div class="card-body my-n2">
                             <div class="d-flex">
                                 <div class="flex-fill">
-                                    <span class="card-title">Numero de parte</span>
+                                    <span class="card-title">Número de parte</span>
                                     <h4 class="mb-0" id="lblNumeroParte"></h4>
                                 </div>
                                 <div class="flex-fill text-right">
@@ -146,7 +146,7 @@ if (strlen($nomina) == 7) {
                             <hr>
                             <div class="d-flex">
                                 <div class="flex-fill">
-                                    <span class="card-title">Descripcion</span>
+                                    <span class="card-title">Descripción</span>
                                     <h4 class="mb-0" id="lblDescripcion"></h4>
                                 </div>
                             </div>

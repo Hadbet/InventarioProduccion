@@ -60,7 +60,7 @@
 
                                 <div class="col-md-2" >
                                     <div class="form-group mb-3">
-                                        <label for="cbArea">Area</label>
+                                        <label for="cbArea">Área</label>
                                         <select class="custom-select" id="cbArea" onchange="graficaCostoCarga()">
                                             <option selected value="all">Todas</option>
                                         </select>

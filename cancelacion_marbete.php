@@ -65,7 +65,7 @@ if (strlen($nomina) == 7) {
                                         <thead>
                                         <tr>
                                             <th>Marbete</th>
-                                            <th>Numero de parte</th>
+                                            <th>Número de parte</th>
                                             <th>Usuario</th>
                                             <th>Estatus</th>
                                             <th>Conteo</th>

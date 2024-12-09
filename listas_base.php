@@ -32,7 +32,7 @@
                                         <thead>
                                         <tr>
                                             <th>Folio</th>
-                                            <th>Numero de Parte</th>
+                                            <th>Número de Parte</th>
                                             <th>Primer Conteo</th>
                                             <th>Segundo Conteo</th>
                                             <th>Tercer Conteo</th>
@@ -46,7 +46,7 @@
                                         <tfoot>
                                         <tr>
                                             <th>Folio</th>
-                                            <th>Numero de Parte</th>
+                                            <th>Número de Parte</th>
                                             <th>Primer Conteo</th>
                                             <th>Segundo Conteo</th>
                                             <th>Tercer Conteo</th>

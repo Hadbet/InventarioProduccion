@@ -73,7 +73,7 @@ if (strlen($nomina) == 7) {
 
                             <div class="col-md-4">
                                 <div class="form-group mb-2">
-                                    <label for="txtDescripcion">Descripcion</label>
+                                    <label for="txtDescripcion">Descripción</label>
                                     <input type="text" class="form-control drgpicker" id="txtDescripcion"
                                            value="" aria-describedby="button-addon2">
                                 </div>

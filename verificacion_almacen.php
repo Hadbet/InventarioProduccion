@@ -62,7 +62,7 @@ if (strlen($nomina) == 7) {
                     <div class="w-50 mx-auto text-center justify-content-center py-5 my-5">
                         <h2 class="page-title mb-0">Ingresa o escanea el marbete</h2>
                         <p class="lead text-muted mb-4">Si lo vas a ingresar manual recuerda que es marbete.conteo.</p>
-                            <input class="form-control form-control-lg bg-white rounded-pill pl-5" type="search" id="txtBuscar" placeholder="Search" aria-label="Search">
+                            <input class="form-control form-control-lg bg-white rounded-pill pl-5" type="search" id="txtBuscar">
                             <p class="help-text mt-2 text-muted">Ejemplo 185.1</p>
                             <br>
                             <button class="btn btn-success text-white" onclick="verificacionRegistro()" >Buscar</button>
@@ -79,7 +79,7 @@ if (strlen($nomina) == 7) {
                             <thead>
                             <tr>
                                 <th>Storage Unit</th>
-                                <th>Numero Parte</th>
+                                <th>Número Parte</th>
                                 <th>Cantidad</th>
                             </tr>
                             </thead>
@@ -105,7 +105,7 @@ if (strlen($nomina) == 7) {
                         <div class="card-body my-n2">
                             <div class="d-flex">
                                 <div class="flex-fill">
-                                    <span class="card-title">Numero de parte</span>
+                                    <span class="card-title">Número de parte</span>
                                     <h4 class="mb-0" id="lblNumeroParte"></h4>
                                 </div>
                                 <div class="flex-fill text-right">
@@ -123,7 +123,7 @@ if (strlen($nomina) == 7) {
                             <hr>
                             <div class="d-flex">
                                 <div class="flex-fill">
-                                    <span class="card-title">Descripcion</span>
+                                    <span class="card-title">Descripción</span>
                                     <h4 class="mb-0" id="lblDescripcion"></h4>
                                 </div>
                             </div>

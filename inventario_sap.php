@@ -70,9 +70,9 @@ if (strlen($nomina) == 7) {
                     <th>STLocation</th>
                     <th>STBin</th>
                     <th>STType</th>
-                    <th>GrammerNo</th>
+                    <th>Grammer No</th>
                     <th>Cantidad</th>
-                    <th>AreaNombre</th>
+                    <th>Nombre área</th>
                 </tr>
                 </thead>
                 <tbody>

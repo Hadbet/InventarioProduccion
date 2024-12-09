@@ -34,7 +34,7 @@ $nombre =$_SESSION['nombre'];
             <div class="row justify-content-center">
                 <div class="col-12">
                     <h2 class="mb-2 page-title">Lista general</h2>
-                    <p class="card-text">Aqui encontraras los marbetes asignados a tu area de trabajo</p>
+                    <p class="card-text">Aquí encontrarás los marbetes asignados a tu área de trabajo</p>
                     <div class="row my-4">
                         <!-- Small table -->
                         <div class="col-md-12">
@@ -45,7 +45,7 @@ $nombre =$_SESSION['nombre'];
                                         <thead>
                                         <tr>
                                             <th>Folio</th>
-                                            <th>Numero de Parte</th>
+                                            <th>Número de Parte</th>
                                             <th>Primer Conteo</th>
                                             <th>Segundo Conteo</th>
                                             <th>Tercer Conteo</th>
@@ -59,7 +59,7 @@ $nombre =$_SESSION['nombre'];
                                         <tfoot>
                                         <tr>
                                             <th>Folio</th>
-                                            <th>Numero de Parte</th>
+                                            <th>Número de Parte</th>
                                             <th>Primer Conteo</th>
                                             <th>Segundo Conteo</th>
                                             <th>Tercer Conteo</th>

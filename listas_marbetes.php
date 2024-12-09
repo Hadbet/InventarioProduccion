@@ -30,7 +30,7 @@
                         <thead>
                           <tr>
                               <th>Marbete</th>
-                            <th>Numero de parte</th>
+                            <th>Número de parte</th>
                           <th>Fecha de captura</th>
                             <th>Usuario</th>
                             <th>Ver detalles</th>
@@ -69,7 +69,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Storage Unit</th>
-                                                <th>Numero Parte</th>
+                                                <th>Número Parte</th>
                                                 <th>Cantidad</th>
                                             </tr>
                                             </thead>

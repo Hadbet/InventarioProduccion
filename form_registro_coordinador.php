@@ -211,7 +211,7 @@ if (strlen($nomina) == 7) {
                             <hr>
                             <div class="d-flex">
                                 <div class="flex-fill">
-                                    <span class="card-title">Descripcion</span>
+                                    <span class="card-title">Descripción</span>
                                     <h4 class="mb-0" id="lblDescripcion"></h4>
                                 </div>
                             </div>

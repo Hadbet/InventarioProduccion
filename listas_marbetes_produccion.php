@@ -90,7 +90,7 @@ $result = $stmt->get_result();
                                         <tr>
                                             <th>Capturista</th>
                                             <th>Marbete</th>
-                                            <th>Numero Parte</th>
+                                            <th>Número Parte</th>
                                             <th>Primer Conteo</th>
                                             <th>Segundo Conteo</th>
                                             <th>Storage bin</th>
