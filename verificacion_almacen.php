@@ -233,7 +233,7 @@ if (strlen($nomina) == 7) {
                     if (i==0){
                         marbete = data.data[i].FolioMarbete;
                         document.getElementById("txtFolioMarbete").innerText = data.data[i].FolioMarbete;
-                        document.getElementById("txtConteo").innerText = data.data[i].Conteo;
+                        document.getElementById("txtConteo").innerText = parseFloat(data.data[i].Conteo).toFixed(2);
                         document.getElementById("txtResponsable").innerText = data.data[i].Usuario;
                         if (data.data[i].Estatus==='2'){
                             document.getElementById("marbeteValidador").style.display='block';
