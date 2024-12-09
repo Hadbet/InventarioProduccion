@@ -110,6 +110,8 @@ if (strlen($nomina) == 7) {
                     <th>Marbete</th>
                     <th>Numero Parte</th>
                     <th>Storage Bin</th>
+                    <th>Captura</th>
+                    <th>Inventario Sap</th>
                     <th>Diferencia</th>
                     <th>Area</th>
                 </tr>
@@ -174,6 +176,8 @@ if (strlen($nomina) == 7) {
                         { data: 'FolioMarbete' },
                         { data: 'NumeroParte' },
                         { data: 'StorageBin' },
+                        { data: 'CantidadBitacora' },
+                        { data: 'CantidadInventarioSap' },
                         { data: 'DiferenciaCantidad' },
                         { data: 'AreaNombre' }
                     ],
