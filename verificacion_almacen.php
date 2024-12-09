@@ -211,7 +211,7 @@ if (strlen($nomina) == 7) {
 <script>
 
     var marbete;
-
+    var auxConteo=0;
     function verificacionRegistro() {
 
         var table = document.getElementById("data-table");
