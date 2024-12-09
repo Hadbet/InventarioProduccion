@@ -161,7 +161,6 @@ if (strlen($nomina) == 7) {
                 <div class="col-md-6 col-xl-6 mb-4" id="marbeteValidador" style="display: none">
                     <div class="card shadow">
                         <div class="card-header">
-                            <span class="card-title">Marbete : <span id="lblFolio"></span></span>
                             <a class="float-right small text-muted" href="#!"><i class="fe fe-more-vertical fe-12"></i></a>
                         </div>
                         <div class="card-body my-n2">
