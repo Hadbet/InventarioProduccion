@@ -20,7 +20,7 @@ try {
     $DateAndTime = $Object->format("Y/m/d h:i:s");
 
     if ($conteo == 1) {
-        $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET  `Usuario`=?, `Estatus`='1', `PrimerConteo`=?,`Comentario`=? WHERE `FolioMarbete`=? AND `Estatus` = 0");
+        $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET  `Usuario`=?, `Estatus`='2', `PrimerConteo`=?,`Comentario`=? WHERE `FolioMarbete`=? AND `Estatus` = 0");
     } elseif ($conteo == 2) {
         $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET  `UserSeg`=?, `SegundoConteo`=?, `SegFolio`=1 WHERE `FolioMarbete`=? AND `Estatus` = 1");
     } elseif ($conteo == 3) {

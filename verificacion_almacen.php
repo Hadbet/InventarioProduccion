@@ -210,6 +210,8 @@ if (strlen($nomina) == 7) {
 
 <script>
 
+    var marbete;
+
     function verificacionRegistro() {
 
         var table = document.getElementById("data-table");
@@ -229,6 +231,7 @@ if (strlen($nomina) == 7) {
                     cell3.innerHTML = data.data[i].Cantidad;
 
                     if (i==0){
+                        marbete = data.data[i].FolioMarbete;
                         document.getElementById("txtFolioMarbete").innerText = data.data[i].FolioMarbete;
                         document.getElementById("txtConteo").innerText = data.data[i].Conteo;
                         document.getElementById("txtResponsable").innerText = data.data[i].Usuario;
@@ -337,6 +340,80 @@ if (strlen($nomina) == 7) {
             verificacionRegistro();
         }
     });
+
+    async function enviarDatos() {
+        var cantidad = document.getElementById("txtCantidad").value;
+        var cantidadAnterior = document.getElementById("lblCantidad").innerText;
+
+        if (cantidad === cantidadAnterior || await confirmarCambio()) {
+            enviarSolicitud('<?php echo $nomina;?>-<?php echo $nombre;?>', marbete, cantidad,auxConteo);
+        }
+    }
+
+    function confirmarCambio() {
+        return new Promise(resolve => {
+            Swal.fire({
+                title: "La cantidad ingresada es diferente a la capturada ¿Quieres guardar los cambios?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Guardar",
+                denyButtonText: "No guardar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    resolve(true);
+                } else if (result.isDenied) {
+                    Swal.fire("Los cambios no se guardaron", "", "info");
+                    resolve(false);
+                }
+            });
+        });
+    }
+
+    function enviarSolicitud(nombre, marbete, cantidad,conteo) {
+        var formData = new FormData();
+        formData.append('nombre', nombre);
+        formData.append('folioMarbete', marbete);
+        formData.append('cantidad', cantidad);
+
+        fetch('https://grammermx.com/Logistica/Inventario/dao/actualizarMarbeteProduccion.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    mostrarExito();
+                } else {
+                    console.log("Hubo un error en la operación");
+                    console.log("Las unidades de almacenamiento que fallaron son: ", data.message);
+                }
+            });
+    }
+
+    function mostrarExito() {
+        let timerInterval;
+        Swal.fire({
+            title: "¡Gracias!.Se finalizo la captura de tu marbete",
+            html: "Te regresaremos a la pagina <b></b> milliseconds.",
+            timer: 1500,
+            timerProgressBar: true,
+            icon: "success",
+            didOpen: () => {
+                Swal.showLoading();
+                const timer = Swal.getPopup().querySelector("b");
+                timerInterval = setInterval(() => {
+                    timer.textContent = `${Swal.getTimerLeft()}`;
+                }, 100);
+            },
+            willClose: () => {
+                clearInterval(timerInterval);
+            }
+        }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) {
+                location.reload();
+            }
+        });
+    }
 
 </script>
 </body>
