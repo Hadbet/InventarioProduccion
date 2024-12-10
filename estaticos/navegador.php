@@ -239,7 +239,7 @@ if ($tipoArea==0){
                     <span class="ml-3 item-text">Control de conteos</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100 collapse show" id="Lider">
-                    <a class="nav-link pl-3" href="control_conteo.php"><span class="ml-1">Control</span></a>
+                    <a class="nav-link pl-3" href="control_conteo.php"><span class="ml-1">Segundos Conteos</span></a>
                     <a class="nav-link pl-3" href="cancelacion_marbete.php"><span class="ml-1">Cancelacion</span></a>
                     <a class="nav-link pl-3" href="listas_base_produccion.php"><span class="ml-1">Lista de marbetes</span></a>
                     <a class="nav-link pl-3" href="listas_marbetes_produccion.php"><span class="ml-1">Lista de captura</span></a>
