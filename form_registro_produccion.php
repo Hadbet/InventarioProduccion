@@ -72,7 +72,7 @@ if (strlen($nomina) == 7) {
                                <div class="col-md-6">
                                         <div class="form-group mb-3">
                                             <input type="number" class="form-control"
-                                                   id="scanner_input">
+                                                   id="scanner_input" autocomplete="off">
                                             <br>
                                        </div>
                                     </div>
