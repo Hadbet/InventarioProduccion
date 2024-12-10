@@ -291,7 +291,8 @@ if (strlen($nomina) == 7) {
     var bandera=0;
 
     document.getElementById('txtNumeroParte').addEventListener('keyup', function(event) {
-        var inputValue = this.value.toUpperCase();
+        this.value = this.value.toUpperCase();
+        var inputValue = this.value;
         document.getElementById('lblNumeroParte').textContent = inputValue;
         if (event.key === 'Enter' || event.keyCode === 13) {
             $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaParte.php?parte='+this.value, function (data) {
