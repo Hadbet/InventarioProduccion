@@ -295,19 +295,28 @@ if (strlen($nomina) == 7) {
         document.getElementById('lblNumeroParte').textContent = this.value;
         if (event.key === 'Enter' || event.keyCode === 13) {
             $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaParte.php?parte='+this.value, function (data) {
-                for (var i = 0; i < data.data.length; i++) {
-                    if (data.data[i].GrammerNo) {
-                        costoUnitario = data.data[i].Costo / data.data[i].Por;
-                        validarUbicacion(data.data[i].GrammerNo,data.data[i].Descripcion,data.data[i].UM,costoUnitario);
-                    } else {
-                        bandera=0;
-                        Swal.fire({
-                            title: "El numero de parte no existe",
-                            text: "Verificalo con la mesa de control",
-                            icon: "error"
-                        });
+                if (data && data.data && data.data.length > 0) {
+                    for (var i = 0; i < data.data.length; i++) {
+                        if (data.data[i].GrammerNo) {
+                            costoUnitario = data.data[i].Costo / data.data[i].Por;
+                            validarUbicacion(data.data[i].GrammerNo,data.data[i].Descripcion,data.data[i].UM,costoUnitario);
+                        } else {
+                            bandera=0;
+                            Swal.fire({
+                                title: "El numero de parte no existe",
+                                text: "Verificalo con la mesa de control",
+                                icon: "error"
+                            });
+                        }
                     }
+                }else{
+                    Swal.fire({
+                        title: "El numero de parte no existe en base",
+                        text: "Verificalo con la mesa de control",
+                        icon: "error"
+                    });
                 }
+
             });
 
         }
