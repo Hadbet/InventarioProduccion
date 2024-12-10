@@ -185,7 +185,7 @@ if (strlen($nomina) == 7) {
                                 <button id="btnFin" class="btn mb-2 btn-success float-right text-white" onclick="enviarDatos()">Finalizar Captura<span
                                             class="fe fe-chevron-right fe-16 ml-2" ></span></button>
 
-                                <button id="btnSegundos" class="btn mb-2 btn-warning float-right text-white" onclick="enviarDatos()">Mandar a segundos conteos<span
+                                <button id="btnSegundos" class="btn mb-2 btn-warning float-right text-white" onclick="enviarSegundos()">Mandar a segundos conteos<span
                                             class="fe fe-chevron-right fe-16 ml-2" ></span></button>
                             </div>
                             <hr>
@@ -236,8 +236,8 @@ if (strlen($nomina) == 7) {
                         document.getElementById("txtResponsable").innerText = data.data[i].Usuario;
                         if (data.data[i].Estatus==='2'){
                             document.getElementById("marbeteValidador").style.display='block';
-                            document.getElementById("divCantidad").style.display='block';
-                            document.getElementById("divCantidadT").style.display='block';
+                            document.getElementById("divCantidad").style.display='flex';
+                            document.getElementById("divCantidadT").style.display='flex';
                             document.getElementById("btnFin").style.display='block';
                             document.getElementById("btnSegundos").style.display='block';
                         }else{
@@ -383,6 +383,26 @@ if (strlen($nomina) == 7) {
         formData.append('cantidad', cantidad);
 
         fetch('https://grammermx.com/Logistica/Inventario/dao/actualizarMarbeteProduccion.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    mostrarExito();
+                } else {
+                    console.log("Hubo un error en la operación");
+                    console.log("Las unidades de almacenamiento que fallaron son: ", data.message);
+                }
+            });
+    }
+
+    function enviarSegundos() {
+        var formData = new FormData();
+        formData.append('nombre', '<?php echo $nomina;?>-<?php echo $nombre;?>');
+        formData.append('folioMarbete', marbete);
+
+        fetch('https://grammermx.com/Logistica/Inventario/dao/mandarSegundos.php', {
             method: 'POST',
             body: formData
         })
