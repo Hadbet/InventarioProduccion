@@ -236,7 +236,6 @@ if (strlen($nomina) == 7) {
 
         if (document.getElementById("scanner_input").value.split('.')[1] === auxConteo){
             $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbeteValidacion.php?marbete='+marbete+'&conteo='+auxConteo, function (data) {
-
                 if (data && data.data && data.data.length > 0) {
                     for (var i = 0; i < data.data.length; i++) {
                         if (data.data[i].FolioMarbete) {
