@@ -314,37 +314,46 @@ if (strlen($nomina) == 7) {
 
         if (document.getElementById("scanner_input").value.split('.')[1] === auxConteo){
             $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbete.php?marbete='+marbete, function (data) {
-                for (var i = 0; i < data.data.length; i++) {
-                    if (data.data[i].FolioMarbete) {
-                        if (data.data[i].Estatus === '0'){
-                            if (data.data[i].Area === '<?php echo $area;?>'){
-                                numeroParte=data.data[i].NumeroParte;
-                                storageBin=data.data[i].StorageBin;
-                                document.getElementById("reader").style.display = 'none';
-                                document.getElementById("lblFolio").innerHTML = marbete;
-                                cargarNumeroParte(numeroParte,storageBin);
+                if (data && data.data && data.data.length > 0) {
+                    for (var i = 0; i < data.data.length; i++) {
+                        if (data.data[i].FolioMarbete) {
+                            if (data.data[i].Estatus === '0'){
+                                if (data.data[i].Area === '<?php echo $area;?>'){
+                                    numeroParte=data.data[i].NumeroParte;
+                                    storageBin=data.data[i].StorageBin;
+                                    document.getElementById("reader").style.display = 'none';
+                                    document.getElementById("lblFolio").innerHTML = marbete;
+                                    cargarNumeroParte(numeroParte,storageBin);
+                                }else{
+                                    Swal.fire({
+                                        title: "El marbete no pertenece al area",
+                                        text: "Escanea otro marbete",
+                                        icon: "error"
+                                    });
+                                }
                             }else{
                                 Swal.fire({
-                                    title: "El marbete no pertenece al area",
+                                    title: "El marbete ya fue registrado",
                                     text: "Escanea otro marbete",
                                     icon: "error"
                                 });
                             }
-                        }else{
+                        } else {
                             Swal.fire({
-                                title: "El marbete ya fue registrado",
-                                text: "Escanea otro marbete",
+                                title: "El marbete no esta cargado",
+                                text: "Verificalo con la mesa central",
                                 icon: "error"
                             });
                         }
-                    } else {
-                        Swal.fire({
-                            title: "El marbete no esta cargado",
-                            text: "Verificalo con la mesa central",
-                            icon: "error"
-                        });
                     }
+                }else{
+                    Swal.fire({
+                        title: "El marbete no existe",
+                        text: "Escanea otro marbete",
+                        icon: "error"
+                    });
                 }
+
             });
         }else{
             Swal.fire({
