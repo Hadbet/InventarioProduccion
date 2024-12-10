@@ -232,7 +232,7 @@ if (strlen($nomina) == 7) {
 
     function manualMarbete() {
 
-        var marbete = document.getElementById("scanner_input").value.split('.')[0];
+        var marbete = parseInt(document.getElementById("scanner_input").value.split('.')[0], 10);
 
         if (document.getElementById("scanner_input").value.split('.')[1] === auxConteo){
             $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbeteValidacion.php?marbete='+marbete+'&conteo='+auxConteo, function (data) {

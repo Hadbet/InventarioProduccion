@@ -320,7 +320,7 @@ if (strlen($nomina) == 7) {
 
     function manualMarbete() {
 
-        var marbete = document.getElementById("scanner_input").value.split('.')[0];
+        var marbete = parseInt(document.getElementById("scanner_input").value.split('.')[0], 10);
         var conteoM = document.getElementById("scanner_input").value.split('.')[1];
 
         $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaMarbeteCordinadores.php?marbete='+marbete, function (data) {
