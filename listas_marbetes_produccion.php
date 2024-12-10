@@ -94,7 +94,7 @@ $result = $stmt->get_result();
                                             <th>Primer Conteo</th>
                                             <th>Segundo Conteo</th>
                                             <th>Storage bin</th>
-                                            <th class="w-25">Monto</th>
+                                            <th class="w-25">Valor monetario</th>
                                             <th>Validador</th>
                                         </tr>
                                         </thead>
