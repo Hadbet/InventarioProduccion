@@ -305,6 +305,8 @@ if (strlen($nomina) == 7) {
                     document.getElementById("pasoDos").style.display = 'block';
                     document.getElementById("pasoUno").style.display = 'none';
 
+                    document.getElementById('txtStorageUnit').focus();
+
                     limpiarEscan();
 
                 } else {
@@ -366,6 +368,7 @@ if (strlen($nomina) == 7) {
                                     document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
                                     document.getElementById("pasoDos").style.display = 'block';
                                     document.getElementById("pasoUno").style.display = 'none';
+                                    document.getElementById('txtStorageUnit').focus();
                                     limpiarEscan();
                                 }else{
                                     Swal.fire({
@@ -458,6 +461,7 @@ if (strlen($nomina) == 7) {
                                     document.getElementById("Ubicacion").innerHTML = "Ubicación : "+storageBin;
                                     document.getElementById("pasoDos").style.display = 'block';
                                     document.getElementById("pasoUno").style.display = 'none';
+                                    document.getElementById('txtStorageUnit').focus();
                                     limpiarEscan();
                                 }else{
                                     Swal.fire({
@@ -573,6 +577,7 @@ if (strlen($nomina) == 7) {
                                 limpiarEscan();
 
                                 document.getElementById("txtStorageUnit").value = '';
+                                document.getElementById('txtStorageUnit').focus();
                             } else {
                                 Swal.fire({
                                     title: "El número de parte no corresponde",
@@ -653,6 +658,7 @@ if (strlen($nomina) == 7) {
                                 cell2.innerHTML = numeroParteUnit;
                                 cell3.innerHTML = cantidad;
                                 document.getElementById("txtStorageUnit").value = '';
+                                document.getElementById('txtStorageUnit').focus();
                                 Swal.fire({
                                     title: "Storage unit escaneado",
                                     text: "Unit : "+data.data[i].Id_StorageUnit,
