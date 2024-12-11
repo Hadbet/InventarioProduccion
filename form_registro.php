@@ -1007,6 +1007,12 @@ if (strlen($nomina) == 7) {
         }
     });
 
+    document.getElementById('txtStorageUnit').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            storageUnitManual():
+        }
+    });
+
 </script>
 </body>
 </html>
