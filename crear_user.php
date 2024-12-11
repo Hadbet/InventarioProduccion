@@ -106,6 +106,10 @@
 
 
               <h2 class="mb-2 page-title">Lista de marbetes capturados</h2>
+                <button type="button" onclick="masivo(1);" class="btn mb-2 btn-success float-right text-white">Habilitar todos<span
+                            class="fe fe-send fe-16 ml-2"></span></button>
+                <button type="button" onclick="masivo(0);" class="btn mb-2 btn-danger float-right text-white">Deshabilitar todos<span
+                            class="fe fe-send fe-16 ml-2"></span></button>
               <div class="row my-4">
                 <!-- Small table -->
                 <div class="col-md-12">
@@ -417,6 +421,36 @@
               document.getElementById('txtContra').focus()
           }
       });
+
+      function masivo(estado) {
+
+          var formData = new FormData();
+          formData.append('estado', estado);
+
+          fetch('https://grammermx.com/Logistica/Inventario/dao/masivoUsuarios.php', {
+              method: 'POST',
+              body: formData
+          })
+              .then(response => response.json())
+              .then(data => {
+
+                  if (data.success) {
+                      Swal.fire({
+                          title: data.message,
+                          text: "Actualización correcta",
+                          icon: "success"
+                      });
+                      actualizarTabla();
+                  } else {
+                      Swal.fire({
+                          title: data.message,
+                          text: "Verificalo con la mesa central",
+                          icon: "error"
+                      });
+                  }
+              });
+
+      }
     </script>
   </body>
 </html>
