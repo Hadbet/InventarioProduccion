@@ -374,7 +374,6 @@
               .then(data => {
 
                   if (data.success) {
-
                       document.getElementById("txtUsuarioM").value="";
                       document.getElementById("txtPasswordM").value="";
                       document.getElementById("txtIdM").value="";
