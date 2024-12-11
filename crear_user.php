@@ -300,6 +300,11 @@
                   document.getElementById("txtContra").value="";
                   document.getElementById("cbRol").value="";
                   document.getElementById("cbEstatus").value="";
+                  Swal.fire({
+                      title: data.message,
+                      text: "Se agrego de manera correcta",
+                      icon: "success"
+                  });
               });
       }
 
