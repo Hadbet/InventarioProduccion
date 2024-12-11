@@ -30,8 +30,7 @@ LEFT JOIN
     Parte P ON COALESCE(B.NumeroParte, I.GrammerNo) = P.GrammerNo
 WHERE 
     B.Area = $area
-    AND B.Estatus = 1
-    AND (B.SegFolio = 1 OR B.SegFolio = 2)
+    AND (B.Estatus = 1 OR B.SegFolio = 2)
     AND (I.GrammerNo IS NULL 
     OR B.PrimerConteo != I.Cantidad
     OR I.Cantidad = 0
@@ -65,7 +64,7 @@ WHERE
     OR B.PrimerConteo != I.Cantidad
     OR I.Cantidad = 0
     OR IFNULL(B.PrimerConteo, 0) = 0
-    OR (B.SegFolio = 1 OR B.SegFolio = 2)
+    OR B.SegFolio = 2
     OR ABS(IFNULL(B.PrimerConteo, 0) - I.Cantidad) >= 10000)
 HAVING
     ABS(CostoInventarioSap - CostoBitacora) > 3000
