@@ -423,6 +423,30 @@
           }
       });
 
+      document.getElementById('txtContra').addEventListener('keyup', function(event) {
+          if (event.key === 'Enter' || event.keyCode === 13) {
+              document.getElementById('cbRol').focus()
+          }
+      });
+
+      document.getElementById('cbRol').addEventListener('keyup', function(event) {
+          if (event.key === 'Enter' || event.keyCode === 13) {
+              document.getElementById('cbEstatus').focus()
+          }
+      });
+
+      document.getElementById('cbEstatus').addEventListener('keyup', function(event) {
+          if (event.key === 'Enter' || event.keyCode === 13) {
+              document.getElementById('cbArea').focus()
+          }
+      });
+
+      document.getElementById('cbArea').addEventListener('keyup', function(event) {
+          if (event.key === 'Enter' || event.keyCode === 13) {
+              enviarDatos();
+          }
+      });
+
       function masivo(estado) {
 
           var formData = new FormData();
