@@ -30,15 +30,16 @@ LEFT JOIN
     Parte P ON COALESCE(B.NumeroParte, I.GrammerNo) = P.GrammerNo
 WHERE 
     B.Area = $area
-    AND (B.Estatus = 1 OR B.SegFolio = 2)
-    AND (I.GrammerNo IS NULL 
-    OR B.PrimerConteo != I.Cantidad
-    OR I.Cantidad = 0
-    OR B.PrimerConteo = 0
-    OR ABS(B.PrimerConteo - IFNULL(I.Cantidad, 0)) >= 10000)
-HAVING
-    ABS(CostoInventarioSap - CostoBitacora) > 3000
-    OR ABS(CantidadInventarioSap - CantidadBitacora) > 100
+    AND (B.SegFolio = 2 OR B.SegFolio IS NULL AND (
+        B.Estatus = 1
+        AND I.GrammerNo IS NOT NULL 
+        AND B.PrimerConteo = I.Cantidad
+        AND I.Cantidad != 0
+        AND B.PrimerConteo != 0
+        AND ABS(B.PrimerConteo - IFNULL(I.Cantidad, 0)) < 10000
+        AND ABS((P.Costo / P.Por) * COALESCE(I.Cantidad, 0) - (P.Costo / P.Por) * COALESCE(B.PrimerConteo, 0)) <= 3000
+        AND ABS(COALESCE(I.Cantidad, 0) - COALESCE(B.PrimerConteo, 0)) <= 100
+    ))
 
 UNION
 
@@ -60,15 +61,15 @@ LEFT JOIN
     Parte P ON COALESCE(B.NumeroParte, I.GrammerNo) = P.GrammerNo
 WHERE 
     I.AreaCve = $area
-    AND (B.NumeroParte IS NULL 
-    OR B.PrimerConteo != I.Cantidad
-    OR I.Cantidad = 0
-    OR IFNULL(B.PrimerConteo, 0) = 0
-    OR B.SegFolio = 2
-    OR ABS(IFNULL(B.PrimerConteo, 0) - I.Cantidad) >= 10000)
-HAVING
-    ABS(CostoInventarioSap - CostoBitacora) > 3000
-    OR ABS(CantidadInventarioSap - CantidadBitacora) > 100;");
+    AND (B.SegFolio = 2 OR B.SegFolio IS NULL AND (
+        B.NumeroParte IS NOT NULL 
+        AND B.PrimerConteo = I.Cantidad
+        AND I.Cantidad != 0
+        AND IFNULL(B.PrimerConteo, 0) != 0
+        AND ABS(IFNULL(B.PrimerConteo, 0) - I.Cantidad) < 10000
+        AND ABS((P.Costo / P.Por) * I.Cantidad - (P.Costo / P.Por) * IFNULL(B.PrimerConteo, 0)) <= 3000
+        AND ABS(I.Cantidad - COALESCE(B.PrimerConteo, 0)) <= 100
+    ));");
 
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
 
