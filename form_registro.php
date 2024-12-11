@@ -574,10 +574,34 @@ if (strlen($nomina) == 7) {
                                     icon: "success"
                                 });
 
-                                limpiarEscan();
+                                let timerInterval;
+                                Swal.fire({
+                                    title: "Storage unit escaneado",
+                                    html: "Te lo agregaremos a la tabla <b></b> milliseconds.",
+                                    timer: 1200,
+                                    timerProgressBar: true,
+                                    icon: "success",
+                                    didOpen: () => {
+                                        Swal.showLoading();
+                                        const timer = Swal.getPopup().querySelector("b");
+                                        timerInterval = setInterval(() => {
+                                            timer.textContent = `${Swal.getTimerLeft()}`;
+                                        }, 100);
+                                    },
+                                    willClose: () => {
+                                        clearInterval(timerInterval);
+                                    }
+                                }).then((result) => {
+                                    /* Read more about handling dismissals below */
+                                    if (result.dismiss === Swal.DismissReason.timer) {
+                                        limpiarEscan();
+                                        document.getElementById("txtStorageUnit").value = '';
+                                        document.getElementById('txtStorageUnit').focus();
+                                    }
+                                });
 
-                                document.getElementById("txtStorageUnit").value = '';
-                                document.getElementById('txtStorageUnit').focus();
+
+
                             } else {
                                 Swal.fire({
                                     title: "El número de parte no corresponde",
@@ -657,13 +681,33 @@ if (strlen($nomina) == 7) {
                                 cell1.innerHTML = data.data[i].Id_StorageUnit;
                                 cell2.innerHTML = numeroParteUnit;
                                 cell3.innerHTML = cantidad;
-                                document.getElementById("txtStorageUnit").value = '';
-                                document.getElementById('txtStorageUnit').focus();
+
+                                let timerInterval;
                                 Swal.fire({
                                     title: "Storage unit escaneado",
-                                    text: "Unit : "+data.data[i].Id_StorageUnit,
-                                    icon: "success"
+                                    html: "Te lo agregaremos a la tabla <b></b> milliseconds.",
+                                    timer: 1200,
+                                    timerProgressBar: true,
+                                    icon: "success",
+                                    didOpen: () => {
+                                        Swal.showLoading();
+                                        const timer = Swal.getPopup().querySelector("b");
+                                        timerInterval = setInterval(() => {
+                                            timer.textContent = `${Swal.getTimerLeft()}`;
+                                        }, 100);
+                                    },
+                                    willClose: () => {
+                                        clearInterval(timerInterval);
+                                    }
+                                }).then((result) => {
+                                    /* Read more about handling dismissals below */
+                                    if (result.dismiss === Swal.DismissReason.timer) {
+                                        limpiarEscan();
+                                        document.getElementById("txtStorageUnit").value = '';
+                                        document.getElementById('txtStorageUnit').focus();
+                                    }
                                 });
+
                             } else {
                                 Swal.fire({
                                     title: "El número de parte no corresponde",
