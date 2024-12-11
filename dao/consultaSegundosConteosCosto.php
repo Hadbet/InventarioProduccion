@@ -23,9 +23,10 @@ function ContadorApu($area)
         (SELECT SUM(Bitacora_Inventario.PrimerConteo * (Parte.Costo / Parte.Por)) 
          FROM Bitacora_Inventario 
          INNER JOIN Parte ON Bitacora_Inventario.NumeroParte = Parte.GrammerNo 
-         WHERE Bitacora_Inventario.Area = $area AND Bitacora_Inventario.Estatus = 1) AS CostoTotalPrimerConteoBitacora
+         WHERE Bitacora_Inventario.Area = $area AND Bitacora_Inventario.Estatus = 1) AS CostoTotalPrimerConteoBitacora,
+        (SELECT MAX(SegFolio) FROM Bitacora_Inventario WHERE Area = $area AND Estatus = 1) AS SegFolio
 ) AS Subquery
-WHERE ABS(Subquery.CostoTotalInventarioSap - Subquery.CostoTotalPrimerConteoBitacora) >= 3000;");
+WHERE ABS(Subquery.CostoTotalInventarioSap - Subquery.CostoTotalPrimerConteoBitacora) >= 3000 OR Subquery.SegFolio = 2;");
     $resultado = mysqli_fetch_all($datos, MYSQLI_ASSOC);
     echo json_encode(array("data" => $resultado));
 }
