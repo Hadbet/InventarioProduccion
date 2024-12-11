@@ -183,7 +183,7 @@ if (strlen($nomina) == 7) {
                             <hr>
                             <label for="basic-url">Comentarios</label>
                             <div class="input-group mb-3">
-                                <input type="text" id="txtComentarios" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <input type="text" id="txtComentarios" autocomplete="off" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
                             </div>
                             <button id="btnFin" disabled class="btn mb-2 btn-success float-right text-white" onclick="enviarDatos()">Finalizar Captura<span
                                         class="fe fe-chevron-right fe-16 ml-2" ></span></button>

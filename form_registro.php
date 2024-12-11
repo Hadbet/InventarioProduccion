@@ -196,7 +196,7 @@ if (strlen($nomina) == 7) {
                 <br><br>
                     <label for="txtFolio">Storage Unit</label>
                     <input type="text" class="form-control"
-                           id="txtStorageUnitA" name="txtStorageUnitA" value="">
+                           id="txtStorageUnitA" name="txtStorageUnitA" value="" autocomplete="off">
                     <br>
                     <label for="txtFolio">Ingresar NP</label>
                     <input type="text" class="form-control"
@@ -204,7 +204,7 @@ if (strlen($nomina) == 7) {
                     <br>
                     <label for="txtFolio">Ingresar la cantidad</label>
                     <input type="text" class="form-control"
-                           id="txtCantidadA" name="txtCantidadA" value="">
+                           id="txtCantidadA" name="txtCantidadA" value="" autocomplete="off">
                     <br>
                     <button onclick="cargaCajaAbierta()" id="btnEnviarNuevos" class="btn btn-primary">Enviar</button>
             </div>

@@ -70,14 +70,10 @@ if (strlen($nomina) == 7) {
                             <div class="row">
                                <div class="col-md-6">
                                         <div class="form-group mb-3">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNomina" name="txtNomina" value="00001606">
-                                            <input style="display:none;" type="text" class="form-control"
-                                                   id="txtNombre" name="txtNombre" value="Nancy Goiz">
                                             <label for="txtFolio">Escanea el marbete</label>
                                             <div id="reader" width="600px"></div>
                                             <input type="text" class="form-control"
-                                                   id="scanner_input">
+                                                   id="scanner_input" autocomplete="off">
                                             <br>
                                        </div>
                                     </div> <!-- /.col -->
@@ -177,7 +173,7 @@ if (strlen($nomina) == 7) {
                             <hr>
                             <label for="basic-url">Comentarios</label>
                             <div class="input-group mb-3">
-                                <input type="text" id="txtComentarios" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <input type="text" id="txtComentarios" autocomplete="off" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
                             </div>
                             <button id="btnFin" disabled class="btn mb-2 btn-success float-right text-white" onclick="enviarDatos()">Finalizar Captura<span
                                         class="fe fe-chevron-right fe-16 ml-2" ></span></button>

@@ -73,7 +73,7 @@ if (strlen($nomina) == 7) {
                                 <div class="form-group mb-2">
                                     <label for="txtNombre">Nombre</label>
                                     <input type="text" class="form-control drgpicker" id="txtNombreArea"
-                                           value="" aria-describedby="button-addon2">
+                                           value="" aria-describedby="button-addon2" autocomplete="off">
                                 </div>
                             </div>
 
@@ -93,7 +93,7 @@ if (strlen($nomina) == 7) {
                                 <div class="form-group mb-3">
                                     <label for="txtStLocation">StLocation</label>
                                     <input type="text" class="form-control drgpicker" id="txtStLocation"
-                                           value="" aria-describedby="button-addon2">
+                                           value="" aria-describedby="button-addon2" autocomplete="off">
                                 </div>
                             </div>
 
@@ -102,7 +102,7 @@ if (strlen($nomina) == 7) {
                                 <div class="form-group mb-3">
                                     <label for="txtStBin">StBin</label>
                                     <input type="text" class="form-control drgpicker" id="txtStBin"
-                                           value="" aria-describedby="button-addon2">
+                                           value="" aria-describedby="button-addon2" autocomplete="off">
                                 </div>
                             </div>
 

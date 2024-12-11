@@ -30,7 +30,7 @@
                                 <div class="form-group mb-3">
                                     <label for="cbCurso">Nomina</label>
                                     <input type="text" class="form-control drgpicker" id="txtNomina"
-                                           value="" aria-describedby="button-addon2">
+                                           value="" aria-describedby="button-addon2" autocomplete="off">
                                 </div>
                             </div>
 
@@ -38,7 +38,7 @@
                                 <div class="form-group mb-2">
                                     <label for="cbCurso">Nombre</label>
                                     <input type="text" class="form-control drgpicker" id="txtNombre"
-                                           value="" aria-describedby="button-addon2">
+                                           value="" aria-describedby="button-addon2" autocomplete="off">
                                 </div>
                             </div>
 
@@ -46,7 +46,7 @@
                                 <div class="form-group mb-3">
                                     <label for="cbCurso">Usuario</label>
                                     <input type="text" class="form-control drgpicker" id="txtUsuario"
-                                           value="" aria-describedby="button-addon2">
+                                           value="" aria-describedby="button-addon2" autocomplete="off">
                                 </div>
                             </div>
 
@@ -55,7 +55,7 @@
                                 <div class="form-group mb-3">
                                     <label for="cbCurso">Contraseña</label>
                                     <input type="password" class="form-control drgpicker" id="txtContra"
-                                           value="" aria-describedby="button-addon2">
+                                           value="" aria-describedby="button-addon2" autocomplete="off">
                                 </div>
                             </div>
 

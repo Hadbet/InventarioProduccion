@@ -67,7 +67,7 @@ if (strlen($nomina) == 7) {
                                 <div class="form-group mb-3">
                                     <label for="txtGrammerNo">Grammer No</label>
                                     <input type="text" class="form-control drgpicker" id="txtGrammerNo"
-                                           value="" aria-describedby="button-addon2">
+                                           value="" aria-describedby="button-addon2" autocomplete="off">
                                 </div>
                             </div>
 
@@ -75,7 +75,7 @@ if (strlen($nomina) == 7) {
                                 <div class="form-group mb-2">
                                     <label for="txtDescripcion">Descripción</label>
                                     <input type="text" class="form-control drgpicker" id="txtDescripcion"
-                                           value="" aria-describedby="button-addon2">
+                                           value="" aria-describedby="button-addon2" autocomplete="off">
                                 </div>
                             </div>
 
@@ -84,7 +84,7 @@ if (strlen($nomina) == 7) {
                                 <div class="form-group mb-3">
                                     <label for="txtUM">UM</label>
                                     <input type="text" class="form-control drgpicker" id="txtUM"
-                                           value="" aria-describedby="button-addon2">
+                                           value="" aria-describedby="button-addon2" autocomplete="off">
                                 </div>
                             </div>
 
@@ -93,15 +93,15 @@ if (strlen($nomina) == 7) {
                                 <div class="form-group mb-3">
                                     <label for="txtProfitCtr">ProfitCtr</label>
                                     <input type="text" class="form-control drgpicker" id="txtProfitCtr"
-                                           value="" aria-describedby="button-addon2">
+                                           value="" aria-describedby="button-addon2" autocomplete="off">
                                 </div>
                             </div>
 
                             <div class="col-md-2">
                                 <div class="form-group mb-3">
                                     <label for="txtCosto">Costo</label>
-                                    <input type="text" class="form-control drgpicker" id="txtCosto"
-                                           value="" aria-describedby="button-addon2">
+                                    <input type="number" class="form-control drgpicker" id="txtCosto"
+                                           value="" aria-describedby="button-addon2" autocomplete="off">
                                 </div>
                             </div>
 
@@ -109,7 +109,7 @@ if (strlen($nomina) == 7) {
                                 <div class="form-group mb-3">
                                     <label for="txtPor">Por</label>
                                     <input type="text" class="form-control drgpicker" id="txtPor"
-                                           value="" aria-describedby="button-addon2">
+                                           value="" aria-describedby="button-addon2" autocomplete="off">
                                 </div>
                             </div>
 

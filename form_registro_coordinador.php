@@ -84,7 +84,7 @@ if (strlen($nomina) == 7) {
                                             <label for="txtFolio">Escanea el marbete</label>
                                             <div id="reader" width="600px"></div>
                                             <input type="text" class="form-control"
-                                                   id="scanner_input">
+                                                   id="scanner_input" autocomplete="off">
                                             <br>
                                        </div>
                                     </div> <!-- /.col -->
@@ -163,7 +163,7 @@ if (strlen($nomina) == 7) {
 
                             <label for="basic-url">Cantidad</label>
                             <div class="input-group mb-3">
-                                <input type="text" id="txtCantidad" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <input type="text" id="txtCantidad" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2" autocomplete="off">
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="txtUnidadMedida" style=""></span>
                                 </div>
