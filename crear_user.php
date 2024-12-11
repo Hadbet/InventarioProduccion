@@ -104,7 +104,7 @@
                     </div>
                 </div> <!-- / .card -->
 
-                <button type="button" onclick="masivo(1);" class="btn mb-2 btn-success float-right text-white">Habilitar todos<span
+                <button type="button" onclick="masivo(1);" class="btn mb-2 btn-success float-right text-white mr-4">Habilitar todos<span
                             class="fe fe-send fe-16 ml-2"></span></button>
                 <button type="button" onclick="masivo(0);" class="btn mb-2 btn-danger float-right text-white">Deshabilitar todos<span
                             class="fe fe-send fe-16 ml-2"></span></button>
