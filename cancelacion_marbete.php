@@ -100,7 +100,9 @@ if (strlen($nomina) == 7) {
             $('#dataTable-1').DataTable({
                 data: data.data,
                 columns: [
-                    {data: null, defaultContent: '<input type="checkbox" class="cancelCheckbox" data-foliomarbete="valorFolioMarbete">'},
+                    {data: 'FolioMarbete', render: function(data, type, row) {
+                            return '<input type="checkbox" class="cancelCheckbox" data-foliomarbete="' + data + '">';
+                        }},
                     {data: 'FolioMarbete'},
                     {data: 'NumeroParte'},
                     {data: 'Usuario'},
