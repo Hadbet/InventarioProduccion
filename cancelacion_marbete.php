@@ -65,7 +65,7 @@ if (strlen($nomina) == 7) {
                                     <table class="table datatables" id="dataTable-1">
                                         <thead>
                                         <tr>
-                                            <td><input type="checkbox" class="cancelCheckbox" data-foliomarbete="1"></td>
+                                            <th>Seleccionar</th>
                                             <th>Marbete</th>
                                             <th>Número de parte</th>
                                             <th>Usuario</th>
@@ -100,6 +100,7 @@ if (strlen($nomina) == 7) {
             $('#dataTable-1').DataTable({
                 data: data.data,
                 columns: [
+                    {data: null, defaultContent: '<input type="checkbox" class="cancelCheckbox" data-foliomarbete="valorFolioMarbete">'},
                     {data: 'FolioMarbete'},
                     {data: 'NumeroParte'},
                     {data: 'Usuario'},
@@ -109,10 +110,7 @@ if (strlen($nomina) == 7) {
                     {data: 'Cancelar'}
                 ],
                 autoWidth: true,
-                "lengthMenu": [
-                    [16, 32, 64, -1],
-                    [16, 32, 64, "All"]
-                ]
+                "lengthMenu": [ [16, 32, 64, -1], [16, 32, 64, "All"] ]
             });
         }
     });
