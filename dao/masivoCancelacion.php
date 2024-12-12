@@ -17,7 +17,7 @@ try {
         if ($stmt->affected_rows > 0) {
             echo json_encode(["success" => true, "message" => "Update exitosa"]);
         } else {
-            echo json_encode(["success" => false, "message" => "No se pudo insertar el registro"]);
+            echo json_encode(["success" => false, "message" => "No se pudo insertar el registro UPDATE `Bitacora_Inventario` SET `Estatus`='5',`Comentario`=$comentarios WHERE `Id_Bitacora` = $id"]);
         }
     }
 
