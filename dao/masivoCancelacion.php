@@ -1,7 +1,7 @@
 <?php
 include_once('db/db_Inventario.php');
 
-$comentarios = $_POST['comentarios'];
+$comentarios = $_POST['comentario'];
 $ids = json_decode($_POST['ids']);
 
 try {
