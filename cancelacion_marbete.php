@@ -126,7 +126,7 @@ if (strlen($nomina) == 7) {
             }
         }
         console.log(selectedFolioMarbetes);
-        //cancelar(selectedFolioMarbetes);
+        cancelar(selectedFolioMarbetes);
     });
 
 </script>
