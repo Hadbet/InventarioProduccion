@@ -1,7 +1,7 @@
 <?php
 include_once('db/db_Inventario.php');
 
-$comentarios = $_POST['comentario'];
+$comentario = $_POST['comentario'];
 $ids = json_decode($_POST['ids']);
 
 try {
@@ -10,7 +10,7 @@ try {
 
     foreach ($ids as $id) {
         $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `Estatus`='5',`Comentario`=? WHERE `Id_Bitacora` = ?");
-        $stmt->bind_param("si", $comentarios, $id);
+        $stmt->bind_param("si", $comentario, $id);
 
         $stmt->execute();
 
