@@ -114,6 +114,19 @@ if (strlen($nomina) == 7) {
             });
         }
     });
+
+    document.getElementById('cancelButton').addEventListener('click', function() {
+        var checkboxes = document.getElementsByClassName('cancelCheckbox');
+        var selectedFolioMarbetes = [];
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                selectedFolioMarbetes.push(checkboxes[i].getAttribute('data-foliomarbete'));
+            }
+        }
+        console.log(selectedFolioMarbetes);
+        //cancelar(selectedFolioMarbetes);
+    });
+
 </script>
 <script src="js/apps.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
