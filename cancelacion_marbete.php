@@ -191,6 +191,41 @@ if (strlen($nomina) == 7) {
         }
     }
 
+    async function cancelar(ids) {
+        const {value: comentario} = await Swal.fire({
+            title: "Ingresa tus comentarios",
+            input: "text",
+            inputLabel: "¿Por qué lo cancelas?",
+            showCancelButton: true,
+            inputValidator: (value) => {
+                if (!value) {
+                    return "¡Se requiere que se explique la razón!";
+                }
+            }
+        });
+
+        if (comentario) {
+            var formData = new FormData();
+            formData.append('ids', JSON.stringify(ids));
+            formData.append('comentario', comentario);
+
+            fetch('https://grammermx.com/Logistica/Inventario/dao/masivoCancelacion.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    Swal.fire({
+                        title: "Los marbetes fueron cancelados",
+                        text: "Gracias",
+                        icon: "success"
+                    });
+                    actualizarTabla();
+                });
+        }
+    }
+
 </script>
 </body>
 </html>
