@@ -9,7 +9,7 @@ try {
     $conex=$con->conectar();
 
     foreach ($ids as $id) {
-        $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `Estatus`='5',`Comentario`=? WHERE `Id_Bitacora` = ?");
+        $stmt = $conex->prepare("UPDATE `Bitacora_Inventario` SET `Estatus`='5',`Comentario`=? WHERE `FolioMarbete` = ?");
         $stmt->bind_param("si", $comentario, $id);
 
         $stmt->execute();
