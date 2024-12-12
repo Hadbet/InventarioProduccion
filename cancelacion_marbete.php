@@ -53,7 +53,8 @@ if (strlen($nomina) == 7) {
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-12">
-
+                    <button type="button" id="cancelButton" class="btn mb-2 btn-danger float-right text-white">Cancelar seleccionados<span
+                                class="fe fe-send fe-16 ml-2"></span></button>
                     <h2 class="mb-2 page-title">Lista de marbetes</h2>
                     <div class="row my-4">
                         <!-- Small table -->
@@ -64,6 +65,7 @@ if (strlen($nomina) == 7) {
                                     <table class="table datatables" id="dataTable-1">
                                         <thead>
                                         <tr>
+                                            <td><input type="checkbox" class="cancelCheckbox" data-foliomarbete="1"></td>
                                             <th>Marbete</th>
                                             <th>Número de parte</th>
                                             <th>Usuario</th>
@@ -77,54 +79,6 @@ if (strlen($nomina) == 7) {
 
                                         </tbody>
                                     </table>
-
-                                    <!-- Button trigger modal -->
-                                    <button style="display: none" type="button" class="btn mb-2 btn-outline-success"
-                                            data-toggle="modal" data-target="#verticalModal" id="btnModal"> Launch demo
-                                        modal
-                                    </button>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="verticalModal" tabindex="-1" role="dialog"
-                                         aria-labelledby="verticalModalTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="verticalModalTitle">Modificación de
-                                                        usuarios</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <label for="recipient-name" class="col-form-label">Id:</label>
-                                                        <input type="text" class="form-control" id="txtIdM" readonly>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="recipient-name"
-                                                               class="col-form-label">Usuario:</label>
-                                                        <input type="text" class="form-control" id="txtUsuarioM">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="recipient-name"
-                                                               class="col-form-label">Password:</label>
-                                                        <input type="password" class="form-control" id="txtPasswordM">
-                                                    </div>
-                                                    <hr>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn mb-2 btn-success text-white"
-                                                            onclick="actualizarDatos()">Actualizar
-                                                    </button>
-                                                    <button type="button" class="btn mb-2 btn-secondary"
-                                                            data-dismiss="modal" id="btnCloseM">Close
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
                         </div> <!-- simple table -->
