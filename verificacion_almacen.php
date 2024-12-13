@@ -225,9 +225,16 @@ if (strlen($nomina) == 7) {
                     var cell1 = row.insertCell(0);
                     var cell2 = row.insertCell(1);
                     var cell3 = row.insertCell(2);
-                    cell1.innerHTML = data.data[i].Id_StorageUnit;
-                    cell2.innerHTML = data.data[i].NumeroParte;
-                    cell3.innerHTML = data.data[i].Cantidad;
+
+                    if (data.data[i].Id_StorageUnit===null or data.data[i].Id_StorageUnit===""){
+                        cell1.innerHTML = "";
+                        cell2.innerHTML = data.data[i].NumeroParte;
+                        cell3.innerHTML = data.data[i].PrimerConteo;
+                    }else{
+                        cell1.innerHTML = data.data[i].Id_StorageUnit;
+                        cell2.innerHTML = data.data[i].NumeroParte;
+                        cell3.innerHTML = data.data[i].Cantidad;
+                    }
 
                     if (i==0){
                         marbete = data.data[i].FolioMarbete;
