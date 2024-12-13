@@ -136,15 +136,6 @@ $result = $stmt->get_result();
                           <div class="col-md-9">
                           </div> <!-- .col -->
                       </div> <!-- .row -->
-                      <nav aria-label="Table Paging" class="my-3">
-                          <ul class="pagination justify-content-end mb-0">
-                              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                              <li class="page-item"><a class="page-link" href="#">2</a></li>
-                              <li class="page-item"><a class="page-link" href="#">3</a></li>
-                              <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                          </ul>
-                      </nav>
                   </div> <!-- .col-12 -->
               </div> <!-- .row -->
           </div> <!-- .container-fluid -->
