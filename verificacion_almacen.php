@@ -226,7 +226,7 @@ if (strlen($nomina) == 7) {
                     var cell2 = row.insertCell(1);
                     var cell3 = row.insertCell(2);
 
-                    if (data.data[i].Id_StorageUnit===null or data.data[i].Id_StorageUnit===""){
+                    if (data.data[i].Id_StorageUnit===null || data.data[i].Id_StorageUnit===""){
                         cell1.innerHTML = "";
                         cell2.innerHTML = data.data[i].NumeroParte;
                         cell3.innerHTML = data.data[i].PrimerConteo;
