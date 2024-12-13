@@ -107,7 +107,7 @@
                 <button type="button" onclick="masivo(1);" class="btn mb-2 btn-success float-right text-white ml-4">Habilitar todos<span
                             class="fe fe-send fe-16 ml-2"></span></button>
                 <button type="button" onclick="masivo(0);" class="btn mb-2 btn-danger float-right text-white">Deshabilitar todos<span
-                            class="fe fe-send fe-16 ml-2"></span></button>
+                            class="fe fe-x-circle fe-16 ml-2"></span></button>
 
               <h2 class="mb-2 page-title">Lista de marbetes capturados</h2>
 
