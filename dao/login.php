@@ -46,6 +46,9 @@ if ($statusLogin['status'] == 1) {
     if ($statusLogin['rol'] == 4){
         echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../inicio.php'>";
     }
+    if ($statusLogin['rol'] == 7){
+        echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../inicio.php'>";
+    }
     if ($statusLogin['rol'] == 5){
         echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../form_validacion_produccion.php'>";
     }
