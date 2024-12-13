@@ -65,7 +65,7 @@ if (strlen($nomina) == 7) {
                             <input class="form-control form-control-lg bg-white rounded-pill pl-5" type="search" id="txtBuscar">
                             <p class="help-text mt-2 text-muted">Ejemplo 185.1</p>
                             <br>
-                            <button class="btn btn-success text-white" onclick="verificacionRegistro()" >Buscar</button>
+                            <button class="btn btn-success text-white" onclick="verificacionRegistro()">Buscar</button>
                     </div>
                     <!-- .row -->
                     <div class="my-5 p-5" id="divMarbete" style="display: none">
