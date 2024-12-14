@@ -86,7 +86,7 @@ if (strlen($nomina) == 7) {
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn mb-2 btn-success float-right text-white" onclick="manualMarbete()">Siguiente<span
+                            <button class="btn mb-2 btn-success float-right text-white" onclick="manualMarbete()">Siguiente<span>
                                     class="fe fe-chevron-right fe-16 ml-2"></span></button>
                         </div>
                     </div> <!-- / .card -->
