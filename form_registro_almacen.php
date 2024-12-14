@@ -304,6 +304,7 @@ if (strlen($nomina) == 7) {
                         }else{
                             document.getElementById('btnFin').disabled = false;
                             document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
+                            document.getElementById("btnFin").focus();
                         }
                     }else{
                         Swal.fire({
@@ -500,6 +501,7 @@ if (strlen($nomina) == 7) {
                         for (var i = 0; i < data.data.length; i++) {
                             document.getElementById('btnFin').disabled = false;
                             document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
+                            document.getElementById("btnFin").focus();
                         }
                     } else {
                         Swal.fire({
