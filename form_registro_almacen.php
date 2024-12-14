@@ -512,6 +512,7 @@ if (strlen($nomina) == 7) {
                     }
                 });
             }else{
+                document.getElementById('btnFin').disabled = true;
                 Swal.fire({
                     title: "Debes ingresar un Storage Bin",
                     text: ":C",
