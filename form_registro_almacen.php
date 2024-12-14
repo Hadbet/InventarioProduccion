@@ -329,7 +329,7 @@ if (strlen($nomina) == 7) {
                                     storageBin=data.data[i].StorageBin;
                                     document.getElementById("reader").style.display = 'none';
                                     document.getElementById("lblFolio").innerHTML = marbete;
-                                    if (numeroParte==="")
+                                    if (numeroParte===""){
                                         document.getElementById("pasoDos").style.display = 'block';
                                         document.getElementById("pasoUno").style.display = 'none';
                                         document.getElementById('txtNumeroParte').disabled = false;
