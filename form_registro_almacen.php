@@ -293,7 +293,7 @@ if (strlen($nomina) == 7) {
                 }else {
                     document.getElementById('lblCantidad').textContent = this.value;
                     if (document.getElementById('txtCantidad').value!==""){
-                        if (document.getElementById('txtNumeroParte').value===""){
+                        if (document.getElementById("txtStorageBin").value==="" || document.getElementById("txtStorageBin").value==="NA"){
                             document.getElementById('txtStorageBin').disabled = false;
                             document.getElementById('txtStorageBin').focus();
                         }else{
@@ -488,7 +488,7 @@ if (strlen($nomina) == 7) {
 
     document.getElementById('txtStorageBin').addEventListener('keyup', function(event) {
         if (event.key === 'Enter' || event.keyCode === 13) {
-            if (document.getElementById("txtStorageBin")!==""){
+            if (document.getElementById("txtStorageBin").value!==""){
                 $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaTypes.php?bin='+document.getElementById("txtStorageBin").value, function (data) {
                     if (data && data.data && data.data.length > 0) {
                         for (var i = 0; i < data.data.length; i++) {
