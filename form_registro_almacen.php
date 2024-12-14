@@ -240,6 +240,11 @@ if (strlen($nomina) == 7) {
                     document.getElementById('txtCantidad').disabled = false;
                     document.getElementById('txtCantidad').focus()
 
+                    document.getElementById('txtNumeroParte').disabled = true;
+
+                    document.getElementById('txtNumeroParte').innerText = data.data[i].GrammerNo;
+                    document.getElementById('txtStorageBin').innerText = storageBinF;
+
                     var txtCantidad = document.getElementById('txtCantidad');
 
                     if (data.data[i].UM === 'PC') {
@@ -484,6 +489,7 @@ if (strlen($nomina) == 7) {
 
     document.getElementById('txtStorageBin').addEventListener('input', function (evt) {
         this.value = this.value.toUpperCase();
+        document.getElementById("lblStorageBin").innerText = this.value;
     });
 
     document.getElementById('txtStorageBin').addEventListener('keyup', function(event) {
