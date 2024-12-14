@@ -293,7 +293,7 @@ if (strlen($nomina) == 7) {
                 }else {
                     document.getElementById('lblCantidad').textContent = this.value;
                     if (document.getElementById('txtCantidad').value!==""){
-                        if (document.getElementById("txtStorageBin").value==="" || document.getElementById("txtStorageBin").value==="NA"){
+                        if (document.getElementById("lblStorageBin").innerText==="" || document.getElementById("lblStorageBin").innerText==="NA"){
                             document.getElementById('txtStorageBin').disabled = false;
                             document.getElementById('txtStorageBin').focus();
                         }else{
