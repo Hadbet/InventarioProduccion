@@ -242,8 +242,8 @@ if (strlen($nomina) == 7) {
 
                     document.getElementById('txtNumeroParte').disabled = true;
 
-                    document.getElementById('txtNumeroParte').innerText = data.data[i].GrammerNo;
-                    document.getElementById('txtStorageBin').innerText = storageBinF;
+                    document.getElementById('txtNumeroParte').value = data.data[i].GrammerNo;
+                    document.getElementById('txtStorageBin').value = storageBinF;
 
                     var txtCantidad = document.getElementById('txtCantidad');
 
