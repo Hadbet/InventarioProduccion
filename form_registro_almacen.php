@@ -101,12 +101,22 @@ if (strlen($nomina) == 7) {
                         <div class="card-body">
                             <p class="mb-3"><strong>Captura</strong></p>
 
+                            <label for="basic-url">Número de parte</label>
+                            <div class="input-group mb-3">
+                                <input type="text" id="txtNumeroParte" class="form-control" autocomplete="off"  aria-label="Recipient's username" aria-describedby="button-addon2">
+                            </div>
+
                             <label for="basic-url">Cantidad</label>
                             <div class="input-group mb-3">
-                                <input type="text" id="txtCantidad" disabled class="form-control" aria-label="Recipient's username" autocomplete="off" aria-describedby="basic-addon2">
+                                <input type="number" id="txtCantidad" disabled class="form-control" aria-label="Recipient's username" autocomplete="off" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="txtUnidadMedida" style=""></span>
                                 </div>
+                            </div>
+
+                            <label for="basic-url">Storage Bin</label>
+                            <div class="input-group mb-3">
+                                <input type="text" id="txtStorageBin" disabled class="form-control" aria-label="Recipient's username" autocomplete="off" aria-describedby="basic-addon2">
                             </div>
 
                         </div>
@@ -319,7 +329,14 @@ if (strlen($nomina) == 7) {
                                     storageBin=data.data[i].StorageBin;
                                     document.getElementById("reader").style.display = 'none';
                                     document.getElementById("lblFolio").innerHTML = marbete;
-                                    cargarNumeroParte(numeroParte,storageBin);
+                                    if (numeroParte==="")
+                                        document.getElementById("pasoDos").style.display = 'block';
+                                        document.getElementById("pasoUno").style.display = 'none';
+                                        document.getElementById('txtNumeroParte').disabled = false;
+                                        document.getElementById('txtNumeroParte').focus();
+                                    }else{
+                                        cargarNumeroParte(numeroParte,storageBin);
+                                    }
                                 }else{
                                     Swal.fire({
                                         title: "El marbete no pertenece al area",
