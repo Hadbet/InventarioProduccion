@@ -293,8 +293,13 @@ if (strlen($nomina) == 7) {
                 }else {
                     document.getElementById('lblCantidad').textContent = this.value;
                     if (document.getElementById('txtCantidad').value!==""){
-                        document.getElementById('btnFin').disabled = false;
-                        document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
+                        if (document.getElementById('txtNumeroParte').value===""){
+                            document.getElementById('txtStorageBin').disabled = false;
+                            document.getElementById('txtStorageBin').focus();
+                        }else{
+                            document.getElementById('btnFin').disabled = false;
+                            document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
+                        }
                     }else{
                         Swal.fire({
                             title: "Ingresa la cantidad",
@@ -437,6 +442,74 @@ if (strlen($nomina) == 7) {
     document.getElementById('scanner_input').addEventListener('keyup', function(event) {
         if (event.key === 'Enter' || event.keyCode === 13) {
             manualMarbete();
+        }
+    });
+
+    document.getElementById('txtNumeroParte').addEventListener('keyup', function(event) {
+        this.value = this.value.toUpperCase();
+        var inputValue = this.value;
+        document.getElementById('lblNumeroParte').textContent = inputValue;
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaParte.php?parte='+this.value, function (data) {
+                if (data && data.data && data.data.length > 0) {
+                    for (var i = 0; i < data.data.length; i++) {
+                        if (data.data[i].GrammerNo) {
+                            costoUnitario = data.data[i].Costo / data.data[i].Por;
+                            document.getElementById('lblDescripcion').innerText = data.data[i].Descripcion;
+                            document.getElementById('txtUnidadMedida').innerText = data.data[i].UM;
+                            document.getElementById('lblCosto').innerText = costoUnitario.toFixed(2);
+                            document.getElementById('txtCantidad').disabled = false;
+                            document.getElementById('txtCantidad').focus()
+                        } else {
+                            bandera=0;
+                            Swal.fire({
+                                title: "El numero de parte no existe",
+                                text: "Verificalo con la mesa de control",
+                                icon: "error"
+                            });
+                        }
+                    }
+                }else{
+                    Swal.fire({
+                        title: "El numero de parte no existe en base",
+                        text: "Verificalo con la mesa de control",
+                        icon: "error"
+                    });
+                }
+
+            });
+
+        }
+    });
+
+    document.getElementById('txtStorageBin').addEventListener('input', function (evt) {
+        this.value = this.value.toUpperCase();
+    });
+
+    document.getElementById('txtStorageBin').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            if (document.getElementById("txtStorageBin")!==""){
+                $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaTypes.php?bin='+document.getElementById("txtStorageBin").value, function (data) {
+                    if (data && data.data && data.data.length > 0) {
+                        for (var i = 0; i < data.data.length; i++) {
+                            document.getElementById('btnFin').disabled = false;
+                            document.getElementById("btnFin").scrollIntoView({behavior: "smooth"});
+                        }
+                    } else {
+                        Swal.fire({
+                            title: "El storage bin no existe",
+                            text: "Verificalo con la mesa de control",
+                            icon: "error"
+                        });
+                    }
+                });
+            }else{
+                Swal.fire({
+                    title: "Debes ingresar un Storage Bin",
+                    text: ":C",
+                    icon: "error"
+                });
+            }
         }
     });
 
