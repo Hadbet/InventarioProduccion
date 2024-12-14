@@ -38,7 +38,11 @@ if ($statusLogin['status'] == 1) {
 
     }
     if ($statusLogin['rol'] == 2){
-        echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../verificacion.php'>";
+        if ($areaDetails['tipoArea'] == "2"){
+            echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../verificacion_almacen.php'>";
+        }else{
+            echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../verificacion.php'>";
+        }
     }
     if ($statusLogin['rol'] == 3){
         echo "<META HTTP-EQUIV='REFRESH' CONTENT='1; URL=../control_conteo.php'>";
