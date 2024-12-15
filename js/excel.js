@@ -88,6 +88,13 @@ async function enviarDatosAPHP(datos) {
 
         // El backend devuelve un array con las columnas adicionales (M y N)
         const resultados = await response.json();
+
+        // Verificar si hubo un error en el backend
+        if (resultados.status === 'error') {
+            console.error("Error en el backend:", resultados.message);
+            // Aquí puedes manejar el error como prefieras, por ejemplo, mostrando un mensaje al usuario
+        }
+
         return resultados;
     } catch (error) {
         console.error("Error en la consulta al backend:", error);
