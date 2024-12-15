@@ -12,26 +12,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         foreach ($inputData['bitacoraDatos'] as $registroBitacora) {
             // Validar y asignar valores
-            $Client = isset($registroBitacora['Client']) ? trim($registroBitacora['Client']) : null;
-            $WarehouseNo = isset($registroBitacora['WarehouseNo']) ? trim($registroBitacora['WarehouseNo']) : null;
-            $InventoryItem = isset($registroBitacora['InventoryItem']) ? trim($registroBitacora['InventoryItem']) : null;
-            $Quant = isset($registroBitacora['Quant']) ? trim($registroBitacora['Quant']) : null;
-            $InvRecount = isset($registroBitacora['InvRecount']) ? trim($registroBitacora['InvRecount']) : null;
-            $InventStatus = isset($registroBitacora['InventStatus']) ? trim($registroBitacora['InventStatus']) : null;
-            $InventoryPage = isset($registroBitacora['InventoryPage']) ? trim($registroBitacora['InventoryPage']) : null;
-            $StorageType = isset($registroBitacora['StorageType']) ? trim($registroBitacora['StorageType']) : null;
-            $StorageBin = isset($registroBitacora['StorageBin']) ? trim($registroBitacora['StorageBin']) : null;
-            $BinPosition = isset($registroBitacora['BinPosition']) ? trim($registroBitacora['BinPosition']) : null;
-            $Material = isset($registroBitacora['Material']) ? trim($registroBitacora['Material']) : null;
-            $Plant = isset($registroBitacora['Plant']) ? trim($registroBitacora['Plant']) : null;
-            $Batch = isset($registroBitacora['Batch']) ? trim($registroBitacora['Batch']) : null;
-            $StorUnitType = isset($registroBitacora['StorUnitType']) ? trim($registroBitacora['StorUnitType']) : null;
-            $TotalStock = isset($registroBitacora['TotalStock']) ? trim($registroBitacora['TotalStock']) : null;
-            $Invent = isset($registroBitacora['Invent']) ? trim($registroBitacora['Invent']) : null;
-            $TransferOrder = isset($registroBitacora['TransferOrder']) ? trim($registroBitacora['TransferOrder']) : null;
-            $TransferItem = isset($registroBitacora['TransferItem']) ? trim($registroBitacora['TransferItem']) : null;
-            $StorageLocation = isset($registroBitacora['StorageLocation']) ? trim($registroBitacora['StorageLocation']) : null;
-            $NameCounter = isset($registroBitacora['NameCounter']) ? trim($registroBitacora['NameCounter']) : null;
+            $Client = isset($registroBitacora['Client']) ? trim($registroBitacora['Client']) : '';
+            $WarehouseNo = isset($registroBitacora['WarehouseNo']) ? trim($registroBitacora['WarehouseNo']) : '';
+            $InventoryItem = isset($registroBitacora['InventoryItem']) ? trim($registroBitacora['InventoryItem']) : '';
+            $Quant = isset($registroBitacora['Quant']) ? trim($registroBitacora['Quant']) : '';
+            $InvRecount = isset($registroBitacora['InvRecount']) ? trim($registroBitacora['InvRecount']) : '';
+            $InventStatus = isset($registroBitacora['InventStatus']) ? trim($registroBitacora['InventStatus']) : '';
+            $InventoryPage = isset($registroBitacora['InventoryPage']) ? trim($registroBitacora['InventoryPage']) : '';
+            $StorageType = isset($registroBitacora['StorageType']) ? trim($registroBitacora['StorageType']) : '';
+            $StorageBin = isset($registroBitacora['StorageBin']) ? trim($registroBitacora['StorageBin']) : '';
+            $BinPosition = isset($registroBitacora['BinPosition']) ? trim($registroBitacora['BinPosition']) : '';
+            $Material = isset($registroBitacora['Material']) ? trim($registroBitacora['Material']) : '';
+            $Plant = isset($registroBitacora['Plant']) ? trim($registroBitacora['Plant']) : '';
+            $Batch = isset($registroBitacora['Batch']) ? trim($registroBitacora['Batch']) : '';
+            $StorUnitType = isset($registroBitacora['StorUnitType']) ? trim($registroBitacora['StorUnitType']) : '';
+            $TotalStock = isset($registroBitacora['TotalStock']) ? trim($registroBitacora['TotalStock']) : '';
+            $Invent = isset($registroBitacora['Invent']) ? trim($registroBitacora['Invent']) : '';
+            $TransferOrder = isset($registroBitacora['TransferOrder']) ? trim($registroBitacora['TransferOrder']) : '';
+            $TransferItem = isset($registroBitacora['TransferItem']) ? trim($registroBitacora['TransferItem']) : '';
+            $StorageLocation = isset($registroBitacora['StorageLocation']) ? trim($registroBitacora['StorageLocation']) : '';
+            $NameCounter = isset($registroBitacora['NameCounter']) ? trim($registroBitacora['NameCounter']) : '';
 
             // Llamar a la función de inserción
             $respuestaInsert = insertarRegistrosBitacora($Client, $WarehouseNo, $InventoryItem, $Quant, $InvRecount, $InventStatus, $InventoryPage, $StorageType, $StorageBin, $BinPosition, $Material, $Plant, $Batch, $StorUnitType, $TotalStock, $Invent, $TransferOrder, $TransferItem, $StorageLocation, $NameCounter);
