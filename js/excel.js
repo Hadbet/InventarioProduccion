@@ -106,9 +106,9 @@ async function manejarExcelQty(file) {
     worksheet.eachRow((row, rowNumber) => {
         if (rowNumber > 1) { // Omitir encabezados
             const registro = {
-                storageBin: row.getCell(7).value || "", // Columna G
-                noParte: row.getCell(9).value || "", // Columna I
-                storageUnit: row.getCell(12).value || "" // Columna L
+                storageBin: row.getCell(11).value || "", // Columna G
+                noParte: row.getCell(13).value || "", // Columna I
+                storageUnit: row.getCell(16).value || "" // Columna L
             };
             ExcelQtyData.push(registro);
         }
@@ -152,9 +152,9 @@ async function actualizarExcelQty(file, dataFromBackend) {
     // Recorremos las filas del Excel, excluyendo el encabezado
     worksheet.eachRow((row, rowNumber) => {
         if (rowNumber > 1) { // Excluir la primera fila (encabezados)
-            const storageBin = row.getCell(7).value?.toString().trim(); // Columna G es storageBin
-            const materialNo = row.getCell(9).value?.toString().trim();  // Columna I es materialNo
-            const storageUnit = row.getCell(12).value?.toString().trim();  // Columna L es storageUnit
+            const storageBin = row.getCell(11).value?.toString().trim(); // Columna G es storageBin
+            const materialNo = row.getCell(13).value?.toString().trim();  // Columna I es materialNo
+            const storageUnit = row.getCell(16).value?.toString().trim();  // Columna L es storageUnit
 
             console.log(`Procesando fila ${rowNumber}: storageBin = ${storageBin}, materialNo = ${materialNo}, storageUnit = ${storageUnit}`);
 
@@ -178,8 +178,8 @@ async function actualizarExcelQty(file, dataFromBackend) {
                 console.log(`Actualizando columnas L y M con: storageUnit = ${matchingData.storageUnit}, cantidad = ${matchingData.cantidad}`);
 
                 // Si hay coincidencia, actualizamos las celdas correspondientes
-                row.getCell(13).value = matchingData.cantidad;     // Columna M - cantidad
-                row.getCell(14).value = matchingData.unit;  // Columna N - unit
+                row.getCell(16).value = matchingData.cantidad;     // Columna M - cantidad
+                row.getCell(16).value = matchingData.unit;  // Columna N - unit
             } else {
                 console.log(`No se encontró coincidencia para storageBin: ${storageBin}, materialNo: ${materialNo}, storageUnit: ${storageUnit}`);
             }
