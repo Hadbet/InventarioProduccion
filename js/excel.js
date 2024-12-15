@@ -46,7 +46,7 @@ async function manejarExcelCompleto(file) {
             const registro = {
                 Client: row.getCell(1).value || "",
                 WarehouseNo: row.getCell(2).value || "",
-                InventoryItem: row.getCell(4).value || "",
+                InventoryItem: row.getCell(3).value || "",
                 Quant: row.getCell(5).value || "",
                 InvRecount: row.getCell(6).value || "",
                 InventStatus: row.getCell(7).value || "",
