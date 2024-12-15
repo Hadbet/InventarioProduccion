@@ -23,9 +23,9 @@ if (!$conexion) {
 $updatedData = [];
 
 foreach ($data as $record) {
-    $storageUnit = mysqli_real_escape_string($conexion, $record['storageUnit']);
-    $storageBin = mysqli_real_escape_string($conexion, $record['storageBin']);
-    $noParte = mysqli_real_escape_string($conexion, $record['noParte']);
+    $storageUnit = mysqli_real_escape_string($conexion, $record['StorUnitType']);
+    $storageBin = mysqli_real_escape_string($conexion, $record['StorageBin']);
+    $noParte = mysqli_real_escape_string($conexion, $record['Material']);
 
     // Inicializar datos predeterminados
     $cantidad = '0';
