@@ -1,4 +1,6 @@
 <?php
+set_time_limit(0); // Establece el límite de tiempo de ejecución del script en segundos (0 significa sin límite)
+ini_set('memory_limit', '-1');
 include_once('connection.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
