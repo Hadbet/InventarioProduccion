@@ -1,3 +1,208 @@
+document.getElementById('btnExcelExcelQty').addEventListener('click', () => {
+    document.getElementById('fileInputExcelQty').click();
+});
+
+document.getElementById('fileInputExcelQty').addEventListener('change', async (event) => {
+    const file = event.target.files[0]; // El archivo seleccionado
+    console.log("Archivo seleccionado:", file); // Verifica el archivo seleccionado
+
+    if (file) {
+        try {
+            // Paso 1: Procesar el archivo Excel
+            const dataToBackend = await manejarExcelCompleto(file);
+
+            // Paso 2: Enviar los datos al PHP
+            const responseFromPHP = await enviarDatosAPHP(dataToBackend);
+            console.log("Respuesta del PHP:", responseFromPHP);
+
+            // Paso 3: Consultar el backend con los datos extraídos
+            const dataFromBackend = await buscarValoresEnBaseDeDatos(dataToBackend);
+
+            // Paso 4: Actualizar el archivo Excel solo si hay datos del backend
+            if (dataFromBackend.length > 0) {
+                await actualizarExcelQty(file, dataFromBackend);
+                console.log("Archivo Excel actualizado y descargado.");
+            } else {
+                console.error("No se recibieron datos válidos del backend.");
+            }
+        } catch (error) {
+            console.error("Ocurrió un error durante el proceso:", error);
+        }
+    } else {
+        console.error("No se seleccionó ningún archivo.");
+    }
+});
+
+async function manejarExcelCompleto(file) {
+    const workbook = new ExcelJS.Workbook();
+    const data = await file.arrayBuffer();
+    await workbook.xlsx.load(data);
+
+    const worksheet = workbook.getWorksheet(1); // Primera hoja
+    const ExcelQtyData = [];
+
+    worksheet.eachRow((row, rowNumber) => {
+        if (rowNumber > 1) { // Omitir encabezados
+            const registro = {
+                Client: row.getCell(1).value || "",
+                WarehouseNo: row.getCell(2).value || "",
+                InventoryItem: row.getCell(3).value || "",
+                Quant: row.getCell(4).value || "",
+                InvRecount: row.getCell(5).value || "",
+                InventStatus: row.getCell(6).value || "",
+                InventoryPage: row.getCell(7).value || "",
+                StorageType: row.getCell(8).value || "",
+                StorageBin: row.getCell(9).value || "",
+                BinPosition: row.getCell(10).value || "",
+                Material: row.getCell(11).value || "",
+                Plant: row.getCell(12).value || "",
+                Batch: row.getCell(13).value || "",
+                StorUnitType: row.getCell(14).value || "",
+                TotalStock: row.getCell(15).value || "",
+                Invent: row.getCell(16).value || "",
+                TransferOrder: row.getCell(17).value || "",
+                TransferItem: row.getCell(18).value || "",
+                StorageLocation: row.getCell(19).value || "",
+                NameCounter: row.getCell(20).value || ""
+            };
+            ExcelQtyData.push(registro);
+        }
+    });
+
+    return ExcelQtyData;
+}
+
+async function enviarDatosAPHP(datos) {
+    try {
+        const response = await fetch('daoAdmin/daoInsertarInv.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ bitacoraDatos: datos }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error al consultar el backend: ${response.statusText}`);
+        }
+
+        // El backend devuelve un array con las columnas adicionales (M y N)
+        const resultados = await response.json();
+        return resultados;
+    } catch (error) {
+        console.error("Error en la consulta al backend:", error);
+        return [];
+    }
+}
+
+async function manejarExcelQty(file) {
+    const workbook = new ExcelJS.Workbook();
+    const data = await file.arrayBuffer();
+    await workbook.xlsx.load(data);
+
+    const worksheet = workbook.getWorksheet(1); // Primera hoja
+    const ExcelQtyData = [];
+
+    worksheet.eachRow((row, rowNumber) => {
+        if (rowNumber > 1) { // Omitir encabezados
+            const registro = {
+                storageBin: row.getCell(7).value || "", // Columna G
+                noParte: row.getCell(9).value || "", // Columna I
+                storageUnit: row.getCell(12).value || "" // Columna L
+            };
+            ExcelQtyData.push(registro);
+        }
+    });
+
+    return ExcelQtyData;
+}
+
+async function buscarValoresEnBaseDeDatos(datos) {
+    try {
+        const response = await fetch('daoAdmin/daoActualizarExcelQty.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(datos),
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error al consultar el backend: ${response.statusText}`);
+        }
+
+        // El backend devuelve un array con las columnas adicionales (M y N)
+        const resultados = await response.json();
+        return resultados;
+    } catch (error) {
+        console.error("Error en la consulta al backend:", error);
+        return [];
+    }
+}
+
+async function actualizarExcelQty(file, dataFromBackend) {
+    const workbook = new ExcelJS.Workbook();
+    const data = await file.arrayBuffer();  // Leemos el archivo
+    await workbook.xlsx.load(data);  // Cargamos el archivo Excel en el workbook
+
+    console.log("Archivo Excel cargado correctamente.");
+
+    const worksheet = workbook.getWorksheet(1); // Suponiendo que trabajas con la primera hoja
+
+    // Recorremos las filas del Excel, excluyendo el encabezado
+    worksheet.eachRow((row, rowNumber) => {
+        if (rowNumber > 1) { // Excluir la primera fila (encabezados)
+            const storageBin = row.getCell(7).value?.toString().trim(); // Columna G es storageBin
+            const materialNo = row.getCell(9).value?.toString().trim();  // Columna I es materialNo
+            const storageUnit = row.getCell(12).value?.toString().trim();  // Columna L es storageUnit
+
+            console.log(`Procesando fila ${rowNumber}: storageBin = ${storageBin}, materialNo = ${materialNo}, storageUnit = ${storageUnit}`);
+
+            // Realizar la distinción por storageUnit
+            let matchingData;
+            if (storageUnit && storageUnit !== '') {
+                console.log(`Buscando por storageUnit: ${storageUnit}`);
+                matchingData = dataFromBackend.find(
+                    (item) => item.storageUnit === storageUnit
+                );
+            } else {
+                console.log(`Buscando por storageBin: ${storageBin}, materialNo: ${materialNo}`);
+                // Buscar coincidencia en los datos del backend por storageBin y materialNo
+                matchingData = dataFromBackend.find(
+                    (item) => item.storageBin === storageBin && item.noParte === materialNo
+                );
+            }
+
+            if (matchingData) {
+                console.log(`Coincidencia encontrada: storageBin = ${storageBin}, materialNo = ${materialNo}`);
+                console.log(`Actualizando columnas L y M con: storageUnit = ${matchingData.storageUnit}, cantidad = ${matchingData.cantidad}`);
+
+                // Si hay coincidencia, actualizamos las celdas correspondientes
+                row.getCell(13).value = matchingData.cantidad;     // Columna M - cantidad
+                row.getCell(14).value = matchingData.unit;  // Columna N - unit
+            } else {
+                console.log(`No se encontró coincidencia para storageBin: ${storageBin}, materialNo: ${materialNo}, storageUnit: ${storageUnit}`);
+            }
+        }
+    });
+
+    // Guardar el archivo actualizado
+    const blob = await workbook.xlsx.writeBuffer();
+    console.log("Archivo actualizado preparado para descarga.");
+
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([blob]));
+    a.download = `Actualizado_${file.name}`; // Nombre del archivo descargado
+    a.click();
+
+    console.log("Descarga del archivo iniciada.");
+}
+
+
+
+
+
+
 /**********************************************************************************************************************/
 /********************************************************TOOLTIPS******************************************************/
 /**********************************************************************************************************************/

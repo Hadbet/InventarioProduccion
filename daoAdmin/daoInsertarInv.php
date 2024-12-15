@@ -1,0 +1,96 @@
+<?php
+include_once('connection.php');
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Decodificar el cuerpo JSON
+    $inputData = json_decode(file_get_contents("php://input"), true);
+
+    if (isset($inputData['bitacoraDatos']) && is_array($inputData['bitacoraDatos'])) {
+        $todosExitosos = true;
+        $errores = [];
+        $detalles = [];
+
+        foreach ($inputData['bitacoraDatos'] as $registroBitacora) {
+            // Validar y asignar valores
+            $Client = isset($registroBitacora['Client']) ? trim($registroBitacora['Client']) : null;
+            $WarehouseNo = isset($registroBitacora['WarehouseNo']) ? trim($registroBitacora['WarehouseNo']) : null;
+            $InventoryItem = isset($registroBitacora['InventoryItem']) ? trim($registroBitacora['InventoryItem']) : null;
+            $Quant = isset($registroBitacora['Quant']) ? trim($registroBitacora['Quant']) : null;
+            $InvRecount = isset($registroBitacora['InvRecount']) ? trim($registroBitacora['InvRecount']) : null;
+            $InventStatus = isset($registroBitacora['InventStatus']) ? trim($registroBitacora['InventStatus']) : null;
+            $InventoryPage = isset($registroBitacora['InventoryPage']) ? trim($registroBitacora['InventoryPage']) : null;
+            $StorageType = isset($registroBitacora['StorageType']) ? trim($registroBitacora['StorageType']) : null;
+            $StorageBin = isset($registroBitacora['StorageBin']) ? trim($registroBitacora['StorageBin']) : null;
+            $BinPosition = isset($registroBitacora['BinPosition']) ? trim($registroBitacora['BinPosition']) : null;
+            $Material = isset($registroBitacora['Material']) ? trim($registroBitacora['Material']) : null;
+            $Plant = isset($registroBitacora['Plant']) ? trim($registroBitacora['Plant']) : null;
+            $Batch = isset($registroBitacora['Batch']) ? trim($registroBitacora['Batch']) : null;
+            $StorUnitType = isset($registroBitacora['StorUnitType']) ? trim($registroBitacora['StorUnitType']) : null;
+            $TotalStock = isset($registroBitacora['TotalStock']) ? trim($registroBitacora['TotalStock']) : null;
+            $Invent = isset($registroBitacora['Invent']) ? trim($registroBitacora['Invent']) : null;
+            $TransferOrder = isset($registroBitacora['TransferOrder']) ? trim($registroBitacora['TransferOrder']) : null;
+            $TransferItem = isset($registroBitacora['TransferItem']) ? trim($registroBitacora['TransferItem']) : null;
+            $StorageLocation = isset($registroBitacora['StorageLocation']) ? trim($registroBitacora['StorageLocation']) : null;
+            $NameCounter = isset($registroBitacora['NameCounter']) ? trim($registroBitacora['NameCounter']) : null;
+
+            // Llamar a la función de inserción
+            $respuestaInsert = insertarRegistrosBitacora($Client, $WarehouseNo, $InventoryItem, $Quant, $InvRecount, $InventStatus, $InventoryPage, $StorageType, $StorageBin, $BinPosition, $Material, $Plant, $Batch, $StorUnitType, $TotalStock, $Invent, $TransferOrder, $TransferItem, $StorageLocation, $NameCounter);
+            if ($respuestaInsert['status'] !== 'success') {
+                $errores[] = "Error al insertar el registro Client: $Client. " . $respuestaInsert['message'];
+                $todosExitosos = false;
+                break;  // Salir del ciclo si ocurre un error
+            }else{
+                $detalles[] = $respuestaInsert['message'];
+            }
+        }
+
+        // Respuesta final si todos fueron exitosos
+        if ($todosExitosos) {
+            $respuesta = array("status" => 'success', "message" => "Todos los registros en la Tabla InvSap fueron insertados correctamente.", "detalles" => $detalles);
+        } else {
+            $respuesta = array("status" => 'error', "message" => "Se encontraron errores al insertar los registros.", "detalles" => $errores);
+        }
+    } else {
+        $respuesta = array("status" => 'error', "message" => "Datos no válidos.");
+    }
+} else {
+    $respuesta = array("status" => 'error', "message" => "Se esperaba REQUEST_METHOD POST");
+}
+
+echo json_encode($respuesta);
+
+function insertarRegistrosBitacora($Client, $WarehouseNo, $InventoryItem, $Quant, $InvRecount, $InventStatus, $InventoryPage, $StorageType, $StorageBin, $BinPosition, $Material, $Plant, $Batch, $StorUnitType, $TotalStock, $Invent, $TransferOrder, $TransferItem, $StorageLocation, $NameCounter) {
+    $con = new LocalConector();
+    $conex = $con->conectar();
+
+    // Iniciar transacción
+    $conex->begin_transaction();
+
+    try {
+        // Insertar el nuevo registro
+        $insertBitacora = $conex->prepare("INSERT INTO `InvSap` (`Client`, `WarehouseNo`, `InventoryItem`, `Quant`, `InvRecount`, `InventStatus`, `InventoryPage`, `StorageType`, `StorageBin`, `BinPosition`, `Material`, `Plant`, `Batch`, `StorUnitType`, `TotalStock`, `Invent`, `TransferOrder`, `TransferItem`, `StorageLocation`, `NameCounter`) 
+                                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $insertBitacora->bind_param("ssssssssssssssssssss", $Client, $WarehouseNo, $InventoryItem, $Quant, $InvRecount, $InventStatus, $InventoryPage, $StorageType, $StorageBin, $BinPosition, $Material, $Plant, $Batch, $StorUnitType, $TotalStock, $Invent, $TransferOrder, $TransferItem, $StorageLocation, $NameCounter);
+
+        $resultado = $insertBitacora->execute();
+
+        if (!$resultado) {
+            $conex->rollback();
+            $respuesta = array('status' => 'error', 'message' => 'Error en la BD al insertar el registro con Client: ' . $Client);
+        } else {
+            $conex->commit();
+            $respuesta = array('status' => 'success', 'message' => 'Registro insertado correctamente.');
+        }
+
+        $insertBitacora->close();
+
+    } catch (Exception $e) {
+        $conex->rollback();
+        $respuesta = array("status" => 'error', "message" => $e->getMessage());
+    } finally {
+        $conex->close();
+    }
+
+    return $respuesta;
+}
+?>
