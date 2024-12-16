@@ -241,15 +241,14 @@ async function numerosFaltantes() {
                 if (StorageBin.startsWith('R')) {
                     if (storageBinCount[StorageBin]) {
                         storageBinCount[StorageBin]++;
-                        StorageBinNumber = storageBinCount[StorageBin];
-                        StorageBin = StorageBin + '/' + StorageBinNumber;
                     } else {
                         storageBinCount[StorageBin] = 1;
-                        StorageBinNumber = storageBinCount[StorageBin];
                     }
+                    StorageBinNumber = storageBinCount[StorageBin];
+                    StorageBin = StorageBin + '/' + StorageBinNumber;
                 }
 
-                ws_data.push([InventoryItem, InvRecount, StorageBin,StorageBinNumber, StorageBinCompleto, NumeroParte, Plant, Cantidad, StorageUnit, StorageType]);
+                ws_data.push([InventoryItem, InvRecount, StorageBin, StorageBinCompleto, NumeroParte, Plant, Cantidad, StorageUnit, StorageType, StorageBinNumber]);
             }
 
             var ws = XLSX.utils.aoa_to_sheet(ws_data);
