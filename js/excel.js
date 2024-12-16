@@ -218,7 +218,7 @@ async function numerosFaltantes() {
             wb.Props = {
                 Title: "SheetJS",
                 Subject: "Numeros de parte faltantes",
-                Author: "Red Stapler",
+                Author: "Hadbetsito",
                 CreatedDate: new Date(2017,12,19)
             };
             wb.SheetNames.push("Test Sheet");
@@ -248,7 +248,7 @@ async function numerosFaltantes() {
                     StorageBin = StorageBin + '/' + StorageBinNumber;
                 }
 
-                ws_data.push([InventoryItem, InvRecount, StorageBin, StorageBinCompleto, NumeroParte, Plant, Cantidad, StorageUnit, StorageType, StorageBinNumber]);
+                ws_data.push([InventoryItem, InvRecount, StorageBin,StorageBinNumber, StorageBinCompleto, NumeroParte, Plant, Cantidad, StorageUnit, StorageType]);
             }
 
             var ws = XLSX.utils.aoa_to_sheet(ws_data);
