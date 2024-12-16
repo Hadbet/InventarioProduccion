@@ -212,7 +212,7 @@ async function numerosFaltantes() {
             Swal.fire({
                 title: "Se encontraron numeros de parte que no estan en el archivo pero si en la base de datos",
                 text: "Se te descargara un archivo",
-                icon: "error"
+                icon: "info"
             });
             var wb = XLSX.utils.book_new();
             wb.Props = {
