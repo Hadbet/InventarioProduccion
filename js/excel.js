@@ -222,36 +222,47 @@ async function numerosFaltantes() {
                 CreatedDate: new Date(2017,12,19)
             };
             wb.SheetNames.push("Test Sheet");
-            var ws_data = [];
             var storageBinCount = {};
+            var ws_data = [];
+
             for (var i = 0; i < data.data.length; i++) {
                 var InventoryItem = data.data[i].InventoryItem;
-                var StorageType = data.data[i].StorageType;
                 var StorageBin = data.data[i].StorageBin;
+                var StorageBinCompleto = data.data[i].StorageBin;
                 var NumeroParte = data.data[i].NumeroParte;
                 var Plant = data.data[i].Plant;
                 var Cantidad = data.data[i].Cantidad;
                 var StorageUnit = data.data[i].StorageUnit;
+                var StorageType = data.data[i].StorageType;
+                var InvRecount = data.data[i].InvRecount; // Assuming you have InvRecount in your data
 
-                // Add a consecutive number to StorageBin if it's a duplicate
-                if (storageBinCount[StorageBin]) {
-                    storageBinCount[StorageBin]++;
-                    StorageBin = StorageBin + '/' + storageBinCount[StorageBin];
-                } else {
-                    storageBinCount[StorageBin] = 1;
+                // Add a consecutive number to StorageBin if it's a duplicate and starts with 'R'
+                var StorageBinNumber = '';
+                if (StorageBin.startsWith('R')) {
+                    if (storageBinCount[StorageBin]) {
+                        storageBinCount[StorageBin]++;
+                        StorageBinNumber = storageBinCount[StorageBin];
+                        StorageBin = StorageBin + '/' + StorageBinNumber;
+                    } else {
+                        storageBinCount[StorageBin] = 1;
+                        StorageBinNumber = storageBinCount[StorageBin];
+                    }
                 }
 
-                ws_data.push([InventoryItem, StorageType, StorageBin, NumeroParte, Plant, Cantidad, StorageUnit]);
+                ws_data.push([InventoryItem, InvRecount, StorageBin,StorageBinNumber, StorageBinCompleto, NumeroParte, Plant, Cantidad, StorageUnit, StorageType]);
             }
+
             var ws = XLSX.utils.aoa_to_sheet(ws_data);
             wb.Sheets["Test Sheet"] = ws;
             var wbout = XLSX.write(wb, {bookType:'xlsx',  type: 'binary'});
+
             function s2ab(s) {
                 var buf = new ArrayBuffer(s.length);
                 var view = new Uint8Array(buf);
                 for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
                 return buf;
             }
+
             saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'Numeros de parte faltantes.xlsx');
         }
     });
