@@ -210,8 +210,8 @@ async function numerosFaltantes() {
     $.getJSON('https://grammermx.com/Logistica/Inventario/dao/consultaInv.php', function (data) {
         if (data && data.data && data.data.length > 0) {
             Swal.fire({
-                title: "Tienes numeros de parte no contados se te descargara un excel con todos",
-                text: "Verificalo con tu equipo",
+                title: "Se encontraron numeros de parte que no estan en el archivo pero si en la base de datos",
+                text: "Se te descargara un archivo",
                 icon: "error"
             });
             var wb = XLSX.utils.book_new();
